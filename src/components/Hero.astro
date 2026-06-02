@@ -1,0 +1,284 @@
+---
+
+---
+
+<section
+  class="relative min-h-screen flex items-center px-6 py-32 overflow-hidden"
+>
+  <div
+    data-float-orb
+    class="fixed top-1/4 -left-32 w-96 h-96 rounded-full bg-accent-orange/15 blur-3xl pointer-events-none"
+  >
+  </div>
+  <div
+    data-float-orb
+    class="fixed bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-purple/12 blur-3xl pointer-events-none"
+  >
+  </div>
+  <div
+    data-float-orb
+    class="fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none"
+  >
+  </div>
+
+  <div class="max-w-7xl mx-auto w-full flex items-center justify-between gap-12">
+    <div class="max-w-3xl">
+      <span
+        class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-8"
+      >
+        Creative Web Developer
+      </span>
+
+      <h1
+        data-hero-heading
+        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+      >
+        <span data-typewriter>Hola, soy Julián Recarte.</span>
+        <span data-cursor class="inline-block ml-0.5 w-[3px] h-[1em] bg-accent-orange align-text-bottom"></span>
+      </h1>
+      <p
+        data-hero-heading
+        class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-8 text-copy/80"
+      >
+        Desarrollo interfaces web con animación y propósito
+        para marcas que buscan destacar.
+      </p>
+
+      <p
+        data-hero-subtitle
+        class="text-lg md:text-xl text-copy/60 mb-12 leading-relaxed font-satoshi"
+      >
+        Especializado en diseño visual, animaciones con propósito y
+        experiencias web que conectan con las personas.
+      </p>
+
+      <div data-hero-buttons class="flex flex-col sm:flex-row gap-4 justify-start items-center">
+      <a
+        href="#proyectos"
+        data-magnetic
+        class="inline-flex items-center justify-center gap-2 w-1/2 sm:w-auto px-8 py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full font-medium text-sm tracking-wider uppercase shadow-lg"
+      >
+        Ver proyectos
+      </a>
+        <a
+          href="#contacto"
+          data-magnetic
+          class="group relative inline-flex items-center justify-center gap-2 w-1/2 sm:w-auto px-8 py-4 rounded-full font-medium text-sm tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300"
+          style="border: 2px solid transparent; background-image: linear-gradient(#F2ECE4, #F2ECE4), linear-gradient(to right, #FF5C2B, #FFB088); background-origin: border-box; background-clip: padding-box, border-box;"
+        >
+          <span class="absolute inset-0 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          <span class="relative z-10">Contactar</span>
+        </a>
+      </div>
+    </div>
+
+    <nav class="hidden lg:flex flex-col items-end gap-10">
+      <a
+        href="#sobre-mi"
+        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
+      >
+        Sobre mí
+        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
+      </a>
+      <a
+        href="#proceso"
+        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
+      >
+        Proceso
+        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
+      </a>
+      <a
+        href="#proyectos"
+        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
+      >
+        Proyectos
+        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
+      </a>
+      <a
+        href="#contacto"
+        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
+      >
+        Contacto
+        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
+      </a>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div
+      id="mobile-nav"
+      class="fixed inset-0 z-50 lg:hidden pointer-events-none"
+    >
+      <div
+        id="mobile-nav-bg"
+        class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-500 pointer-events-none"
+      ></div>
+
+      <div id="mobile-nav-items" class="absolute inset-0">
+        <a
+          href="#sobre-mi"
+          data-mobile-link
+          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
+        >
+          Sobre mí
+        </a>
+        <a
+          href="#proceso"
+          data-mobile-link
+          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
+        >
+          Proceso
+        </a>
+        <a
+          href="#proyectos"
+          data-mobile-link
+          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
+        >
+          Proyectos
+        </a>
+        <a
+          href="#contacto"
+          data-mobile-link
+          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
+        >
+          Contacto
+        </a>
+      </div>
+
+      <button
+        id="mobile-nav-btn"
+        class="absolute top-4 right-4 z-20 w-12 h-12 flex flex-col items-center justify-center gap-[5px] rounded-full bg-accent-orange text-white shadow-lg pointer-events-auto"
+        aria-label="Abrir menú"
+      >
+        <span class="h-bar block w-5 h-[2px] bg-white rounded-full origin-center"></span>
+        <span class="h-bar block w-5 h-[2px] bg-white rounded-full"></span>
+        <span class="h-bar block w-5 h-[2px] bg-white rounded-full origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float"
+  >
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      class="text-copy/30"
+    >
+      <path d="M12 5v14M5 12l7 7 7-7" />
+    </svg>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+
+  (function () {
+    const btn = document.getElementById("mobile-nav-btn");
+    const bg = document.getElementById("mobile-nav-bg");
+    const links = document.querySelectorAll("[data-mobile-link]");
+    const container = document.getElementById("mobile-nav");
+    const bars = document.querySelectorAll("#mobile-nav-btn .h-bar");
+    if (!btn || !links.length) return;
+
+    let isOpen = false;
+    const positions = [
+      { dx: -210, dy: 0 },    // Sobre mí: misma altura que btn, bien a la izquierda
+      { dx: -150, dy: 50 },   // Proceso: baja un poco, se acerca al centro
+      { dx: -90, dy: 100 },   // Proyectos: más abajo, más centrado
+      { dx: -30, dy: 150 },   // Contacto: abajo, ligeramente a la izq del botón
+    ];
+
+    function getBtnCenter() {
+      const r = btn.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+    }
+
+    // Start all items hidden
+    gsap.set(links, { opacity: 0, pointerEvents: "none" });
+
+    btn.addEventListener("click", () => {
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    bg.addEventListener("click", closeMenu);
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) closeMenu();
+    });
+
+    links.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    function openMenu() {
+      isOpen = true;
+      container.classList.remove("pointer-events-none");
+      const center = getBtnCenter();
+
+      // Put all items at button center
+      gsap.set(links, {
+        left: center.x,
+        top: center.y,
+        xPercent: -50,
+        yPercent: -50,
+      });
+
+      // Animate items outward in a diagonal cascade
+      links.forEach((link, i) => {
+        const { dx, dy } = positions[i];
+
+        gsap.to(link, {
+          x: dx,
+          y: dy,
+          opacity: 1,
+          pointerEvents: "auto",
+          duration: 0.5,
+          delay: i * 0.06,
+          ease: "power3.out",
+        });
+      });
+
+      gsap.to(bg, { opacity: 1, duration: 0.4, pointerEvents: "auto" });
+
+      // Hamburger → X
+      gsap.to(bars[0], { y: 6, rotate: 45, duration: 0.3 });
+      gsap.to(bars[1], { opacity: 0, duration: 0.2 });
+      gsap.to(bars[2], { y: -6, rotate: -45, duration: 0.3 });
+
+      btn.setAttribute("aria-label", "Cerrar menú");
+    }
+
+    function closeMenu() {
+      isOpen = false;
+
+      links.forEach((link, i) => {
+        gsap.to(link, {
+          x: 0,
+          y: 0,
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.3,
+          delay: (links.length - 1 - i) * 0.04,
+          ease: "power2.in",
+        });
+      });
+
+      gsap.to(bg, { opacity: 0, duration: 0.3, pointerEvents: "none" });
+
+      // X → Hamburger
+      gsap.to(bars[0], { y: 0, rotate: 0, duration: 0.3 });
+      gsap.to(bars[1], { opacity: 1, duration: 0.2, delay: 0.1 });
+      gsap.to(bars[2], { y: 0, rotate: 0, duration: 0.3 });
+
+      btn.setAttribute("aria-label", "Abrir menú");
+
+      setTimeout(() => {
+        if (!isOpen) container.classList.add("pointer-events-none");
+      }, 400);
+    }
+  })();
+</script>

@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  style: string;
+}
+
+const { title, description, tags, style } = Astro.props;
+---
+
+<article
+  class="project-card group relative overflow-hidden rounded-2xl bg-white/50 border border-black/5 hover:border-black/10 transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-black/5"
+>
+  <div
+    class="aspect-[4/3] relative overflow-hidden"
+    style="background: {style}"
+  >
+    <div
+      class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTAgMjBoNDBNMjAgMHY0MCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDYiLz48L3N2Zz4=')] opacity-50"
+    >
+    </div>
+    <div
+      class="absolute top-4 left-4 flex gap-1.5"
+    >
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+    </div>
+    <div
+      class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500"
+    >
+    </div>
+    <div
+      class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500"
+    >
+      <span
+        class="text-white text-sm font-medium tracking-wider uppercase bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20"
+      >
+        Ver proyecto →
+      </span>
+    </div>
+  </div>
+
+  <div class="p-6 md:p-8">
+    <h3
+      class="text-2xl font-bold font-clash mb-3 group-hover:text-accent-orange transition-colors duration-300"
+    >
+      {title}
+    </h3>
+    <p class="text-copy/50 text-sm leading-relaxed mb-6">
+      {description}
+    </p>
+    <div class="flex flex-wrap gap-2">
+      {tags.map((tag) => (
+        <span
+          class="px-3 py-1 text-xs font-medium bg-black/5 rounded-full"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</article>

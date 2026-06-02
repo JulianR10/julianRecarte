@@ -1,0 +1,87 @@
+---
+import sobremi from '../assets/images/sobremi.webp';
+---
+
+<section
+  id="sobre-mi"
+  class="min-h-screen flex items-center px-6 py-32"
+>
+  <div class="max-w-7xl mx-auto w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div class="relative group" data-reveal="left">
+          <div
+            class="absolute -inset-1 bg-[conic-gradient(from_0deg,#FF5C2B,#5B1FFF,#FF5C2B)] opacity-[0.36] blur-xl rounded-3xl pointer-events-none"
+          ></div>
+          <div
+            class="relative aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-accent-orange/20 via-accent-purple/10 to-background shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
+          >
+            <img
+              src={sobremi.src}
+              alt="Sobre mí — Julian Recarte"
+              class="absolute inset-0 w-full h-full object-cover object-[center_30%]"
+              loading="lazy"
+            />
+            <div
+              class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(0,0,0,0.35)_0%,_transparent_70%)]"
+            >
+            </div>
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-accent-orange/30 to-accent-purple/30 mix-blend-multiply"
+            >
+            </div>
+          </div>
+        </div>
+
+      <div data-reveal="right">
+        <span
+          class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
+        >
+          Sobre mí
+        </span>
+
+        <h2
+          class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-12"
+        >
+          Creando experiencias
+          <span class="text-accent-orange">digitales</span> con
+          propósito
+        </h2>
+
+        <div class="space-y-4 text-copy/60 leading-relaxed text-lg">
+          <p>
+            Soy desarrollador frontend creativo apasionado por la
+            intersección entre diseño y código. Me especializo en
+            construir experiencias web que no solo se ven bien, sino
+            que se sienten bien.
+          </p>
+          <p>
+            Cada línea de código que escribo busca contar una
+            historia, generar una emoción y dejar una impresión
+            duradera. Porque en un mundo digital saturado, la
+            diferencia está en los detalles.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3 pt-4">
+          {[
+            "Astro",
+            "React",
+            "TypeScript",
+            "TailwindCSS",
+            "GSAP",
+            "Framer Motion",
+            "Next.js",
+            "Node.js",
+            "Three.js",
+          ].map((tech) => (
+            <span
+              class="px-4 py-2 text-sm font-medium bg-black/5 rounded-full border border-black/10 hover:bg-accent-orange/10 hover:border-accent-orange/30 hover:text-accent-orange transition-all duration-300 cursor-default"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+---
+const links = [
+  {
+    label: "GitHub",
+    href: "https://github.com",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.338c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>`,
+  },
+  {
+    label: "Instagram",
+    href: "https://instagram.com",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+  },
+  {
+    label: "Email",
+    href: "mailto:julianrecarteweb@gmail.com",
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 6L12 13 2 6M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg>`,
+  },
+];
+---
+
+<section
+  id="contacto"
+  class="min-h-screen flex items-center px-6 py-32 relative overflow-hidden"
+>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent-orange/[0.03] blur-3xl pointer-events-none"
+  >
+  </div>
+
+  <div class="max-w-5xl mx-auto w-full relative">
+    <div class="text-center" data-reveal>
+      <span
+        class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
+      >
+        Contacto
+      </span>
+
+      <h2
+        class="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-12"
+      >
+        Trabajemos
+        <br />
+        <span class="text-accent-orange">juntos</span>
+      </h2>
+
+      <p
+        class="text-lg md:text-xl text-copy/60 max-w-xl mx-auto leading-relaxed mb-10"
+      >
+        ¿Tenés un proyecto en mente? Estoy abierto a nuevas
+        oportunidades y colaboraciones. Hablemos.
+      </p>
+
+      <a
+        href="mailto:julianrecarteweb@gmail.com"
+        class="inline-flex items-center gap-3 text-2xl md:text-3xl font-bold font-clash text-accent-purple hover:text-accent-purple/80 transition-colors duration-300 group"
+      >
+        <span>julianrecarteweb@gmail.com</span>
+        <span
+          class="inline-block transition-transform duration-300 group-hover:translate-x-2"
+        >
+          →
+        </span>
+      </a>
+    </div>
+
+    <div
+      class="flex justify-center gap-8 pt-12"
+      data-reveal
+      data-reveal-delay="0.3"
+    >
+      {links.map((link) => (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 px-6 py-3 rounded-full border border-black/10 text-copy/60 hover:text-accent-orange hover:border-accent-orange/30 hover:bg-accent-orange/5 transition-all duration-300 text-sm font-medium"
+        >
+          <span set:html={link.icon} />
+          {link.label}
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

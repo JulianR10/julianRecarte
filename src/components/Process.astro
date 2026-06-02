@@ -1,0 +1,121 @@
+---
+const steps = [
+  {
+    num: "01",
+    title: "Briefing",
+    description:
+      "Comenzamos con una conversación. Me contás tus ideas, objetivos y expectativas. Analizamos tu marca, tu audiencia y el mensaje que querés transmitir.",
+    gradient:
+      "linear-gradient(135deg, rgba(255,92,43,0.3), rgba(255,92,43,0.05), rgba(91,31,255,0.15))",
+  },
+  {
+    num: "02",
+    title: "Boceto",
+    description:
+      "Transformo las ideas en un concepto visual. Arquitectura de información, wireframes y diseño de interfaz pensado para contar tu historia.",
+    gradient:
+      "linear-gradient(135deg, rgba(91,31,255,0.3), rgba(91,31,255,0.05), rgba(255,92,43,0.15))",
+  },
+  {
+    num: "03",
+    title: "Desarrollo",
+    description:
+      "Cada línea de código está pensada para crear una experiencia fluida, animada y optimizada. Desarrollo con tecnologías modernas que aseguran rendimiento y belleza.",
+    gradient:
+      "linear-gradient(135deg, rgba(255,92,43,0.2), rgba(242,236,228,0.3), rgba(91,31,255,0.25))",
+  },
+  {
+    num: "04",
+    title: "Iteración",
+    description:
+      "Revisamos, ajustamos y refinamos hasta que cada detalle esté alineado con la visión del proyecto. Porque el resultado final nace de la colaboración.",
+    gradient:
+      "linear-gradient(135deg, rgba(91,31,255,0.2), rgba(255,92,43,0.1), rgba(242,236,228,0.3))",
+  },
+];
+---
+
+<section
+  id="proceso"
+  class="px-6 py-32 overflow-hidden"
+>
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-16 md:mb-20 text-center" data-reveal>
+      <span
+        class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
+      >
+        Proceso
+      </span>
+      <h2
+        class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+      >
+        Cómo <span class="text-accent-orange">trabajo</span>
+      </h2>
+    </div>
+
+    <div class="relative">
+      <div
+        class="absolute left-[7%] md:left-1/2 top-0 bottom-0 w-px"
+        style="background: linear-gradient(to bottom, transparent 0%, rgba(91,31,255,0.2) 15%, rgba(255,92,43,0.2) 50%, rgba(91,31,255,0.2) 85%, transparent 100%);"
+      >
+      </div>
+
+      {steps.map((step, i) => (
+        <div
+          class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 py-12 md:py-16"
+          data-reveal
+        >
+          <div
+            class={`${i % 2 === 1 ? "md:order-2" : ""}`}
+          >
+            <div
+              class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
+              style="background: {step.gradient}"
+            >
+              <div
+                class="absolute inset-0 flex items-center justify-center"
+              >
+                <span
+                  class="text-8xl md:text-9xl lg:text-[10rem] font-bold font-clash text-white/10 select-none"
+                >
+                  {step.num}
+                </span>
+              </div>
+              <div
+                class="absolute top-4 left-4 flex gap-1.5"
+              >
+                <span
+                  class="w-2 h-2 rounded-full bg-white/20"
+                ></span>
+                <span
+                  class="w-2 h-2 rounded-full bg-white/20"
+                ></span>
+                <span
+                  class="w-2 h-2 rounded-full bg-white/20"
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class={`flex flex-col justify-center ${i % 2 === 1 ? "md:order-1" : ""}`}
+          >
+            <span
+              class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange/60 mb-4"
+            >
+              Paso {step.num}
+            </span>
+            <h3
+              class="text-3xl md:text-4xl lg:text-5xl font-bold font-clash mb-6 leading-tight"
+            >
+              {step.title}
+            </h3>
+            <p class="text-copy/60 leading-relaxed text-lg">
+              {step.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
