@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://julianrecarte.com/sitemap.xml
+Sitemap: https://julianrecarte.github.io/julianRecarte/sitemap.xml

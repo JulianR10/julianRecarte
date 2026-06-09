@@ -1,0 +1,141 @@
+---
+
+---
+
+<!-- Toggle button -->
+<button
+  id="jr-btn"
+  class="fixed top-5 right-5 z-50 w-11 h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br from-accent-orange via-[#FF7A4F] to-accent-pastel text-white font-bold shadow-lg shadow-accent-orange/30 cursor-pointer border-none outline-none flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-300"
+  aria-label="Abrir menú"
+>
+  <span class="font-clash text-base md:text-lg tracking-tight">JR</span>
+</button>
+
+<!-- Nav overlay -->
+<div
+  id="nav-overlay"
+  class="fixed inset-0 z-40 pointer-events-none"
+>
+
+
+  <!-- Floating links -->
+  <div class="absolute right-5 md:right-8 top-28 md:top-32 flex flex-col items-end gap-3 md:gap-4">
+
+    <a
+      id="nl-1"
+      href="#proyectos"
+      class="nav-link relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-medium tracking-widest uppercase text-white bg-accent-pastel border border-accent-pastel shadow-lg hover:bg-accent-pastel/80 hover:border-accent-pastel/80 transition-colors duration-300"
+    >
+      Proyectos
+    </a>
+    <a
+      id="nl-2"
+      href="#proceso"
+      class="nav-link relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-medium tracking-widest uppercase text-white bg-accent-pastel border border-accent-pastel shadow-lg hover:bg-accent-pastel/80 hover:border-accent-pastel/80 transition-colors duration-300"
+    >
+      Proceso
+    </a>
+    <a
+      id="nl-3"
+      href="#contacto"
+      class="nav-link relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-medium tracking-widest uppercase text-white bg-accent-pastel border border-accent-pastel shadow-lg hover:bg-accent-pastel/80 hover:border-accent-pastel/80 transition-colors duration-300"
+    >
+      Contacto
+    </a>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  (function () {
+    const btn = document.getElementById("jr-btn");
+    const overlay = document.getElementById("nav-overlay");
+    const links = document.querySelectorAll(".nav-link");
+    if (!btn || !overlay || !links.length) return;
+
+    const linkEls = [...links];
+    // Different starting offsets for organic feel
+    const offsets = [40, 70, 100, 130];
+
+    let isOpen = false;
+    let isAnimating = false;
+
+    // Initial state — nav visible from the start
+    gsap.set(overlay, { autoAlpha: 1 });
+    overlay.classList.remove("pointer-events-none");
+    linkEls.forEach((link) => {
+      gsap.set(link, { x: 0, autoAlpha: 1 });
+    });
+    isOpen = true;
+    btn.setAttribute("aria-label", "Cerrar menú");
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (isAnimating) return;
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) closeMenu();
+    });
+
+    linkEls.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeMenu();
+      });
+    });
+
+    overlay.addEventListener("click", closeMenu);
+
+    function openMenu(instant = false) {
+      if (isAnimating) return;
+      isAnimating = true;
+      isOpen = true;
+      btn.setAttribute("aria-label", "Cerrar menú");
+      gsap.set(overlay, { autoAlpha: 1 });
+      overlay.classList.remove("pointer-events-none");
+
+      const dur = instant ? 0 : 0.6;
+      const staggerDelay = instant ? 0 : 0.08;
+
+      linkEls.forEach((link, i) => {
+        gsap.to(link, {
+          x: 0,
+          autoAlpha: 1,
+          duration: dur,
+          delay: instant ? 0 : i * staggerDelay,
+          ease: "power3.out",
+          onComplete: i === linkEls.length - 1 ? () => { isAnimating = false; } : undefined,
+        });
+      });
+    }
+
+    function closeMenu() {
+      if (!isOpen) return;
+      isAnimating = true;
+      isOpen = false;
+      btn.setAttribute("aria-label", "Abrir menú");
+      linkEls.forEach((link, i) => {
+        gsap.to(link, {
+          x: 120 + i * 40,
+          opacity: 0,
+          duration: 0.45,
+          ease: "power2.in",
+        });
+      });
+
+      // Hide overlay after links slide out
+      gsap.delayedCall(0.5, () => {
+        overlay.classList.add("pointer-events-none");
+        gsap.set(overlay, { autoAlpha: 0 });
+        // Reset x for next open
+        linkEls.forEach((link, i) => {
+          gsap.set(link, { x: offsets[i], opacity: 0 });
+        });
+        isAnimating = false;
+      });
+    }
+  })();
+</script>

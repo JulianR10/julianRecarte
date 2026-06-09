@@ -1,5 +1,5 @@
 ---
-
+import sobremi from '../assets/images/sobremi.webp';
 ---
 
 <section
@@ -38,18 +38,17 @@
       </h1>
       <p
         data-hero-heading
-        class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-8 text-copy/80"
+        class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-8 text-copy/80 text-balance"
       >
-        Desarrollo interfaces web con animación y propósito
-        para marcas que buscan destacar.
+        Convierto marcas en experiencias web interactivas para negocios que buscanPU destacar.
       </p>
 
-      <p
-        data-hero-subtitle
-        class="text-lg md:text-xl text-copy/60 mb-12 leading-relaxed font-satoshi"
-      >
-        Especializado en diseño visual, animaciones con propósito y
-        experiencias web que conectan con las personas.
+      <p class="text-copy/60 leading-relaxed text-base md:text-lg mb-8 max-w-2xl">
+        Llevo 3 años viajando y trabajando desde cualquier lugar del mundo.<br>
+        Esa experiencia me enseñó que adaptarse no es improvisar, es encontrar
+        la mejor solución con el contexto que tenés.<br>
+        Lo mismo aplico a cada proyecto web que tomo: entiendo el negocio,
+        el usuario y el objetivo antes de escribir una sola línea de código.
       </p>
 
       <div data-hero-buttons class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
@@ -72,213 +71,23 @@
       </div>
     </div>
 
-    <nav class="hidden lg:flex flex-col items-end gap-10">
-      <a
-        href="#sobre-mi"
-        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
-      >
-        Sobre mí
-        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
-      </a>
-      <a
-        href="#proceso"
-        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
-      >
-        Proceso
-        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
-      </a>
-      <a
-        href="#proyectos"
-        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
-      >
-        Proyectos
-        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
-      </a>
-      <a
-        href="#contacto"
-        class="group flex items-center gap-3 text-[19px] font-medium tracking-wider uppercase text-copy/80 hover:text-accent-orange transition-colors duration-300"
-      >
-        Contacto
-        <span class="w-6 h-px bg-copy/20 group-hover:bg-accent-orange group-hover:w-10 transition-all duration-300"></span>
-      </a>
-    </nav>
-
-    <!-- Mobile nav -->
-    <div
-      id="mobile-nav"
-      class="fixed inset-0 z-50 lg:hidden pointer-events-none"
-    >
-      <div
-        id="mobile-nav-bg"
-        class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-500 pointer-events-none"
-      ></div>
-
-      <div id="mobile-nav-items" class="absolute inset-0">
-        <a
-          href="#sobre-mi"
-          data-mobile-link
-          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
-        >
-          Sobre mí
-        </a>
-        <a
-          href="#proceso"
-          data-mobile-link
-          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
-        >
-          Proceso
-        </a>
-        <a
-          href="#proyectos"
-          data-mobile-link
-          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
-        >
-          Proyectos
-        </a>
-        <a
-          href="#contacto"
-          data-mobile-link
-          class="mobile-nav-link absolute z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-xs font-medium tracking-wider uppercase border border-white/20 hover:bg-accent-orange hover:text-white transition-colors duration-300 whitespace-nowrap"
-        >
-          Contacto
-        </a>
-      </div>
-
-      <button
-        id="mobile-nav-btn"
-        class="absolute top-4 right-4 z-20 w-12 h-12 flex flex-col items-center justify-center gap-[5px] rounded-full bg-accent-orange/70 backdrop-blur-md border border-white/10 text-white shadow-lg pointer-events-auto"
-        aria-label="Abrir menú"
-      >
-        <span class="h-bar block w-5 h-[2px] bg-white rounded-full origin-center"></span>
-        <span class="h-bar block w-5 h-[2px] bg-white rounded-full"></span>
-        <span class="h-bar block w-5 h-[2px] bg-white rounded-full origin-center"></span>
-      </button>
+    <div class="hidden lg:block absolute bottom-0 right-[10%] w-1/2 max-w-lg">
+      <img
+        src={sobremi.src}
+        alt="Julián Recarte"
+        class="w-full h-auto block hero-img"
+        loading="eager"
+      />
     </div>
   </div>
 
-  <div
-    class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float"
-  >
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="1.5"
-      class="text-copy/30"
-    >
-      <path d="M12 5v14M5 12l7 7 7-7" />
-    </svg>
-  </div>
 </section>
 
-<script>
-  import gsap from "gsap";
+<style>
+  .hero-img {
+    mask-image: linear-gradient(to top, transparent 0%, black 33%, black 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 33%, black 100%);
+  }
+</style>
 
-  (function () {
-    const btn = document.getElementById("mobile-nav-btn");
-    const bg = document.getElementById("mobile-nav-bg");
-    const links = document.querySelectorAll("[data-mobile-link]");
-    const container = document.getElementById("mobile-nav");
-    const bars = document.querySelectorAll("#mobile-nav-btn .h-bar");
-    if (!btn || !links.length) return;
 
-    let isOpen = false;
-    const positions = [
-      { dx: -210, dy: 0 },    // Sobre mí: misma altura que btn, bien a la izquierda
-      { dx: -150, dy: 50 },   // Proceso: baja un poco, se acerca al centro
-      { dx: -90, dy: 100 },   // Proyectos: más abajo, más centrado
-      { dx: -30, dy: 150 },   // Contacto: abajo, ligeramente a la izq del botón
-    ];
-
-    function getBtnCenter() {
-      const r = btn.getBoundingClientRect();
-      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-    }
-
-    // Start all items hidden
-    gsap.set(links, { opacity: 0, pointerEvents: "none" });
-
-    btn.addEventListener("click", () => {
-      isOpen ? closeMenu() : openMenu();
-    });
-
-    bg.addEventListener("click", closeMenu);
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && isOpen) closeMenu();
-    });
-
-    links.forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
-
-    function openMenu() {
-      isOpen = true;
-      container.classList.remove("pointer-events-none");
-      const center = getBtnCenter();
-
-      // Put all items at button center
-      gsap.set(links, {
-        left: center.x,
-        top: center.y,
-        xPercent: -50,
-        yPercent: -50,
-      });
-
-      // Animate items outward in a diagonal cascade
-      links.forEach((link, i) => {
-        const { dx, dy } = positions[i];
-
-        gsap.to(link, {
-          x: dx,
-          y: dy,
-          opacity: 1,
-          pointerEvents: "auto",
-          duration: 0.5,
-          delay: i * 0.06,
-          ease: "power3.out",
-        });
-      });
-
-      gsap.to(bg, { opacity: 1, duration: 0.4, pointerEvents: "auto" });
-
-      // Hamburger → X
-      gsap.to(bars[0], { y: 6, rotate: 45, duration: 0.3 });
-      gsap.to(bars[1], { opacity: 0, duration: 0.2 });
-      gsap.to(bars[2], { y: -6, rotate: -45, duration: 0.3 });
-
-      btn.setAttribute("aria-label", "Cerrar menú");
-    }
-
-    function closeMenu() {
-      isOpen = false;
-
-      links.forEach((link, i) => {
-        gsap.to(link, {
-          x: 0,
-          y: 0,
-          opacity: 0,
-          pointerEvents: "none",
-          duration: 0.3,
-          delay: (links.length - 1 - i) * 0.04,
-          ease: "power2.in",
-        });
-      });
-
-      gsap.to(bg, { opacity: 0, duration: 0.3, pointerEvents: "none" });
-
-      // X → Hamburger
-      gsap.to(bars[0], { y: 0, rotate: 0, duration: 0.3 });
-      gsap.to(bars[1], { opacity: 1, duration: 0.2, delay: 0.1 });
-      gsap.to(bars[2], { y: 0, rotate: 0, duration: 0.3 });
-
-      btn.setAttribute("aria-label", "Abrir menú");
-
-      setTimeout(() => {
-        if (!isOpen) container.classList.add("pointer-events-none");
-      }, 400);
-    }
-  })();
-</script>
