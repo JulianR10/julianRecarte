@@ -1,23 +1,26 @@
 ---
 import sobremi from '../assets/images/sobremi.webp';
+
+interface Props {
+  t: Record<string, string>;
+}
+
+const { t } = Astro.props;
 ---
 
 <section
   class="relative min-h-screen flex items-center px-6 py-32 overflow-hidden"
 >
   <div
-    data-float-orb
-    class="fixed top-1/4 -left-32 w-96 h-96 rounded-full bg-accent-orange/15 blur-3xl pointer-events-none"
+    class="fixed top-1/4 -left-32 w-96 h-96 rounded-full bg-accent-orange/15 blur-3xl pointer-events-none dark:opacity-0"
   >
   </div>
   <div
-    data-float-orb
-    class="fixed bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-purple/12 blur-3xl pointer-events-none"
+    class="fixed bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-purple/12 blur-3xl pointer-events-none dark:opacity-0"
   >
   </div>
   <div
-    data-float-orb
-    class="fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none"
+    class="fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:opacity-0"
   >
   </div>
 
@@ -26,50 +29,53 @@ import sobremi from '../assets/images/sobremi.webp';
       <span
         class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-8"
       >
-        Creative Web Developer
+        {t.label}
       </span>
 
       <h1
         data-hero-heading
-        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+        class="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 leading-tight"
       >
-        <span data-typewriter>Hola, soy Julián Recarte.</span>
-        <span data-cursor class="inline-block ml-0.5 w-[3px] h-[1em] bg-accent-orange align-text-bottom"></span>
+        <span data-typewriter>{t.greeting}</span>
+        <span data-cursor class="ml-[3px] w-[2px] sm:w-[3px] h-[0.9em] bg-accent-orange inline-block"></span>
       </h1>
       <p
         data-hero-heading
-        class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-8 text-copy/80 text-balance"
+        class="text-sm sm:text-lg md:text-xl font-bold tracking-tight mb-6 text-copy/60 dark:text-dark-copy/60 text-balance"
       >
-        Convierto marcas en experiencias web interactivas para negocios que buscanPU destacar.
+        {t.subtitle}
       </p>
 
-      <p class="text-copy/60 leading-relaxed text-base md:text-lg mb-8 max-w-2xl">
-        Llevo 3 años viajando y trabajando desde cualquier lugar del mundo.<br>
-        Esa experiencia me enseñó que adaptarse no es improvisar, es encontrar
-        la mejor solución con el contexto que tenés.<br>
-        Lo mismo aplico a cada proyecto web que tomo: entiendo el negocio,
-        el usuario y el objetivo antes de escribir una sola línea de código.
+      <p class="text-copy/50 dark:text-dark-muted leading-relaxed text-xs sm:text-sm md:text-base mb-6 max-w-2xl text-balance">
+        {t.description}
       </p>
 
-      <div data-hero-buttons class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
+      <p data-hero-cta class="font-serif text-sm sm:text-base md:text-lg italic text-accent-orange/80 mb-8 text-balance">
+        {t.cta}
+      </p>
+
+      <div data-hero-buttons class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start items-center">
       <a
         href="#proyectos"
         data-magnetic
-        class="inline-flex items-center justify-center gap-2 w-auto px-8 py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full font-medium text-sm tracking-wider uppercase shadow-lg"
+        class="inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full font-medium text-xs md:text-sm tracking-wider uppercase shadow-lg"
       >
-        Ver proyectos
+        {t.viewProjects}
       </a>
         <a
           href="#contacto"
           data-magnetic
-          class="group relative inline-flex items-center justify-center gap-2 w-1/2 sm:w-auto px-8 py-4 rounded-full font-medium text-sm tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300"
-          style="border: 2px solid transparent; background-image: linear-gradient(#F2ECE4, #F2ECE4), linear-gradient(to right, #FF5C2B, #FFB088); background-origin: border-box; background-clip: padding-box, border-box;"
+          class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full font-medium text-xs md:text-sm tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300"
+          style="border: 2px solid transparent; background-image: linear-gradient(var(--bg-hex), var(--bg-hex)), linear-gradient(to right, #FF5C2B, #FFB088); background-origin: border-box; background-clip: padding-box, border-box;"
         >
           <span class="absolute inset-0 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          <span class="relative z-10">Contactar</span>
+          <span class="relative z-10">{t.contact}</span>
         </a>
       </div>
+
     </div>
+
+
 
     <div class="hidden lg:block absolute bottom-0 right-[10%] w-1/2 max-w-lg">
       <img
@@ -85,8 +91,8 @@ import sobremi from '../assets/images/sobremi.webp';
 
 <style>
   .hero-img {
-    mask-image: linear-gradient(to top, transparent 0%, black 33%, black 100%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 33%, black 100%);
+    mask-image: linear-gradient(to top, transparent 0%, black 60%, black 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 60%, black 100%);
   }
 </style>
 

@@ -1,25 +1,25 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
 
+interface Props {
+  t: Record<string, any>;
+}
+
+const { t } = Astro.props;
+
 const projects = [
   {
     title: "Nexus",
-    description:
-      "Plataforma interactiva con animaciones 3D y microinteracciones fluidas. Diseño editorial con tipografía protagonista.",
     tags: ["React", "Three.js", "GSAP", "Framer Motion"],
     style: "linear-gradient(135deg, rgba(255,92,43,0.4), rgba(255,92,43,0.15), rgba(91,31,255,0.3))",
   },
   {
     title: "Aether",
-    description:
-      "Experiencia cinematográfica de storytelling visual. Scroll narrativo con parallax y transiciones orgánicas.",
     tags: ["Next.js", "GSAP", "Lenis", "TailwindCSS"],
     style: "linear-gradient(135deg, rgba(91,31,255,0.4), rgba(91,31,255,0.15), rgba(255,92,43,0.3))",
   },
   {
     title: "Lumina",
-    description:
-      "E-commerce con enfoque en la experiencia de producto. Animaciones con intención y navegación fluida.",
     tags: ["Astro", "GSAP", "Shopify", "TypeScript"],
     style: "linear-gradient(135deg, rgba(255,92,43,0.3), rgba(242,236,228,0.5), rgba(91,31,255,0.4))",
   },
@@ -35,12 +35,12 @@ const projects = [
       <span
         class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
       >
-        Proyectos
+        {t.label}
       </span>
       <h2
         class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-3xl"
       >
-        Trabajos <span class="text-accent-orange">destacados</span>
+        {t.title} <span class="text-accent-orange">{t.highlight}</span>
       </h2>
     </div>
 
@@ -48,8 +48,8 @@ const projects = [
       data-reveal-stagger
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
     >
-      {projects.map((project) => (
-        <ProjectCard {...project} />
+      {projects.map((project, i) => (
+        <ProjectCard {...project} title={t.items[i].title} description={t.items[i].description} t={{ viewProject: t.viewProject }} />
       ))}
     </div>
   </div>

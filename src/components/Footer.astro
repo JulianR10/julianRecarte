@@ -1,20 +1,24 @@
 ---
+interface Props {
+  t: Record<string, string>;
+}
+
+const { t } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-black/5 px-6 md:px-12 py-5">
+<footer class="border-t border-black/5 dark:border-dark-muted/20 py-5">
   <div
-    class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6"
+    class="max-w-[87%] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 px-6"
   >
     <a
-      href="/"
-      class="text-xl font-bold font-clash tracking-tight hover:text-accent-orange transition-colors duration-300"
+      href={import.meta.env.BASE_URL || "/"}
+      class="text-[2rem] font-bold font-clash leading-none tracking-[-4px] no-underline"
     >
-      JR
+      <span class="text-copy dark:text-dark-copy">J</span><span class="text-accent-orange">R</span>
     </a>
-    <p class="text-sm text-copy/30 order-3 md:order-2">
-      &copy; {year} Julián Recarte
+    <p class="text-sm text-copy/30 dark:text-dark-muted/50 order-3 md:order-2">
+      {t.copyright.replace("{year}", String(year))}
     </p>
-
   </div>
 </footer>

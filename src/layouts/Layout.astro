@@ -4,16 +4,22 @@ import "../styles/globals.css";
 interface Props {
   title?: string;
   description?: string;
+  jobTitle?: string;
+  lang?: string;
+  t?: Record<string, string>;
 }
 
 const {
   title = "Julián Recarte | Creative Frontend Developer",
   description = "Convierto marcas en experiencias web interactivas.",
+  jobTitle = "Creative Frontend Developer",
+  lang = "es",
+  t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba" },
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -25,48 +31,65 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content="https://julianrecarte.github.io/julianRecarte" />
+    <meta property="og:url" content={`https://julianrecarte.github.io/julianRecarte/${lang}/`} />
     <meta property="og:image" content="https://julianrecarte.github.io/julianRecarte/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={lang === "es" ? "es_ES" : lang === "en" ? "en_US" : "it_IT"} />
+    <meta property="og:site_name" content="Julián Recarte" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://julianrecarte.github.io/julianRecarte/og-image.png" />
 
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="es" href="https://julianrecarte.github.io/julianRecarte/es/" />
+    <link rel="alternate" hreflang="en" href="https://julianrecarte.github.io/julianRecarte/en/" />
+    <link rel="alternate" hreflang="it" href="https://julianrecarte.github.io/julianRecarte/it/" />
+    <link rel="alternate" hreflang="x-default" href="https://julianrecarte.github.io/julianRecarte/" />
+    <link rel="canonical" href={`https://julianrecarte.github.io/julianRecarte/${lang}/`} />
+
     <!-- JSON-LD Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Julián Recarte",
-        "jobTitle": "Creative Frontend Developer",
-        "description": "Convierto marcas en experiencias web interactivas.",
-        "url": "https://julianrecarte.github.io/julianRecarte",
-        "knowsAbout": [
-          "Frontend Development",
-          "React",
-          "Astro",
-          "GSAP",
-          "TailwindCSS",
-          "Three.js",
-          "TypeScript",
-          "Framer Motion"
-        ],
-        "knowsLanguage": ["Spanish", "English"]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Julián Recarte",
+      "jobTitle": jobTitle,
+      description,
+      "url": `https://julianrecarte.github.io/julianRecarte/${lang}/`,
+      "knowsAbout": [
+        "Frontend Development",
+        "React",
+        "Astro",
+        "GSAP",
+        "TailwindCSS",
+        "Three.js",
+        "TypeScript",
+        "Framer Motion"
+      ],
+      "knowsLanguage": ["Spanish", "English", "Italian"]
+    })}></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Satoshi:wght@400;500;700&family=DM+Serif+Display:ital@0;1&display=swap"
       rel="stylesheet"
     />
+
+    <script>
+      (function () {
+        const stored = localStorage.getItem("dark-mode");
+        const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (stored === "true" || (stored === null && prefers)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    <a href="#main-content" class="skip-link">{t.skipLink}</a>
     <main id="main-content">
       <slot />
     </main>
@@ -84,6 +107,8 @@ const {
 
         lenis.on("scroll", () => ScrollTrigger.update());
 
+        window.lenis = lenis;
+
         function raf(time) {
           lenis.raf(time);
           requestAnimationFrame(raf);
@@ -99,7 +124,7 @@ const {
     <button
       id="btn-top"
       class="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-accent-orange text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border-none outline-none translate-y-20 opacity-0 pointer-events-none"
-      aria-label="Volver arriba"
+      aria-label={t.backToTop}
     >
       <svg
         id="arrow-top"
@@ -118,8 +143,8 @@ const {
     <script>
       const btn = document.getElementById("btn-top");
       const arrow = document.getElementById("arrow-top");
+      if (!btn || !arrow) throw new Error("Missing btn-top or arrow-top elements");
 
-      let lastScroll = 0;
       window.addEventListener("scroll", () => {
         const y = window.scrollY;
         if (y > 400) {
@@ -129,7 +154,6 @@ const {
           btn.classList.remove("translate-y-0", "opacity-100");
           btn.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
         }
-        lastScroll = y;
       });
 
       btn.addEventListener("mouseenter", () => {
@@ -174,7 +198,11 @@ const {
         btn.style.transform = "translateY(-100px) scale(0.6)";
         btn.style.opacity = "0";
         setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          if (window.lenis) {
+            window.lenis.scrollTo(0, { lock: true, force: true });
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
         }, 150);
         setTimeout(() => {
           btn.style.transition = "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease";
@@ -198,12 +226,36 @@ const {
     scroll-behavior: smooth;
   }
 
+  :root {
+    --bg-hex: #F2ECE4;
+    --theme-dur: 2s;
+  }
+
+  :root.dark {
+    --bg-hex: #1A1A1A;
+  }
+
   body {
-    background-color: #f2ece4;
+    background-color: var(--bg-hex);
     font-family: "Satoshi", sans-serif;
     color: #1A1613;
     line-height: 1.6;
     overflow-x: hidden;
+    transition: background-color var(--theme-dur) ease, color var(--theme-dur) ease;
+  }
+
+  :root.dark body {
+    color: #F0F0F0;
+  }
+
+  *, *::before, *::after {
+    transition-property: background-color, border-color, box-shadow, color;
+    transition-duration: var(--theme-dur);
+    transition-timing-function: ease;
+  }
+
+  a, button, [data-magnetic] {
+    transition-duration: 0.2s;
   }
 
   h1,
@@ -217,7 +269,7 @@ const {
   }
 
   ::selection {
-    background-color: #ff5c2b;
+    background-color: #FF5C2B;
     color: #fff;
   }
 

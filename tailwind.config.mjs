@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
@@ -11,22 +12,19 @@ export default {
           pastel: "#FFB088",
           purple: "#5B1FFF",
         },
+        dark: {
+          bg: "#1A1A1A",
+          card: "#252525",
+          copy: "#F0F0F0",
+          muted: "#888888",
+        },
       },
       fontFamily: {
         clash: ["Clash Display", "sans-serif"],
         satoshi: ["Satoshi", "sans-serif"],
+        serif: ["DM Serif Display", "serif"],
       },
-      animation: {
-        "float": "float 6s ease-in-out infinite",
-        "float-delayed": "float 6s ease-in-out 2s infinite",
-        "float-slow": "float 8s ease-in-out 1s infinite",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
-        },
-      },
+
     },
   },
   plugins: [],

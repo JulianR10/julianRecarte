@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (reducedMotion) {
-  document.querySelectorAll("[data-reveal], [data-reveal-stagger], [data-hero-subtitle], [data-hero-buttons]").forEach(el => {
+  document.querySelectorAll("[data-reveal], [data-reveal-stagger], [data-hero-cta], [data-hero-buttons]").forEach(el => {
     el.style.opacity = "1";
     el.style.transform = "none";
   });
@@ -41,7 +41,7 @@ function splitTextIntoSpans(element) {
 }
 
 const heroHeadings = document.querySelectorAll("[data-hero-heading]");
-const heroSubtitle = document.querySelector("[data-hero-subtitle]");
+const heroCta = document.querySelector("[data-hero-cta]");
 const heroButtons = document.querySelector("[data-hero-buttons]");
 
 if (heroHeadings.length) {
@@ -64,9 +64,10 @@ if (heroHeadings.length) {
         if (wordIdx >= words.length) {
           if (cursor) {
             cursor.style.opacity = "1";
-            setInterval(() => {
+            const blink = setInterval(() => {
               cursor.style.opacity = cursor.style.opacity === "1" ? "0" : "1";
             }, 400);
+            blink._id = "cursor-blink";
           }
           return;
         }
@@ -105,8 +106,8 @@ if (heroHeadings.length) {
     }
   });
 
-  if (heroSubtitle) {
-    tl.from(heroSubtitle, { y: 40, opacity: 0, duration: 0.8 }, "-=0.3");
+  if (heroCta) {
+    tl.from(heroCta, { y: 30, opacity: 0, duration: 0.6 }, "-=0.2");
   }
 
   if (heroButtons) {
@@ -218,7 +219,5 @@ document.querySelectorAll("[data-magnetic]").forEach((el) => {
   });
 });
 
+  ScrollTrigger.refresh();
 }
-
-
-ScrollTrigger.refresh();

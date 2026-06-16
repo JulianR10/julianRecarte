@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Waves from "../../components/Waves.astro";
+import Nav from "../../components/Nav.astro";
+import Hero from "../../components/Hero.astro";
+import Projects from "../../components/Projects.astro";
+import Process from "../../components/Process.astro";
+import Contact from "../../components/Contact.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  const langs = ["es", "en", "it"];
+  return langs.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const translations = await Astro.glob("../../i18n/*.json");
+const file = translations.find((t) => t.lang === lang);
+if (!file) return Astro.redirect("/es/");
+const t = file;
+---
+
+<Layout title={t.layout.title} description={t.layout.description} jobTitle={t.layout.jobTitle} lang={lang} t={t.layout}>
+  <Waves />
+  <Nav lang={lang} t={t.nav} />
+  <Hero t={t.hero} />
+  <Projects t={t.projects} />
+  <Process t={t.process} />
+  <Contact t={t.contact} />
+  <Footer t={t.footer} />
+</Layout>

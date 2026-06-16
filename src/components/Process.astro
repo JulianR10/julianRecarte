@@ -4,39 +4,33 @@ import bocetoImg from "../assets/images/boceto.webp";
 import desarrolloImg from "../assets/images/desarrollo.webp";
 import iteracionImg from "../assets/images/iteracion.webp";
 
+interface Props {
+  t: Record<string, any>;
+}
+
+const { t } = Astro.props;
+
 const steps = [
   {
     num: "01",
-    title: "Briefing",
-    description:
-      "Comenzamos con una conversación. Me contás tus ideas, objetivos y expectativas. Analizamos tu marca, tu audiencia y el mensaje que querés transmitir.",
     gradient:
       "linear-gradient(135deg, rgba(255,92,43,0.3), rgba(255,92,43,0.05), rgba(91,31,255,0.15))",
     image: briefingImg,
   },
   {
     num: "02",
-    title: "Boceto",
-    description:
-      "Transformo las ideas en un concepto visual. Arquitectura de información, wireframes y diseño de interfaz pensado para contar tu historia.",
     gradient:
       "linear-gradient(135deg, rgba(91,31,255,0.3), rgba(91,31,255,0.05), rgba(255,92,43,0.15))",
     image: bocetoImg,
   },
   {
     num: "03",
-    title: "Desarrollo",
-    description:
-      "Cada línea de código está pensada para crear una experiencia fluida, animada y optimizada. Desarrollo con tecnologías modernas que aseguran rendimiento y belleza.",
     gradient:
       "linear-gradient(135deg, rgba(255,92,43,0.2), rgba(242,236,228,0.3), rgba(91,31,255,0.25))",
     image: desarrolloImg,
   },
   {
     num: "04",
-    title: "Iteración",
-    description:
-      "Revisamos, ajustamos y refinamos hasta que cada detalle esté alineado con la visión del proyecto. Porque el resultado final nace de la colaboración.",
     gradient:
       "linear-gradient(135deg, rgba(91,31,255,0.2), rgba(255,92,43,0.1), rgba(242,236,228,0.3))",
     image: iteracionImg,
@@ -53,12 +47,12 @@ const steps = [
       <span
         class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
       >
-        Proceso
+        {t.label}
       </span>
       <h2
         class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
       >
-        Cómo <span class="text-accent-orange">trabajo</span>
+        {t.title} <span class="text-accent-orange">{t.highlight}</span>
       </h2>
     </div>
 
@@ -78,18 +72,13 @@ const steps = [
             class={`${i % 2 === 1 ? "md:order-2" : ""}`}
           >
             <div
-              class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)]"
-              style="background: {step.image ? '#FDEDDC' : step.gradient}"
+              class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] bg-[#FDEDDC] dark:bg-dark-card"
             >
-              {
-                step.image && (
-                  <img
-                    src={step.image.src}
-                    alt={step.title}
-                    class="absolute inset-0 w-full h-full object-cover"
-                  />
-                )
-              }
+              <img
+                src={step.image.src}
+                alt={t.steps[i].title}
+                class="absolute inset-0 w-full h-full object-cover"
+              />
               <div
                 class="absolute inset-0 flex items-center justify-center"
               >
@@ -103,13 +92,13 @@ const steps = [
                 class="absolute top-4 left-4 flex gap-1.5"
               >
                 <span
-                  class="w-2 h-2 rounded-full bg-white/20"
+                  class="w-2 h-2 rounded-full bg-white/20 dark:bg-dark-muted/30"
                 ></span>
                 <span
-                  class="w-2 h-2 rounded-full bg-white/20"
+                  class="w-2 h-2 rounded-full bg-white/20 dark:bg-dark-muted/30"
                 ></span>
                 <span
-                  class="w-2 h-2 rounded-full bg-white/20"
+                  class="w-2 h-2 rounded-full bg-white/20 dark:bg-dark-muted/30"
                 ></span>
               </div>
             </div>
@@ -121,15 +110,15 @@ const steps = [
             <span
               class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange/60 mb-4"
             >
-              Paso {step.num}
+              {t.stepLabel} {step.num}
             </span>
             <h3
               class="text-3xl md:text-4xl lg:text-5xl font-bold font-clash mb-6 leading-tight"
             >
-              {step.title}
+              {t.steps[i].title}
             </h3>
-            <p class="text-copy/60 leading-relaxed text-lg" style="text-wrap: balance;">
-              {step.description}
+            <p class="text-copy/60 dark:text-dark-muted leading-relaxed text-lg" style="text-wrap: balance;">
+              {t.steps[i].description}
             </p>
           </div>
         </div>

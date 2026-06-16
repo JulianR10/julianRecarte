@@ -1,24 +1,21 @@
----
-import Layout from "../layouts/Layout.astro";
-import Waves from "../components/Waves.astro";
-import Nav from "../components/Nav.astro";
-import Hero from "../components/Hero.astro";
-import Projects from "../components/Projects.astro";
-import Process from "../components/Process.astro";
-import Contact from "../components/Contact.astro";
-import Cursor from "../components/Cursor.astro";
-import Footer from "../components/Footer.astro";
----
-
-<Layout title="Julián Recarte | Creative Frontend Developer">
-  <Cursor />
-  <Waves />
-  <Nav />
-  <Hero />
-  <Projects />
-  <Process />
-  <Contact />
-  <Footer />
-</Layout>
-
-
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="description" content="Convierto marcas en experiencias web interactivas para negocios que buscan destacar." />
+  <title>Julián Recarte | Desarrollador Frontend Creativo</title>
+  <meta http-equiv="refresh" content="0;url=/julianRecarte/es/" />
+  <script>
+    var langs = ["es", "en", "it"];
+    var nav = (navigator.language || navigator.userLanguage || "es").slice(0, 2);
+    var lang = langs.indexOf(nav) !== -1 ? nav : "es";
+    var base = location.pathname.replace(/\/+$/g, "");
+    if (base === "") base = "/";
+    location.pathname = base + "/" + lang + "/";
+  </script>
+</head>
+<body>
+  <p>Redirecting to <a href="/julianRecarte/es/">Julián Recarte</a>...</p>
+</body>
+</html>

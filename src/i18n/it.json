@@ -1,0 +1,91 @@
+{
+  "lang": "it",
+  "nav": {
+    "projects": "Progetti",
+    "process": "Processo",
+    "contact": "Contatti",
+    "lightMode": "Modalità chiara",
+    "darkMode": "Modalità scura",
+    "closeMenu": "Chiudi menu",
+    "openMenu": "Apri menu",
+    "langEs": "Spagnolo",
+    "langEn": "Inglese",
+    "langIt": "Italiano"
+  },
+  "hero": {
+    "label": "Sviluppatore Web FullStack",
+    "greeting": "Ciao, sono Julián Recarte.",
+    "subtitle": "Trasformo marchi in esperienze web interattive per aziende che vogliono distinguersi.",
+    "description": "Lavoro in remoto da 3 anni da diversi angoli del mondo.\nQuesto mi ha insegnato ad adattarmi a qualsiasi business e contesto.\nApplico lo stesso a ogni sfida che affronto.",
+    "cta": "Parliamo del tuo progetto?",
+    "viewProjects": "Vedi progetti",
+    "contact": "Contattami"
+  },
+  "projects": {
+    "label": "Progetti",
+    "title": "Lavori in",
+    "highlight": "evidenza",
+    "viewProject": "Vedi progetto →",
+    "items": [
+      {
+        "title": "Nexus",
+        "description": "Piattaforma interattiva con animazioni 3D e micro-interazioni fluide. Design editoriale con tipografia protagonista."
+      },
+      {
+        "title": "Aether",
+        "description": "Esperienza cinematografica di storytelling visivo. Scroll narrativo con parallasse e transizioni organiche."
+      },
+      {
+        "title": "Lumina",
+        "description": "E-commerce con focus sull'esperienza di prodotto. Animazioni intenzionali e navigazione fluida."
+      }
+    ]
+  },
+  "process": {
+    "label": "Processo",
+    "title": "Come",
+    "highlight": "lavoro",
+    "stepLabel": "Passo",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Briefing",
+        "description": "Iniziamo con una conversazione. Mi racconti le tue idee, obiettivi e aspettative. Analizziamo il tuo marchio, il tuo pubblico e il messaggio che vuoi trasmettere."
+      },
+      {
+        "num": "02",
+        "title": "Bozzetto",
+        "description": "Trasformo le idee in un concetto visivo. Architettura dell'informazione, wireframe e design dell'interfaccia pensati per raccontare la tua storia."
+      },
+      {
+        "num": "03",
+        "title": "Sviluppo",
+        "description": "Ogni riga di codice è pensata per creare un'esperienza fluida, animata e ottimizzata. Sviluppo con tecnologie moderne che garantiscono performance e bellezza."
+      },
+      {
+        "num": "04",
+        "title": "Iterazione",
+        "description": "Rivediamo, aggiustiamo e perfezioniamo finché ogni dettaglio è allineato con la visione del progetto. Perché il risultato finale nasce dalla collaborazione."
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contatti",
+    "title": "Lavoriamo",
+    "highlight": "insieme",
+    "description": "Hai un progetto in mente? Sono aperto a nuove opportunità e collaborazioni. Parliamone.",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "email": "Email"
+  },
+  "footer": {
+    "copyright": "© {year} Julián Recarte"
+  },
+  "layout": {
+    "skipLink": "Vai al contenuto principale",
+    "backToTop": "Torna su",
+    "title": "Julián Recarte | Sviluppatore Frontend Creativo",
+    "description": "Trasformo marchi in esperienze web interattive.",
+    "jobTitle": "Sviluppatore Frontend Creativo"
+  }
+}

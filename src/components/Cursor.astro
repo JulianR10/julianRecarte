@@ -31,29 +31,26 @@
 </style>
 
 <script>
-  import gsap from "gsap";
-
   (function () {
     const cursor = document.getElementById("cursor");
-    if (!cursor || "ontouchstart" in window) return;
+    if (!cursor || !window.matchMedia("(pointer: fine)").matches) return;
 
     let mx = 0,
       my = 0;
+    let rafId;
+
+    cursor.style.transform = "translate(-8px, -8px)";
 
     document.addEventListener("mousemove", (e) => {
       mx = e.clientX;
       my = e.clientY;
     });
 
-    gsap.ticker.add(() => {
-      gsap.to(cursor, {
-        x: mx - 8,
-        y: my - 8,
-        duration: 0.25,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    });
+    function tick() {
+      cursor.style.transform = `translate(${mx - 8}px, ${my - 8}px)`;
+      rafId = requestAnimationFrame(tick);
+    }
+    rafId = requestAnimationFrame(tick);
 
     document
       .querySelectorAll(

@@ -10,14 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.5.0",
     "astro": "^4.15.0",
-    "autoprefixer": "^10.4.19",
     "gsap": "^3.12.2",
     "lenis": "^1.1.11",
-    "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3"
   },
   "devDependencies": {
-    "@astrojs/tailwind": "^5.1.1"
+    "@astrojs/tailwind": "^5.1.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38"
   }
 }
