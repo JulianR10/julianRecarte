@@ -121,7 +121,11 @@ const {
       }
     </script>
     <script>
-      import "../scripts/animations.js";
+      const isMobileAnim = window.innerWidth < 768;
+      const reducedMotionAnim = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!reducedMotionAnim && !isMobileAnim) {
+        import("../scripts/animations.js");
+      }
     </script>
 
     <button
@@ -251,14 +255,8 @@ const {
     color: #F0F0F0;
   }
 
-  *, *::before, *::after {
-    transition-property: background-color, border-color, box-shadow, color;
-    transition-duration: var(--theme-dur);
-    transition-timing-function: ease;
-  }
-
-  a, button, [data-magnetic] {
-    transition-duration: 0.2s;
+  #main-nav.scrolled {
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
   }
 
   h1,
