@@ -4,7 +4,7 @@
 
 <div
   id="waves"
-  class="hidden md:block fixed inset-0 pointer-events-none z-0 overflow-hidden"
+  class="fixed inset-0 pointer-events-none z-0 overflow-hidden"
   aria-hidden="true"
 >
   <svg
@@ -50,6 +50,16 @@
     />
   </svg>
 </div>
+
+<style>
+  @media (max-width: 767px) {
+    .wave-1,
+    .wave-2,
+    .wave-3 {
+      filter: none;
+    }
+  }
+</style>
 
 <script>
   (async function () {
