@@ -128,6 +128,30 @@ const {
       }
     </script>
 
+    <script>
+      (function () {
+        if (window.innerWidth >= 768) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const els = document.querySelectorAll("[data-reveal]");
+        if (!els.length) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.15 }
+        );
+
+        els.forEach((el) => observer.observe(el));
+      })();
+    </script>
+
     <button
       id="btn-top"
       class="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-accent-orange text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border-none outline-none translate-y-20 opacity-0 pointer-events-none"
@@ -257,6 +281,26 @@ const {
 
   #main-nav.scrolled {
     transition: background-color 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  [data-reveal]:not(.revealed) {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .revealed {
+    animation: fade-in-up 0.6s ease-out forwards;
   }
 
   h1,
