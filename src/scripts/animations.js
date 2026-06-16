@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isMobile = window.innerWidth < 768;
 
 if (reducedMotion) {
   document.querySelectorAll("[data-reveal], [data-reveal-stagger], [data-hero-cta], [data-hero-buttons]").forEach(el => {
@@ -177,10 +178,10 @@ revealElements.forEach((el) => {
     scrollTrigger: {
       trigger: el,
       start: "top 85%",
-      toggleActions: "play none none reverse",
+      toggleActions: isMobile ? "play none none none" : "play none none reverse",
     },
     ...(config[direction] || config.up),
-    duration: 1,
+    duration: isMobile ? 0.5 : 1,
     delay,
     ease: "power3.out",
   });
@@ -197,8 +198,8 @@ revealStagger.forEach((container) => {
     },
     y: 0,
     opacity: 1,
-    stagger: 0.15,
-    duration: 0.8,
+    stagger: isMobile ? 0.08 : 0.15,
+    duration: isMobile ? 0.4 : 0.8,
     ease: "power3.out",
   });
 });

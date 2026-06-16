@@ -95,7 +95,7 @@ const flagSvgs: Record<string, string> = {
 
 <div
   id="nav-overlay"
-  class="nav-overlay-hidden fixed inset-0 z-40 lg:hidden bg-black/80 backdrop-blur-xl transition-opacity duration-300"
+  class="nav-overlay-hidden fixed inset-0 z-40 lg:hidden bg-black/80 transition-opacity duration-300"
 >
   <div class="absolute right-5 md:right-8 top-28 md:top-32 flex flex-col items-end gap-3 md:gap-4">
     <a
@@ -450,14 +450,19 @@ const flagSvgs: Record<string, string> = {
 
   #main-nav.scrolled {
     background-color: rgba(242, 236, 228, 0.7);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
   }
 
   :root.dark #main-nav.scrolled {
     background-color: rgba(26, 26, 26, 0.7);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  @media (min-width: 768px) {
+    #main-nav.scrolled {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
   }
 
   .desktop-link:hover {
