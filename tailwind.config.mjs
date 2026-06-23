@@ -9,6 +9,7 @@ export default {
         copy: "#1A1613",
         accent: {
           orange: "#FF5C2B",
+          warm: "#FF7A4F",
           pastel: "#FFB088",
           purple: "#5B1FFF",
         },

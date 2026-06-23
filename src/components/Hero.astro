@@ -1,6 +1,4 @@
 ---
-import sobremi from '../assets/images/sobremi.webp';
-
 interface Props {
   t: Record<string, string>;
 }
@@ -9,24 +7,32 @@ const { t } = Astro.props;
 ---
 
 <section
-  class="relative min-h-screen flex items-center px-6 py-32 overflow-hidden"
+  class="relative min-h-screen flex items-center px-6 py-16 md:py-32 overflow-hidden"
 >
   <div
-    class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full bg-accent-orange/15 blur-3xl pointer-events-none dark:opacity-0"
+    class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full bg-accent-orange/15 blur-3xl pointer-events-none dark:opacity-20"
+    data-parallax="0.3"
+    style="will-change: transform"
   >
   </div>
   <div
-    class="hidden md:block fixed bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-purple/12 blur-3xl pointer-events-none dark:opacity-0"
+    class="hidden md:block fixed bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-purple/12 blur-3xl pointer-events-none dark:opacity-20"
+    data-parallax="0.5"
+    style="will-change: transform"
   >
   </div>
   <div
-    class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:opacity-0"
+    class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:opacity-20"
+    data-parallax="0.7"
+    style="will-change: transform"
   >
   </div>
 
   <div class="max-w-7xl mx-auto w-full flex items-center justify-between gap-12">
     <div class="max-w-3xl text-center md:text-left">
       <span
+        data-hero-label
+        data-split-text
         class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-8"
       >
         {t.label}
@@ -34,23 +40,26 @@ const { t } = Astro.props;
 
       <h1
         data-hero-heading
+        data-split-text
         class="text-[2rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 leading-tight text-copy dark:text-dark-copy"
       >
-        <span data-typewriter>{t.greeting}</span>
-        <span data-cursor class="ml-[3px] w-[2px] sm:w-[3px] h-[0.9em] bg-accent-orange inline-block"></span>
+        {t.greeting}
       </h1>
       <p
         data-hero-heading
+        data-split-text
         class="text-sm sm:text-lg md:text-xl font-bold tracking-tight mb-6 text-copy/60 dark:text-dark-copy/60 text-balance"
       >
         {t.subtitle}
       </p>
 
-      <p class="text-copy/50 dark:text-dark-muted leading-relaxed text-xs sm:text-sm md:text-base mb-6 max-w-2xl text-balance">
-        {t.description}
-      </p>
+      {
+        t.description.split('\n').map((line) => (
+          <p data-hero-desc data-split-text class="text-copy/50 dark:text-dark-muted leading-relaxed text-xs sm:text-sm md:text-base mb-0 max-w-2xl text-balance">{line.trim()}</p>
+        ))
+      }
 
-      <p data-hero-cta class="font-serif text-sm sm:text-base md:text-lg italic text-accent-orange/80 mb-8 text-balance">
+      <p data-hero-cta data-split-text class="font-serif text-sm sm:text-base md:text-lg italic text-accent-orange/80 mt-6 mb-8 text-balance">
         {t.cta}
       </p>
 
@@ -66,7 +75,7 @@ const { t } = Astro.props;
           href="#contacto"
           data-magnetic
           class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full font-medium text-xs md:text-sm tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300"
-          style="border: 2px solid transparent; background-image: linear-gradient(var(--bg-hex), var(--bg-hex)), linear-gradient(to right, #FF5C2B, #FFB088); background-origin: border-box; background-clip: padding-box, border-box;"
+          style="border: 2px solid transparent; background-image: linear-gradient(var(--bg-hex), var(--bg-hex)), linear-gradient(to right, var(--clr-accent-orange), var(--clr-accent-pastel)); background-origin: border-box; background-clip: padding-box, border-box;"
         >
           <span class="absolute inset-0 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           <span class="relative z-10">{t.contact}</span>
@@ -75,25 +84,14 @@ const { t } = Astro.props;
 
     </div>
 
-
-
-    <div class="hidden lg:block absolute bottom-0 right-[10%] w-1/2 max-w-lg">
-      <img
-        src={sobremi.src}
-        alt="Julián Recarte"
-        class="w-full h-auto block hero-img"
-        loading="eager"
-      />
+    <div class="hidden md:flex items-center justify-center w-full max-w-md shrink-0">
+      <div class="relative w-72 h-72 lg:w-96 lg:h-96 rounded-[2rem] overflow-hidden shadow-2xl bg-accent-orange/5 dark:bg-dark-card border border-black/5 dark:border-dark-muted/20">
+        <div class="absolute inset-0 bg-gradient-to-br from-accent-orange/10 via-accent-pastel/10 to-accent-purple/10 animate-pulse"></div>
+      </div>
     </div>
+
   </div>
 
 </section>
-
-<style>
-  .hero-img {
-    mask-image: linear-gradient(to top, transparent 0%, black 60%, black 100%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 60%, black 100%);
-  }
-</style>
 
 

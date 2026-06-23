@@ -14,25 +14,25 @@ const steps = [
   {
     num: "01",
     gradient:
-      "linear-gradient(135deg, rgba(255,92,43,0.3), rgba(255,92,43,0.05), rgba(91,31,255,0.15))",
+      "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.3), rgba(var(--rgb-accent-orange),0.05), rgba(var(--rgb-accent-purple),0.15))",
     image: briefingImg,
   },
   {
     num: "02",
     gradient:
-      "linear-gradient(135deg, rgba(91,31,255,0.3), rgba(91,31,255,0.05), rgba(255,92,43,0.15))",
+      "linear-gradient(135deg, rgba(var(--rgb-accent-purple),0.3), rgba(var(--rgb-accent-purple),0.05), rgba(var(--rgb-accent-orange),0.15))",
     image: bocetoImg,
   },
   {
     num: "03",
     gradient:
-      "linear-gradient(135deg, rgba(255,92,43,0.2), rgba(242,236,228,0.3), rgba(91,31,255,0.25))",
+      "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.2), rgba(242,236,228,0.3), rgba(var(--rgb-accent-purple),0.25))",
     image: desarrolloImg,
   },
   {
     num: "04",
     gradient:
-      "linear-gradient(135deg, rgba(91,31,255,0.2), rgba(255,92,43,0.1), rgba(242,236,228,0.3))",
+      "linear-gradient(135deg, rgba(var(--rgb-accent-purple),0.2), rgba(var(--rgb-accent-orange),0.1), rgba(242,236,228,0.3))",
     image: iteracionImg,
   },
 ];
@@ -40,7 +40,7 @@ const steps = [
 
 <section
   id="proceso"
-  class="min-h-screen px-6 py-32 overflow-hidden"
+  class="min-h-screen px-6 py-16 md:py-32 overflow-hidden"
 >
   <div class="max-w-7xl mx-auto">
     <div class="mb-16 md:mb-20 text-center" data-reveal>
@@ -50,33 +50,40 @@ const steps = [
         {t.label}
       </span>
       <h2
+        data-reveal-heading
         class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
       >
         {t.title} <span class="text-accent-orange">{t.highlight}</span>
       </h2>
     </div>
 
-    <div class="relative">
+    <div id="process-wrap" class="relative">
       <div
         class="hidden md:block absolute left-[7%] md:left-1/2 top-0 bottom-0 w-px"
         style="background: linear-gradient(to bottom, transparent 0%, rgba(91,31,255,0.2) 15%, rgba(255,92,43,0.2) 50%, rgba(91,31,255,0.2) 85%, transparent 100%);"
       >
       </div>
+      <div id="process-line-wrap" class="hidden md:block absolute left-[6.9%] md:left-[calc(50%-1px)] top-0 bottom-0 w-[2px] overflow-hidden">
+        <div id="process-line" class="absolute top-0 left-0 w-full h-full origin-top" style="transform: scaleY(0); background: linear-gradient(to bottom, transparent 0%, rgb(255,92,43) 10%, rgb(91,31,255) 50%, rgb(255,92,43) 90%, transparent 100%);"></div>
+      </div>
 
       {steps.map((step, i) => (
         <div
-          class="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-24 py-6 md:py-8"
+          class="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 lg:gap-24 py-6 md:py-8"
           data-reveal
         >
           <div
             class={`${i % 2 === 1 ? "md:order-2" : ""}`}
           >
             <div
-              class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] bg-[#FDEDDC] dark:bg-dark-card"
+              class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:bg-dark-card"
+              style="background: {step.gradient}"
             >
               <img
                 src={step.image.src}
                 alt={t.steps[i].title}
+                loading="lazy"
+                decoding="async"
                 class="absolute inset-0 w-full h-full object-cover"
               />
               <div
@@ -117,7 +124,7 @@ const steps = [
             >
               {t.steps[i].title}
             </h3>
-            <p class="text-copy/60 dark:text-dark-muted leading-relaxed text-lg" style="text-wrap: balance;">
+            <p class="text-copy/60 dark:text-dark-muted leading-relaxed text-base md:text-lg" style="text-wrap: balance;">
               {t.steps[i].description}
             </p>
           </div>

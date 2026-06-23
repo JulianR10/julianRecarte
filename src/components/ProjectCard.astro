@@ -4,14 +4,14 @@ interface Props {
   description: string;
   tags: string[];
   style: string;
-  t: Record<string, string>;
+  viewProject: string;
 }
 
-const { title, description, tags, style, t } = Astro.props;
+const { title, description, tags, style, viewProject } = Astro.props;
 ---
 
 <article
-  class="project-card group relative overflow-hidden rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 hover:border-black/10 dark:hover:border-dark-muted/30 transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-black/5"
+  class="project-card group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 hover:border-black/10 dark:hover:border-dark-muted/30 transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-black/5"
 >
   <div
     class="aspect-[4/3] relative overflow-hidden"
@@ -38,7 +38,7 @@ const { title, description, tags, style, t } = Astro.props;
       <span
         class="text-white text-sm font-medium tracking-wider uppercase bg-white/10 dark:bg-dark-card backdrop-blur-md px-6 py-3 rounded-full border border-white/20"
       >
-        {t.viewProject}
+        {viewProject}
       </span>
     </div>
   </div>
@@ -63,3 +63,34 @@ const { title, description, tags, style, t } = Astro.props;
     </div>
   </div>
 </article>
+
+<script>
+  (async function () {
+    const gsap = (await import("gsap")).default;
+
+    const cards = document.querySelectorAll(".project-card");
+    cards.forEach((card) => {
+      gsap.set(card, { transformStyle: "preserve-3d" });
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(card, {
+          rotationX: y * -12,
+          rotationY: x * 12,
+          transformPerspective: 1000,
+          duration: 0.4,
+          ease: "power2.out",
+        });
+      });
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          rotationX: 0,
+          rotationY: 0,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      });
+    });
+  })();
+</script>

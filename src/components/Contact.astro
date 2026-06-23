@@ -8,7 +8,7 @@ const { t } = Astro.props;
 
 <section
   id="contacto"
-  class="flex items-center px-6 pt-32 pb-0 relative overflow-hidden"
+  class="flex items-center px-6 pt-16 md:pt-32 pb-0 relative overflow-hidden"
 >
   <div
     class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent-orange/[0.03] blur-3xl pointer-events-none dark:opacity-0"
@@ -24,6 +24,7 @@ const { t } = Astro.props;
       </span>
 
       <h2
+        data-reveal-heading
         class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-12"
       >
         {t.title}
@@ -40,7 +41,7 @@ const { t } = Astro.props;
     </div>
 
     <div
-      class="flex flex-wrap justify-center gap-4 md:gap-8 pt-12 mb-5"
+      class="flex flex-wrap justify-center gap-3 md:gap-8 pt-12 mb-5"
     >
       <a
         href="#"

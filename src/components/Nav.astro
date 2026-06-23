@@ -22,11 +22,12 @@ const flagSvgs: Record<string, string> = {
 ---
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 py-4 md:py-5 transition-all duration-500">
+  <div id="progress-bar" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent-orange to-accent-purple origin-left" style="transform: scaleX(0);"></div>
   <div class="max-w-[87%] mx-auto flex items-center px-6">
     <div class="flex-1 lg:flex-none text-left">
       <a
         href={import.meta.env.BASE_URL || "/"}
-        class="text-[2rem] font-bold font-clash leading-none tracking-[-4px] no-underline"
+        class="inline-block text-[2rem] font-bold font-clash leading-none tracking-[-4px] no-underline transition-transform duration-300 hover:scale-110 hover:rotate-[25deg]"
       >
         <span class="text-copy dark:text-dark-copy">J</span><span class="text-accent-orange">R</span>
       </a>
@@ -80,7 +81,7 @@ const flagSvgs: Record<string, string> = {
 
       <button
         id="menu-btn"
-        class="lg:hidden w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-accent-orange via-[#FF7A4F] to-accent-pastel text-white shadow-lg shadow-accent-orange/30 cursor-pointer border-none outline-none flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-300"
+        class="lg:hidden w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-accent-orange via-accent-warm to-accent-pastel text-white shadow-lg shadow-accent-orange/30 cursor-pointer border-none outline-none flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-300"
         data-close-label={t.closeMenu} data-open-label={t.openMenu} aria-label={t.closeMenu}
       >
         <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -177,6 +178,29 @@ const flagSvgs: Record<string, string> = {
   }
 
   (function () {
+    const sections = [
+      { id: "proyectos", link: document.querySelector('.desktop-link[href="#proyectos"]') },
+      { id: "proceso", link: document.querySelector('.desktop-link[href="#proceso"]') },
+      { id: "contacto", link: document.querySelector('.desktop-link[href="#contacto"]') },
+    ].filter(s => s.link);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          sections.forEach(s => s.link.classList.remove("active"));
+          const match = sections.find(s => s.id === entry.target.id);
+          if (match) match.link.classList.add("active");
+        }
+      });
+    }, { rootMargin: "-50% 0px -50% 0px" });
+
+    sections.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+  })();
+
+  (function () {
     const lightBtn = document.getElementById("light-toggle");
     const darkBtn = document.getElementById("dark-toggle");
     const indicator = document.getElementById("theme-indicator");
@@ -216,9 +240,7 @@ const flagSvgs: Record<string, string> = {
       overlayDark.addEventListener("click", () => setTheme(true));
     }
   })();
-</script>
 
-<script>
   (function () {
     const btn = document.getElementById("menu-btn");
     const overlay = document.getElementById("nav-overlay");
@@ -256,7 +278,6 @@ const flagSvgs: Record<string, string> = {
       if (e.target === overlay) closeMenu();
     });
 
-    // Overlay language dropdown
     const langBtn = document.getElementById("overlay-lang-btn");
     const langDropdown = document.getElementById("overlay-lang-dropdown");
     const langChevron = document.getElementById("overlay-lang-chevron");
@@ -311,9 +332,7 @@ const flagSvgs: Record<string, string> = {
       }
     });
   })();
-</script>
 
-<script>
   (function () {
     const btn = document.getElementById("lang-btn");
     const dropdown = document.getElementById("lang-dropdown");
@@ -366,7 +385,7 @@ const flagSvgs: Record<string, string> = {
 
 <style>
   #lang-dropdown {
-    transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+    transition: transform var(--dur-fast) ease, opacity var(--dur-fast) ease, visibility var(--dur-fast) ease;
     transform-origin: top;
   }
 
@@ -383,7 +402,7 @@ const flagSvgs: Record<string, string> = {
   }
 
   #overlay-lang-dropdown {
-    transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+    transition: transform var(--dur-fast) ease, opacity var(--dur-fast) ease, visibility var(--dur-fast) ease;
     transform-origin: top;
   }
 
@@ -398,7 +417,7 @@ const flagSvgs: Record<string, string> = {
   }
 
   #nav-overlay > div {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    transition: transform var(--dur-slow) cubic-bezier(0.16, 1, 0.3, 1), opacity var(--dur-slow) ease;
   }
 
   .nav-overlay-hidden > div {
@@ -417,7 +436,7 @@ const flagSvgs: Record<string, string> = {
   #nav-overlay #overlay-dark-toggle {
     opacity: 0;
     transform: translateX(40px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    transition: transform var(--dur-slow) cubic-bezier(0.16, 1, 0.3, 1), opacity var(--dur-slow) ease;
     transition-delay: 0.05s;
   }
 
@@ -463,7 +482,11 @@ const flagSvgs: Record<string, string> = {
     -webkit-backdrop-filter: blur(14px);
   }
 
+  .desktop-link.active {
+    color: var(--clr-accent-orange);
+  }
+
   .desktop-link:hover {
-    color: #FF5C2B;
+    color: var(--clr-accent-orange);
   }
 </style>

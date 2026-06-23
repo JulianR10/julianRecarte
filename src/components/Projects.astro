@@ -11,24 +11,24 @@ const projects = [
   {
     title: "Nexus",
     tags: ["React", "Three.js", "GSAP", "Framer Motion"],
-    style: "linear-gradient(135deg, rgba(255,92,43,0.4), rgba(255,92,43,0.15), rgba(91,31,255,0.3))",
+    style: "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.4), rgba(var(--rgb-accent-orange),0.15), rgba(var(--rgb-accent-purple),0.3))",
   },
   {
     title: "Aether",
     tags: ["Next.js", "GSAP", "Lenis", "TailwindCSS"],
-    style: "linear-gradient(135deg, rgba(91,31,255,0.4), rgba(91,31,255,0.15), rgba(255,92,43,0.3))",
+    style: "linear-gradient(135deg, rgba(var(--rgb-accent-purple),0.4), rgba(var(--rgb-accent-purple),0.15), rgba(var(--rgb-accent-orange),0.3))",
   },
   {
     title: "Lumina",
     tags: ["Astro", "GSAP", "Shopify", "TypeScript"],
-    style: "linear-gradient(135deg, rgba(255,92,43,0.3), rgba(242,236,228,0.5), rgba(91,31,255,0.4))",
+    style: "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.3), rgba(242,236,228,0.5), rgba(var(--rgb-accent-purple),0.4))",
   },
 ];
 ---
 
 <section
   id="proyectos"
-  class="min-h-screen px-6 py-32"
+  class="min-h-screen px-6 py-16 md:py-32"
 >
   <div class="max-w-7xl mx-auto">
     <div class="mb-16 md:mb-20" data-reveal>
@@ -38,6 +38,7 @@ const projects = [
         {t.label}
       </span>
       <h2
+        data-reveal-heading
         class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-3xl"
       >
         {t.title} <span class="text-accent-orange">{t.highlight}</span>
@@ -46,10 +47,10 @@ const projects = [
 
     <div
       data-reveal-stagger
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
     >
       {projects.map((project, i) => (
-        <ProjectCard {...project} title={t.items[i].title} description={t.items[i].description} t={{ viewProject: t.viewProject }} />
+        <ProjectCard {...project} title={t.items[i].title} description={t.items[i].description} viewProject={t.viewProject} />
       ))}
     </div>
   </div>

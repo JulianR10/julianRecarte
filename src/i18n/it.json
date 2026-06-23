@@ -41,6 +41,34 @@
       }
     ]
   },
+  "testimonials": {
+    "label": "Testimonianze",
+    "title": "Cosa dicono",
+    "highlight": "i miei clienti",
+    "items": [
+      {
+        "quote": "Lavorare con Julián è stata un'esperienza incredibile. Ha trasformato la nostra visione in una piattaforma web che ha superato tutte le aspettative. La sua attenzione ai dettagli e la creatività sono eccezionali.",
+        "initials": "MC",
+        "name": "Maria Campos",
+        "role": "CEO",
+        "company": "Nexus Studio"
+      },
+      {
+        "quote": "Professionale, creativo e estremamente talentuoso. Ha capito esattamente cosa ci serviva e lo ha eseguito alla perfezione. Il risultato è un sito web che rappresenta veramente il nostro marchio.",
+        "initials": "PL",
+        "name": "Pablo Lucero",
+        "role": "Direttore Creativo",
+        "company": "Aether Agency"
+      },
+      {
+        "quote": "La decisione migliore che abbiamo preso è stata assumere Julián. Non solo ha rispettato le scadenze, ma ha portato idee che hanno migliorato significativamente il progetto finale. Altamente raccomandato.",
+        "initials": "CG",
+        "name": "Carolina Gómez",
+        "role": "Fondatrice",
+        "company": "Lumina Co."
+      }
+    ]
+  },
   "process": {
     "label": "Processo",
     "title": "Come",

@@ -7,184 +7,191 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matc
 const isMobile = window.innerWidth < 768;
 
 if (reducedMotion) {
-  document.querySelectorAll("[data-reveal], [data-reveal-stagger], [data-hero-cta], [data-hero-buttons]").forEach(el => {
+  document.querySelectorAll("[data-reveal], [data-reveal-stagger], [data-split-text], [data-hero-cta], [data-hero-buttons]").forEach(el => {
     el.style.opacity = "1";
     el.style.transform = "none";
   });
-  document.querySelectorAll("[data-cursor]").forEach(el => {
-    el.style.display = "none";
-  });
 } else {
 
-function splitTextIntoSpans(element) {
-  const frag = document.createDocumentFragment();
-  const children = Array.from(element.childNodes);
-  element.textContent = "";
-  children.forEach((node) => {
-    if (node.nodeType === Node.TEXT_NODE) {
-      const words = node.textContent.trim().split(/\s+/);
-      words.forEach((word, i) => {
-        if (!word) return;
-        const span = document.createElement("span");
-        span.textContent = word;
-        span.style.display = "inline-block";
-        frag.appendChild(span);
-        if (i < words.length - 1) {
-          frag.appendChild(document.createTextNode(" "));
-        }
-      });
-    } else {
-      frag.appendChild(node.cloneNode(true));
-    }
-  });
-  element.appendChild(frag);
-  return element.querySelectorAll("span");
+// ===== 1. LOAD STAGGER: NAV =====
+const loadTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+const navItems = document.querySelectorAll("#main-nav .desktop-link, #lang-btn, #theme-toggle");
+if (navItems.length) {
+  gsap.set(navItems, { opacity: 0, y: -20 });
+  loadTl.to(navItems, { opacity: 1, y: 0, stagger: 0.05, duration: 0.4 }, 0);
 }
 
-const heroHeadings = document.querySelectorAll("[data-hero-heading]");
-const heroCta = document.querySelector("[data-hero-cta]");
-const heroButtons = document.querySelector("[data-hero-buttons]");
+// ===== 6. PROGRESS BAR =====
+const progressBar = document.getElementById("progress-bar");
+if (progressBar) {
+  gsap.to(progressBar, {
+    scrollTrigger: {
+      trigger: document.body,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 0.5,
+    },
+    scaleX: 1,
+    ease: "none",
+  });
+}
 
-if (heroHeadings.length) {
-  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-  let allWords = [];
+function splitTextIntoChars(element) {
+  const text = element.textContent;
+  element.textContent = "";
+  const chars = [];
+  const groups = text.split(/(\s+)/);
 
-  heroHeadings.forEach((el) => {
-    const typewriter = el.querySelector("[data-typewriter]");
-    const cursor = el.querySelector("[data-cursor]");
+  groups.forEach((group) => {
+    if (/^\s+$/.test(group)) {
+      element.appendChild(document.createTextNode(group));
+    } else if (group.length > 0) {
+      const wrapper = document.createElement("span");
+      wrapper.style.display = "inline-block";
+      wrapper.style.whiteSpace = "nowrap";
 
-    if (typewriter) {
-      const text = typewriter.textContent.trim();
-      typewriter.textContent = "";
-      const words = text.split(" ");
-      let wordIdx = 0;
-      let charIdx = 0;
-      let currentWord = null;
-
-      const tick = () => {
-        if (wordIdx >= words.length) {
-          if (cursor) {
-            cursor.style.opacity = "1";
-            const blink = setInterval(() => {
-              cursor.style.opacity = cursor.style.opacity === "1" ? "0" : "1";
-            }, 400);
-            blink._id = "cursor-blink";
-          }
-          return;
-        }
-
-        if (charIdx === 0) {
-          if (wordIdx > 0) {
-            const space = document.createElement("span");
-            space.innerHTML = "&nbsp;";
-            typewriter.appendChild(space);
-          }
-          currentWord = document.createElement("span");
-          currentWord.style.display = "inline-block";
-          currentWord.style.verticalAlign = "baseline";
-          typewriter.appendChild(currentWord);
-        }
-
-        const char = words[wordIdx][charIdx];
+      for (let i = 0; i < group.length; i++) {
         const span = document.createElement("span");
-        span.textContent = char;
-        currentWord.appendChild(span);
-        charIdx++;
+        span.textContent = group[i];
+        span.style.display = "inline-block";
+        wrapper.appendChild(span);
+        chars.push(span);
+      }
 
-        if (charIdx >= words[wordIdx].length) {
-          wordIdx++;
-          charIdx = 0;
-          currentWord = null;
-        }
-
-        setTimeout(tick, 60);
-      };
-
-      tick();
-    } else {
-      const words = splitTextIntoSpans(el);
-      allWords = allWords.concat(Array.from(words));
+      element.appendChild(wrapper);
     }
   });
 
-  if (heroCta) {
-    tl.from(heroCta, { y: 30, opacity: 0, duration: 0.6 }, "-=0.2");
+  return chars;
+}
+
+const splitElements = document.querySelectorAll("[data-split-text]");
+let allCharSpans = [];
+const splitData = [];
+
+if (splitElements.length) {
+  splitElements.forEach((el) => {
+    const chars = splitTextIntoChars(el);
+    if (chars.length) {
+      splitData.push({ el, chars });
+      allCharSpans = allCharSpans.concat(chars);
+    }
+  });
+}
+
+if (allCharSpans.length) {
+  const staggerVal = isMobile ? 0.008 : 0.012;
+  const durVal = isMobile ? 0.25 : 0.35;
+
+  gsap.set(allCharSpans, { opacity: 0, y: 30, filter: "blur(6px)" });
+
+  const splitTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  splitTl.to(allCharSpans, {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    duration: durVal,
+    stagger: staggerVal,
+  });
+
+  let destacarChars = [];
+  for (const { el, chars } of splitData) {
+    const fullText = chars.map((s) => s.textContent).join("");
+    const idx = fullText.indexOf("destacar");
+    if (idx !== -1) {
+      destacarChars = chars.slice(idx, idx + 8);
+      break;
+    }
   }
 
+  splitTl.call(() => {
+    if (destacarChars.length) {
+      gsap.to(destacarChars, {
+        color: "#FF5C2B",
+        fontStyle: "italic",
+        duration: 1.2,
+        stagger: { each: 0.15, from: "start" },
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+    }
+  });
+
+  const heroCta = document.querySelector("[data-hero-cta]");
+  if (heroCta) {
+    splitTl.from(heroCta, { y: 20, opacity: 0, duration: 0.5 });
+  }
+
+  const heroButtons = document.querySelector("[data-hero-buttons]");
   if (heroButtons) {
-    tl.from(
+    splitTl.from(
       heroButtons.children,
-      { y: 30, opacity: 0, scale: 0.9, stagger: 0.15, duration: 0.6 },
-      "-=0.3"
+      { y: 20, opacity: 0, scale: 0.9, stagger: 0.1, duration: 0.5 },
+      "-=0.1"
     );
   }
-
-  const pulseLine = Array.from(allWords).find(
-    (w) => w.textContent.includes("destacar")
-  );
-  if (pulseLine) {
-    const text = pulseLine.textContent;
-    const idx = text.indexOf("destacar");
-    const before = text.slice(0, idx);
-    const after = text.slice(idx + "destacar".length);
-
-    pulseLine.textContent = "";
-
-    if (before) {
-      const beforeSpan = document.createElement("span");
-      beforeSpan.textContent = before;
-      beforeSpan.style.display = "inline-block";
-      pulseLine.appendChild(beforeSpan);
-    }
-
-    const chars = "destacar".split("").map((char) => {
-      const span = document.createElement("span");
-      span.textContent = char;
-      span.style.display = "inline-block";
-      return span;
-    });
-    chars.forEach((c) => pulseLine.appendChild(c));
-
-    if (after) {
-      const afterSpan = document.createElement("span");
-      afterSpan.textContent = after;
-      afterSpan.style.display = "inline-block";
-      pulseLine.appendChild(afterSpan);
-    }
-
-    gsap.to(chars, {
-      color: "#FF5C2B",
-      fontStyle: "italic",
-      duration: 1.2,
-      stagger: { each: 0.15, from: "start" },
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-    });
-  }
 }
 
+// ===== 3. SECTION HEADINGS CLIP-PATH REVEAL =====
+const revealHeadings = document.querySelectorAll("[data-reveal-heading]");
+revealHeadings.forEach((el) => {
+  gsap.from(el, {
+    scrollTrigger: {
+      trigger: el,
+      start: "top 85%",
+    },
+    clipPath: "inset(0 100% 0 0)",
+    duration: 2,
+    ease: "power2.out",
+  });
+});
+
+// ===== 4. PROCESS LINE DRAW =====
+const processLine = document.getElementById("process-line");
+const processWrap = document.getElementById("process-wrap");
+if (processLine && processWrap) {
+  gsap.to(processLine, {
+    scrollTrigger: {
+      trigger: processWrap,
+      start: "top 70%",
+      end: "bottom 30%",
+      scrub: 1,
+    },
+    scaleY: 1,
+    ease: "none",
+  });
+}
+
+// ===== SCROLL REVEAL (with explicit fromTo to avoid CSS conflicts) =====
 const revealElements = document.querySelectorAll("[data-reveal]");
 revealElements.forEach((el) => {
   const direction = el.dataset.reveal || "up";
   const delay = parseFloat(el.dataset.revealDelay) || 0;
   const config = {
-    up: { y: 80, opacity: 0 },
-    down: { y: -80, opacity: 0 },
-    left: { x: -80, opacity: 0 },
-    right: { x: 80, opacity: 0 },
+    up: { y: 80 },
+    down: { y: -80 },
+    left: { x: -80 },
+    right: { x: 80 },
   };
-  gsap.from(el, {
-    scrollTrigger: {
-      trigger: el,
-      start: "top 85%",
-      toggleActions: isMobile ? "play none none none" : "play none none reverse",
-    },
-    ...(config[direction] || config.up),
-    duration: isMobile ? 0.5 : 1,
-    delay,
-    ease: "power3.out",
-  });
+  gsap.fromTo(el,
+    { ...(config[direction] || config.up), opacity: 0 },
+    {
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        toggleActions: isMobile ? "play none none none" : "play none none reverse",
+      },
+      y: 0,
+      x: 0,
+      opacity: 1,
+      duration: isMobile ? 0.5 : 1,
+      delay,
+      ease: "power3.out",
+    }
+  );
 });
 
 const revealStagger = document.querySelectorAll("[data-reveal-stagger]");
@@ -219,6 +226,26 @@ document.querySelectorAll("[data-magnetic]").forEach((el) => {
     gsap.to(el, { x: 0, y: 0, scale: 1, duration: 0.6, ease: "power3.out" });
   });
 });
+
+// ===== PARALLAX LAYERS =====
+const parallaxLayers = document.querySelectorAll("[data-parallax]");
+if (parallaxLayers.length) {
+  document.addEventListener("mousemove", (e) => {
+    const mx = (e.clientX / window.innerWidth - 0.5) * 2;
+    const my = (e.clientY / window.innerHeight - 0.5) * 2;
+
+    parallaxLayers.forEach((layer) => {
+      const speed = parseFloat(layer.dataset.parallax) || 0.3;
+      gsap.to(layer, {
+        x: mx * 80 * speed,
+        y: my * 60 * speed,
+        duration: 1.2,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    });
+  });
+}
 
   ScrollTrigger.refresh();
 }

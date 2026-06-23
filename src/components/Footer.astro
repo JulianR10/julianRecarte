@@ -13,12 +13,12 @@ const year = new Date().getFullYear();
   >
     <a
       href={import.meta.env.BASE_URL || "/"}
-      class="text-[2rem] font-bold font-clash leading-none tracking-[-4px] no-underline"
+      class="inline-block text-[2rem] font-bold font-clash leading-none tracking-[-4px] no-underline transition-transform duration-300 hover:scale-110 hover:rotate-[25deg]"
     >
       <span class="text-copy dark:text-dark-copy">J</span><span class="text-accent-orange">R</span>
     </a>
     <p class="text-sm text-copy/30 dark:text-dark-muted/50 order-3 md:order-2">
-      {t.copyright.replace("{year}", String(year))}
+      {(t.copyright || "© {year} Julián Recarte").replace("{year}", String(year))}
     </p>
   </div>
 </footer>

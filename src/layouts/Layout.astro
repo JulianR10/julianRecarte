@@ -89,6 +89,90 @@ const {
     </script>
   </head>
   <body>
+    <div id="preloader" aria-hidden="true">
+      <span class="text-[3rem] md:text-[4rem] font-bold font-clash leading-none tracking-[-6px]">
+        <span id="pl-j" class="text-copy dark:text-dark-copy">J</span><span id="pl-r" class="text-accent-orange">R</span>
+      </span>
+    </div>
+    <script>
+      import gsap from "gsap";
+
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        if (!preloader) return;
+
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (reducedMotion) {
+          preloader.style.display = "none";
+          return;
+        }
+
+        const safety = setTimeout(() => {
+          preloader.style.display = "none";
+        }, 3000);
+
+        setTimeout(() => {
+          try {
+            const plJ = document.getElementById("pl-j");
+            const plR = document.getElementById("pl-r");
+            const navLogo = document.querySelector("#main-nav > div > div:first-child a:first-child");
+            if (!navLogo) throw new Error("navLogo not found");
+            const navJ = navLogo.querySelector("span:first-child");
+            const navR = navLogo.querySelector("span:last-child");
+            if (!plJ || !plR || !navJ || !navR) throw new Error("spans not found");
+
+            gsap.set([plJ, plR], { display: "inline-block" });
+
+            const plJRect = plJ.getBoundingClientRect();
+            const plRRect = plR.getBoundingClientRect();
+            const navJRect = navJ.getBoundingClientRect();
+            const navRRect = navR.getBoundingClientRect();
+
+            const scaleJ = navJRect.width / plJRect.width;
+            const scaleR = navRRect.width / plRRect.width;
+
+            const dJ = {
+              x: navJRect.left + navJRect.width / 2 - (plJRect.left + plJRect.width / 2),
+              y: navJRect.top + navJRect.height / 2 - (plJRect.top + plJRect.height / 2),
+            };
+            const dR = {
+              x: navRRect.left + navRRect.width / 2 - (plRRect.left + plRRect.width / 2),
+              y: navRRect.top + navRRect.height / 2 - (plRRect.top + plRRect.height / 2),
+            };
+
+            const tl = gsap.timeline({
+              defaults: { ease: "power4.inOut", duration: 1.2 },
+              onComplete: () => {
+                clearTimeout(safety);
+                preloader.style.display = "none";
+              },
+            });
+
+            tl.set(plJ, { rotation: -6 });
+            tl.set(plR, { rotation: 6 });
+
+            tl.to(plJ, {
+              x: dJ.x, y: dJ.y,
+              rotation: 0, scale: scaleJ,
+            }, 0);
+
+            tl.to(plR, {
+              x: dR.x, y: dR.y,
+              rotation: 0, scale: scaleR,
+            }, 0.07);
+
+            tl.to(preloader, {
+              backgroundColor: "transparent",
+              duration: 0.9,
+              ease: "power2.out",
+            }, 0.25);
+          } catch (e) {
+            console.error("Preloader error:", e);
+            preloader.style.display = "none";
+          }
+        }, 500);
+      });
+    </script>
     <a href="#main-content" class="skip-link">{t.skipLink}</a>
     <main id="main-content">
       <slot />
@@ -259,7 +343,16 @@ const {
 
   :root {
     --bg-hex: #F2ECE4;
-    --theme-dur: 2s;
+    --theme-dur: 0.6s;
+    --dur-fast: 0.15s;
+    --dur-base: 0.3s;
+    --dur-slow: 0.5s;
+    --clr-accent-orange: #FF5C2B;
+    --clr-accent-purple: #5B1FFF;
+    --clr-accent-pastel: #FFB088;
+    --rgb-accent-orange: 255, 92, 43;
+    --rgb-accent-purple: 91, 31, 255;
+    --rgb-accent-pastel: 255, 176, 136;
   }
 
   :root.dark {
@@ -342,6 +435,17 @@ const {
 
   .skip-link:focus {
     top: 16px;
+  }
+
+  #preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background-color: var(--bg-hex);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
   }
 
   @media (prefers-reduced-motion: reduce) {

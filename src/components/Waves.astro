@@ -19,30 +19,27 @@
       </filter>
     </defs>
     <path
-      class="wave-1"
+      class="wave wave-1"
       d="M-200,300 C50,100 300,500 550,300 C800,100 1050,500 1300,300 C1550,100 1800,500 2000,300"
       fill="none"
-      stroke="#FF5C2B"
       stroke-width="1.5"
       stroke-linecap="round"
       opacity="0.12"
       filter="url(#wave-blur)"
     />
     <path
-      class="wave-2"
+      class="wave wave-2"
       d="M-200,500 C50,700 300,300 550,500 C800,700 1050,300 1300,500 C1550,700 1800,300 2000,500"
       fill="none"
-      stroke="#5B1FFF"
       stroke-width="1.5"
       stroke-linecap="round"
       opacity="0.1"
       filter="url(#wave-blur)"
     />
     <path
-      class="wave-3"
+      class="wave wave-3"
       d="M-200,700 C50,500 300,900 550,700 C800,500 1050,900 1300,700 C1550,500 1800,900 2000,700"
       fill="none"
-      stroke="#FF5C2B"
       stroke-width="1"
       stroke-linecap="round"
       opacity="0.07"
@@ -52,6 +49,15 @@
 </div>
 
 <style>
+  .wave-1,
+  .wave-3 {
+    stroke: var(--clr-accent-orange);
+  }
+
+  .wave-2 {
+    stroke: var(--clr-accent-purple);
+  }
+
   @media (max-width: 767px) {
     .wave-1,
     .wave-2,
