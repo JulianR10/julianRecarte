@@ -13,7 +13,7 @@ const { title, description, tags, style, viewProject, href, image } = Astro.prop
 ---
 
 <article
-  class="project-card group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 hover:border-black/10 dark:hover:border-dark-muted/30 transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-black/5"
+  class="project-card group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-all duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5"
 >
   <div
     class="aspect-[4/3] relative overflow-hidden rounded-2xl"
@@ -33,7 +33,7 @@ const { title, description, tags, style, viewProject, href, image } = Astro.prop
       <span class="w-2.5 h-2.5 rounded-full bg-white/20 dark:bg-dark-muted/30"></span>
     </div>
     <div
-      class="absolute inset-0 bg-black/0 group-hover:bg-black/10 dark:bg-white/0 dark:group-hover:bg-white/10 transition-colors duration-500"
+      class="absolute inset-0 bg-black/0 md:group-hover:bg-black/10 dark:bg-white/0 md:dark:group-hover:bg-white/10 transition-colors duration-500"
     >
     </div>
     <div
@@ -60,7 +60,7 @@ const { title, description, tags, style, viewProject, href, image } = Astro.prop
 
   <div class="p-6 md:p-8">
     <h3
-      class="text-2xl font-bold font-clash mb-3 text-accent-purple transition-colors duration-300 group-hover:text-accent-orange"
+      class="text-2xl font-bold font-clash mb-3 text-accent-purple transition-colors duration-300 md:group-hover:text-accent-orange"
     >
       {title}
     </h3>

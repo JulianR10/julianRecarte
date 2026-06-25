@@ -43,7 +43,7 @@ const { t } = Astro.props;
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
     >
       {t.items.map((item: TestimonialItem) => (
-        <div class="relative p-8 rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/20 transition-all duration-500">
+        <div class="relative p-8 rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5 md:dark:hover:shadow-black/20 transition-shadow duration-500 md:transition-all duration-500">
           <div class="flex items-center gap-1 mb-4">
             {Array.from({ length: 5 }).map((_, i) => (
               <svg key={i} class="w-4 h-4 text-accent-orange" viewBox="0 0 20 20" fill="currentColor">
