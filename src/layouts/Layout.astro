@@ -241,6 +241,7 @@ const {
         const gsap = window.gsap;
         if (!gsap) return;
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (window.innerWidth < 768) return;
 
         let hovered = null;
 
