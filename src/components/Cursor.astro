@@ -54,7 +54,7 @@
 
     document
       .querySelectorAll(
-        "a, button, [data-hoverable], [data-magnetic], .project-card"
+        "a, button, [data-magnetic], .project-card"
       )
       .forEach((el) => {
         el.addEventListener("mouseenter", () =>
@@ -64,5 +64,7 @@
           cursor.classList.remove("is-hover")
         );
       });
+
+    window.addEventListener("beforeunload", () => cancelAnimationFrame(rafId));
   })();
 </script>

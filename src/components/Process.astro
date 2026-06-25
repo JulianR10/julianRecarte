@@ -4,8 +4,19 @@ import bocetoImg from "../assets/images/boceto.webp";
 import desarrolloImg from "../assets/images/desarrollo.webp";
 import iteracionImg from "../assets/images/iteracion.webp";
 
+interface ProcessStep {
+  title: string;
+  description: string;
+}
+
 interface Props {
-  t: Record<string, any>;
+  t: {
+    label: string;
+    title: string;
+    highlight: string;
+    stepLabel: string;
+    steps: ProcessStep[];
+  };
 }
 
 const { t } = Astro.props;
@@ -71,12 +82,13 @@ const steps = [
         <div
           class="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 lg:gap-24 py-6 md:py-8"
           data-reveal
+          data-process-step={i}
         >
           <div
             class={`${i % 2 === 1 ? "md:order-2" : ""}`}
           >
             <div
-              class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:bg-dark-card"
+              class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:bg-dark-card hover:shadow-xl hover:shadow-black/5 dark:hover:shadow-black/20 transition-all duration-500"
               style="background: {step.gradient}"
             >
               <img
@@ -133,3 +145,5 @@ const steps = [
     </div>
   </div>
 </section>
+
+

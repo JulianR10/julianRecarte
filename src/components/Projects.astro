@@ -1,16 +1,30 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
+import logoSP from "../assets/images/logoSP.PNG";
+
+interface ProjectItem {
+  title: string;
+  description: string;
+}
 
 interface Props {
-  t: Record<string, any>;
+  t: {
+    label: string;
+    title: string;
+    highlight: string;
+    viewProject: string;
+    items: ProjectItem[];
+  };
 }
 
 const { t } = Astro.props;
 
 const projects = [
   {
-    title: "Nexus",
-    tags: ["React", "Three.js", "GSAP", "Framer Motion"],
+    title: "SP Soluciones Textiles",
+    tags: ["Astro", "TailwindCSS", "GSAP"],
+    href: "https://julianr10.github.io/sp-soluciones-textiles/",
+    image: logoSP,
     style: "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.4), rgba(var(--rgb-accent-orange),0.15), rgba(var(--rgb-accent-purple),0.3))",
   },
   {
@@ -50,7 +64,7 @@ const projects = [
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
     >
       {projects.map((project, i) => (
-        <ProjectCard {...project} title={t.items[i].title} description={t.items[i].description} viewProject={t.viewProject} />
+        <ProjectCard {...project} title={t.items[i].title} description={t.items[i].description} viewProject={t.viewProject} image={project.image && (typeof project.image === 'string' ? project.image : project.image.src)} />
       ))}
     </div>
   </div>

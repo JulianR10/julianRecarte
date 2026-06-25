@@ -1,37 +1,33 @@
-# Mejoras — Portfolio Julián Recarte
+# Análisis completo — Portfolio Julián Recarte
 
-## ✅ Completadas
+> Análisis realizado el 24 de junio de 2026. Código base en `27ef55b`.
+> Última actualización: 24 de junio de 2026.
 
-| # | Mejora | Archivos |
-|---|---|---|
-| 1 | Gradients de steps aplicados al fondo de imágenes | `Process.astro` |
-| 2 | `viewProject` como prop directa (sin objeto `t` anidado) | `ProjectCard.astro`, `Projects.astro` |
-| 3 | Variables CSS de timing (`--dur-fast`, `--dur-base`, `--dur-slow`) | `Layout.astro` |
-| 4 | `--theme-dur` reducido: 2s → 1.5s → 0.6s | `Layout.astro` |
-| 5 | Transiciones en Cursor y Nav dropdowns unificadas con vars | `Cursor.astro`, `Nav.astro` |
-| 6 | Indicador de sección activa en el nav (IntersectionObserver) | `Nav.astro` |
-| 7 | Colores hardcodeados migrados a tokens/variables CSS | `tailwind.config.mjs`, `Layout.astro`, `Waves.astro`, `Nav.astro`, `Cursor.astro`, `Process.astro`, `Projects.astro`, `Hero.astro` |
-| 8 | GSAP: imports duplicados eliminados (ProjectCard → dinámico) | `ProjectCard.astro` |
-| 9 | Scripts de Nav.astro unificados (3 → 1 bloque) | `Nav.astro` |
-| 10 | Lazy loading en imágenes del proceso | `Process.astro` |
-| 11 | `py-32` reducido a `py-16 md:py-32` en mobile | `Hero.astro`, `Projects.astro`, `Process.astro`, `Contact.astro` |
-| 12 | Hover delay del cursor: 0.5s → 0.3s (size) / 0.3s → 0.15s (color) | `Cursor.astro` |
-| 13 | Footer copyright con fallback `(t.copyright \|\| "...")` | `Footer.astro` |
-| 14 | Estructura para foto en Hero (lado derecho, placeholder con pulse) | `Hero.astro` |
-| 15 | Loading state con wipe reveal (clip-path) | `Layout.astro` |
-| 16 | Sección Testimonios creada con placeholder data (es/en/it) | `Testimonios.astro`, i18n, `[lang]/index.astro` |
-| 17 | Colores hardcodeados en borde gradient del CTA | `Hero.astro` |
-| 18 | Responsive: gaps reducidos en mobile, texto escala mejor | `Projects.astro`, `Process.astro`, `Contact.astro` |
+---
 
-## ⏳ Pendientes
+## Estado actual
 
-| # | Ítem | Depende de |
-|---|---|---|
-| 1 | Links de contacto (WhatsApp, Instagram, Email) | Datos del usuario |
+### ✅ Resuelto en esta sesión
 
-## 📝 Notas adicionales
+| # | Problema | Resolución |
+|---|----------|------------|
+| 1 | **Preloader no arranca** | Safety timeout movido fuera del `load` event; `showPage()` reemplazado por lógica inline; `[data-nav-logo]` en lugar de CSS path frágil; `navLogo` opacity 0→1 |
+| 3 | **ProjectCard O(N²)** | Script por instancia eliminado; tilt con event delegation (`document.mousemove`) en Layout.astro — O(1) listeners |
+| 4 | `scroll-behavior:smooth` vs Lenis | Eliminado del CSS de `<html>` |
+| 5 | **GSAP cargado 4 veces** | `window.gsap = gsap` en Layout.astro; Waves y animaciones usan `window.gsap` |
+| 6 | **`[data-reveal-heading]` sin animación en mobile** | IntersectionObserver expandido (data-reveal, data-reveal-heading, data-reveal-stagger) |
+| 7 | **Flasheo de contenido invisible** | `<noscript>` fallback inyectado |
+| 8-14 | **Atributos muertos** | Eliminados `data-parallax`, `data-split-text`, `data-hero-*`, `data-magnetic`, `data-hoverable`, `html.lenis`, `#page-content` |
+| 15 | **Logo componente compartido** | Creado `Logo.astro`; usado en Nav y Footer |
+| 16 | **Selector de idioma duplicado** | Refactorizado a `initLangSelector()` factory; desktop y overlay usan la misma función |
+| 17 | `#FF5C2B` hardcodeado | Reemplazado por `var(--clr-accent-orange)` en Contact.astro |
+| 18 | `path.replace` frágil | Reemplazado por `split("/")` + `findIndex` + `join("/")` — ignora falsos positivos |
+| 19 | `rafId` sin cancelar | `cancelAnimationFrame` agregado en `beforeunload` |
+| — | **CSS `data-reveal-heading/stagger` bug** | Corregido: solo `[data-reveal]:not(.revealed)` tiene `opacity:0`; heading y stagger container ya no se ocultan |
 
-- **GSAP en Waves.astro**: ya usa `await import("gsap")` dinámico → óptimo
-- **Sección "Sobre mí"**: descartada por ahora (se usará Hero para eso)
-- **Transición de entrada (loading state)**: implementada como wipe reveal con clip-path
-- Cuando se agreguen imágenes reales a Proyectos y al Hero, mantener hover overlay, tilt 3D y efecto de aparición
+### ❌ Pendiente para próxima sesión
+
+| # | Problema | Archivo | Detalle |
+|---|----------|---------|---------|
+| 2 | **Social links placeholder** | `Contact.astro` | WhatsApp, Instagram, Email tienen `href="#"` — necesita URLs reales del usuario |
+| 20 | Typing: `Record<string, string>` vs `any` | Varios | Process, Projects, Testimonials usan `any` por tener objetos anidados — bajo impacto |

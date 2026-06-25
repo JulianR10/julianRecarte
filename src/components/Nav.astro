@@ -1,4 +1,6 @@
 ---
+import Logo from "./Logo.astro";
+
 interface Props {
   lang: string;
   t: Record<string, string>;
@@ -23,14 +25,9 @@ const flagSvgs: Record<string, string> = {
 
 <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 py-4 md:py-5 transition-all duration-500">
   <div id="progress-bar" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent-orange to-accent-purple origin-left" style="transform: scaleX(0);"></div>
-  <div class="max-w-[87%] mx-auto flex items-center px-6">
+  <div class="max-w-7xl mx-auto flex items-center px-6">
     <div class="flex-1 lg:flex-none text-left">
-      <a
-        href={import.meta.env.BASE_URL || "/"}
-        class="inline-block text-[2rem] font-bold font-clash leading-none tracking-[-4px] no-underline transition-transform duration-300 hover:scale-110 hover:rotate-[25deg]"
-      >
-        <span class="text-copy dark:text-dark-copy">J</span><span class="text-accent-orange">R</span>
-      </a>
+      <Logo dataNavLogo />
     </div>
 
     <div class="hidden lg:flex flex-1 justify-center items-center gap-8">
@@ -278,108 +275,85 @@ const flagSvgs: Record<string, string> = {
       if (e.target === overlay) closeMenu();
     });
 
-    const langBtn = document.getElementById("overlay-lang-btn");
-    const langDropdown = document.getElementById("overlay-lang-dropdown");
-    const langChevron = document.getElementById("overlay-lang-chevron");
-    let langOpen = false;
-
-    if (langBtn && langDropdown && langChevron) {
-      langBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        langOpen = !langOpen;
-        if (langOpen) {
-          langDropdown.classList.remove("overlay-lang-dropdown-closed");
-          langDropdown.classList.add("overlay-lang-dropdown-open");
-          langChevron.style.transform = "rotate(180deg)";
-        } else {
-          langDropdown.classList.remove("overlay-lang-dropdown-open");
-          langDropdown.classList.add("overlay-lang-dropdown-closed");
-          langChevron.style.transform = "rotate(0deg)";
-        }
-      });
-
-      document.querySelectorAll(".overlay-lang-option").forEach((opt) => {
-        opt.addEventListener("click", () => {
-          const newLang = opt.dataset.lang;
-          if (newLang) {
-            const path = window.location.pathname;
-            const newPath = path.replace(/\/(es|en|it)(\/|$)/, "/" + newLang + "/");
-            window.location.pathname = newPath;
-          }
-        });
-      });
-    }
-
-    document.addEventListener("click", (e) => {
-      if (langOpen && langBtn && !langBtn.closest("#overlay-lang-wrapper")?.contains(e.target)) {
-        langOpen = false;
-        langDropdown.classList.remove("overlay-lang-dropdown-open");
-        langDropdown.classList.add("overlay-lang-dropdown-closed");
-        langChevron.style.transform = "rotate(0deg)";
-      }
-    });
-
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        if (langOpen) {
-          langOpen = false;
-          langDropdown.classList.remove("overlay-lang-dropdown-open");
-          langDropdown.classList.add("overlay-lang-dropdown-closed");
-          langChevron.style.transform = "rotate(0deg)";
-        } else if (isOpen) {
-          closeMenu();
+        const overlayDD = document.getElementById("overlay-lang-dropdown");
+        if (overlayDD && overlayDD.classList.contains("overlay-lang-dropdown-open")) {
+          return;
         }
-      }
-    });
-  })();
-
-  (function () {
-    const btn = document.getElementById("lang-btn");
-    const dropdown = document.getElementById("lang-dropdown");
-    const chevron = document.getElementById("lang-chevron");
-    if (!btn || !dropdown || !chevron) return;
-
-    let isOpen = false;
-
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      isOpen ? closeLang() : openLang();
-    });
-
-    document.addEventListener("click", (e) => {
-      if (isOpen && !btn.closest("#lang-selector")?.contains(e.target)) {
-        closeLang();
+        if (isOpen) closeMenu();
       }
     });
 
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && isOpen) closeLang();
-    });
+    function switchLang(newLang) {
+      const path = window.location.pathname;
+      const parts = path.split("/");
+      const idx = parts.findIndex(p => /^(es|en|it)$/.test(p));
+      if (idx !== -1) {
+        parts[idx] = newLang;
+        window.location.pathname = parts.join("/");
+      }
+    }
 
-    document.querySelectorAll(".lang-option").forEach((opt) => {
-      opt.addEventListener("click", () => {
-        const newLang = opt.dataset.lang;
-        if (newLang) {
-          const path = window.location.pathname;
-          const newPath = path.replace(/\/(es|en|it)(\/|$)/, "/" + newLang + "/");
-          window.location.pathname = newPath;
+    function initLangSelector(opts) {
+      const btn = document.getElementById(opts.btnId);
+      const dd = document.getElementById(opts.ddId);
+      const ch = document.getElementById(opts.chId);
+      if (!btn || !dd || !ch) return { isOpen: () => false, close: () => {} };
+      let open = false;
+
+      function set(v) {
+        open = v;
+        dd.classList.remove(v ? opts.closed : opts.opened);
+        dd.classList.add(v ? opts.opened : opts.closed);
+        if (ch) ch.style.transform = v ? "rotate(180deg)" : "rotate(0deg)";
+      }
+
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        set(!open);
+      });
+
+      document.querySelectorAll(opts.optSel).forEach((el) => {
+        el.addEventListener("click", () => {
+          const l = el.dataset.lang;
+          if (l) switchLang(l);
+        });
+      });
+
+      document.addEventListener("click", (e) => {
+        if (open && opts.wrapSel) {
+          const wrap = btn.closest(opts.wrapSel);
+          if (wrap && !wrap.contains(e.target)) set(false);
         }
       });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && open) set(false);
+      });
+
+      return { isOpen: () => open, close: () => set(false) };
+    }
+
+    const overlayLang = initLangSelector({
+      btnId: "overlay-lang-btn",
+      ddId: "overlay-lang-dropdown",
+      chId: "overlay-lang-chevron",
+      optSel: ".overlay-lang-option",
+      wrapSel: "#overlay-lang-wrapper",
+      opened: "overlay-lang-dropdown-open",
+      closed: "overlay-lang-dropdown-closed",
     });
 
-    function openLang() {
-      isOpen = true;
-      dropdown.classList.remove("lang-dropdown-closed");
-      dropdown.classList.add("lang-dropdown-open");
-      chevron.style.transform = "rotate(180deg)";
-    }
-
-    function closeLang() {
-      isOpen = false;
-      dropdown.classList.remove("lang-dropdown-open");
-      dropdown.classList.add("lang-dropdown-closed");
-      chevron.style.transform = "rotate(0deg)";
-    }
+    initLangSelector({
+      btnId: "lang-btn",
+      ddId: "lang-dropdown",
+      chId: "lang-chevron",
+      optSel: ".lang-option",
+      wrapSel: "#lang-selector",
+      opened: "lang-dropdown-open",
+      closed: "lang-dropdown-closed",
+    });
   })();
 </script>
 
