@@ -1,8 +1,7 @@
 ---
-import briefingImg from "../assets/images/briefing.webp";
-import bocetoImg from "../assets/images/boceto.webp";
-import desarrolloImg from "../assets/images/desarrollo.webp";
-import iteracionImg from "../assets/images/iteracion.webp";
+import { Image } from "astro:assets";
+import SectionHeader from "./SectionHeader.astro";
+import { steps } from "@data/process";
 
 interface ProcessStep {
   title: string;
@@ -20,61 +19,22 @@ interface Props {
 }
 
 const { t } = Astro.props;
-
-const steps = [
-  {
-    num: "01",
-    gradient:
-      "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.3), rgba(var(--rgb-accent-orange),0.05), rgba(var(--rgb-accent-purple),0.15))",
-    image: briefingImg,
-  },
-  {
-    num: "02",
-    gradient:
-      "linear-gradient(135deg, rgba(var(--rgb-accent-purple),0.3), rgba(var(--rgb-accent-purple),0.05), rgba(var(--rgb-accent-orange),0.15))",
-    image: bocetoImg,
-  },
-  {
-    num: "03",
-    gradient:
-      "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.2), rgba(242,236,228,0.3), rgba(var(--rgb-accent-purple),0.25))",
-    image: desarrolloImg,
-  },
-  {
-    num: "04",
-    gradient:
-      "linear-gradient(135deg, rgba(var(--rgb-accent-purple),0.2), rgba(var(--rgb-accent-orange),0.1), rgba(242,236,228,0.3))",
-    image: iteracionImg,
-  },
-];
 ---
 
 <section
   id="proceso"
-  class="min-h-screen px-6 py-16 md:py-32 overflow-hidden"
+  class="relative z-[1] min-h-screen px-6 py-16 md:py-24 overflow-hidden"
 >
   <div class="max-w-7xl mx-auto">
-    <div class="mb-16 md:mb-20 text-center" data-reveal>
-      <span
-        class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
-      >
-        {t.label}
-      </span>
-      <h2
-        data-reveal-heading
-        class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-      >
-        {t.title} <span class="text-accent-orange">{t.highlight}</span>
-      </h2>
-    </div>
+    <SectionHeader label={t.label} title={t.title} highlight={t.highlight} id="proc-title" />
 
     <div id="process-wrap" class="relative">
       <div
-        class="hidden md:block absolute left-[7%] md:left-1/2 top-0 bottom-0 w-px"
+        class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px"
         style="background: linear-gradient(to bottom, transparent 0%, rgba(91,31,255,0.2) 15%, rgba(255,92,43,0.2) 50%, rgba(91,31,255,0.2) 85%, transparent 100%);"
       >
       </div>
-      <div id="process-line-wrap" class="hidden md:block absolute left-[6.9%] md:left-[calc(50%-1px)] top-0 bottom-0 w-[2px] overflow-hidden">
+      <div id="process-line-wrap" class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] overflow-hidden">
         <div id="process-line" class="absolute top-0 left-0 w-full h-full origin-top" style="transform: scaleY(0); background: linear-gradient(to bottom, transparent 0%, rgb(255,92,43) 10%, rgb(91,31,255) 50%, rgb(255,92,43) 90%, transparent 100%);"></div>
       </div>
 
@@ -89,20 +49,21 @@ const steps = [
           >
             <div
               class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] dark:bg-dark-card md:hover:shadow-xl md:hover:shadow-black/5 md:dark:hover:shadow-black/20 transition-shadow duration-500 md:transition-all duration-500"
-              style="background: {step.gradient}"
+              style={`background: ${step.gradient}`}
             >
-              <img
-                src={step.image.src}
+              <Image
+                src={step.image}
                 alt={t.steps[i].title}
+                width={800}
+                height={600}
                 loading="lazy"
-                decoding="async"
                 class="absolute inset-0 w-full h-full object-cover"
               />
               <div
                 class="absolute inset-0 flex items-center justify-center"
               >
                 <span
-                  class="text-8xl md:text-9xl lg:text-[10rem] font-bold font-clash text-white/10 select-none"
+                  class="text-8xl md:text-9xl lg:text-[10rem] font-bold text-white/10 select-none"
                 >
                   {step.num}
                 </span>
@@ -132,7 +93,7 @@ const steps = [
               {t.stepLabel} {step.num}
             </span>
             <h3
-              class="text-3xl md:text-4xl lg:text-5xl font-bold font-clash mb-6 leading-tight"
+              class="text-3xl md:text-4xl lg:text-5xl font-medium mb-6 leading-tight"
             >
               {t.steps[i].title}
             </h3>
@@ -145,5 +106,3 @@ const steps = [
     </div>
   </div>
 </section>
-
-

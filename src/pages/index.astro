@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width" />
   <meta name="description" content="Convierto marcas en experiencias web interactivas para negocios que buscan destacar." />
   <title>Julián Recarte | Desarrollador Frontend Creativo</title>
-  <meta http-equiv="refresh" content="0;url=/julianRecarte/es/" />
+  <style>
+    body {
+      background-color: #F2ECE4;
+      margin: 0;
+    }
+    p {
+      display: none;
+    }
+  </style>
   <script>
-    var langs = ["es", "en", "it"];
-    var nav = (navigator.language || navigator.userLanguage || "es").slice(0, 2);
-    var lang = langs.indexOf(nav) !== -1 ? nav : "es";
-    var base = location.pathname.replace(/\/+$/g, "");
-    if (base === "") base = "/";
-    location.pathname = base + "/" + lang + "/";
+    (function() {
+      var langs = ["es", "en", "it"];
+      var nav = (navigator.language || navigator.userLanguage || "es").slice(0, 2);
+      var lang = langs.indexOf(nav) !== -1 ? nav : "es";
+      var base = window.location.pathname.replace(/\/+$/g, "");
+      if (base === "") base = "/julianRecarte";
+      window.location.replace(base + "/" + lang + "/");
+    })();
   </script>
 </head>
 <body>

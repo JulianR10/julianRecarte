@@ -1,67 +1,48 @@
 ---
 import Logo from "./Logo.astro";
+import LangSelector from "./LangSelector.astro";
 
 interface Props {
   lang: string;
-  t: Record<string, string>;
+  t: {
+    projects: string;
+    process: string;
+    contact: string;
+    lightMode: string;
+    darkMode: string;
+    closeMenu: string;
+    openMenu: string;
+  };
 }
 
 const { lang, t } = Astro.props;
-const langs = ["es", "en", "it"];
-const otherLangs = langs.filter((l) => l !== lang);
 
-const langCodes: Record<string, string> = {
-  es: "ES",
-  en: "ENG",
-  it: "IT",
-};
-
-const flagSvgs: Record<string, string> = {
-  es: '<svg viewBox="0 0 24 24"><rect width="24" height="24" fill="#C60B1E"/><rect y="6" width="24" height="12" fill="#FFC400"/></svg>',
-  en: '<svg viewBox="0 0 24 24"><rect width="24" height="24" fill="#012169"/><rect x="9" y="-6" width="6" height="36" fill="white" transform="rotate(45,12,12)"/><rect x="9" y="-6" width="6" height="36" fill="white" transform="rotate(-45,12,12)"/><rect x="10.5" y="-6" width="3" height="36" fill="#C8102E" transform="rotate(45,12,12)"/><rect x="10.5" y="-6" width="3" height="36" fill="#C8102E" transform="rotate(-45,12,12)"/><rect x="9" y="0" width="6" height="24" fill="white"/><rect y="9" width="24" height="6" fill="white"/><rect x="10.5" y="0" width="3" height="24" fill="#C8102E"/><rect y="10.5" width="24" height="3" fill="#C8102E"/></svg>',
-  it: '<svg viewBox="0 0 24 24"><rect width="8" height="24" fill="#009246"/><rect x="8" width="8" height="24" fill="#FFFFFF"/><rect x="16" width="8" height="24" fill="#CE2B37"/></svg>',
-};
+const navItems = [
+  { id: "proyectos", label: t.projects },
+  { id: "proceso", label: t.process },
+  { id: "contacto", label: t.contact },
+];
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 py-4 md:py-5 transition-all duration-500">
-  <div id="progress-bar" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent-orange to-accent-purple origin-left" style="transform: scaleX(0);"></div>
+<nav id="main-nav" aria-label="Main navigation" class="fixed top-0 left-0 right-0 z-50 py-4 md:py-5" style="view-transition-name: nav" data-lenis-prevent>
+  <div id="progress-bar" aria-hidden="true" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent-orange to-accent-purple origin-left" style="transform: scaleX(0);"></div>
   <div class="max-w-7xl mx-auto flex items-center px-6">
-    <div class="flex-1 lg:flex-none text-left">
-      <Logo dataNavLogo />
+    <div class="flex-1 md:flex-none text-left">
+      <Logo dataNavLogo lang={lang} />
     </div>
 
-    <div class="hidden lg:flex flex-1 justify-center items-center gap-8">
-      <a href="#proyectos" class="desktop-link text-sm font-semibold tracking-widest uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange hover:tracking-[0.15em] transition-all duration-300">
-          {t.projects}
+    <div class="hidden md:flex flex-1 justify-center items-center gap-8">
+      {navItems.map((item) => (
+        <a href={`#${item.id}`} class="desktop-link text-sm font-semibold tracking-widest uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange hover:tracking-[0.15em] transition-all duration-300">
+          {item.label}
         </a>
-        <a href="#proceso" class="desktop-link text-sm font-semibold tracking-widest uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange hover:tracking-[0.15em] transition-all duration-300">
-          {t.process}
-        </a>
-        <a href="#contacto" class="desktop-link text-sm font-semibold tracking-widest uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange hover:tracking-[0.15em] transition-all duration-300">
-          {t.contact}
-        </a>
+      ))}
     </div>
 
     <div class="flex items-center gap-2 md:gap-3">
-      <div id="lang-selector" class="relative">
-        <button id="lang-btn" class="hidden lg:flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs font-semibold tracking-wider uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange transition-colors duration-300" aria-label="Switch language">
-          <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" set:html={flagSvgs[lang]} />
-          <span class="text-xs font-bold tracking-wider">{langCodes[lang]}</span>
-          <svg class="w-3 h-3 transition-transform duration-300" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </button>
-        <div id="lang-dropdown" class="lang-dropdown-closed absolute right-0 top-full mt-2 min-w-[130px] origin-top rounded-xl bg-background dark:bg-dark-bg border border-copy/10 dark:border-dark-copy/10 shadow-lg shadow-black/5 dark:shadow-black/20 overflow-hidden">
-          {otherLangs.map((l) => (
-            <button data-lang={l} class="lang-option flex items-center gap-2 w-full px-3 py-2.5 text-xs font-semibold tracking-wider uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange hover:bg-copy/5 dark:hover:bg-dark-copy/5 transition-colors duration-200">
-              <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" set:html={flagSvgs[l]} />
-              <span class="text-xs font-bold tracking-wider">{langCodes[l]}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+      <LangSelector lang={lang} mode="desktop" />
 
-      <div id="theme-toggle" class="hidden lg:relative lg:flex items-center">
+      <div id="theme-toggle" class="hidden md:relative md:flex items-center">
         <div id="theme-indicator" class="absolute w-8 h-8 rounded-full bg-accent-orange shadow-sm shadow-accent-orange/40 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"></div>
         <button id="light-toggle" class="theme-btn relative z-10 w-8 h-8 rounded-full flex items-center justify-center" aria-label={t.lightMode}>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -76,12 +57,11 @@ const flagSvgs: Record<string, string> = {
         </button>
       </div>
 
-      <button
-        id="menu-btn"
-        class="lg:hidden w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-accent-orange via-accent-warm to-accent-pastel text-white shadow-lg shadow-accent-orange/30 cursor-pointer border-none outline-none flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-300"
-        data-close-label={t.closeMenu} data-open-label={t.openMenu} aria-label={t.closeMenu}
+      <button id="menu-btn" aria-expanded="false" aria-controls="nav-overlay"
+        class="md:hidden w-11 h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-accent-orange via-accent-warm to-accent-pastel text-white shadow-lg shadow-accent-orange/30 cursor-pointer border-none outline-none flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-300"
+        data-close-label={t.closeMenu} data-open-label={t.openMenu} aria-label={t.openMenu}
       >
-        <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <svg class="w-5 h-5 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="3" y1="6" x2="21" y2="6" />
           <line x1="3" y1="12" x2="21" y2="12" />
           <line x1="3" y1="18" x2="21" y2="18" />
@@ -93,63 +73,39 @@ const flagSvgs: Record<string, string> = {
 
 <div
   id="nav-overlay"
-  class="nav-overlay-hidden fixed inset-0 z-40 lg:hidden bg-black/80 backdrop-blur-sm transition-opacity duration-300"
+  class="nav-overlay-hidden fixed inset-0 z-40 md:hidden bg-black/80 backdrop-blur-sm transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  inert
 >
-  <div class="absolute right-5 md:right-8 top-28 md:top-32 flex flex-col items-end gap-3 md:gap-4">
-    <a
-      id="nl-1"
-      href="#proyectos"
-      class="nav-link relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-medium tracking-widest uppercase text-white bg-accent-pastel border border-accent-pastel shadow-lg hover:bg-accent-pastel/80 hover:border-accent-pastel/80 transition-colors duration-300"
-    >
-      {t.projects}
-    </a>
-    <a
-      id="nl-2"
-      href="#proceso"
-      class="nav-link relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-medium tracking-widest uppercase text-white bg-accent-pastel border border-accent-pastel shadow-lg hover:bg-accent-pastel/80 hover:border-accent-pastel/80 transition-colors duration-300"
-    >
-      {t.process}
-    </a>
-    <a
-      id="nl-3"
-      href="#contacto"
-      class="nav-link relative px-5 md:px-6 py-2.5 md:py-3 rounded-full text-xs md:text-sm font-medium tracking-widest uppercase text-white bg-accent-pastel border border-accent-pastel shadow-lg hover:bg-accent-pastel/80 hover:border-accent-pastel/80 transition-colors duration-300"
-    >
-      {t.contact}
-    </a>
+  <div class="absolute right-5 md:right-8 top-28 md:top-32 flex flex-col items-end gap-4 md:gap-5">
+    {navItems.map((item, i) => (
+      <a
+        id={`nl-${i + 1}`}
+        href={`#${item.id}`}
+        class="nav-link relative px-6 py-3 md:px-6 md:py-3 rounded-full text-sm md:text-sm font-medium tracking-widest uppercase text-white bg-accent-orange shadow-lg hover:bg-accent-orange/80 transition-colors duration-300"
+      >
+        {item.label}
+      </a>
+    ))}
 
-    <div class="w-full h-px bg-white/20 my-2"></div>
+    <div class="w-full h-px bg-white/20 my-3"></div>
 
-    <div class="flex items-center gap-3">
-      <div class="relative" id="overlay-lang-wrapper">
-        <button id="overlay-lang-btn" class="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-semibold tracking-wider uppercase text-white/50 hover:text-white/80 transition-colors duration-300" aria-label="Switch language">
-          <span class="w-4 h-4 rounded-sm overflow-hidden flex-shrink-0" set:html={flagSvgs[lang]} />
-          <span class="text-[10px] font-bold tracking-wider">{langCodes[lang]}</span>
-          <svg class="w-2.5 h-2.5 transition-transform duration-300" id="overlay-lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </button>
-        <div id="overlay-lang-dropdown" class="overlay-lang-dropdown-closed absolute right-0 top-full mt-1 min-w-[100px] origin-top rounded-lg bg-white/10 border border-white/20 overflow-hidden">
-          {otherLangs.map((l) => (
-            <button data-lang={l} class="overlay-lang-option flex items-center gap-1.5 w-full px-2.5 py-1.5 text-[10px] font-semibold tracking-wider uppercase text-white/50 hover:text-white hover:bg-white/10 transition-colors duration-200">
-              <span class="w-3.5 h-3.5 rounded-sm overflow-hidden flex-shrink-0" set:html={flagSvgs[l]} />
-              <span class="text-[10px] font-bold tracking-wider">{langCodes[l]}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+    <div class="flex items-center gap-4">
+      <LangSelector lang={lang} mode="overlay" />
 
-      <div class="w-px h-4 bg-white/15"></div>
+      <div class="w-px h-6 bg-white/25"></div>
 
-      <div class="flex items-center gap-1.5">
-        <button id="overlay-light-toggle" class="w-6 h-6 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/60 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.lightMode}>
-          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="flex items-center gap-2">
+        <button id="overlay-light-toggle" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.lightMode}>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5" />
             <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
           </svg>
         </button>
-        <button id="overlay-dark-toggle" class="w-6 h-6 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/60 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.darkMode}>
-          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button id="overlay-dark-toggle" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.darkMode}>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
         </button>
@@ -158,254 +114,28 @@ const flagSvgs: Record<string, string> = {
   </div>
 </div>
 
-<script>
-  const nav = document.getElementById("main-nav");
-  if (nav) {
-    let ticking = false;
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          nav.classList.toggle("scrolled", window.scrollY > 40);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-    if (window.scrollY > 40) nav.classList.add("scrolled");
-  }
-
-  (function () {
-    const sections = [
-      { id: "proyectos", link: document.querySelector('.desktop-link[href="#proyectos"]') },
-      { id: "proceso", link: document.querySelector('.desktop-link[href="#proceso"]') },
-      { id: "contacto", link: document.querySelector('.desktop-link[href="#contacto"]') },
-    ].filter(s => s.link);
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          sections.forEach(s => s.link.classList.remove("active"));
-          const match = sections.find(s => s.id === entry.target.id);
-          if (match) match.link.classList.add("active");
-        }
-      });
-    }, { rootMargin: "-50% 0px -50% 0px" });
-
-    sections.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el) observer.observe(el);
-    });
-  })();
-
-  (function () {
-    const lightBtn = document.getElementById("light-toggle");
-    const darkBtn = document.getElementById("dark-toggle");
-    const indicator = document.getElementById("theme-indicator");
-    const overlayLight = document.getElementById("overlay-light-toggle");
-    const overlayDark = document.getElementById("overlay-dark-toggle");
-
-    function setTheme(dark) {
-      if (dark) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("dark-mode", "true");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("dark-mode", "false");
-      }
-      if (indicator) {
-        const target = dark ? darkBtn : lightBtn;
-        if (target) indicator.style.left = target.offsetLeft + "px";
-      }
-      if (lightBtn && darkBtn) {
-        lightBtn.classList.toggle("text-white", !dark);
-        lightBtn.classList.toggle("text-background", dark);
-        darkBtn.classList.toggle("text-white", dark);
-        darkBtn.classList.toggle("text-dark-muted/60", !dark);
-      }
-    }
-
-    if (lightBtn && darkBtn && indicator) {
-      const isDark = document.documentElement.classList.contains("dark");
-      setTheme(isDark);
-
-      lightBtn.addEventListener("click", () => setTheme(false));
-      darkBtn.addEventListener("click", () => setTheme(true));
-    }
-
-    if (overlayLight && overlayDark) {
-      overlayLight.addEventListener("click", () => setTheme(false));
-      overlayDark.addEventListener("click", () => setTheme(true));
-    }
-  })();
-
-  (function () {
-    const btn = document.getElementById("menu-btn");
-    const overlay = document.getElementById("nav-overlay");
-    if (!btn || !overlay) return;
-
-    let isOpen = false;
-
-    function openMenu() {
-      isOpen = true;
-      overlay.classList.remove("nav-overlay-hidden");
-      overlay.classList.add("nav-overlay-visible");
-      btn.setAttribute("aria-label", btn.dataset.closeLabel || "Cerrar menú");
-    }
-
-    function closeMenu() {
-      isOpen = false;
-      overlay.classList.remove("nav-overlay-visible");
-      overlay.classList.add("nav-overlay-hidden");
-      btn.setAttribute("aria-label", btn.dataset.openLabel || "Abrir menú");
-    }
-
-    btn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      isOpen ? closeMenu() : openMenu();
-    });
-
-    document.querySelectorAll(".nav-link").forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.stopPropagation();
-        closeMenu();
-      });
-    });
-
-    overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) closeMenu();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        const overlayDD = document.getElementById("overlay-lang-dropdown");
-        if (overlayDD && overlayDD.classList.contains("overlay-lang-dropdown-open")) {
-          return;
-        }
-        if (isOpen) closeMenu();
-      }
-    });
-
-    function switchLang(newLang) {
-      const path = window.location.pathname;
-      const parts = path.split("/");
-      const idx = parts.findIndex(p => /^(es|en|it)$/.test(p));
-      if (idx !== -1) {
-        parts[idx] = newLang;
-        window.location.pathname = parts.join("/");
-      }
-    }
-
-    function initLangSelector(opts) {
-      const btn = document.getElementById(opts.btnId);
-      const dd = document.getElementById(opts.ddId);
-      const ch = document.getElementById(opts.chId);
-      if (!btn || !dd || !ch) return { isOpen: () => false, close: () => {} };
-      let open = false;
-
-      function set(v) {
-        open = v;
-        dd.classList.remove(v ? opts.closed : opts.opened);
-        dd.classList.add(v ? opts.opened : opts.closed);
-        if (ch) ch.style.transform = v ? "rotate(180deg)" : "rotate(0deg)";
-      }
-
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        set(!open);
-      });
-
-      document.querySelectorAll(opts.optSel).forEach((el) => {
-        el.addEventListener("click", () => {
-          const l = el.dataset.lang;
-          if (l) switchLang(l);
-        });
-      });
-
-      document.addEventListener("click", (e) => {
-        if (open && opts.wrapSel) {
-          const wrap = btn.closest(opts.wrapSel);
-          if (wrap && !wrap.contains(e.target)) set(false);
-        }
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && open) set(false);
-      });
-
-      return { isOpen: () => open, close: () => set(false) };
-    }
-
-    const overlayLang = initLangSelector({
-      btnId: "overlay-lang-btn",
-      ddId: "overlay-lang-dropdown",
-      chId: "overlay-lang-chevron",
-      optSel: ".overlay-lang-option",
-      wrapSel: "#overlay-lang-wrapper",
-      opened: "overlay-lang-dropdown-open",
-      closed: "overlay-lang-dropdown-closed",
-    });
-
-    initLangSelector({
-      btnId: "lang-btn",
-      ddId: "lang-dropdown",
-      chId: "lang-chevron",
-      optSel: ".lang-option",
-      wrapSel: "#lang-selector",
-      opened: "lang-dropdown-open",
-      closed: "lang-dropdown-closed",
-    });
-  })();
-</script>
-
 <style>
-  #lang-dropdown {
-    transition: transform var(--dur-fast) ease, opacity var(--dur-fast) ease, visibility var(--dur-fast) ease;
-    transform-origin: top;
-  }
-
-  .overlay-lang-dropdown-closed {
-    visibility: hidden;
-    opacity: 0;
-    transform: scaleY(0);
-  }
-
-  .overlay-lang-dropdown-open {
-    visibility: visible;
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  #overlay-lang-dropdown {
-    transition: transform var(--dur-fast) ease, opacity var(--dur-fast) ease, visibility var(--dur-fast) ease;
-    transform-origin: top;
-  }
-
   .nav-overlay-hidden {
     opacity: 0;
     pointer-events: none;
   }
-
   .nav-overlay-visible {
     opacity: 1;
     pointer-events: auto;
   }
-
   #nav-overlay > div {
     transition: transform var(--dur-slow) cubic-bezier(0.16, 1, 0.3, 1), opacity var(--dur-slow) ease;
   }
-
   .nav-overlay-hidden > div {
     transform: translateX(60px);
     opacity: 0;
   }
-
   .nav-overlay-visible > div {
     transform: translateX(0);
     opacity: 1;
   }
-
   #nav-overlay .nav-link,
-  #nav-overlay #overlay-lang-btn,
+  #nav-overlay :global(#overlay-lang-btn),
   #nav-overlay #overlay-light-toggle,
   #nav-overlay #overlay-dark-toggle {
     opacity: 0;
@@ -413,54 +143,37 @@ const flagSvgs: Record<string, string> = {
     transition: transform var(--dur-slow) cubic-bezier(0.16, 1, 0.3, 1), opacity var(--dur-slow) ease;
     transition-delay: 0.05s;
   }
-
   #nav-overlay.nav-overlay-visible .nav-link:nth-child(1) { transition-delay: 0.05s; }
   #nav-overlay.nav-overlay-visible .nav-link:nth-child(2) { transition-delay: 0.10s; }
   #nav-overlay.nav-overlay-visible .nav-link:nth-child(3) { transition-delay: 0.15s; }
-  #nav-overlay.nav-overlay-visible #overlay-lang-btn { transition-delay: 0.20s; }
+  #nav-overlay.nav-overlay-visible :global(#overlay-lang-btn) { transition-delay: 0.20s; }
   #nav-overlay.nav-overlay-visible #overlay-light-toggle { transition-delay: 0.25s; }
   #nav-overlay.nav-overlay-visible #overlay-dark-toggle { transition-delay: 0.30s; }
-
   #nav-overlay.nav-overlay-visible .nav-link,
-  #nav-overlay.nav-overlay-visible #overlay-lang-btn,
+  #nav-overlay.nav-overlay-visible :global(#overlay-lang-btn),
   #nav-overlay.nav-overlay-visible #overlay-light-toggle,
   #nav-overlay.nav-overlay-visible #overlay-dark-toggle {
     opacity: 1;
     transform: translateX(0);
   }
-
-  .lang-dropdown-closed {
-    visibility: hidden;
-    opacity: 0;
-    transform: scaleY(0);
-  }
-
-  .lang-dropdown-open {
-    visibility: visible;
-    opacity: 1;
-    transform: scaleY(1);
-  }
-
-  #main-nav.scrolled {
-    background-color: rgba(242, 236, 228, 0.7);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-  }
-
-  :root.dark #main-nav.scrolled {
-    background-color: rgba(26, 26, 26, 0.7);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
-  }
-
-  #main-nav.scrolled {
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-  }
-
   .desktop-link.active {
     color: var(--clr-accent-orange);
   }
 
-  .desktop-link:hover {
-    color: var(--clr-accent-orange);
+  #main-nav {
+    background-color: color-mix(in srgb, var(--bg-hex) 95%, transparent);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  :global(.dark) #main-nav {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   }
 </style>
+
+<script>
+  import { initNav, destroyNav } from "@scripts/nav";
+  import { createLifecycle } from "@scripts/lifecycle";
+  createLifecycle(initNav, destroyNav);
+</script>

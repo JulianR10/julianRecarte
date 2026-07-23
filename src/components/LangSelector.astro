@@ -1,0 +1,120 @@
+---
+interface Props {
+  lang: string;
+  mode: "desktop" | "overlay";
+}
+
+const { lang, mode } = Astro.props;
+const isOverlay = mode === "overlay";
+
+const langs = ["es", "en", "it"];
+const otherLangs = langs.filter((l) => l !== lang);
+
+const langCodes: Record<string, string> = {
+  es: "ES",
+  en: "ENG",
+  it: "IT",
+};
+
+const flagSvgs: Record<string, string> = {
+  es: '<svg viewBox="0 0 24 24"><rect width="24" height="24" fill="#C60B1E"/><rect y="6" width="24" height="12" fill="#FFC400"/></svg>',
+  en: '<svg viewBox="0 0 24 24"><rect width="24" height="24" fill="#012169"/><rect x="9" y="-6" width="6" height="36" fill="white" transform="rotate(45,12,12)"/><rect x="9" y="-6" width="6" height="36" fill="white" transform="rotate(-45,12,12)"/><rect x="10.5" y="-6" width="3" height="36" fill="#C8102E" transform="rotate(45,12,12)"/><rect x="10.5" y="-6" width="3" height="36" fill="#C8102E" transform="rotate(-45,12,12)"/><rect x="9" y="0" width="6" height="24" fill="white"/><rect y="9" width="24" height="6" fill="white"/><rect x="10.5" y="0" width="3" height="24" fill="#C8102E"/><rect y="10.5" width="24" height="3" fill="#C8102E"/></svg>',
+  it: '<svg viewBox="0 0 24 24"><rect width="8" height="24" fill="#009246"/><rect x="8" width="8" height="24" fill="#FFFFFF"/><rect x="16" width="8" height="24" fill="#CE2B37"/></svg>',
+};
+---
+
+<div
+  class="lang-selector relative"
+  class:list={{ "hidden md:block": !isOverlay, overlay: isOverlay }}
+>
+  <button
+    id={isOverlay ? "overlay-lang-btn" : "lang-btn"}
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="lang-btn flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors duration-300"
+    aria-label="Switch language"
+  >
+    <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" aria-hidden="true" set:html={flagSvgs[lang]} />
+    <span class="text-xs font-bold tracking-wider">{langCodes[lang]}</span>
+    <svg
+      class="w-3 h-3 transition-transform duration-300"
+      id={isOverlay ? "overlay-lang-chevron" : "lang-chevron"}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  </button>
+  <div
+    id={isOverlay ? "overlay-lang-dropdown" : "lang-dropdown"}
+    class="lang-dropdown dropdown-closed absolute right-0 top-full mt-2 origin-top overflow-hidden"
+  >
+    {otherLangs.map((l) => (
+      <button
+        data-lang={l}
+        class="lang-option flex items-center gap-2 w-full px-3 py-2.5 text-xs font-semibold tracking-wider uppercase transition-colors duration-200"
+      >
+        <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" aria-hidden="true" set:html={flagSvgs[l]} />
+        <span class="text-xs font-bold tracking-wider">{langCodes[l]}</span>
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .lang-selector {
+    --btn-color: color-mix(in srgb, var(--clr-accent-orange) 0%, var(--copy, #1A1613));
+    --btn-color-hover: var(--clr-accent-orange);
+    --dd-bg: var(--bg-hex);
+    --dd-border: color-mix(in srgb, var(--copy, #1A1613) 10%, transparent);
+    --dd-text: color-mix(in srgb, var(--copy, #1A1613) 80%, transparent);
+    --dd-hover-bg: color-mix(in srgb, var(--copy, #1A1613) 5%, transparent);
+    --dd-hover-text: var(--clr-accent-orange);
+    --dd-min-w: 130px;
+    --dd-radius: 0.75rem;
+  }
+
+  :root.dark .lang-selector {
+    --btn-color: color-mix(in srgb, var(--clr-accent-orange) 0%, #F0F0F0);
+    --dd-bg: #1A1A1A;
+    --dd-border: color-mix(in srgb, #F0F0F0 10%, transparent);
+    --dd-text: color-mix(in srgb, #F0F0F0 80%, transparent);
+    --dd-hover-bg: color-mix(in srgb, #F0F0F0 5%, transparent);
+  }
+
+  .lang-selector.overlay {
+    --btn-color: rgba(255, 255, 255, 0.8);
+    --btn-color-hover: #ffffff;
+    --dd-bg: rgba(255, 255, 255, 0.15);
+    --dd-border: rgba(255, 255, 255, 0.25);
+    --dd-text: rgba(255, 255, 255, 0.7);
+    --dd-hover-bg: rgba(255, 255, 255, 0.15);
+    --dd-hover-text: #ffffff;
+    --dd-min-w: 120px;
+    --dd-radius: 0.5rem;
+  }
+
+  .lang-btn { color: var(--btn-color); }
+  .lang-btn:hover { color: var(--btn-color-hover); }
+
+  .lang-dropdown {
+    min-width: var(--dd-min-w);
+    background: var(--dd-bg);
+    border: 1px solid var(--dd-border);
+    border-radius: var(--dd-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform var(--dur-fast) ease, opacity var(--dur-fast) ease, visibility var(--dur-fast) ease;
+    transform-origin: top;
+  }
+
+  .lang-option { color: var(--dd-text); }
+  .lang-option:hover { color: var(--dd-hover-text); background: var(--dd-hover-bg); }
+
+  .dropdown-closed { visibility: hidden; opacity: 0; transform: scaleY(0); }
+  .dropdown-open { visibility: visible; opacity: 1; transform: scaleY(1); }
+</style>

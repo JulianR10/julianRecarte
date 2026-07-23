@@ -22,9 +22,14 @@ export default {
         },
       },
       fontFamily: {
-        clash: ["Clash Display", "sans-serif"],
+        clash: ["Outfit", "sans-serif"],
         satoshi: ["Satoshi", "sans-serif"],
-        serif: ["DM Serif Display", "serif"],
+      },
+      transitionDuration: {
+        fast: "0.15s",
+        base: "0.3s",
+        slow: "0.5s",
+        theme: "0.6s",
       },
 
     },

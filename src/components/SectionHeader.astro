@@ -1,0 +1,28 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  highlight: string;
+  id?: string;
+  centered?: boolean;
+  class?: string;
+}
+
+const { label, title, highlight, id, centered = true, class: className = "" } = Astro.props;
+---
+
+<div class:list={[{ "text-center": centered }, "mb-16 md:mb-20", className]} data-reveal>
+  <span
+    class="inline-block text-sm font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
+    data-reveal-heading
+  >
+    {label}
+  </span>
+  <h2
+    id={id}
+    data-reveal-heading
+    class="text-4xl md:text-5xl lg:text-6xl font-medium leading-tight max-w-3xl mx-auto"
+  >
+    {title} <span class="text-accent-orange whitespace-nowrap">{highlight}</span>
+  </h2>
+</div>

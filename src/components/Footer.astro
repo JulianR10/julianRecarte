@@ -1,11 +1,15 @@
 ---
 import Logo from "./Logo.astro";
+import firma from "@assets/images/firma.png";
 
 interface Props {
-  t: Record<string, string>;
+  t: {
+    copyright: string;
+  };
+  lang?: string;
 }
 
-const { t } = Astro.props;
+const { t, lang = "es" } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -13,9 +17,27 @@ const year = new Date().getFullYear();
   <div
     class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 px-6"
   >
-    <Logo dataFooterLogo />
-    <p class="text-sm text-copy/50 dark:text-dark-muted/70 order-3 md:order-2">
-      {(t.copyright || "© {year} Julián Recarte").replace("{year}", String(year))}
+    <Logo dataFooterLogo lang={lang} />
+    <p class="text-sm text-copy/50 dark:text-dark-muted/70 flex items-center gap-3 order-3 md:order-2">
+      {(t.copyright || "© {year}").replace("{year}", String(year))}
+      <img
+        src={firma.src}
+        alt=""
+        class="signature h-6 w-auto"
+        aria-hidden="true"
+      />
     </p>
   </div>
 </footer>
+
+<style>
+  .signature {
+    filter: brightness(0);
+    opacity: 0.5;
+  }
+
+  :global(.dark) .signature {
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+  }
+</style>

@@ -14,9 +14,11 @@
   },
   "hero": {
     "label": "FullStack Web Developer",
-    "greeting": "Hi, I'm Julián Recarte.",
+    "greetingPrefix": "Hi, I'm ",
+    "greetingName": "Julián Recarte",
     "subtitle": "I turn brands into interactive web experiences for businesses that want to stand out.",
     "description": "I've been working remotely for 3 years from different corners of the world.\nThat taught me to adapt to any business and context.\nI apply the same to every challenge I take on.",
+    "highlightWord": "adapt",
     "cta": "Shall we talk about your project?",
     "viewProjects": "View projects",
     "contact": "Contact"
@@ -26,14 +28,15 @@
     "title": "Featured",
     "highlight": "work",
     "viewProject": "View project →",
+    "comingSoon": "Coming soon",
     "items": [
       {
         "title": "SP Soluciones Textiles",
         "description": "Landing page for a textile business with service catalog, work gallery, and direct WhatsApp connection. Clean design with brand identity."
       },
       {
-        "title": "Aether",
-        "description": "Cinematic visual storytelling experience. Narrative scroll with parallax and organic transitions."
+        "title": "Triba",
+        "description": "A monthly digital magazine with subscription system. Written by women worldwide. Culture, art, identity, and quality content with smooth navigation and editorial design."
       },
       {
         "title": "Lumina",
@@ -45,6 +48,10 @@
     "label": "Testimonials",
     "title": "What my",
     "highlight": "clients say",
+    "starRating": "5 out of 5 stars",
+    "prev": "Previous testimonial",
+    "next": "Next testimonial",
+    "carouselLabel": "Testimonials carousel",
     "items": [
       {
         "quote": "Working with Julián was an incredible experience. He transformed our vision into a web platform that exceeded all our expectations. His attention to detail and creativity are exceptional.",
@@ -107,7 +114,7 @@
     "email": "Email"
   },
   "footer": {
-    "copyright": "© {year} Julián Recarte"
+    "copyright": "© {year}"
   },
   "layout": {
     "skipLink": "Skip to main content",

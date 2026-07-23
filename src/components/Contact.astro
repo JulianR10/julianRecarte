@@ -1,6 +1,16 @@
 ---
+import SectionHeader from "./SectionHeader.astro";
+
 interface Props {
-  t: Record<string, string>;
+  t: {
+    label: string;
+    title: string;
+    highlight: string;
+    description: string;
+    whatsapp: string;
+    instagram: string;
+    email: string;
+  };
 }
 
 const { t } = Astro.props;
@@ -8,7 +18,7 @@ const { t } = Astro.props;
 
 <section
   id="contacto"
-  class="flex items-center px-6 pt-16 md:pt-32 pb-0 relative overflow-hidden"
+  class="flex items-center px-6 py-16 md:py-24 relative overflow-hidden"
 >
   <div
     class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent-orange/[0.03] blur-3xl pointer-events-none dark:opacity-0"
@@ -17,20 +27,7 @@ const { t } = Astro.props;
 
   <div class="max-w-5xl mx-auto w-full relative px-6">
     <div class="text-center" data-reveal>
-      <span
-        class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
-      >
-        {t.label}
-      </span>
-
-      <h2
-        data-reveal-heading
-        class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-16 md:mb-20"
-      >
-        {t.title}
-        <br />
-        <span class="text-accent-orange">{t.highlight}</span>
-      </h2>
+      <SectionHeader label={t.label} title={t.title} highlight={t.highlight} centered={true} class="mb-16 md:mb-20" />
 
       <p
         class="text-lg md:text-xl text-copy/60 dark:text-dark-muted max-w-xl mx-auto leading-relaxed mb-10"
@@ -44,7 +41,7 @@ const { t } = Astro.props;
       class="flex flex-wrap justify-center gap-3 md:gap-8 pt-12 mb-5"
     >
       <a
-        href="#"
+        href="https://wa.me/393447817557"
         target="_blank"
         rel="noopener noreferrer"
         class="social-link flex items-center gap-2 px-6 py-3 rounded-full border border-black/20 dark:border-dark-muted/30 text-copy/80 dark:text-dark-copy hover:text-accent-orange dark:hover:text-accent-orange hover:border-accent-orange/30 hover:bg-accent-orange/5 transition-all duration-300 text-sm font-medium"
@@ -53,7 +50,7 @@ const { t } = Astro.props;
         {t.whatsapp}
       </a>
       <a
-        href="#"
+        href="https://instagram.com/julianrecarte.dev"
         target="_blank"
         rel="noopener noreferrer"
         class="social-link flex items-center gap-2 px-6 py-3 rounded-full border border-black/20 dark:border-dark-muted/30 text-copy/80 dark:text-dark-copy hover:text-accent-orange dark:hover:text-accent-orange hover:border-accent-orange/30 hover:bg-accent-orange/5 transition-all duration-300 text-sm font-medium"
@@ -62,7 +59,7 @@ const { t } = Astro.props;
         {t.instagram}
       </a>
       <a
-        href="#"
+        href="mailto:julianrecarte.dev@gmail.com"
         target="_blank"
         rel="noopener noreferrer"
         class="social-link flex items-center gap-2 px-6 py-3 rounded-full border border-black/20 dark:border-dark-muted/30 text-copy/80 dark:text-dark-copy hover:text-accent-orange dark:hover:text-accent-orange hover:border-accent-orange/30 hover:bg-accent-orange/5 transition-all duration-300 text-sm font-medium"

@@ -1,3 +1,196 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .section-inner {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+/* ============================================
+   CSS Custom Properties
+   ============================================ */
+:root {
+  --bg-hex: #F2ECE4;
+  --copy: #1A1613;
+  --theme-dur: 0.6s;
+  --dur-fast: 0.15s;
+  --dur-base: 0.3s;
+  --dur-slow: 0.5s;
+  --clr-accent-orange: #FF5C2B;
+  --clr-accent-warm: #FF7A4F;
+  --clr-accent-pastel: #FFB088;
+  --clr-accent-purple: #5B1FFF;
+  --rgb-accent-orange: 255, 92, 43;
+  --rgb-accent-warm: 255, 122, 79;
+  --rgb-accent-purple: 91, 31, 255;
+  --rgb-accent-pastel: 255, 176, 136;
+}
+
+:root.dark {
+  --bg-hex: #1A1A1A;
+  --copy: #F0F0F0;
+}
+
+/* ============================================
+   Base Reset
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   Root & Body — full-viewport constraint
+   ============================================ */
+html {
+  width: 100%;
+}
+
+body {
+  width: 100%;
+  max-width: 100vw;
+  background-color: var(--bg-hex);
+  font-family: "Satoshi", sans-serif;
+  color: #1A1613;
+  line-height: 1.6;
+  overflow-x: clip;
+  transition: background-color var(--theme-dur) ease, color var(--theme-dur) ease;
+}
+
+:root.dark body {
+  color: #F0F0F0;
+}
+
+/* ============================================
+    Typography
+   ============================================ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Mozilla Headline", sans-serif;
+  font-weight: 500;
+}
+
+/* ============================================
+   Selection & Focus
+   ============================================ */
+::selection {
+  background-color: var(--clr-accent-orange);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--clr-accent-orange);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   Skip Link
+   ============================================ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 12px 24px;
+  background: var(--clr-accent-orange);
+  color: #fff;
+  font-family: "Satoshi", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+/* ============================================
+   Reveal Animations
+   ============================================ */
+@keyframes fade-in-up {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+[data-reveal]:not(.revealed),
+[data-reveal-heading]:not(.revealed) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+[data-reveal-stagger] > :not(.revealed) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.revealed {
+  animation: fade-in-up 0.6s ease-out forwards;
+  transform: translateY(0);
+}
+
+.cine-text-processed.revealed {
+  animation: none;
+  transform: none;
+  opacity: 1;
+}
+
+/* ============================================
+   Hero Zap Glow Effects
+   ============================================ */
+.zap-glow-brand,
+.zap-glow-orange {
+  opacity: 0;
+  will-change: opacity, transform, filter;
+}
+
+.zap-glow-brand {
+  color: var(--clr-accent-purple);
+  text-shadow: 0 0 8px var(--clr-accent-purple), 0 0 20px var(--clr-accent-purple);
+}
+
+.zap-glow-orange {
+  color: var(--clr-accent-orange);
+  text-shadow: 0 0 8px var(--clr-accent-orange), 0 0 20px var(--clr-accent-orange);
+}
+
+/* ============================================
+   Card Shine
+   ============================================ */
+[data-card-shine] {
+  will-change: opacity, background;
+}
+
+/* ============================================
+   Cinematic Text Characters
+   ============================================ */
+ .cine-char {
+   display: inline-block;
+   white-space: pre;
+   transition: transform 0.6s ease-out;
+ }
+
+/* ============================================
+    Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

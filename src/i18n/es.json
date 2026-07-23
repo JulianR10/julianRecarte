@@ -14,9 +14,11 @@
   },
   "hero": {
     "label": "Desarrollador web FullStack",
-    "greeting": "Hola, soy Julián Recarte.",
+    "greetingPrefix": "Hola, soy ",
+    "greetingName": "Julián Recarte",
     "subtitle": "Convierto marcas en experiencias web interactivas para negocios que buscan destacar.",
     "description": "Trabajo remoto hace 3 años desde distintos rincones del mundo.\nEso me enseñó a adaptarme a cualquier negocio y contexto.\nLo mismo aplico en cada desafío que tomo.",
+    "highlightWord": "adaptarme",
     "cta": "¿Hablamos de tu proyecto?",
     "viewProjects": "Ver proyectos",
     "contact": "Contactar"
@@ -26,14 +28,15 @@
     "title": "Trabajos",
     "highlight": "destacados",
     "viewProject": "Ver proyecto →",
+    "comingSoon": "Próximamente",
     "items": [
       {
         "title": "SP Soluciones Textiles",
         "description": "Landing page para emprendimiento textil con catálogo de servicios, galería de trabajos y conexión directa a WhatsApp. Diseño limpio con identidad de marca."
       },
       {
-        "title": "Aether",
-        "description": "Experiencia cinematográfica de storytelling visual. Scroll narrativo con parallax y transiciones orgánicas."
+        "title": "Triba",
+        "description": "Revista digital mensual con sistema de suscripción. Escrita por mujeres de todo el mundo. Cultura, arte, identidad y contenido de calidad con navegación fluida y diseño editorial."
       },
       {
         "title": "Lumina",
@@ -45,6 +48,10 @@
     "label": "Testimonios",
     "title": "Lo que dicen",
     "highlight": "mis clientes",
+    "starRating": "5 de 5 estrellas",
+    "prev": "Testimonio anterior",
+    "next": "Siguiente testimonio",
+    "carouselLabel": "Carousel de testimonios",
     "items": [
       {
         "quote": "Trabajar con Julián fue una experiencia increíble. Transformó nuestra visión en una plataforma web que superó todas nuestras expectativas. Su atención al detalle y creatividad son excepcionales.",
@@ -107,7 +114,7 @@
     "email": "Email"
   },
   "footer": {
-    "copyright": "© {year} Julián Recarte"
+    "copyright": "© {year}"
   },
   "layout": {
     "skipLink": "Ir al contenido principal",

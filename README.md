@@ -2,7 +2,7 @@
 
 ## 🎯 Proyecto
 
-Portfolio web moderno y altamente visual de Julián Recarte, Creative Frontend Developer.
+Portfolio web moderno y altamente visual de Julián Recarte, Creative Frontend Developer. Multi-idioma (ES/EN/IT) con animaciones fluidas y diseño responsive.
 
 ## 🛠️ Stack Tecnológico
 
@@ -10,7 +10,8 @@ Portfolio web moderno y altamente visual de Julián Recarte, Creative Frontend D
 - **Estilos:** TailwindCSS 3.4.3
 - **Animaciones:** GSAP 3.12.2
 - **Scroll Suave:** Lenis 1.1.11
-- **Tipografía:** Clash Display + Satoshi
+- **Tipografía:** Outfit (headings) + Satoshi (body)
+- **Utilidades:** autoprefixer, postcss, @astrojs/sitemap
 
 ## 📁 Estructura de Carpetas
 
@@ -18,19 +19,46 @@ Portfolio web moderno y altamente visual de Julián Recarte, Creative Frontend D
 julianRecarte/
 ├── src/
 │   ├── layouts/
-│   │   └── Layout.astro          # Layout principal con Lenis
+│   │   └── Layout.astro              # Layout principal con Lenis, fonts y dark mode
 │   ├── pages/
-│   │   └── index.astro           # Página de inicio
+│   │   └── [lang]/
+│   │       └── index.astro           # Página principal (multi-idioma)
 │   ├── components/
-│   │   ├── Header.astro          # Header/Navegación
-│   │   └── Button.astro          # Componente Button reutilizable
-│   └── styles/
-│       └── globals.css           # Estilos globales
-├── public/                       # Archivos estáticos
-├── astro.config.mjs             # Config de Astro
-├── tailwind.config.mjs          # Config de Tailwind
-├── tsconfig.json                # Config de TypeScript
-└── package.json                 # Dependencias
+│   │   ├── Nav.astro                 # Navegación sticky
+│   │   ├── Hero.astro                # Sección hero con animación zap
+│   │   ├── Projects.astro            # Grid de proyectos
+│   │   ├── ProjectCard.astro         # Card de proyecto con tilt
+│   │   ├── Process.astro             # Sección de proceso/trabajo
+│   │   ├── Testimonials.astro        # Carousel de testimonios (3D)
+│   │   ├── Contact.astro             # Formulario de contacto
+│   │   ├── SectionHeader.astro       # Componente reutilizable de encabezado de sección
+│   │   ├── Footer.astro              # Footer
+│   │   ├── Waves.astro               # Efecto de olas SVG
+│   │   ├── Cursor.astro              # Cursor personalizado
+│   │   └── Logo.astro                # Componente logo
+│   ├── scripts/
+│   │   ├── main.js                   # Punto de entrada JS
+│   │   ├── testimonios-carousel.js   # Lógica del carousel de testimonios
+│   │   ├── animations.js             # Animaciones GSAP globales
+│   │   ├── card-tilt.js              # Efecto tilt 3D en cards
+│   │   ├── cine-text.js              # Animación de texto cinematográfico
+│   │   ├── hero-scroll.js            # Scroll-driven hero
+│   │   ├── hero-zap.js               # Animación zap del hero
+│   │   ├── nav.js                    # Lógica de navegación
+│   │   ├── back-to-top.js            # Botón de ir arriba con partículas
+│   │   └── waves.js                  # Animación de olas
+│   ├── styles/
+│   │   └── globals.css               # Estilos globales, CSS custom properties y utilidades
+│   └── i18n/
+│       ├── es.json                   # Contenido en español
+│       ├── en.json                   # Contenido en inglés
+│       └── it.json                   # Contenido en italiano
+├── public/
+│   └── robots.txt
+├── astro.config.mjs
+├── tailwind.config.mjs
+├── tsconfig.json
+└── package.json
 ```
 
 ## 🚀 Instalación y Desarrollo
@@ -44,7 +72,7 @@ npm install
 ```bash
 npm run dev
 ```
-El sitio estará disponible en `http://localhost:3000`
+El sitio estará disponible en `http://localhost:4321/julianRecarte/`
 
 ### 3. Compilar para producción
 ```bash
@@ -65,26 +93,23 @@ npm run preview
 - **Accent 3:** `#5B1FFF` (Morado)
 
 ### Tipografía
-- **Headings:** Clash Display (700)
+- **Headings:** Outfit (400)
 - **Body:** Satoshi (400, 500)
 
 ## 🎬 Características
 
 - ✅ Scroll suave con Lenis
-- ✅ Animaciones con GSAP (lista para implementar)
+- ✅ Animaciones GSAP (scroll-driven, reveal, stagger)
+- ✅ Carousel de testimonios con efecto Cover (card nueva cubre a la anterior)
+- ✅ Efecto tilt 3D en cards de proyectos
+- ✅ Animación cinematográfica de texto
+- ✅ Cursor personalizado
+- ✅ Efecto de olas SVG
+- ✅ Navegación sticky con transiciones
+- ✅ Multi-idioma (ES/EN/IT)
+- ✅ Dark mode
 - ✅ Responsive design con Tailwind
-- ✅ Tipografía personalizada
-- ✅ Estructura modular de componentes
 - ✅ Optimizado para Vercel
-
-## 📝 Próximos Pasos
-
-- [ ] Crear componentes de portfolio/proyectos
-- [ ] Implementar animaciones de scroll (GSAP)
-- [ ] Crear página de proyectos detalladosOk
-- [ ] Formulario de contacto
-- [ ] Integración de redes sociales
-- [ ] Deploy en Vercel
 
 ## 📧 Contacto
 

@@ -1,10 +1,8 @@
----
 
----
 
 <div
   id="waves"
-  class="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+  class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden"
   aria-hidden="true"
 >
   <svg
@@ -19,7 +17,8 @@
       </filter>
     </defs>
     <path
-      class="wave wave-1"
+      data-wave
+      class="wave-1"
       d="M-200,300 C50,100 300,500 550,300 C800,100 1050,500 1300,300 C1550,100 1800,500 2000,300"
       fill="none"
       stroke-width="1.5"
@@ -28,7 +27,8 @@
       filter="url(#wave-blur)"
     />
     <path
-      class="wave wave-2"
+      data-wave
+      class="wave-2"
       d="M-200,500 C50,700 300,300 550,500 C800,700 1050,300 1300,500 C1550,700 1800,300 2000,500"
       fill="none"
       stroke-width="1.5"
@@ -37,7 +37,8 @@
       filter="url(#wave-blur)"
     />
     <path
-      class="wave wave-3"
+      data-wave
+      class="wave-3"
       d="M-200,700 C50,500 300,900 550,700 C800,500 1050,900 1300,700 C1550,500 1800,900 2000,700"
       fill="none"
       stroke-width="1"
@@ -67,47 +68,3 @@
   }
 </style>
 
-<script>
-  (function () {
-    const gsap = window.gsap;
-    if (!gsap) return;
-
-    const waves = [
-      {
-        el: document.querySelector(".wave-1"),
-        morphs: [
-          "M-200,300 C50,100 300,500 550,300 C800,100 1050,500 1300,300 C1550,100 1800,500 2000,300",
-          "M-200,300 C50,500 300,100 550,300 C800,500 1050,100 1300,300 C1550,500 1800,100 2000,300",
-        ],
-        dur: 10,
-      },
-      {
-        el: document.querySelector(".wave-2"),
-        morphs: [
-          "M-200,500 C50,700 300,300 550,500 C800,700 1050,300 1300,500 C1550,700 1800,300 2000,500",
-          "M-200,500 C50,300 300,700 550,500 C800,300 1050,700 1300,500 C1550,300 1800,700 2000,500",
-        ],
-        dur: 13,
-      },
-      {
-        el: document.querySelector(".wave-3"),
-        morphs: [
-          "M-200,700 C50,500 300,900 550,700 C800,500 1050,900 1300,700 C1550,500 1800,900 2000,700",
-          "M-200,700 C50,900 300,500 550,700 C800,900 1050,500 1300,700 C1550,900 1800,500 2000,700",
-        ],
-        dur: 16,
-      },
-    ];
-
-    waves.forEach(({ el, morphs, dur }) => {
-      if (!el) return;
-      gsap.to(el, {
-        attr: { d: morphs[1] },
-        duration: dur,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-    });
-  })();
-</script>

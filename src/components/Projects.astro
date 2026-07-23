@@ -1,6 +1,7 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
-import logoSP from "../assets/images/logoSP.png";
+import SectionHeader from "./SectionHeader.astro";
+import { projects } from "@data/projects";
 
 interface ProjectItem {
   title: string;
@@ -13,59 +14,41 @@ interface Props {
     title: string;
     highlight: string;
     viewProject: string;
+    comingSoon: string;
     items: ProjectItem[];
   };
 }
 
 const { t } = Astro.props;
-
-const projects = [
-  {
-    title: "SP Soluciones Textiles",
-    tags: ["Astro", "TailwindCSS", "GSAP"],
-    href: "https://julianr10.github.io/sp-soluciones-textiles/",
-    image: logoSP,
-    style: "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.4), rgba(var(--rgb-accent-orange),0.15), rgba(var(--rgb-accent-purple),0.3))",
-  },
-  {
-    title: "Aether",
-    tags: ["Next.js", "GSAP", "Lenis", "TailwindCSS"],
-    style: "linear-gradient(135deg, rgba(var(--rgb-accent-purple),0.4), rgba(var(--rgb-accent-purple),0.15), rgba(var(--rgb-accent-orange),0.3))",
-  },
-  {
-    title: "Lumina",
-    tags: ["Astro", "GSAP", "Shopify", "TypeScript"],
-    style: "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.3), rgba(242,236,228,0.5), rgba(var(--rgb-accent-purple),0.4))",
-  },
-];
 ---
 
 <section
   id="proyectos"
-  class="min-h-screen px-6 py-16 md:py-32"
+  class="relative md:z-[2] min-h-screen px-6 py-16 md:py-24"
 >
   <div class="max-w-7xl mx-auto">
-    <div class="mb-16 md:mb-20" data-reveal>
-      <span
-        class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange mb-6"
-      >
-        {t.label}
-      </span>
-      <h2
-        data-reveal-heading
-        class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight max-w-3xl"
-      >
-        {t.title} <span class="text-accent-orange">{t.highlight}</span>
-      </h2>
-    </div>
+    <SectionHeader label={t.label} title={t.title} highlight={t.highlight} />
 
     <div
       data-reveal-stagger
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
     >
-      {projects.map((project, i) => (
-        <ProjectCard {...project} title={t.items[i].title} description={t.items[i].description} viewProject={t.viewProject} image={project.image && (typeof project.image === 'string' ? project.image : project.image.src)} />
-      ))}
+      {projects.map((project, i) => {
+        const item = t.items[i];
+        if (!item) return null;
+        return (
+          <ProjectCard
+            title={item.title}
+            description={item.description}
+            tags={project.tags}
+            href={project.href}
+            image={project.image}
+            style={project.style}
+            viewProject={t.viewProject}
+            comingSoon={project.href ? undefined : t.comingSoon}
+          />
+        );
+      })}
     </div>
   </div>
 </section>
