@@ -12,7 +12,7 @@
    CSS Custom Properties
    ============================================ */
 :root {
-  --bg-hex: #F2ECE4;
+  --bg-hex: #E8E0D0;
   --copy: #1A1613;
   --theme-dur: 0.6s;
   --dur-fast: 0.15s;
@@ -29,7 +29,7 @@
 }
 
 :root.dark {
-  --bg-hex: #1A1A1A;
+  --bg-hex: #1C1A18;
   --copy: #F0F0F0;
 }
 
@@ -154,12 +154,12 @@ h6 {
 
 .zap-glow-brand {
   color: var(--clr-accent-purple);
-  text-shadow: 0 0 8px var(--clr-accent-purple), 0 0 20px var(--clr-accent-purple);
+  text-shadow: 0 0 6px var(--clr-accent-purple), 0 0 18px var(--clr-accent-purple);
 }
 
 .zap-glow-orange {
   color: var(--clr-accent-orange);
-  text-shadow: 0 0 8px var(--clr-accent-orange), 0 0 20px var(--clr-accent-orange);
+  text-shadow: 0 0 6px var(--clr-accent-orange), 0 0 18px var(--clr-accent-orange);
 }
 
 /* ============================================
@@ -177,6 +177,16 @@ h6 {
    white-space: pre;
    transition: transform 0.6s ease-out;
  }
+
+/* ============================================
+   Hero Orbs
+   ============================================ */
+.orb-accent {
+  background-color: color-mix(in srgb, var(--clr-accent-orange) 15%, transparent);
+}
+:root.dark .orb-accent {
+  background-color: color-mix(in srgb, var(--clr-accent-orange) 2%, transparent);
+}
 
 /* ============================================
     Reduced Motion

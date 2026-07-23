@@ -26,7 +26,7 @@ const { title, description, tags, style, viewProject, href, image, comingSoon } 
     style={image ? undefined : "background: " + style}
   >
     {image ? (
-      <Image src={image} alt={title} class="w-full h-full object-contain p-8" style={`background: ${style}; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25))`} />
+      <Image src={image} alt={title} width={400} height={300} loading="lazy" class="w-full h-full object-contain p-8" style={`background: ${style}; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25))`} />
     ) : (
       <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTAgMjBoNDBNMjAgMHY0MCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDYiLz48L3N2Zz4=')] opacity-50">
       </div>

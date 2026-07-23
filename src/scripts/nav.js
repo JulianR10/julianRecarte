@@ -199,6 +199,7 @@ function switchLang(newLang) {
   const idx = parts.findIndex((p) => /^(es|en|it)$/.test(p));
   if (idx !== -1) {
     parts[idx] = newLang;
+    window.scrollTo(0, 0);
     window.location.pathname = parts.join("/");
   }
 }

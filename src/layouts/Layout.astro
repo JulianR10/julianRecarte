@@ -30,7 +30,7 @@ const {
     <title>{title}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/julianRecarte/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/julianRecarte/favicon.svg" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/julianRecarte/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/julianRecarte/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/julianRecarte/apple-touch-icon.png" />
@@ -43,6 +43,7 @@ const {
     <meta property="og:image" content="https://julianrecarte.github.io/julianRecarte/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={description} />
     <meta property="og:locale" content={lang === "es" ? "es_ES" : lang === "en" ? "en_US" : "it_IT"} />
     <meta property="og:site_name" content="Julián Recarte" />
     <!-- Twitter Card -->
@@ -63,9 +64,15 @@ const {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Julián Recarte",
+      "image": "https://julianrecarte.github.io/julianRecarte/og-image.png",
       "jobTitle": jobTitle,
       description,
       "url": `https://julianrecarte.github.io/julianRecarte/${lang}/`,
+      "sameAs": [
+        "https://github.com/JulianR10",
+        "https://instagram.com/julianrecarte.dev",
+        "https://wa.me/393447817557"
+      ],
       "knowsAbout": [
         "Frontend Development",
         "React",
@@ -79,10 +86,17 @@ const {
       "knowsLanguage": ["Spanish", "English", "Italian"]
     })}></script>
 
-    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
+      as="style"
+      crossorigin
+    />
     <link
       href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
       rel="stylesheet"
+      crossorigin
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -94,8 +108,7 @@ const {
     <script is:inline>
       (function () {
         const stored = localStorage.getItem("dark-mode");
-        const prefers = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (stored === "true" || (stored === null && prefers)) {
+        if (stored === "true") {
           document.documentElement.classList.add("dark");
         }
       })();
@@ -104,9 +117,8 @@ const {
   </head>
   <body transition:animate="slide">
     <a href="#main-content" class="skip-link">{t.skipLink}</a>
-    <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full bg-accent-orange/15 blur-3xl pointer-events-none dark:hidden" style="will-change: transform"></div>
-    <div data-hero-orb class="hidden md:block fixed bottom-1/4 -right-32 w-80 h-80 rounded-full bg-accent-purple/12 blur-3xl pointer-events-none dark:hidden" style="will-change: transform"></div>
-    <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:hidden z-[60]" style="will-change: transform"></div>
+    <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none" style="will-change: transform"></div>
+    <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-[60]" style="will-change: transform"></div>
     <header><slot name="nav" /></header>
     <slot name="hero" />
     <main id="main-content" class="w-full max-w-[100vw] overflow-x-clip">

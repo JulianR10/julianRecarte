@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#F2ECE4",
+        background: "#E8E0D0",
         copy: "#1A1613",
         muted: "#8C8884",
         accent: {
