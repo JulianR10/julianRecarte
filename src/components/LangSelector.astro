@@ -1,10 +1,15 @@
 ---
+import EsFlag from "./flags/EsFlag.astro";
+import EnFlag from "./flags/EnFlag.astro";
+import ItFlag from "./flags/ItFlag.astro";
+
 interface Props {
   lang: string;
   mode: "desktop" | "overlay";
+  class?: string;
 }
 
-const { lang, mode } = Astro.props;
+const { lang, mode, class: className } = Astro.props;
 const isOverlay = mode === "overlay";
 
 const langs = ["es", "en", "it"];
@@ -16,16 +21,18 @@ const langCodes: Record<string, string> = {
   it: "IT",
 };
 
-const flagSvgs: Record<string, string> = {
-  es: '<svg viewBox="0 0 24 24"><rect width="24" height="24" fill="#C60B1E"/><rect y="6" width="24" height="12" fill="#FFC400"/></svg>',
-  en: '<svg viewBox="0 0 24 24"><rect width="24" height="24" fill="#012169"/><rect x="9" y="-6" width="6" height="36" fill="white" transform="rotate(45,12,12)"/><rect x="9" y="-6" width="6" height="36" fill="white" transform="rotate(-45,12,12)"/><rect x="10.5" y="-6" width="3" height="36" fill="#C8102E" transform="rotate(45,12,12)"/><rect x="10.5" y="-6" width="3" height="36" fill="#C8102E" transform="rotate(-45,12,12)"/><rect x="9" y="0" width="6" height="24" fill="white"/><rect y="9" width="24" height="6" fill="white"/><rect x="10.5" y="0" width="3" height="24" fill="#C8102E"/><rect y="10.5" width="24" height="3" fill="#C8102E"/></svg>',
-  it: '<svg viewBox="0 0 24 24"><rect width="8" height="24" fill="#009246"/><rect x="8" width="8" height="24" fill="#FFFFFF"/><rect x="16" width="8" height="24" fill="#CE2B37"/></svg>',
+const flagComponents: Record<string, any> = {
+  es: EsFlag,
+  en: EnFlag,
+  it: ItFlag,
 };
+
+const CurrentFlag = flagComponents[lang];
 ---
 
 <div
   class="lang-selector relative"
-  class:list={{ "hidden md:block": !isOverlay, overlay: isOverlay }}
+  class:list={[!isOverlay && className, { overlay: isOverlay }]}
 >
   <button
     id={isOverlay ? "overlay-lang-btn" : "lang-btn"}
@@ -34,7 +41,7 @@ const flagSvgs: Record<string, string> = {
     class="lang-btn flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors duration-300"
     aria-label="Switch language"
   >
-    <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" aria-hidden="true" set:html={flagSvgs[lang]} />
+    <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" aria-hidden="true"><CurrentFlag /></span>
     <span class="text-xs font-bold tracking-wider">{langCodes[lang]}</span>
     <svg
       class="w-3 h-3 transition-transform duration-300"
@@ -54,15 +61,19 @@ const flagSvgs: Record<string, string> = {
     id={isOverlay ? "overlay-lang-dropdown" : "lang-dropdown"}
     class="lang-dropdown dropdown-closed absolute right-0 top-full mt-2 origin-top overflow-hidden"
   >
-    {otherLangs.map((l) => (
+    {otherLangs.map((l) => {
+      const Flag = flagComponents[l];
+      return (
       <button
+        type="button"
         data-lang={l}
         class="lang-option flex items-center gap-2 w-full px-3 py-2.5 text-xs font-semibold tracking-wider uppercase transition-colors duration-200"
       >
-        <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" aria-hidden="true" set:html={flagSvgs[l]} />
+        <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" aria-hidden="true"><Flag /></span>
         <span class="text-xs font-bold tracking-wider">{langCodes[l]}</span>
       </button>
-    ))}
+      );
+    })}
   </div>
 </div>
 

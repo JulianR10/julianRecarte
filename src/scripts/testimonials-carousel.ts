@@ -1,23 +1,23 @@
-let cleanup = null;
+let cleanup: (() => void) | null = null;
 
-export function initTestimonials() {
-  const cards = document.querySelectorAll(".testimonio-card");
-  const prevBtn = document.getElementById("test-prev");
-  const nextBtn = document.getElementById("test-next");
-  const track = document.getElementById("testimonios-track");
+export function initTestimonials(): void {
+  const cards = document.querySelectorAll<HTMLElement>(".testimonio-card");
+  const prevBtn = document.getElementById("test-prev")!;
+  const nextBtn = document.getElementById("test-next")!;
+  const track = document.getElementById("testimonios-track")!;
   if (!cards.length || !prevBtn || !nextBtn || !track) return;
 
   let active = 0;
   let locked = false;
-  let lockTimer = null;
+  let lockTimer: ReturnType<typeof setTimeout> | null = null;
 
-  function setState(card, state) {
+  function setState(card: Element, state: string): void {
     card.classList.remove("card-active", "card-peek-right", "card-peek-left", "card-hidden");
-    const map = { active: "card-active", "peek-right": "card-peek-right", "peek-left": "card-peek-left" };
+    const map: Record<string, string> = { active: "card-active", "peek-right": "card-peek-right", "peek-left": "card-peek-left" };
     card.classList.add(map[state] || "card-hidden");
   }
 
-  function layout() {
+  function layout(): void {
     cards.forEach((card, i) => {
       if (i === active) setState(card, "active");
       else if (i === (active + 1) % cards.length) setState(card, "peek-right");
@@ -26,7 +26,7 @@ export function initTestimonials() {
     });
   }
 
-  function show(index) {
+  function show(index: number): void {
     if (locked || index === active) return;
     locked = true;
     active = index;
@@ -34,15 +34,15 @@ export function initTestimonials() {
     lockTimer = setTimeout(() => { locked = false; }, 500);
   }
 
-  const onPrev = () => show(active === 0 ? cards.length - 1 : active - 1);
-  const onNext = () => show(active === cards.length - 1 ? 0 : active + 1);
+  const onPrev = (): void => show(active === 0 ? cards.length - 1 : active - 1);
+  const onNext = (): void => show(active === cards.length - 1 ? 0 : active + 1);
 
   prevBtn.addEventListener("click", onPrev);
   nextBtn.addEventListener("click", onNext);
 
   let startX = 0;
-  const onPointerDown = (e) => { startX = e.clientX; track.setPointerCapture(e.pointerId); };
-  const onPointerUp = (e) => {
+  const onPointerDown = (e: PointerEvent): void => { startX = e.clientX; track.setPointerCapture(e.pointerId); };
+  const onPointerUp = (e: PointerEvent): void => {
     const delta = e.clientX - startX;
     if (Math.abs(delta) > 40) {
       const dir = delta < 0 ? (active + 1) % cards.length : active === 0 ? cards.length - 1 : active - 1;
@@ -66,7 +66,7 @@ export function initTestimonials() {
   };
 }
 
-export function destroyTestimonials() {
+export function destroyTestimonials(): void {
   if (cleanup) {
     cleanup();
     cleanup = null;

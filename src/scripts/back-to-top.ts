@@ -1,13 +1,14 @@
-import { onScroll, scrollToTop } from "@scripts/lenis";
+import { onScroll } from "@scripts/scroll-source";
+import { scrollToTop } from "@scripts/lenis-adapter";
 
-let scrollCleanup = null;
+let scrollCleanup: (() => void) | null = null;
 
-export function initBackToTop() {
-  const btn = document.getElementById("btn-top");
-  const arrow = document.getElementById("arrow-top");
-  if (!btn || !arrow) return;
+export function initBackToTop(): () => void {
+  const btn = document.getElementById("btn-top")!;
+  const arrow = document.getElementById("arrow-top")!;
+  if (!btn || !arrow) return () => {};
 
-  scrollCleanup = onScroll((y) => {
+  scrollCleanup = onScroll((y: number) => {
     if (y > 400) {
       btn.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
       btn.classList.add("translate-y-0", "opacity-100");
@@ -17,12 +18,12 @@ export function initBackToTop() {
     }
   });
 
-  const onEnter = () => {
+  const onEnter = (): void => {
     arrow.style.transition = "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)";
     arrow.style.transform = "scaleY(0.6)";
   };
-  const onLeave = () => { arrow.style.transform = "scaleY(1)"; };
-  const onClick = () => {
+  const onLeave = (): void => { arrow.style.transform = "scaleY(1)"; };
+  const onClick = (): void => {
     const rect = btn.getBoundingClientRect();
     const cx = rect.left + rect.width / 2;
     const cy = rect.top + rect.height / 2;
@@ -78,7 +79,7 @@ export function initBackToTop() {
   };
 }
 
-export function destroyBackToTop() {
+export function destroyBackToTop(): void {
   if (scrollCleanup) {
     scrollCleanup();
     scrollCleanup = null;

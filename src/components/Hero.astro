@@ -8,8 +8,6 @@ interface Props {
     greetingPrefix: string;
     greetingName: string;
     subtitle: string;
-    description: string;
-    highlightWord?: string;
     cta: string;
     viewProjects: string;
     contact: string;
@@ -17,21 +15,11 @@ interface Props {
 }
 
 const { t } = Astro.props;
-
-function highlightParts(line: string, word?: string): Array<{ text: string; highlighted: boolean }> {
-  if (!word) return [{ text: line, highlighted: false }];
-  const regex = new RegExp(`(${word})`, "gi");
-  const parts = line.split(regex);
-  return parts.map((part) => ({
-    text: part,
-    highlighted: part.toLowerCase() === word.toLowerCase(),
-  }));
-}
 ---
 
 <section
   id="hero"
-  class="relative min-h-screen md:h-screen md:sticky md:top-0 md:z-[1] flex items-center px-6 py-16 md:py-24 overflow-hidden"
+  class="relative min-h-screen md:h-screen sticky top-0 z-[1] flex items-center px-6 md:py-24 overflow-hidden"
 >
   <div class="max-w-7xl mx-auto w-full flex items-center justify-center md:justify-between gap-12">
     <div data-hero-text class="max-w-3xl text-center md:text-left">
@@ -74,16 +62,6 @@ function highlightParts(line: string, word?: string): Array<{ text: string; high
         {t.subtitle}
       </p>
 
-      {
-        t.description.split('\n').map((line) => (
-          <p data-reveal class="text-copy/50 dark:text-dark-muted leading-relaxed text-sm sm:text-base md:text-lg mb-0 max-w-2xl text-balance">
-            {highlightParts(line.trim(), t.highlightWord).map((part) =>
-              part.highlighted ? <span class="highlight-word">{part.text}</span> : part.text
-            )}
-          </p>
-        ))
-      }
-
       <p data-reveal class="font-satoshi text-base sm:text-lg md:text-xl italic text-accent-orange/80 mt-6 mb-8 text-balance">
         {t.cta}
       </p>
@@ -91,12 +69,14 @@ function highlightParts(line: string, word?: string): Array<{ text: string; high
       <div data-reveal class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start items-center">
       <a
         href="#proyectos"
+        data-magnetic
         class="inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full font-medium text-sm md:text-base tracking-wider uppercase shadow-lg"
       >
         {t.viewProjects}
       </a>
         <a
           href="#contacto"
+          data-magnetic
           class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full font-medium text-sm md:text-base tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300"
           style="border: 2px solid transparent; background-image: linear-gradient(var(--bg-hex), var(--bg-hex)), linear-gradient(to right, var(--clr-accent-orange), var(--clr-accent-pastel)); background-origin: border-box; background-clip: padding-box, border-box;"
         >
@@ -124,15 +104,3 @@ function highlightParts(line: string, word?: string): Array<{ text: string; high
   </div>
 
 </section>
-
-<style>
-  .highlight-word {
-    background-color: rgba(var(--rgb-accent-orange), 0.13);
-    border-radius: 3px;
-    padding: 0 4px;
-    font-style: italic;
-    font-weight: 500;
-  }
-</style>
-
-

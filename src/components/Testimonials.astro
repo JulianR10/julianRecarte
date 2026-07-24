@@ -17,6 +17,7 @@ interface Props {
     starRating: string;
     prev: string;
     next: string;
+    carouselLabel: string;
     items: TestimonialItem[];
   };
 }
@@ -28,7 +29,7 @@ const { t } = Astro.props;
   <div class="max-w-7xl mx-auto">
     <SectionHeader label={t.label} title={t.title} highlight={t.highlight} id="test-title" />
 
-    <div id="testimonios-carousel" class="flex items-center max-w-3xl mx-auto" role="region" aria-roledescription="carousel" aria-label="Testimonials">
+    <div id="testimonios-carousel" class="flex items-center max-w-3xl mx-auto" role="region" aria-roledescription="carousel" aria-label={t.carouselLabel}>
       <button id="test-prev" type="button"
         class="shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white dark:bg-dark-card border border-black/5 dark:border-dark-muted/20 shadow-md flex items-center justify-center text-copy dark:text-dark-copy hover:bg-accent-orange hover:text-white hover:border-accent-orange transition-all duration-300"
         aria-label={t.prev}>
@@ -87,7 +88,7 @@ const { t } = Astro.props;
     transform: translateX(0) scale(1);
     z-index: 3;
     pointer-events: auto;
-    transition: transform 500ms ease;
+    transition: transform var(--dur-slow) ease;
   }
   .card-peek-right {
     opacity: 0.45;
@@ -115,8 +116,3 @@ const { t } = Astro.props;
   }
 </style>
 
-<script>
-  import { createLifecycle } from "@scripts/lifecycle";
-  import { initTestimonials, destroyTestimonials } from "@scripts/testimonials-carousel";
-  createLifecycle(initTestimonials, destroyTestimonials);
-</script>

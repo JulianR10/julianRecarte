@@ -1,5 +1,4 @@
 {
-  "lang": "en",
   "nav": {
     "projects": "Projects",
     "process": "Process",
@@ -17,8 +16,6 @@
     "greetingPrefix": "Hi, I'm ",
     "greetingName": "Julián Recarte",
     "subtitle": "I turn brands into interactive web experiences for businesses that want to stand out.",
-    "description": "I've been working remotely for 3 years from different corners of the world.\nThat taught me to adapt to any business and context.\nI apply the same to every challenge I take on.",
-    "highlightWord": "adapt",
     "cta": "Shall we talk about your project?",
     "viewProjects": "View projects",
     "contact": "Contact"
@@ -83,22 +80,18 @@
     "stepLabel": "Step",
     "steps": [
       {
-        "num": "01",
         "title": "Briefing",
         "description": "We start with a conversation. You tell me your ideas, goals and expectations. We analyze your brand, your audience and the message you want to convey."
       },
       {
-        "num": "02",
         "title": "Sketch",
         "description": "I turn ideas into a visual concept. Information architecture, wireframes and interface design crafted to tell your story."
       },
       {
-        "num": "03",
         "title": "Development",
         "description": "Every line of code is designed to create a fluid, animated and optimized experience. Built with modern technologies that ensure performance and beauty."
       },
       {
-        "num": "04",
         "title": "Iteration",
         "description": "We review, adjust and refine until every detail aligns with the project's vision. Because the final result is born from collaboration."
       }

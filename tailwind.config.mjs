@@ -5,9 +5,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#E8E0D0",
         copy: "#1A1613",
-        muted: "#8C8884",
         accent: {
           orange: "#FF5C2B",
           warm: "#FF7A4F",
@@ -15,21 +13,13 @@ export default {
           purple: "#5B1FFF",
         },
         dark: {
-          bg: "#1A1A1A",
           card: "#252525",
           copy: "#F0F0F0",
           muted: "#888888",
         },
       },
       fontFamily: {
-        clash: ["Outfit", "sans-serif"],
         satoshi: ["Satoshi", "sans-serif"],
-      },
-      transitionDuration: {
-        fast: "0.15s",
-        base: "0.3s",
-        slow: "0.5s",
-        theme: "0.6s",
       },
 
     },

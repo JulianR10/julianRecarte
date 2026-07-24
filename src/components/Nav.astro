@@ -28,7 +28,7 @@ const navItems = [
   <div id="progress-bar" aria-hidden="true" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent-orange to-accent-purple origin-left" style="transform: scaleX(0);"></div>
   <div class="max-w-7xl mx-auto flex items-center px-6">
     <div class="flex-1 md:flex-none text-left">
-      <Logo dataNavLogo lang={lang} />
+      <Logo lang={lang} />
     </div>
 
     <div class="hidden md:flex flex-1 justify-center items-center gap-8">
@@ -40,17 +40,17 @@ const navItems = [
     </div>
 
     <div class="flex items-center gap-2 md:gap-3">
-      <LangSelector lang={lang} mode="desktop" />
+      <LangSelector lang={lang} mode="desktop" class="hidden md:block" />
 
       <div id="theme-toggle" class="hidden md:relative md:flex items-center">
         <div id="theme-indicator" class="absolute w-8 h-8 rounded-full bg-accent-orange shadow-sm shadow-accent-orange/40 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"></div>
-        <button id="light-toggle" class="theme-btn relative z-10 w-8 h-8 rounded-full flex items-center justify-center" aria-label={t.lightMode}>
+        <button id="light-toggle" type="button" class="theme-btn relative z-10 w-8 h-8 rounded-full flex items-center justify-center" aria-label={t.lightMode}>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5" />
             <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
           </svg>
         </button>
-        <button id="dark-toggle" class="theme-btn relative z-10 w-8 h-8 rounded-full flex items-center justify-center" aria-label={t.darkMode}>
+        <button id="dark-toggle" type="button" class="theme-btn relative z-10 w-8 h-8 rounded-full flex items-center justify-center" aria-label={t.darkMode}>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
@@ -98,13 +98,13 @@ const navItems = [
       <div class="w-px h-6 bg-white/25"></div>
 
       <div class="flex items-center gap-2">
-        <button id="overlay-light-toggle" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.lightMode}>
+        <button id="overlay-light-toggle" type="button" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.lightMode}>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5" />
             <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
           </svg>
         </button>
-        <button id="overlay-dark-toggle" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.darkMode}>
+        <button id="overlay-dark-toggle" type="button" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-colors duration-300" aria-label={t.darkMode}>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
           </svg>
@@ -161,15 +161,20 @@ const navItems = [
   }
 
   #main-nav {
-    background-color: color-mix(in srgb, var(--bg-hex) 95%, transparent);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-  :global(.dark) #main-nav {
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  @media (min-width: 768px) {
+    #main-nav {
+      background-color: color-mix(in srgb, var(--bg-hex) 95%, transparent);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    :global(.dark) #main-nav {
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
   }
 </style>
 

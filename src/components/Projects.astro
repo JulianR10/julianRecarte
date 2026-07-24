@@ -34,8 +34,7 @@ const { t } = Astro.props;
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
     >
       {projects.map((project, i) => {
-        const item = t.items[i];
-        if (!item) return null;
+        const item = t.items[i] || { title: project.title, description: "" };
         return (
           <ProjectCard
             title={item.title}

@@ -1,7 +1,5 @@
 ---
 interface Props {
-  dataNavLogo?: boolean;
-  dataFooterLogo?: boolean;
   className?: string;
   lang?: string;
 }
@@ -12,16 +10,12 @@ const logoLabels: Record<string, string> = {
   it: "Julián Recarte - Home",
 };
 
-const { dataNavLogo, dataFooterLogo, className = "", lang = "es" } = Astro.props;
+const { className = "", lang = "es" } = Astro.props;
 const logoLabel = logoLabels[lang] || logoLabels.es;
-const attrs: Record<string, string | boolean> = {};
-if (dataNavLogo) attrs["data-nav-logo"] = true;
-if (dataFooterLogo) attrs["data-footer-logo"] = true;
 ---
 
 <a
   href={import.meta.env.BASE_URL || "/"}
-  {...attrs}
   class={"inline-block text-[2rem] font-bold leading-none tracking-[-4px] no-underline transition-transform duration-300 hover:scale-110 hover:rotate-[25deg]" + (className ? " " + className : "")}
   aria-label={logoLabel}
 >

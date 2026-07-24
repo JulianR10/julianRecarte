@@ -118,7 +118,7 @@ const {
   <body transition:animate="slide">
     <a href="#main-content" class="skip-link">{t.skipLink}</a>
     <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none" style="will-change: transform"></div>
-    <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-[60]" style="will-change: transform"></div>
+    <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-40" style="will-change: transform"></div>
     <header><slot name="nav" /></header>
     <slot name="hero" />
     <main id="main-content" class="w-full max-w-[100vw] overflow-x-clip">
@@ -130,47 +130,6 @@ const {
       import { initAll, destroyAll } from "@scripts/main";
       import { createLifecycle } from "@scripts/lifecycle";
       createLifecycle(initAll, destroyAll);
-    </script>
-
-    <script>
-      let revealObserver = null;
-
-      function initRevealObserver() {
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        const els = document.querySelectorAll("[data-reveal], [data-reveal-heading], [data-reveal-stagger]");
-        if (!els.length) return;
-
-        const items = [];
-        els.forEach((el) => {
-          if (el.hasAttribute("data-reveal-stagger")) {
-            items.push(...el.children);
-          } else {
-            items.push(el);
-          }
-        });
-
-        revealObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("revealed");
-                revealObserver.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.15 }
-        );
-
-        items.forEach((el) => revealObserver.observe(el));
-      }
-
-      function destroyRevealObserver() {
-        if (revealObserver) { revealObserver.disconnect(); revealObserver = null; }
-      }
-
-      import { createLifecycle } from "@scripts/lifecycle";
-      createLifecycle(initRevealObserver, destroyRevealObserver);
     </script>
 
     <button
@@ -192,12 +151,6 @@ const {
         <path d="M12 19V5M12 5L5 12M12 5L19 12" />
       </svg>
     </button>
-
-    <script>
-      import { initBackToTop, destroyBackToTop } from "@scripts/back-to-top";
-      import { createLifecycle } from "@scripts/lifecycle";
-      createLifecycle(initBackToTop, destroyBackToTop);
-    </script>
 
   </body>
 </html>

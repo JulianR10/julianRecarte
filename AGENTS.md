@@ -58,17 +58,17 @@ createLifecycle(initAll, destroyAll);
 
 ### Shared Scroll Utility
 
-`@scripts/scroll-utils.js` exports `onScroll(callback)` — a single rAF-throttled scroll listener. Multiple modules subscribe, one listener runs. Each call returns an unsubscribe function.
+`@scripts/scroll-source.ts` exports `onScroll(callback)` — subscribers notified from Lenis scroll. Multiple modules subscribe, one source runs. Each call returns an unsubscribe function.
 
-```js
-import { onScroll } from "@scripts/scroll-utils.js";
-const cleanup = onScroll((scrollY) => { /* ... */ });
+```ts
+import { onScroll } from "@scripts/scroll-source";
+const cleanup = onScroll((scroll, velocity, direction) => { /* ... */ });
 // later: cleanup()
 ```
 
 ### Language Switching
 
-`LangSelector.astro` renders flag buttons. `nav.js` handles dropdown toggle and navigates via `window.location.pathname` rewrite (full page reload with ViewTransitions slide).
+`LangSelector.astro` renders flag buttons. `nav.ts` handles dropdown toggle and navigates via `window.location.pathname` rewrite (full page reload with ViewTransitions slide).
 
 ## The `data-*` Hook System
 
@@ -76,18 +76,18 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 
 | Attribute | Used By | Purpose |
 |-----------|---------|---------|
-| `[data-reveal]` | Layout.astro inline observer | Fade-in on scroll (IntersectionObserver) |
-| `[data-reveal-heading]` | cine-text.js | Character-level stagger reveal |
-| `[data-reveal-stagger]` | Layout.astro inline observer | Observe each child individually |
-| `[data-project-card]` | card-tilt.js | 3D tilt on mouse hover |
-| `[data-card-shine]` | card-tilt.js | Radial gradient shine overlay |
-| `[data-hero-text]` | hero-scroll.js | Fade-out + slide on scroll |
-| `[data-hero-image]` | hero-scroll.js | Scale-down on scroll |
-| `[data-hero-orb]` | hero-scroll.js | Decorative orbs fade-out |
-| `[data-zap-clone]` | hero-zap.js | Random glitch flash effect |
-| `[data-wave]` | waves.js | SVG path morphing animation |
-| `[data-magnetic]` | (unused — planned) | Magnetic button hover effect |
-| `[data-process-step]` | animations.js | Process image scale on scroll |
+| `[data-reveal]` | reveal-observer.ts | Fade-in on scroll (IntersectionObserver) |
+| `[data-reveal-heading]` | cine-text.ts | Character-level stagger reveal |
+| `[data-reveal-stagger]` | reveal-observer.ts | Observe each child individually |
+| `[data-project-card]` | card-tilt.ts | 3D tilt on mouse hover |
+| `[data-card-shine]` | card-tilt.ts | Radial gradient shine overlay |
+| `[data-hero-text]` | hero-scroll.ts | Fade-out + slide on scroll |
+| `[data-hero-image]` | hero-scroll.ts | Scale-down on scroll |
+| `[data-hero-orb]` | hero-scroll.ts | Decorative orbs fade-out |
+| `[data-zap-clone]` | hero-zap.ts | Random glitch flash effect |
+| `[data-wave]` | waves.ts | SVG path morph + scroll parallax depth |
+| `[data-magnetic]` | magnetic.ts | Magnetic button hover (Hero CTAs, Contact links) |
+| `[data-process-step]` | animations.ts | Process image scale on scroll |
 
 ## Known Pitfalls
 
@@ -126,14 +126,15 @@ Elements with `will-change: transform/opacity/filter` get promoted to GPU layers
 
 | Module | What it animates | Uses ScrollTrigger? | Has destroy? |
 |--------|-----------------|---------------------|--------------|
-| `hero-scroll.js` | Hero text/image/orbs exit | Yes (scrub) | Yes |
-| `hero-zap.js` | Glitch flash on hero label | No (time-based) | Yes |
-| `waves.js` | SVG path morphing | No (infinite loop) | Yes |
-| `animations.js` | Progress bar, process line, step images | Yes | Yes |
-| `card-tilt.js` | 3D card tilt + shine | No (mouse-based) | Yes |
-| `cine-text.js` | Character stagger reveal | Yes | Yes |
+| `hero-scroll.ts` | Hero text/image/orbs exit | Yes (scrub) | Yes |
+| `hero-zap.ts` | Glitch flash on hero label | No (time-based) | Yes |
+| `waves.ts` | SVG path morph + scroll parallax | Yes (scrub) + loop | Yes |
+| `animations.ts` | Progress bar, process line, step images | Yes | Yes |
+| `card-tilt.ts` | 3D card tilt + shine | No (mouse-based) | Yes |
+| `magnetic.ts` | Magnetic hover on CTAs / contact links | No (mouse-based) | Yes |
+| `cine-text.ts` | Character stagger reveal | Yes | Yes |
 
-All modules use `gsap.context()` for scoped cleanup. `destroy*()` functions call `ctx.kill()`.
+All modules use `defineAnimation` / `gsap.context()` for scoped cleanup. `destroy()` calls `ctx.kill()`.
 
 ## i18n
 

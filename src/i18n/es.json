@@ -1,5 +1,4 @@
 {
-  "lang": "es",
   "nav": {
     "projects": "Proyectos",
     "process": "Proceso",
@@ -17,8 +16,6 @@
     "greetingPrefix": "Hola, soy ",
     "greetingName": "Julián Recarte",
     "subtitle": "Convierto marcas en experiencias web interactivas para negocios que buscan destacar.",
-    "description": "Trabajo remoto hace 3 años desde distintos rincones del mundo.\nEso me enseñó a adaptarme a cualquier negocio y contexto.\nLo mismo aplico en cada desafío que tomo.",
-    "highlightWord": "adaptarme",
     "cta": "¿Hablamos de tu proyecto?",
     "viewProjects": "Ver proyectos",
     "contact": "Contactar"
@@ -83,22 +80,18 @@
     "stepLabel": "Paso",
     "steps": [
       {
-        "num": "01",
         "title": "Briefing",
         "description": "Comenzamos con una conversación. Me contás tus ideas, objetivos y expectativas. Analizamos tu marca, tu audiencia y el mensaje que querés transmitir."
       },
       {
-        "num": "02",
         "title": "Boceto",
         "description": "Transformo las ideas en un concepto visual. Arquitectura de información, wireframes y diseño de interfaz pensado para contar tu historia."
       },
       {
-        "num": "03",
         "title": "Desarrollo",
         "description": "Cada línea de código está pensada para crear una experiencia fluida, animada y optimizada. Desarrollo con tecnologías modernas que aseguran rendimiento y belleza."
       },
       {
-        "num": "04",
         "title": "Iteración",
         "description": "Revisamos, ajustamos y refinamos hasta que cada detalle esté alineado con la visión del proyecto. Porque el resultado final nace de la colaboración."
       }
