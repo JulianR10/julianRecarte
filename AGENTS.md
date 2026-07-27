@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Single-page Astro portfolio with GSAP animations, Lenis smooth scrolling, i18n (es/en/it), and ViewTransitions. Deployed to GitHub Pages at `/julianRecarte`.
+Single-page Astro portfolio with GSAP animations, Lenis smooth scrolling, i18n (es/en/it), and ViewTransitions. Deployed to Vercel at `https://julianrecarte.dev/`.
 
 ## Folder Structure
 
@@ -156,8 +156,8 @@ Simple approach: beige at 95% opacity + minimal blur. No saturate, no separate s
 ## Build & Deploy
 
 ```bash
-npm run dev       # http://localhost:4321/julianRecarte/es/
+npm run dev       # http://localhost:4321/es/
 npm run build     # outputs to dist/
 ```
 
-Deployed to GitHub Pages at `https://julianrecarte.github.io/julianRecarte/`. Base path is `/julianRecarte`.
+Deployed to Vercel at `https://julianrecarte.dev/`. Domain configured with Vercel.

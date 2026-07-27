@@ -4,8 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import { fileURLToPath } from "url";
 
 export default defineConfig({
-  site: "https://julianrecarte.github.io",
-  base: "/julianRecarte",
+  site: "https://julianrecarte.dev",
   trailingSlash: "always",
   integrations: [
     tailwind(),

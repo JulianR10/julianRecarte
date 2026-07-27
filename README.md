@@ -72,7 +72,7 @@ npm install
 ```bash
 npm run dev
 ```
-El sitio estará disponible en `http://localhost:4321/julianRecarte/`
+El sitio estará disponible en `http://localhost:4321/`
 
 ### 3. Compilar para producción
 ```bash
@@ -109,7 +109,7 @@ npm run preview
 - ✅ Multi-idioma (ES/EN/IT)
 - ✅ Dark mode
 - ✅ Responsive design con Tailwind
-- ✅ Optimizado para Vercel
+- ✅ Deployado en Vercel con dominio julianrecarte.dev
 
 ## 📧 Contacto
 

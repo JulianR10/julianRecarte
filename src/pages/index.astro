@@ -11,12 +11,11 @@
       var nav = (navigator.language || navigator.userLanguage || "es").slice(0, 2);
       var lang = langs.indexOf(nav) !== -1 ? nav : "es";
       var base = window.location.pathname.replace(/\/+$/g, "");
-      if (base === "") base = "/julianRecarte";
       window.location.replace(base + "/" + lang + "/");
     })();
   </script>
 </head>
 <body style="background-color: #E8E0D0; margin: 0">
-  <p hidden>Redirecting to <a href="/julianRecarte/es/">Julián Recarte</a>...</p>
+  <p hidden>Redirecting to <a href="/es/">Julián Recarte</a>...</p>
 </body>
 </html>
