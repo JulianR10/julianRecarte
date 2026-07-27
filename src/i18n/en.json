@@ -9,7 +9,9 @@
     "openMenu": "Open menu",
     "langEs": "Spanish",
     "langEn": "English",
-    "langIt": "Italian"
+    "langIt": "Italian",
+    "ariaLabel": "Main navigation",
+    "switchLang": "Switch language"
   },
   "hero": {
     "label": "FullStack Web Developer",
@@ -112,8 +114,8 @@
   "layout": {
     "skipLink": "Skip to main content",
     "backToTop": "Back to top",
-    "title": "Julián Recarte | Creative Frontend Developer",
+    "title": "Julián Recarte | FullStack Web Developer",
     "description": "I turn brands into interactive web experiences.",
-    "jobTitle": "Creative Frontend Developer"
+    "jobTitle": "FullStack Web Developer"
   }
 }

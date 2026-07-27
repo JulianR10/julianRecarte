@@ -38,7 +38,9 @@ const { t } = Astro.props;
         <div id="process-line" class="absolute top-0 left-0 w-full h-full origin-top" style="transform: scaleY(0); background: linear-gradient(to bottom, transparent 0%, rgb(255,92,43) 10%, rgb(91,31,255) 50%, rgb(255,92,43) 90%, transparent 100%);"></div>
       </div>
 
-      {steps.map((step, i) => (
+      {steps.map((step, i) => {
+        const s = t.steps[i] || { title: step.title, description: step.description };
+        return (
         <div
           class="relative grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 lg:gap-24 py-6 md:py-8"
           data-reveal
@@ -53,7 +55,7 @@ const { t } = Astro.props;
             >
               <Image
                 src={step.image}
-                alt={t.steps[i].title}
+                alt={s.title}
                 width={800}
                 height={600}
                 loading="lazy"
@@ -87,14 +89,15 @@ const { t } = Astro.props;
             <h3
               class="text-3xl md:text-4xl lg:text-5xl font-medium mb-6 leading-tight"
             >
-              {t.steps[i].title}
+              {s.title}
             </h3>
             <p class="text-copy/60 dark:text-dark-muted leading-relaxed text-base md:text-lg" style="text-wrap: balance;">
-              {t.steps[i].description}
+              {s.description}
             </p>
           </div>
         </div>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>

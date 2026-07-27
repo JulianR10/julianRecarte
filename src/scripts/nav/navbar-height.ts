@@ -1,4 +1,4 @@
-let resizeCleanup: (() => void) | null = null;
+const navbarHeightCleanups: (() => void)[] = [];
 
 function setNavbarHeight(): void {
   const nav = document.getElementById("main-nav");
@@ -11,13 +11,15 @@ export function initNavbarHeight(): void {
   setNavbarHeight();
   const handler = () => setNavbarHeight();
   window.addEventListener("resize", handler);
-  resizeCleanup = () => window.removeEventListener("resize", handler);
+  navbarHeightCleanups.push(() => window.removeEventListener("resize", handler));
 }
 
 export function destroyNavbarHeight(): void {
-  if (resizeCleanup) {
-    resizeCleanup();
-    resizeCleanup = null;
+  for (let i = navbarHeightCleanups.length - 1; i >= 0; i--) {
+    try { navbarHeightCleanups[i](); } catch (e) {
+      console.warn("[navbar-height] cleanup error:", e);
+    }
   }
+  navbarHeightCleanups.length = 0;
   document.documentElement.style.removeProperty("--navbar-h");
 }

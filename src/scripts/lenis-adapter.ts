@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { notifyListeners, scrollToTop as baseScrollToTop } from "@scripts/scroll-source";
 
 let instance: Lenis | null = null;
+let tickerCleanup: (() => void) | null = null;
 
 export function initLenis(): void {
   if (instance) return;
@@ -20,12 +21,18 @@ export function initLenis(): void {
     ScrollTrigger.update();
   });
 
-  gsap.ticker.add((time: number) => instance!.raf(time * 1000));
+  const tickerFn = (time: number) => instance!.raf(time * 1000);
+  gsap.ticker.add(tickerFn);
   gsap.ticker.lagSmoothing(0);
+  tickerCleanup = () => gsap.ticker.remove(tickerFn);
 }
 
 export function destroyLenis(): void {
   if (!instance) return;
+  if (tickerCleanup) {
+    tickerCleanup();
+    tickerCleanup = null;
+  }
   instance.destroy();
   instance = null;
 }

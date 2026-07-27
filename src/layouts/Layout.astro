@@ -11,9 +11,9 @@ interface Props {
 }
 
 const {
-  title = "Julián Recarte | Creative Frontend Developer",
-  description = "Convierto marcas en experiencias web interactivas.",
-  jobTitle = "Creative Frontend Developer",
+  title = "Julián Recarte | Desarrollador web FullStack",
+  description = "Convierto ideas en experiencias web interactivas.",
+  jobTitle = "Desarrollador web FullStack",
   lang = "es",
   t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba" },
 } = Astro.props;
@@ -74,7 +74,9 @@ const {
         "https://wa.me/393447817557"
       ],
       "knowsAbout": [
+        "Full Stack Development",
         "Frontend Development",
+        "Backend Development",
         "React",
         "Astro",
         "GSAP",
@@ -117,8 +119,8 @@ const {
   </head>
   <body transition:animate="slide">
     <a href="#main-content" class="skip-link">{t.skipLink}</a>
-    <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none" style="will-change: transform"></div>
-    <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-40" style="will-change: transform"></div>
+    <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none"></div>
+    <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-40"></div>
     <header><slot name="nav" /></header>
     <slot name="hero" />
     <main id="main-content" class="w-full max-w-[100vw] overflow-x-clip">

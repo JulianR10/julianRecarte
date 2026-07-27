@@ -9,7 +9,9 @@
     "openMenu": "Apri menu",
     "langEs": "Spagnolo",
     "langEn": "Inglese",
-    "langIt": "Italiano"
+    "langIt": "Italiano",
+    "ariaLabel": "Navigazione principale",
+    "switchLang": "Cambia lingua"
   },
   "hero": {
     "label": "Sviluppatore Web FullStack",
@@ -112,8 +114,8 @@
   "layout": {
     "skipLink": "Vai al contenuto principale",
     "backToTop": "Torna su",
-    "title": "Julián Recarte | Sviluppatore Frontend Creativo",
+    "title": "Julián Recarte | Sviluppatore Web FullStack",
     "description": "Trasformo marchi in esperienze web interattive.",
-    "jobTitle": "Sviluppatore Frontend Creativo"
+    "jobTitle": "Sviluppatore Web FullStack"
   }
 }

@@ -21,6 +21,7 @@
   --rgb-accent-purple: 91, 31, 255;
   --rgb-accent-pastel: 255, 176, 136;
   --navbar-h: 76px;
+  scroll-padding-top: var(--navbar-h, 76px);
 }
 
 :root.dark {

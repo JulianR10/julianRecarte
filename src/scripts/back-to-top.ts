@@ -1,12 +1,14 @@
 import { onScroll } from "@scripts/scroll-source";
 import { scrollToTop } from "@scripts/lenis-adapter";
 
-let scrollCleanup: (() => void) | null = null;
+const backToTopCleanups: (() => void)[] = [];
 
 export function initBackToTop(): () => void {
   const btn = document.getElementById("btn-top")!;
   const arrow = document.getElementById("arrow-top")!;
   if (!btn || !arrow) return () => {};
+
+  let scrollCleanup: (() => void) | null = null;
 
   scrollCleanup = onScroll((y: number) => {
     if (y > 400) {
@@ -70,18 +72,24 @@ export function initBackToTop(): () => void {
   btn.addEventListener("mouseleave", onLeave);
   btn.addEventListener("click", onClick);
 
-  return () => {
+  const cleanup = () => {
     btn.removeEventListener("mouseenter", onEnter);
     btn.removeEventListener("mouseleave", onLeave);
     btn.removeEventListener("click", onClick);
     if (scrollCleanup) scrollCleanup();
     scrollCleanup = null;
   };
+
+  backToTopCleanups.push(cleanup);
+
+  return cleanup;
 }
 
 export function destroyBackToTop(): void {
-  if (scrollCleanup) {
-    scrollCleanup();
-    scrollCleanup = null;
+  for (let i = backToTopCleanups.length - 1; i >= 0; i--) {
+    try { backToTopCleanups[i](); } catch (e) {
+      console.warn("[back-to-top] cleanup error:", e);
+    }
   }
+  backToTopCleanups.length = 0;
 }

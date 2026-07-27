@@ -1,6 +1,6 @@
 import { onScroll } from "@scripts/scroll-source";
 
-let autoHideCleanup: (() => void) | null = null;
+const autoHideCleanups: (() => void)[] = [];
 
 export function initAutoHide(): void {
   const nav = document.getElementById("main-nav");
@@ -24,14 +24,16 @@ export function initAutoHide(): void {
     lastScrollY = y;
   });
 
-  autoHideCleanup = unsubscribe;
+  autoHideCleanups.push(unsubscribe);
 }
 
 export function destroyAutoHide(): void {
-  if (autoHideCleanup) {
-    autoHideCleanup();
-    autoHideCleanup = null;
+  for (let i = autoHideCleanups.length - 1; i >= 0; i--) {
+    try { autoHideCleanups[i](); } catch (e) {
+      console.warn("[auto-hide] cleanup error:", e);
+    }
   }
+  autoHideCleanups.length = 0;
   const nav = document.getElementById("main-nav");
   if (nav) nav.style.transform = "";
 }

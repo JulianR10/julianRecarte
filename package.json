@@ -1,7 +1,7 @@
 {
   "name": "julian-recarte-portfolio",
   "version": "1.0.0",
-  "description": "Creative Frontend Developer Portfolio",
+  "description": "FullStack Web Developer Portfolio",
   "type": "module",
   "scripts": {
     "dev": "astro dev",

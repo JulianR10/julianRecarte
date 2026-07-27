@@ -9,13 +9,15 @@
     "openMenu": "Abrir menú",
     "langEs": "Español",
     "langEn": "English",
-    "langIt": "Italiano"
+    "langIt": "Italiano",
+    "ariaLabel": "Navegación principal",
+    "switchLang": "Cambiar idioma"
   },
   "hero": {
     "label": "Desarrollador web FullStack",
     "greetingPrefix": "Hola, soy ",
     "greetingName": "Julián Recarte",
-    "subtitle": "Convierto marcas en experiencias web interactivas para negocios que buscan destacar.",
+    "subtitle": "Convierto ideas en experiencias web interactivas para negocios que buscan destacar.",
     "cta": "¿Hablamos de tu proyecto?",
     "viewProjects": "Ver proyectos",
     "contact": "Contactar"
@@ -112,8 +114,8 @@
   "layout": {
     "skipLink": "Ir al contenido principal",
     "backToTop": "Volver arriba",
-    "title": "Julián Recarte | Desarrollador Frontend Creativo",
-    "description": "Convierto marcas en experiencias web interactivas.",
-    "jobTitle": "Desarrollador Frontend Creativo"
+    "title": "Julián Recarte | Desarrollador web FullStack",
+    "description": "Convierto ideas en experiencias web interactivas.",
+    "jobTitle": "Desarrollador web FullStack"
   }
 }

@@ -38,7 +38,7 @@ export const heroScroll = defineAnimation((_gsap: typeof gsap) => {
     });
   }
 
-  const orbs = hero.querySelectorAll<HTMLElement>("[data-hero-orb]");
+  const orbs = document.querySelectorAll<HTMLElement>("[data-hero-orb]");
   if (orbs.length) {
     _gsap.to(orbs, {
       opacity: 0,

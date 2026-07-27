@@ -1,4 +1,4 @@
-let observer: IntersectionObserver | null = null;
+const activeSectionCleanups: (() => void)[] = [];
 
 export function initActiveSection(): void {
   const sections = [
@@ -9,7 +9,7 @@ export function initActiveSection(): void {
 
   if (!sections.length) return;
 
-  observer = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -24,13 +24,17 @@ export function initActiveSection(): void {
 
   sections.forEach((s) => {
     const el = document.getElementById(s.id);
-    if (el) observer!.observe(el);
+    if (el) observer.observe(el);
   });
+
+  activeSectionCleanups.push(() => observer.disconnect());
 }
 
 export function destroyActiveSection(): void {
-  if (observer) {
-    observer.disconnect();
-    observer = null;
+  for (let i = activeSectionCleanups.length - 1; i >= 0; i--) {
+    try { activeSectionCleanups[i](); } catch (e) {
+      console.warn("[active-section] cleanup error:", e);
+    }
   }
+  activeSectionCleanups.length = 0;
 }

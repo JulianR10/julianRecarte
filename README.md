@@ -1,8 +1,8 @@
-# Julián Recarte - Creative Frontend Developer Portfolio
+# Julián Recarte - FullStack Web Developer Portfolio
 
 ## 🎯 Proyecto
 
-Portfolio web moderno y altamente visual de Julián Recarte, Creative Frontend Developer. Multi-idioma (ES/EN/IT) con animaciones fluidas y diseño responsive.
+Portfolio web moderno y altamente visual de Julián Recarte, Desarrollador web FullStack. Multi-idioma (ES/EN/IT) con animaciones fluidas y diseño responsive.
 
 ## 🛠️ Stack Tecnológico
 
@@ -113,4 +113,4 @@ npm run preview
 
 ## 📧 Contacto
 
-Julián Recarte - Creative Frontend Developer
+Julián Recarte - Desarrollador web FullStack
