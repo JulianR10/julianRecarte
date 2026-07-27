@@ -153,6 +153,10 @@ Three languages in `src/i18n/`. The `safeT()` Proxy in `[lang]/index.astro` retu
 
 Simple approach: beige at 95% opacity + minimal blur. No saturate, no separate scrolled state. Transition only on transform for show/hide animations.
 
+## Analytics
+
+`@vercel/speed-insights` se inyecta en el `<head>` de `Layout.astro` mediante el componente `<SpeedInsights />`. No requiere configuración adicional — Vercel recolecta los datos automáticamente.
+
 ## Build & Deploy
 
 ```bash
