@@ -113,8 +113,7 @@
     "email": "Email"
   },
   "footer": {
-    "copyright": "© {year}",
-    "contactCta": "Hablemos →"
+    "copyright": "© {year}"
   },
   "layout": {
     "skipLink": "Ir al contenido principal",

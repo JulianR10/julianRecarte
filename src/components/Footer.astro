@@ -1,31 +1,21 @@
 ---
-import Logo from "./Logo.astro";
 import firma from "@assets/images/firma.png";
 
 interface Props {
   t: {
     copyright: string;
-    contactCta: string;
   };
-  lang?: string;
 }
 
-const { t, lang = "es" } = Astro.props;
+const { t } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-black/5 dark:border-dark-muted/20 py-5">
   <div
-    class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 px-6"
+    class="max-w-7xl mx-auto flex items-center justify-center px-6"
   >
-    <Logo lang={lang} />
-    <a
-      href="#contacto"
-      class="text-sm font-medium tracking-wider uppercase text-accent-orange hover:text-accent-orange/80 transition-colors duration-300 order-2 md:order-2"
-    >
-      {t.contactCta}
-    </a>
-    <p class="text-sm text-copy/50 dark:text-dark-muted/70 flex items-center gap-3 order-3 md:order-3">
+    <p class="text-sm text-copy/50 dark:text-dark-muted/70 flex items-center gap-3">
       {(t.copyright || "© {year}").replace("{year}", String(year))}
       <img
         src={firma.src}
