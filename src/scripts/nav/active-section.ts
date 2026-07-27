@@ -13,9 +13,15 @@ export function initActiveSection(): void {
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          sections.forEach((s) => s.link.classList.remove("active"));
+          sections.forEach((s) => {
+            s.link.classList.remove("active");
+            s.link.removeAttribute("aria-current");
+          });
           const match = sections.find((s) => s.id === entry.target.id);
-          if (match) match.link.classList.add("active");
+          if (match) {
+            match.link.classList.add("active");
+            match.link.setAttribute("aria-current", "page");
+          }
         }
       });
     },

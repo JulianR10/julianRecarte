@@ -38,8 +38,8 @@
         "description": "A monthly digital magazine with subscription system. Written by women worldwide. Culture, art, identity, and quality content with smooth navigation and editorial design."
       },
       {
-        "title": "Lumina",
-        "description": "E-commerce focused on product experience. Intentional animations and smooth navigation."
+        "title": "Multiservizi SRL",
+        "description": "Italian funeral home offering wholesale products: ceramics, coffins, decorations and more. Complete digital catalog with smooth navigation."
       }
     ]
   },
@@ -53,25 +53,32 @@
     "carouselLabel": "Testimonials carousel",
     "items": [
       {
-        "quote": "Working with Julián was an incredible experience. He transformed our vision into a web platform that exceeded all our expectations. His attention to detail and creativity are exceptional.",
-        "initials": "MC",
-        "name": "Maria Campos",
-        "role": "CEO",
-        "company": "Nexus Studio"
+        "quote": "Working with Julián was a turning point for Triba. He instantly understood our vision and turned it into a digital magazine that truly represents us. Professional, patient, and with a great eye for detail.",
+        "initials": "PA",
+        "name": "Pilar Argañas",
+        "role": "Owner",
+        "company": "Triba"
       },
       {
-        "quote": "Professional, creative and extremely talented. He understood exactly what we needed and executed it perfectly. The result was a website that truly represents our brand.",
-        "initials": "PL",
-        "name": "Pablo Lucero",
-        "role": "Creative Director",
-        "company": "Aether Agency"
+        "quote": "Julián is one of those people who understand what you need before you say it. The Triba site looks flawless, with navigation that feels amazing. We will definitely keep working together.",
+        "initials": "AA",
+        "name": "Azul Argañas",
+        "role": "Owner",
+        "company": "Triba"
       },
       {
-        "quote": "The best decision we made was hiring Julián. Not only did he meet the deadlines, but he brought ideas that significantly improved the final project. Highly recommended.",
-        "initials": "CG",
-        "name": "Carolina Gómez",
-        "role": "Founder",
-        "company": "Lumina Co."
+        "quote": "We needed a landing page that reflected the quality of our prints and Julián nailed it. Fast, neat, and incredibly patient with every change I asked for. Highly recommended.",
+        "initials": "FP",
+        "name": "Federico Pleitavino",
+        "role": "Owner",
+        "company": "SP Estampados"
+      },
+      {
+        "quote": "Building a website for a funeral home is not easy, but Julián found the right tone: serious, respectful, and functional. The online catalog opened many doors for us. Very happy with the result.",
+        "initials": "GP",
+        "name": "Gianluca Petrungaro",
+        "role": "Owner",
+        "company": "Multiservizi Petrungaro SRL"
       }
     ]
   },
@@ -109,7 +116,8 @@
     "email": "Email"
   },
   "footer": {
-    "copyright": "© {year}"
+    "copyright": "© {year}",
+    "contactCta": "Let's talk →"
   },
   "layout": {
     "skipLink": "Skip to main content",

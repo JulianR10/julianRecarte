@@ -1,6 +1,7 @@
 import type { ImageMetadata } from "astro";
 import logoSP from "@assets/images/logoSP.png";
 import tribaLogo from "@assets/images/logoTriba.svg";
+import logoMulti from "@assets/images/logoMultiservizi.png";
 
 export interface Project {
   title: string;
@@ -25,8 +26,9 @@ export const projects: Project[] = [
     style: "radial-gradient(circle at 25% 20%, rgba(222,6,46,0.35), transparent 50%), radial-gradient(circle at 75% 60%, rgba(255,90,125,0.25), transparent 50%), linear-gradient(135deg, rgba(255,195,195,0.2), rgba(255,235,230,0.15))",
   },
   {
-    title: "Lumina",
+    title: "Multiservizi SRL",
     tags: ["Astro", "GSAP", "Shopify", "TypeScript"],
-    style: "linear-gradient(135deg, rgba(var(--rgb-accent-orange),0.3), rgba(242,236,228,0.5), rgba(var(--rgb-accent-purple),0.4))",
+    image: logoMulti,
+    style: "radial-gradient(circle at 25% 20%, rgba(128,0,32,0.35), transparent 50%), radial-gradient(circle at 75% 60%, rgba(180,65,85,0.25), transparent 50%), linear-gradient(135deg, rgba(200,140,150,0.15), rgba(245,225,225,0.1))",
   },
 ];

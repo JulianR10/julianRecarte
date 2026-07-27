@@ -6,10 +6,11 @@ import ItFlag from "./flags/ItFlag.astro";
 interface Props {
   lang: string;
   mode: "desktop" | "overlay";
+  switchLang?: string;
   class?: string;
 }
 
-const { lang, mode, class: className } = Astro.props;
+const { lang, mode, switchLang = "Switch language", class: className } = Astro.props;
 const isOverlay = mode === "overlay";
 
 const langs = ["es", "en", "it"];
@@ -39,7 +40,7 @@ const CurrentFlag = flagComponents[lang];
     aria-expanded="false"
     aria-haspopup="true"
     class="lang-btn flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors duration-300"
-    aria-label="Switch language"
+    aria-label={switchLang}
   >
     <span class="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0" aria-hidden="true"><CurrentFlag /></span>
     <span class="text-xs font-bold tracking-wider">{langCodes[lang]}</span>

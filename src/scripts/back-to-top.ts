@@ -6,6 +6,7 @@ const backToTopCleanups: (() => void)[] = [];
 export function initBackToTop(): () => void {
   const btn = document.getElementById("btn-top")!;
   const arrow = document.getElementById("arrow-top")!;
+  const wa = document.getElementById("btn-whatsapp")!;
   if (!btn || !arrow) return () => {};
 
   let scrollCleanup: (() => void) | null = null;
@@ -14,9 +15,17 @@ export function initBackToTop(): () => void {
     if (y > 400) {
       btn.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
       btn.classList.add("translate-y-0", "opacity-100");
+      if (wa) {
+        wa.classList.remove("translate-y-20", "opacity-0", "pointer-events-none");
+        wa.classList.add("translate-y-0", "opacity-100");
+      }
     } else {
       btn.classList.remove("translate-y-0", "opacity-100");
       btn.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
+      if (wa) {
+        wa.classList.remove("translate-y-0", "opacity-100");
+        wa.classList.add("translate-y-20", "opacity-0", "pointer-events-none");
+      }
     }
   });
 

@@ -38,8 +38,8 @@
         "description": "Una rivista digitale mensile con sistema di abbonamento. Scritta da donne di tutto il mondo. Cultura, arte, identità e contenuti di qualità con navigazione fluida e design editoriale."
       },
       {
-        "title": "Lumina",
-        "description": "E-commerce con focus sull'esperienza di prodotto. Animazioni intenzionali e navigazione fluida."
+        "title": "Multiservizi SRL",
+        "description": "Impresa funebre italiana con vendita all'ingrosso di articoli: ceramiche, casse, addobbi e molto altro. Catalogo digitale completo con navigazione fluida."
       }
     ]
   },
@@ -53,25 +53,32 @@
     "carouselLabel": "Carousel di testimonianze",
     "items": [
       {
-        "quote": "Lavorare con Julián è stata un'esperienza incredibile. Ha trasformato la nostra visione in una piattaforma web che ha superato tutte le aspettative. La sua attenzione ai dettagli e la creatività sono eccezionali.",
-        "initials": "MC",
-        "name": "Maria Campos",
-        "role": "CEO",
-        "company": "Nexus Studio"
+        "quote": "Lavorare con Julián è stato un punto di svolta per Triba. Ha capito subito la nostra visione e l'ha trasformata in una rivista digitale che ci rappresenta davvero. Professionale, paziente e con grande attenzione ai dettagli.",
+        "initials": "PA",
+        "name": "Pilar Argañas",
+        "role": "Titolare",
+        "company": "Triba"
       },
       {
-        "quote": "Professionale, creativo e estremamente talentuoso. Ha capito esattamente cosa ci serviva e lo ha eseguito alla perfezione. Il risultato è un sito web che rappresenta veramente il nostro marchio.",
-        "initials": "PL",
-        "name": "Pablo Lucero",
-        "role": "Direttore Creativo",
-        "company": "Aether Agency"
+        "quote": "Julián è di quelle persone che capiscono cosa serve ancora prima che tu lo dica. Il sito di Triba è venuto impeccabile, con una navigazione che incanta. Sicuramente continueremo a lavorare insieme.",
+        "initials": "AA",
+        "name": "Azul Argañas",
+        "role": "Titolare",
+        "company": "Triba"
       },
       {
-        "quote": "La decisione migliore che abbiamo preso è stata assumere Julián. Non solo ha rispettato le scadenze, ma ha portato idee che hanno migliorato significativamente il progetto finale. Altamente raccomandato.",
-        "initials": "CG",
-        "name": "Carolina Gómez",
-        "role": "Fondatrice",
-        "company": "Lumina Co."
+        "quote": "Avevamo bisogno di una landing page che rispecchiasse la qualità delle nostre stampe e Julián l'ha azzeccata. Veloce, preciso e con una pazienza enorme per ogni modifica richiesta. Molto raccomandato.",
+        "initials": "FP",
+        "name": "Federico Pleitavino",
+        "role": "Titolare",
+        "company": "SP Estampados"
+      },
+      {
+        "quote": "Affrontare un sito web per un'impresa funebre non è facile, ma Julián ha saputo dare il tono giusto: serio, rispettoso e funzionale. Il catalogo online ci ha aperto molte porte. Molto soddisfatto del risultato.",
+        "initials": "GP",
+        "name": "Gianluca Petrungaro",
+        "role": "Titolare",
+        "company": "Multiservizi Petrungaro SRL"
       }
     ]
   },
@@ -109,7 +116,8 @@
     "email": "Email"
   },
   "footer": {
-    "copyright": "© {year}"
+    "copyright": "© {year}",
+    "contactCta": "Parliamo →"
   },
   "layout": {
     "skipLink": "Vai al contenuto principale",

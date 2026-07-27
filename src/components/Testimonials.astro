@@ -74,6 +74,17 @@ const { t } = Astro.props;
         </svg>
       </button>
     </div>
+
+    <div id="test-dots" class="flex justify-center gap-2 mt-6">
+      {t.items.map((_, i) => (
+        <button
+          type="button"
+          class="test-dot w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer border-none"
+          data-index={i}
+          aria-label={`Ir al testimonio ${i + 1}`}
+        ></button>
+      ))}
+    </div>
   </div>
 </section>
 
@@ -115,4 +126,8 @@ const { t } = Astro.props;
     #testimonios-track { min-height: 500px; }
   }
 </style>
+
+<noscript>
+  <style>.testimonio-card:first-child { opacity: 1 !important; transform: none !important; z-index: 3 !important; pointer-events: auto !important; }</style>
+</noscript>
 

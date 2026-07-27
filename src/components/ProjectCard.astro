@@ -14,12 +14,20 @@ interface Props {
 }
 
 const { title, description, tags, style, viewProject, href, image, comingSoon } = Astro.props;
+
+const Wrapper = href ? "a" : "article";
+const wrapperAttrs: Record<string, any> = {
+  "data-project-card": true,
+  class: "group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5 block no-underline",
+};
+if (href) {
+  wrapperAttrs.href = href;
+  wrapperAttrs.target = "_blank";
+  wrapperAttrs.rel = "noopener noreferrer";
+}
 ---
 
-<article
-  data-project-card
-  class="group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5"
->
+<Wrapper {...wrapperAttrs}>
   <div data-card-shine class="pointer-events-none absolute inset-0 rounded-2xl opacity-0 z-[1]"></div>
   <div
     class="aspect-[4/3] relative overflow-hidden rounded-2xl"
@@ -51,16 +59,13 @@ const { title, description, tags, style, viewProject, href, image, comingSoon } 
     </div>
     {href ? (
     <div
-      class="absolute inset-0 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500"
+      class="absolute inset-0 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none"
     >
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-white text-sm font-medium tracking-wider uppercase bg-white/10 dark:bg-dark-card backdrop-blur-md px-6 py-3 rounded-full border border-white/20 hover:bg-white/20 transition-colors duration-300"
+        <span
+          class="text-white text-sm font-medium tracking-wider uppercase bg-white/10 dark:bg-dark-card backdrop-blur-md px-6 py-3 rounded-full border border-white/20"
         >
           {viewProject}
-        </a>
+        </span>
     </div>
     ) : null}
   </div>
@@ -81,15 +86,5 @@ const { title, description, tags, style, viewProject, href, image, comingSoon } 
         ))}
       </div>
     ) : null}
-    {href ? (
-      <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="md:hidden inline-flex items-center justify-center text-sm font-medium tracking-wider uppercase text-accent-orange hover:text-accent-orange/80 transition-colors duration-300"
-      >
-        {viewProject}
-      </a>
-    ) : null}
   </div>
-</article>
+</Wrapper>

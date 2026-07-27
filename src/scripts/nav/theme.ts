@@ -14,7 +14,7 @@ function setTheme(dark: boolean, lightBtn: HTMLElement | null, darkBtn: HTMLElem
   }
   if (lightBtn && darkBtn) {
     lightBtn.classList.toggle("text-white", !dark);
-    lightBtn.classList.toggle("text-background", dark);
+    lightBtn.classList.toggle("text-copy", dark);
     darkBtn.classList.toggle("text-white", dark);
     darkBtn.classList.toggle("text-dark-muted/60", !dark);
   }

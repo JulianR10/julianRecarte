@@ -12,6 +12,8 @@ interface Props {
     darkMode: string;
     closeMenu: string;
     openMenu: string;
+    ariaLabel: string;
+    switchLang: string;
   };
 }
 
@@ -24,7 +26,7 @@ const navItems = [
 ];
 ---
 
-<nav id="main-nav" aria-label="Main navigation" class="fixed top-0 left-0 right-0 z-50 py-4 md:py-5" style="view-transition-name: nav" data-lenis-prevent>
+<nav id="main-nav" aria-label={t.ariaLabel} class="fixed top-0 left-0 right-0 z-50 py-4 md:py-5" style="view-transition-name: nav" data-lenis-prevent>
   <div id="progress-bar" aria-hidden="true" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent-orange to-accent-purple origin-left" style="transform: scaleX(0);"></div>
   <div class="max-w-7xl mx-auto flex items-center px-6">
     <div class="flex-1 md:flex-none text-left">
@@ -40,7 +42,7 @@ const navItems = [
     </div>
 
     <div class="flex items-center gap-2 md:gap-3">
-      <LangSelector lang={lang} mode="desktop" class="hidden md:block" />
+      <LangSelector lang={lang} mode="desktop" switchLang={t.switchLang} class="hidden md:block" />
 
       <div id="theme-toggle" class="hidden md:relative md:flex items-center">
         <div id="theme-indicator" class="absolute w-8 h-8 rounded-full bg-accent-orange shadow-sm shadow-accent-orange/40 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"></div>
@@ -93,7 +95,7 @@ const navItems = [
     <div class="w-full h-px bg-white/20 my-3"></div>
 
     <div class="flex items-center gap-4">
-      <LangSelector lang={lang} mode="overlay" />
+      <LangSelector lang={lang} mode="overlay" switchLang={t.switchLang} />
 
       <div class="w-px h-6 bg-white/25"></div>
 

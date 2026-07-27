@@ -1,5 +1,18 @@
 let cleanup: (() => void) | null = null;
 
+function updateDots(active: number): void {
+  const dots = document.querySelectorAll<HTMLElement>(".test-dot");
+  dots.forEach((dot, i) => {
+    if (i === active) {
+      dot.classList.remove("bg-copy/20", "dark:bg-dark-muted/20");
+      dot.classList.add("bg-accent-orange", "scale-125");
+    } else {
+      dot.classList.add("bg-copy/20", "dark:bg-dark-muted/20");
+      dot.classList.remove("bg-accent-orange", "scale-125");
+    }
+  });
+}
+
 export function initTestimonials(): void {
   const cards = document.querySelectorAll<HTMLElement>(".testimonio-card");
   const prevBtn = document.getElementById("test-prev")!;
@@ -24,6 +37,7 @@ export function initTestimonials(): void {
       else if (i === (active - 1 + cards.length) % cards.length) setState(card, "peek-left");
       else setState(card, "hidden");
     });
+    updateDots(active);
   }
 
   function show(index: number): void {
@@ -39,6 +53,18 @@ export function initTestimonials(): void {
 
   prevBtn.addEventListener("click", onPrev);
   nextBtn.addEventListener("click", onNext);
+
+  // dot click handling
+  const dots = document.querySelectorAll<HTMLElement>(".test-dot");
+  const dotHandlers: (() => void)[] = [];
+  dots.forEach((dot) => {
+    const handler = () => {
+      const idx = parseInt(dot.dataset.index || "0");
+      show(idx);
+    };
+    dot.addEventListener("click", handler);
+    dotHandlers.push(handler);
+  });
 
   let startX = 0;
   const onPointerDown = (e: PointerEvent): void => { startX = e.clientX; track.setPointerCapture(e.pointerId); };
@@ -60,6 +86,7 @@ export function initTestimonials(): void {
     nextBtn.removeEventListener("click", onNext);
     track.removeEventListener("pointerdown", onPointerDown);
     track.removeEventListener("pointerup", onPointerUp);
+    dotHandlers.forEach((h, i) => dots[i]?.removeEventListener("click", h));
     if (lockTimer) clearTimeout(lockTimer);
     locked = false;
     lockTimer = null;

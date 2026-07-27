@@ -28,6 +28,9 @@ const {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#E8E0D0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1C1A18" media="(prefers-color-scheme: dark)" />
+    <meta name="google-site-verification" content="uCipOPVggRgVZ-5D8k06oVtNT1oeVXRMeu4rabjkL9o" />
     <title>{title}</title>
 
     <!-- Favicon -->
@@ -136,14 +139,31 @@ const {
       createLifecycle(initAll, destroyAll);
     </script>
 
+
+
+    <a
+      id="btn-whatsapp"
+      href="https://wa.me/393447817557"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-8 right-24 z-50 transition-all duration-300 cursor-pointer outline-none translate-y-20 opacity-0 pointer-events-none hover:scale-110 text-accent-orange"
+      data-lenis-prevent
+      aria-label="WhatsApp"
+    >
+      <svg class="w-10 h-10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.07-.25-.13-1.06-.39-2.01-1.27-.74-.69-1.24-1.53-1.38-1.86-.14-.33-.01-.5.13-.67.14-.15.29-.33.42-.49.14-.17.19-.28.27-.47.08-.19.04-.36-.01-.5-.06-.13-.52-1.23-.71-1.78-.19-.55-.38-.48-.52-.46-.14.01-.3.02-.45.02-.16 0-.43.06-.66.31-.22.25-.85.83-.85 2.02 0 1.19.87 2.34.99 2.5.12.17 1.71 2.62 4.16 3.63.58.25 1.04.4 1.4.51.58.19 1.12.16 1.53.1.48-.07 1.43-.59 1.63-1.15.2-.56.2-1.05.14-1.15-.06-.1-.22-.16-.47-.28z"/>
+      </svg>
+    </a>
+
     <button
       id="btn-top"
-      class="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-accent-orange text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border-none outline-none translate-y-20 opacity-0 pointer-events-none"
+      class="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-accent-orange text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer border-none outline-none translate-y-20 opacity-0 pointer-events-none"
       aria-label={t.backToTop}
+      data-lenis-prevent
     >
       <svg
         id="arrow-top"
-        class="w-5 h-5"
+        class="w-4 h-4"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
