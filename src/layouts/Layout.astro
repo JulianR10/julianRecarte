@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import "@styles/globals.css";
 
 interface Props {
@@ -116,6 +117,7 @@ const {
       })();
     </script>
     <noscript><style>[data-reveal],[data-reveal-heading],[data-reveal-stagger]{opacity:1!important;transform:none!important}</style></noscript>
+    <SpeedInsights />
   </head>
   <body transition:animate="slide">
     <a href="#main-content" class="skip-link">{t.skipLink}</a>
