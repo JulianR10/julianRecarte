@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
 function wrapTextNodes(el: HTMLElement): HTMLElement[] {
@@ -24,7 +24,7 @@ function wrapTextNodes(el: HTMLElement): HTMLElement[] {
   return chars;
 }
 
-export const cineText = defineAnimation((_gsap: typeof gsap) => {
+export const cineText = defineAnimation((gsap: typeof gsap) => {
   const headings = document.querySelectorAll<HTMLElement>("[data-reveal-heading]");
   if (!headings.length) return;
 
@@ -40,7 +40,7 @@ export const cineText = defineAnimation((_gsap: typeof gsap) => {
 
     if (!prefersReducedMotion) {
       if (!isHero) {
-        _gsap.fromTo(
+        gsap.fromTo(
           heading,
           { y: 35 },
           {
@@ -56,7 +56,7 @@ export const cineText = defineAnimation((_gsap: typeof gsap) => {
         );
       }
 
-      _gsap.fromTo(
+      gsap.fromTo(
         chars,
         { opacity: 0, y: 30, filter: "blur(4px)" },
         {

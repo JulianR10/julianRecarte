@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
 const MORPH: readonly [string, string][] = [
@@ -19,7 +19,7 @@ const MORPH: readonly [string, string][] = [
 /** y travel as fraction of viewport height over full-page scroll. Opposite signs = depth layers. */
 const DEPTH: readonly number[] = [0.28, -0.18, 0.12];
 
-export const waves = defineAnimation((_gsap: typeof gsap) => {
+export const waves = defineAnimation((gsap: typeof gsap) => {
   const paths = document.querySelectorAll<SVGPathElement>("[data-wave]");
   if (!paths.length) return;
 
@@ -29,7 +29,7 @@ export const waves = defineAnimation((_gsap: typeof gsap) => {
   paths.forEach((path, i) => {
     const morph = MORPH[i];
     if (morph) {
-      _gsap.to(path, {
+      gsap.to(path, {
         attr: { d: morph[1] },
         duration: 4 + i * 1.5,
         repeat: -1,
@@ -41,7 +41,7 @@ export const waves = defineAnimation((_gsap: typeof gsap) => {
     const depth = DEPTH[i];
     if (depth == null || depth === 0) return;
 
-    _gsap.fromTo(
+    gsap.fromTo(
       path,
       { y: 0 },
       {

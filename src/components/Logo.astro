@@ -1,6 +1,4 @@
 ---
-import logoJr from "@assets/images/logo-jr.svg?raw";
-
 interface Props {
   className?: string;
   lang?: string;
@@ -18,11 +16,14 @@ const logoLabel = logoLabels[lang] || logoLabels.es;
 
 <a
   href={`${import.meta.env.BASE_URL}${lang}/`}
-  class={"inline-block text-copy dark:text-dark-copy leading-none no-underline transition-transform duration-300 hover:scale-110 hover:rotate-[25deg]" + (className ? " " + className : "")}
+  class={"inline-flex items-center justify-center text-copy dark:text-dark-copy leading-none no-underline transition-transform duration-300 hover:scale-110 hover:rotate-[25deg]" + (className ? " " + className : "")}
   aria-label={logoLabel}
 >
-  <span
-    class="block h-11 md:h-12 w-auto [&>svg]:h-full [&>svg]:w-auto [&>svg]:block"
-    set:html={logoJr}
+  <img
+    src="/logo-jr-color.svg"
+    alt="JR"
+    class="h-12 w-auto"
+    width="200"
+    height="200"
   />
 </a>

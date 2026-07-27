@@ -1,10 +1,10 @@
-import gsap from "gsap";
+import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
-export const progressAnimations = defineAnimation((_gsap: typeof gsap) => {
+export const progressAnimations = defineAnimation((gsap: typeof gsap) => {
   const bar = document.getElementById("progress-bar");
   if (bar) {
-    _gsap.to(bar, {
+    gsap.to(bar, {
       scaleX: 1,
       ease: "none",
       scrollTrigger: {
@@ -18,7 +18,7 @@ export const progressAnimations = defineAnimation((_gsap: typeof gsap) => {
 
   const pLine = document.getElementById("process-line");
   if (pLine) {
-    _gsap.to(pLine, {
+    gsap.to(pLine, {
       scaleY: 1,
       ease: "none",
       scrollTrigger: {
@@ -35,7 +35,7 @@ export const progressAnimations = defineAnimation((_gsap: typeof gsap) => {
     const img = step.querySelector("img");
     if (!img) return;
 
-    _gsap.fromTo(img,
+    gsap.fromTo(img,
       { scale: 1 },
       {
         scale: 1.08,

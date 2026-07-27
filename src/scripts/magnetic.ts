@@ -1,7 +1,7 @@
-import gsap from "gsap";
+import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
-export const magnetic = defineAnimation((_gsap: typeof gsap) => {
+export const magnetic = defineAnimation((gsap: typeof gsap) => {
   const buttons = document.querySelectorAll<HTMLElement>("[data-magnetic]");
   if (!buttons.length) return;
 
@@ -22,7 +22,7 @@ export const magnetic = defineAnimation((_gsap: typeof gsap) => {
       const moveX = (x / dist) * strength * factor || 0;
       const moveY = (y / dist) * strength * factor || 0;
 
-      _gsap.to(btn, {
+      gsap.to(btn, {
         x: moveX,
         y: moveY,
         duration: 0.4,
@@ -32,7 +32,7 @@ export const magnetic = defineAnimation((_gsap: typeof gsap) => {
     };
 
     const onLeave = (): void => {
-      _gsap.to(btn, {
+      gsap.to(btn, {
         x: 0,
         y: 0,
         duration: 0.6,

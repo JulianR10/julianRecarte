@@ -1,9 +1,11 @@
-import gsap from "gsap";
+import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
-export const cardTilt = defineAnimation((_gsap: typeof gsap) => {
+export const cardTilt = defineAnimation((gsap: typeof gsap) => {
   const cards = document.querySelectorAll<HTMLElement>("[data-project-card]");
   if (!cards.length) return;
+
+  const cleanupFns: (() => void)[] = [];
 
   cards.forEach((card) => {
     const shine = card.querySelector<HTMLElement>("[data-card-shine]");
@@ -13,10 +15,10 @@ export const cardTilt = defineAnimation((_gsap: typeof gsap) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      const rotX = _gsap.utils.mapRange(0, rect.height, 6, -6, y);
-      const rotY = _gsap.utils.mapRange(0, rect.width, -6, 6, x);
+      const rotX = gsap.utils.mapRange(0, rect.height, 6, -6, y);
+      const rotY = gsap.utils.mapRange(0, rect.width, -6, 6, x);
 
-      _gsap.to(card, {
+      gsap.to(card, {
         rotationX: rotX,
         rotationY: rotY,
         transformPerspective: 1000,
@@ -36,7 +38,7 @@ export const cardTilt = defineAnimation((_gsap: typeof gsap) => {
 
     const onLeave = (): void => {
       card.style.willChange = "";
-      _gsap.to(card, {
+      gsap.to(card, {
         rotationX: 0,
         rotationY: 0,
         transformPerspective: 1000,
@@ -50,5 +52,11 @@ export const cardTilt = defineAnimation((_gsap: typeof gsap) => {
 
     card.addEventListener("mousemove", onMove);
     card.addEventListener("mouseleave", onLeave);
+    cleanupFns.push(() => {
+      card.removeEventListener("mousemove", onMove);
+      card.removeEventListener("mouseleave", onLeave);
+    });
   });
+
+  return () => cleanupFns.forEach((fn) => fn());
 });

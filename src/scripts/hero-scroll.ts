@@ -1,7 +1,7 @@
-import gsap from "gsap";
+import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
-export const heroScroll = defineAnimation((_gsap: typeof gsap) => {
+export const heroScroll = defineAnimation((gsap: typeof gsap) => {
   const hero = document.querySelector<HTMLElement>("#hero");
   if (!hero) return;
 
@@ -22,7 +22,7 @@ export const heroScroll = defineAnimation((_gsap: typeof gsap) => {
       ? { opacity: 0, ease: "none" }
       : { opacity: 0, x: 150, filter: "blur(3px)", ease: "none" };
 
-    _gsap.fromTo(textContent, { opacity: 1, x: 0, filter: "none" }, {
+    gsap.fromTo(textContent, { opacity: 1, x: 0, filter: "none" }, {
       ...textEnd,
       scrollTrigger: baseConfig,
     });
@@ -30,7 +30,7 @@ export const heroScroll = defineAnimation((_gsap: typeof gsap) => {
 
   const imageDiv = hero.querySelector<HTMLElement>("[data-hero-image]");
   if (imageDiv) {
-    _gsap.to(imageDiv, {
+    gsap.to(imageDiv, {
       opacity: 0,
       scale: isMobile ? 0.85 : 0.8,
       ease: "none",
@@ -40,7 +40,7 @@ export const heroScroll = defineAnimation((_gsap: typeof gsap) => {
 
   const orbs = document.querySelectorAll<HTMLElement>("[data-hero-orb]");
   if (orbs.length) {
-    _gsap.to(orbs, {
+    gsap.to(orbs, {
       opacity: 0,
       scale: 0.5,
       ease: "none",

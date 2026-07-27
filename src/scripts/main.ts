@@ -26,7 +26,7 @@ const animations = [
 
 export function initAll(): void {
   initLenis();
-  animations.forEach((a) => a.init(gsap, ScrollTrigger));
+  animations.forEach((a) => a.init(gsap));
   initRevealObserver();
   initBackToTop();
   initTestimonials();

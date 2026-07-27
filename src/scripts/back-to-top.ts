@@ -3,11 +3,11 @@ import { scrollToTop } from "@scripts/lenis-adapter";
 
 const backToTopCleanups: (() => void)[] = [];
 
-export function initBackToTop(): () => void {
+export function initBackToTop(): void {
   const btn = document.getElementById("btn-top")!;
   const arrow = document.getElementById("arrow-top")!;
   const wa = document.getElementById("btn-whatsapp")!;
-  if (!btn || !arrow) return () => {};
+  if (!btn || !arrow) return;
 
   let scrollCleanup: (() => void) | null = null;
 
@@ -81,17 +81,13 @@ export function initBackToTop(): () => void {
   btn.addEventListener("mouseleave", onLeave);
   btn.addEventListener("click", onClick);
 
-  const cleanup = () => {
+  backToTopCleanups.push(() => {
     btn.removeEventListener("mouseenter", onEnter);
     btn.removeEventListener("mouseleave", onLeave);
     btn.removeEventListener("click", onClick);
     if (scrollCleanup) scrollCleanup();
     scrollCleanup = null;
-  };
-
-  backToTopCleanups.push(cleanup);
-
-  return cleanup;
+  });
 }
 
 export function destroyBackToTop(): void {
