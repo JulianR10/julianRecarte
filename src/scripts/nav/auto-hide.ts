@@ -8,15 +8,19 @@ export function initAutoHide(): void {
 
   let lastScrollY = 0;
 
+  const isDesktop = window.innerWidth >= 768;
+
   const unsubscribe = onScroll((y: number) => {
     const delta = y - lastScrollY;
     const scrollingDown = delta > 0;
     const atTop = y <= 20;
 
     if (atTop) {
-      nav.style.transform = "translateY(-100%)";
+      nav.style.transform = isDesktop ? "translateY(0)" : "translateY(-100%)";
     } else if (!scrollingDown) {
       nav.style.transform = "translateY(0)";
+    } else if (isDesktop) {
+      nav.style.transform = "translateY(-100%)";
     }
 
     lastScrollY = y;
