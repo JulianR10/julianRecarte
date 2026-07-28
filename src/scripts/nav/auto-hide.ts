@@ -11,12 +11,10 @@ export function initAutoHide(): void {
   const unsubscribe = onScroll((y: number) => {
     const delta = y - lastScrollY;
     const scrollingDown = delta > 0;
-    const pastThreshold = y > 150;
+    const atTop = y <= 20;
 
-    if (scrollingDown && pastThreshold) {
+    if (atTop) {
       nav.style.transform = "translateY(-100%)";
-    } else if (y <= 0) {
-      nav.style.transform = "translateY(0)";
     } else if (!scrollingDown) {
       nav.style.transform = "translateY(0)";
     }

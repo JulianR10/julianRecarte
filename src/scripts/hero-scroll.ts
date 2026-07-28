@@ -10,8 +10,8 @@ export const heroScroll = defineAnimation((gsap: typeof gsap) => {
   const baseConfig = {
     trigger: "#hero",
     start: "top top",
-    end: `bottom${isMobile ? "" : "-=20%"} top`,
-    scrub: 1,
+    end: isMobile ? "bottom-=50% top" : "bottom-=20% top",
+    scrub: isMobile ? 0.3 : 1,
     onLeave: () => { hero.style.pointerEvents = "none"; },
     onEnterBack: () => { hero.style.pointerEvents = ""; },
   };
