@@ -166,6 +166,12 @@ const navItems = [
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
+  @media (max-width: 767px) {
+    #main-nav {
+      transform: translateY(-100%);
+    }
+  }
+
   @media (min-width: 768px) {
     #main-nav {
       background-color: color-mix(in srgb, var(--bg-hex) 95%, transparent);
