@@ -8,18 +8,17 @@ export function initAutoHide(): void {
 
   let lastScrollY = 0;
 
-  const isDesktop = window.innerWidth >= 768;
+  const overlay = document.getElementById("nav-overlay");
 
   const unsubscribe = onScroll((y: number) => {
+    if (overlay?.classList.contains("nav-overlay-visible")) return;
+
     const delta = y - lastScrollY;
     const scrollingDown = delta > 0;
-    const atTop = y <= 20;
 
-    if (atTop) {
-      nav.style.transform = isDesktop ? "translateY(0)" : "translateY(-100%)";
-    } else if (!scrollingDown) {
+    if (y <= 20 || !scrollingDown) {
       nav.style.transform = "translateY(0)";
-    } else if (isDesktop) {
+    } else {
       nav.style.transform = "translateY(-100%)";
     }
 
