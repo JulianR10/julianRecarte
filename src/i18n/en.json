@@ -23,7 +23,6 @@
     "label": "Projects",
     "title": "Featured",
     "highlight": "work",
-    "viewProject": "View project →",
     "comingSoon": "Coming soon",
     "items": [
       {
@@ -32,7 +31,7 @@
       },
       {
         "title": "Triba",
-        "description": "A monthly digital magazine with subscription system. Written by women worldwide. Culture, art, identity, and quality content with smooth navigation and editorial design."
+        "description": "A monthly digital magazine with subscription system and newsletter. Written by women worldwide. Culture, art, identity, and quality content with smooth navigation and editorial design."
       },
       {
         "title": "Multiservizi SRL",

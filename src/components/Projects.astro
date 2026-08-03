@@ -3,19 +3,16 @@ import ProjectCard from "./ProjectCard.astro";
 import SectionHeader from "./SectionHeader.astro";
 import { projects } from "@data/projects";
 
-interface ProjectItem {
-  title: string;
-  description: string;
-}
-
 interface Props {
   t: {
     label: string;
     title: string;
     highlight: string;
-    viewProject: string;
     comingSoon: string;
-    items: ProjectItem[];
+    items: {
+      title: string;
+      description: string;
+    }[];
   };
 }
 
@@ -40,10 +37,8 @@ const { t } = Astro.props;
             title={item.title}
             description={item.description}
             tags={project.tags}
-            href={project.href}
             image={project.image}
             style={project.style}
-            viewProject={t.viewProject}
             comingSoon={project.href ? undefined : t.comingSoon}
           />
         );

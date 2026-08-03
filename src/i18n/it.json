@@ -23,7 +23,6 @@
     "label": "Progetti",
     "title": "Lavori in",
     "highlight": "evidenza",
-    "viewProject": "Vedi progetto →",
     "comingSoon": "Prossimamente",
     "items": [
       {
@@ -32,7 +31,7 @@
       },
       {
         "title": "Triba",
-        "description": "Una rivista digitale mensile con sistema di abbonamento. Scritta da donne di tutto il mondo. Cultura, arte, identità e contenuti di qualità con navigazione fluida e design editoriale."
+        "description": "Una rivista digitale mensile con sistema di abbonamento e newsletter. Scritta da donne di tutto il mondo. Cultura, arte, identità e contenuti di qualità con navigazione fluida e design editoriale."
       },
       {
         "title": "Multiservizi SRL",

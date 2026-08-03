@@ -11,6 +11,7 @@ export const cardTilt = defineAnimation((gsap: typeof gsap) => {
     const shine = card.querySelector<HTMLElement>("[data-card-shine]");
 
     const onMove = (e: MouseEvent): void => {
+      if (card.dataset.tiltDisabled === "true") return;
       card.style.willChange = "transform";
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
