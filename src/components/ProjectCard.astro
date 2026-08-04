@@ -5,13 +5,14 @@ import type { ImageMetadata } from "astro";
 interface Props {
   title: string;
   description: string;
-  tags: string[];
   style: string;
   image?: ImageMetadata;
+  href?: string;
+  viewSite?: string;
   comingSoon?: string;
 }
 
-const { title, description, tags, style, image, comingSoon } = Astro.props;
+const { title, description, style, image, href, viewSite, comingSoon } = Astro.props;
 
 const wrapperAttrs: Record<string, any> = {
   "data-project-card": true,
@@ -50,15 +51,18 @@ const wrapperAttrs: Record<string, any> = {
     <h3 class="text-2xl font-medium mb-3 text-accent-purple transition-colors duration-300 md:group-hover:text-accent-orange">
       {title}
     </h3>
-    <p class="text-copy/60 dark:text-dark-muted text-sm leading-relaxed mb-4">
+    <p class="text-copy/60 dark:text-dark-muted text-sm leading-relaxed mb-6">
       {description}
     </p>
-    {tags.length > 0 ? (
-      <div class="flex flex-wrap gap-2 mb-6">
-        {tags.map((tag) => (
-          <span class="inline-block px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-accent-orange/10 text-accent-orange border border-accent-orange/20">{tag}</span>
-        ))}
-      </div>
+    {href ? (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel text-white font-medium text-xs md:text-sm tracking-wider uppercase shadow-md transition-transform duration-300 md:group-hover:scale-105"
+      >
+        {viewSite}
+      </a>
     ) : null}
   </div>
 </article>

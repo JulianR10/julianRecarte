@@ -9,6 +9,7 @@ interface Props {
     title: string;
     highlight: string;
     comingSoon: string;
+    viewSite: string;
     items: {
       title: string;
       description: string;
@@ -36,9 +37,10 @@ const { t } = Astro.props;
           <ProjectCard
             title={item.title}
             description={item.description}
-            tags={project.tags}
             image={project.image}
             style={project.style}
+            href={project.href}
+            viewSite={t.viewSite}
             comingSoon={project.href ? undefined : t.comingSoon}
           />
         );

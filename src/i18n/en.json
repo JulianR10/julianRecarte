@@ -24,14 +24,15 @@
     "title": "Featured",
     "highlight": "work",
     "comingSoon": "Coming soon",
+    "viewSite": "View site",
     "items": [
+      {
+        "title": "Triba",
+        "description": "Development of a complete digital magazine: subscription system, automated newsletter, editions catalog, and a contributor program with application form. Editorial design with smooth navigation and comfortable reading on any device."
+      },
       {
         "title": "SP Soluciones Textiles",
         "description": "Landing page for a textile business with service catalog, work gallery, and direct WhatsApp connection. Clean design with brand identity."
-      },
-      {
-        "title": "Triba",
-        "description": "A monthly digital magazine with subscription system and newsletter. Written by women worldwide. Culture, art, identity, and quality content with smooth navigation and editorial design."
       },
       {
         "title": "Multiservizi SRL",

@@ -18,20 +18,19 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "SP Soluciones Textiles",
-    tags: ["Tailwind"],
-    href: "https://sp-soluciones-textiles.vercel.app/",
-    image: logoSP,
-    screenshots: [],
-    style: "radial-gradient(circle at 30% 25%, rgba(255,156,58,0.4), transparent 50%), radial-gradient(circle at 70% 70%, rgba(255,185,110,0.3), transparent 50%), linear-gradient(135deg, rgba(255,220,170,0.2), rgba(255,245,230,0.15))",
-  },
-  {
     title: "Triba",
     tags: ["Tailwind"],
-    href: "https://triba.vercel.app/",
+    href: "https://www.comunidadtriba.com/",
     image: tribaLogo,
     screenshots: [celuFirme, celuGirado, tabletVerticalFirme, LaptopGirado],
     style: "radial-gradient(circle at 25% 20%, rgba(222,6,46,0.35), transparent 50%), radial-gradient(circle at 75% 60%, rgba(255,90,125,0.25), transparent 50%), linear-gradient(135deg, rgba(255,195,195,0.2), rgba(255,235,230,0.15))",
+  },
+  {
+    title: "SP Soluciones Textiles",
+    tags: ["Tailwind"],
+    image: logoSP,
+    screenshots: [],
+    style: "radial-gradient(circle at 30% 25%, rgba(255,156,58,0.4), transparent 50%), radial-gradient(circle at 70% 70%, rgba(255,185,110,0.3), transparent 50%), linear-gradient(135deg, rgba(255,220,170,0.2), rgba(255,245,230,0.15))",
   },
   {
     title: "Multiservizi SRL",

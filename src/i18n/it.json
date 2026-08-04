@@ -24,14 +24,15 @@
     "title": "Lavori in",
     "highlight": "evidenza",
     "comingSoon": "Prossimamente",
+    "viewSite": "Vedi sito",
     "items": [
+      {
+        "title": "Triba",
+        "description": "Sviluppo di una rivista digitale completa: sistema di abbonamento, newsletter automatica, catalogo di edizioni e programma di collaboratori con modulo di candidatura. Design editoriale responsive con navigazione fluida e lettura comoda su qualsiasi dispositivo."
+      },
       {
         "title": "SP Soluciones Textiles",
         "description": "Landing page per un'impresa tessile con catalogo servizi, galleria lavori e connessione diretta a WhatsApp. Design pulito con identità di marca."
-      },
-      {
-        "title": "Triba",
-        "description": "Una rivista digitale mensile con sistema di abbonamento e newsletter. Scritta da donne di tutto il mondo. Cultura, arte, identità e contenuti di qualità con navigazione fluida e design editoriale."
       },
       {
         "title": "Multiservizi SRL",
