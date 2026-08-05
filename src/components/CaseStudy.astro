@@ -1,0 +1,153 @@
+---
+import { Image } from "astro:assets";
+import type { Project } from "@data/projects";
+
+interface Props {
+  lang: string;
+  project: Project;
+  t: {
+    comingSoon: string;
+    backLabel: string;
+    title: string;
+    subtitle: string;
+    challengeTitle: string;
+    challenge: string;
+    solutionTitle: string;
+    solution: string;
+  };
+}
+
+const { lang, project, t } = Astro.props;
+const accent = project.accent;
+---
+
+<div class="relative flex-1 min-h-0 h-full" style={`--project-accent: ${accent}`}>
+  <a
+    href={`/${lang}/#proyectos`}
+    data-lenis-prevent
+    class="absolute left-6 md:left-8 top-6 md:top-8 z-30 flex items-center justify-center w-11 h-11 rounded-full bg-[var(--bg-hex)] dark:bg-dark-card backdrop-blur-lg shadow-lg transition-all duration-300 hover:scale-110 text-copy/70 dark:text-dark-copy/70 hover:text-accent-orange"
+    aria-label={t.backLabel}
+  >
+    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+  </a>
+
+  <section
+    class="case-hero relative h-full overflow-hidden flex items-center justify-center px-6 py-8 md:py-10"
+    style={`--project-accent: ${accent}; --project-style: ${project.style}`}
+  >
+    <h1 class="sr-only">{t.title}</h1>
+    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_660px] gap-6 lg:gap-10 items-start">
+
+      <div class="flex flex-col items-center text-center lg:text-left lg:items-start gap-6">
+        <div class="flex flex-col items-center lg:items-start">
+          {project.image && (
+            <div data-reveal class="mb-5 flex justify-center lg:justify-start">
+              <img
+                src={project.image.src}
+                alt={`${t.title} logo`}
+                class="h-14 md:h-16 w-auto object-contain"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          )}
+
+          <p data-reveal class="max-w-2xl mx-auto lg:mx-0 text-base md:text-lg leading-snug text-copy/70 dark:text-dark-muted">
+            {t.subtitle}
+          </p>
+        </div>
+
+        <div data-reveal class="w-full max-w-2xl mx-auto lg:mx-0 lg:w-auto">
+          <h2 class="case-accent mb-2 text-sm font-medium tracking-[0.3em] uppercase">
+            {t.challengeTitle}
+          </h2>
+          <p class="text-sm md:text-base leading-relaxed text-copy/70 dark:text-dark-muted">
+            {t.challenge}
+          </p>
+        </div>
+
+        {project.mockup && (
+          <div data-reveal class="w-[320px] sm:w-[540px] mx-auto lg:hidden">
+            <Image
+              src={project.mockup}
+              alt={`${t.title} — mockups`}
+              widths={[320, 540]}
+              sizes="(min-width: 640px) 540px, 320px"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        )}
+
+        <div data-reveal class="w-full max-w-2xl mx-auto lg:mx-0 lg:w-auto">
+          <h2 class="case-accent mb-2 text-sm font-medium tracking-[0.3em] uppercase">
+            {t.solutionTitle}
+          </h2>
+          <p class="text-sm md:text-base leading-relaxed text-copy/70 dark:text-dark-muted">
+            {t.solution}
+          </p>
+        </div>
+
+        {project.comingSoon && (
+          <div data-reveal class="flex flex-col items-center lg:items-start gap-4">
+            <span
+              class="case-accent case-badge inline-flex items-center px-4 py-2 rounded-full text-xs font-medium tracking-wider uppercase border"
+            >
+              {t.comingSoon}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {project.mockup && (
+        <div data-reveal class="hidden lg:block sticky top-28 self-start">
+          <Image
+            src={project.mockup}
+            alt={`${t.title} — mockups`}
+            widths={[660, 1000]}
+            sizes="(min-width: 1024px) 660px"
+            loading="eager"
+            decoding="async"
+            class="w-[660px]"
+          />
+        </div>
+      )}
+
+    </div>
+  </section>
+</div>
+
+<style>
+  .case-hero {
+    background:
+      radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--project-accent) 20%, transparent), transparent 55%),
+      radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--project-accent) 12%, transparent), transparent 50%),
+      var(--project-style),
+      var(--bg-hex);
+  }
+
+  .case-accent {
+    color: var(--project-accent);
+  }
+  .case-accent.case-badge {
+    border-color: color-mix(in srgb, var(--project-accent) 35%, transparent);
+  }
+
+  :global(.dark) .case-hero {
+    background:
+      radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--project-accent) 22%, transparent), transparent 55%),
+      radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--project-accent) 14%, transparent), transparent 50%),
+      linear-gradient(rgba(22, 20, 18, 0.62), rgba(22, 20, 18, 0.62)),
+      var(--project-style),
+      var(--bg-hex);
+  }
+
+  :global(.dark) .case-accent {
+    color: color-mix(in srgb, var(--project-accent) 60%, #fff);
+  }
+  :global(.dark) .case-accent.case-badge {
+    border-color: color-mix(in srgb, var(--project-accent) 50%, #fff);
+  }
+</style>

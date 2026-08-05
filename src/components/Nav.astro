@@ -4,6 +4,8 @@ import LangSelector from "./LangSelector.astro";
 
 interface Props {
   lang: string;
+  prefix?: string;
+  fixed?: boolean;
   t: {
     projects: string;
     process: string;
@@ -17,7 +19,7 @@ interface Props {
   };
 }
 
-const { lang, t } = Astro.props;
+const { lang, prefix = "", fixed = true, t } = Astro.props;
 
 const navItems = [
   { id: "proyectos", label: t.projects },
@@ -26,7 +28,7 @@ const navItems = [
 ];
 ---
 
-<nav id="main-nav" aria-label={t.ariaLabel} class="fixed top-0 left-0 right-0 z-50 py-4 md:py-5" style="view-transition-name: nav" data-lenis-prevent>
+<nav id="main-nav" aria-label={t.ariaLabel} class={`${fixed ? "fixed top-0 left-0 right-0" : "relative"} z-50 py-4 md:py-5`} style="view-transition-name: nav" data-lenis-prevent>
   <div id="progress-bar" aria-hidden="true" class="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-accent-orange to-accent-purple origin-left" style="transform: scaleX(0);"></div>
   <div class="max-w-7xl mx-auto flex items-center px-6">
     <div class="flex-1 md:flex-none flex items-stretch">
@@ -35,7 +37,7 @@ const navItems = [
 
     <div class="hidden md:flex flex-1 justify-center items-center gap-8">
       {navItems.map((item) => (
-        <a href={`#${item.id}`} class="desktop-link text-sm font-semibold tracking-widest uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange hover:tracking-[0.15em] transition-all duration-300">
+        <a href={`${prefix}#${item.id}`} class="desktop-link text-sm font-semibold tracking-widest uppercase text-copy/80 dark:text-dark-copy hover:text-accent-orange hover:tracking-[0.15em] transition-all duration-300">
           {item.label}
         </a>
       ))}
@@ -86,7 +88,7 @@ const navItems = [
     {navItems.map((item, i) => (
       <a
         id={`nl-${i + 1}`}
-        href={`#${item.id}`}
+        href={`${prefix}#${item.id}`}
         class="nav-link relative px-6 py-3 md:px-6 md:py-3 rounded-full text-sm md:text-sm font-medium tracking-widest uppercase text-white bg-accent-orange shadow-lg hover:bg-accent-orange/80 transition-colors duration-300"
       >
         {item.label}

@@ -25,6 +25,9 @@
     "highlight": "work",
     "comingSoon": "Coming soon",
     "viewSite": "View site",
+    "caseStudy": "Case study",
+    "carouselLabel": "Projects carousel",
+    "gotoProject": "Go to project",
     "items": [
       {
         "title": "Triba",
@@ -111,6 +114,37 @@
     "whatsapp": "WhatsApp",
     "instagram": "Instagram",
     "email": "Email"
+  },
+  "caseStudies": {
+    "stackLabel": "Stack",
+    "viewSite": "View site",
+    "comingSoon": "Coming soon",
+    "backLabel": "Back to projects",
+    "ctaButton": "Let's talk on WhatsApp",
+    "triba": {
+      "title": "Triba",
+      "subtitle": "Digital magazine with subscription system, automated newsletter and contributor program.",
+      "challengeTitle": "The challenge",
+      "challenge": "The magazine needed more than a nice page — it needed a solid foundation to grow on. A subscription system, a newsletter that sent itself with every edition, a catalog of published issues and a contributor program with an application form. All with comfortable reading on any device.",
+      "solutionTitle": "The solution",
+      "solution": "I designed a responsive editorial platform with smooth navigation and comfortable reading. The subscription system feeds the automated newsletter, which distributes every edition to readers with no manual work. The catalog organizes published issues and the contributor program opens the door to new content."
+    },
+    "sp-soluciones-textiles": {
+      "title": "SP Soluciones Textiles",
+      "subtitle": "Landing page with service catalog and direct WhatsApp connection.",
+      "challengeTitle": "The challenge",
+      "challenge": "A landing page that reflected the quality of the prints and guided the customer to contact. No friction: clear information, a work gallery and a direct path to WhatsApp.",
+      "solutionTitle": "The solution",
+      "solution": "I designed a clean landing page with brand identity: service catalog, work gallery and WhatsApp buttons visible at all times. The design focuses on taking the visitor to the conversation."
+    },
+    "multiservizi": {
+      "title": "Multiservizi SRL",
+      "subtitle": "Digital catalog for a wholesale funeral home.",
+      "challengeTitle": "The challenge",
+      "challenge": "A delicate industry that demands seriousness and respect without losing functionality. The catalog had to organize many products and types of items, with simple navigation that didn't overwhelm visitors.",
+      "solutionTitle": "The solution",
+      "solution": "I designed a complete digital catalog with smooth navigation, built to organize items by category and ease consultation. The visual tone matches the sobriety of the industry without sacrificing clarity."
+    }
   },
   "footer": {
     "copyright": "© {year}"

@@ -57,6 +57,43 @@ body {
 }
 
 /* ============================================
+   Locked viewport (100dvh, no scroll)
+   Only used on case study pages
+   ============================================ */
+body.is-locked {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  overflow-x: hidden;
+}
+
+body.is-locked main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body.is-locked :is(#btn-whatsapp, #btn-top) {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  body.is-locked {
+    height: auto;
+    min-height: 100dvh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  body.is-locked main {
+    flex: none;
+    display: block;
+  }
+}
+
+/* ============================================
     Typography
    ============================================ */
 h1,
@@ -141,7 +178,6 @@ h6 {
 .zap-glow-brand,
 .zap-glow-orange {
   opacity: 0;
-  will-change: opacity, transform, filter;
 }
 
 .zap-glow-brand {
@@ -185,8 +221,18 @@ h6 {
 }
 
 /* ============================================
+    WhatsApp Button
+    ============================================ */
+  .wa-btn {
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--bg-hex), var(--bg-hex)), linear-gradient(to right, var(--clr-accent-orange), var(--clr-accent-pastel));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+/* ============================================
     Reduced Motion
-   ============================================ */
+    ============================================ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

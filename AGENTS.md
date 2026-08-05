@@ -165,3 +165,103 @@ npm run build     # outputs to dist/
 ```
 
 Deployed to Vercel at `https://julianrecarte.dev/`. Domain configured with Vercel.
+
+## UX Improvement Map (division de componentes / flujos)
+
+División del proyecto en componentes y flujos con su potencial de mejora de UX. Usar para
+elegir UN foco puntual en vez de «mejorar todo». La etiqueta **Foco recomendado** marca la
+mayor oportunidad de retorno actual.
+
+| # | Componente / Flujo | Cómo está hoy | Oportunidad de UX | Impacto | Esfuerzo |
+|---|---|---|---|---|---|
+| 1 | **Hero (flujo de entrada)** | Pantalla completa sticky, sin indicador de scroll | Falta un tercer CTA secundario granular | Alto | Bajo |
+| 2 | **Nav (orientación)** | Links ancla; sin botón de acción en desktop | Falta un CTA "Hablemos / Contactar" persistente en desktop y breadcrumb visual de sección activa más claro | Alto | Bajo |
+| 3 | **Projects (pilar de venta)** | 3 cards, solo 1 con "Ver sitio", sin filtros ni caso de estudio | Severa falta de profundidad: solo 1 proyecto en vivo, cards sin click fuera de Triba, sin categorías | **Muy alto (Foco recomendado)** | Medio |
+| 4 | **Testimonials (prueba social)** | Carousel con 4 items; sin autoplay ni teclado | Falta autoplay opcional, navegación con ← →, y en desktop mostrar 2 cards | Medio | Bajo |
+| 5 | **Contact (conversión)** | 3 botones: WhatsApp, IG, Email | Falta WhatsApp con **mensaje pre-cargado** y (opcional) número/timing; email sin asunto | Alto | Bajo |
+| 6 | **Process (confianza)** | Timeline de 4 pasos | Está bien; oportunidad menor de profundidad visual por paso | Bajo | Bajo |
+| 7 | **Footer (cierre)** | Solo copyright + firma | Falta mini-navegación / sociales / CTA de cierre para no depender del scroll | Medio | Bajo |
+| 8 | **Floating (WhatsApp + Top)** | Ambos aparecen al scroll | Funcionan bien; oportunidad menor de tooltip/label | Bajo | Bajo |
+
+## Case Studies — Plan en pausa (retomar luego)
+
+Feature aprobado: **una página de case study por producto** (`/es/proyectos/<slug>/`). Resuelve
+SEO/IA (#5 del audit) y ataca el foco recomendado del mapa UX (#3 Projects). Enfoque confirmado:
+**Opción A — página dedicada**, la card del home queda como resumen + link al case study.
+
+### Decisiones tomadas
+
+- **Slug invariante por idioma** (`triba`, `sp-soluciones-textiles`, `multiservizi`) → el
+  `switchLang` de `lang-selector.ts` ya funciona gratis (conserva el path, cambia solo el idioma).
+- **Los 3 proyectos llevan case study**, aunque hoy solo Triba esté lanzado. Los otros usan
+  estado "Próximamente" + CTA de contacto reforzado. Al lanzarse solo cambia `liveUrl` en `projects.ts`.
+- **Copy y stack: drafteados por mí, Julián los corrige luego.**
+- **Stack drafteado:** Triba = Astro · Tailwind · Supabase; SP = Astro · Tailwind;
+  Multiservizi = Astro · Tailwind · Supabase. **Pendiente de confirmar por Julián.**
+
+### Decisión de diseño (skill frontend-design)
+
+El case study **viste la paleta del proyecto**, no la del sitio. Cada proyecto ya tiene su
+identidad en `projects.ts` (gradiente: Triba=rojo, SP=ámbar, Multiservizi=burdeos). La página
+es "entrar al mundo del producto" manteniendo coherencia con el sistema (beige `#E8E0D0`,
+copy `#1A1613`, Mozilla Headline display + Satoshi body).
+
+- Nuevo token `--project-accent` derivado del gradiente de cada proyecto (eyebrow, hover, wash).
+- Tipografía existente; título del proyecto en Mozilla Headline con eje de width comprimido.
+- **Sin marcadores numerados** (01/02/03): el contenido es narrativo. Eyebrows semánticos:
+  *El proyecto / El desafío / La solución / Resultados*.
+- Resultados como bloques cortos con viñeta, **no** stats inventadas ni "big number" template.
+
+### Wireframe
+
+```
+NAV persistente
+HERO · wash del gradiente del proyecto (signature)
+  eyebrow: CASO DE ESTUDIO · AÑO · logo del proyecto
+  H1: nombre del proyecto (Mozilla comprimida)
+  stack chips + [Ver sitio →] / [Próximamente]
+El proyecto    · párrafo apertura (2 col desktop)
+El desafío ║ La solución   (split, eyebrow por col)
+Resultados     · 4 highlights (bloques cortos)
+Screenshots    · galería (solo Triba hoy)
+Siguiente proyecto →  (nav cíclica entre los 3)
+CTA de cierre  · contacto WhatsApp
+FOOTER
+```
+
+### Signature
+
+Hero con **wash de gradiente del proyecto + logo + título comprimido**. Único punto de
+audacia; todo lo demás silencioso. Sin animaciones nuevas: reusar `data-reveal-heading`
+(cine-text), `data-reveal`, stagger en screenshots.
+
+### Estructura i18n (por idioma)
+
+```json
+"caseStudies": {
+  "triba": {
+    "eyebrow", "title", "subtitle", "overviewTitle", "overview",
+    "challengeTitle", "challenge", "solutionTitle", "solution",
+    "resultsTitle", "results[]", "stackLabel", "viewSite", "comingSoon",
+    "backLabel", "nextLabel", "ctaTitle", "ctaBody", "ctaButton"
+  },
+  "sp-soluciones-textiles": { ... },
+  "multiservizi": { ... }
+}
+```
+
+### Implementación pendiente
+
+1. `src/data/projects.ts` → `slug`, `year`, `stack[]`, `accent`, `challenge`, `solution`, `results`, `liveUrl`.
+2. `es/en/it.json` → sección `caseStudies` con copy drafteado (Triba ya drafteado; falta SP y Multiservizi).
+3. `src/pages/[lang]/proyectos/[slug].astro` → `getStaticPaths()` (3 slugs × 3 idiomas), usa `Layout`.
+4. `src/components/CaseStudy.astro` → hero + secciones narrativas + schema `Article` en head.
+5. `ProjectCard.astro` → `href` interno al case study; botón "Ver sitio" (solo Triba) como acción secundaria.
+6. Sitemap + hreflang automáticos (ruta en `[lang]`, Layout ya emite alternates).
+
+### Preguntas abiertas (responder antes de construir)
+
+1. ¿Hero con wash de gradiente **a color pleno** (signature) o más sobrio con gradiente solo en borde?
+2. ¿Incluir **Waves** de fondo en el case study? Recomendado: **no** (aire más editorial/limpio).
+3. ¿Confirmar **stack drafteado** de cada proyecto?
+4. ¿Los **resultados de Triba** (4 bullets) son reales o hay métricas concretas (tiempo de carga, suscriptores)?

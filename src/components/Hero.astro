@@ -22,6 +22,9 @@ const { t } = Astro.props;
   id="hero"
   class="relative min-h-screen xl:h-screen sticky top-0 z-[1] flex items-center px-6 md:py-24 overflow-hidden"
 >
+  <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none"></div>
+  <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-40"></div>
+
   <div class="max-w-7xl mx-auto w-full flex items-center justify-center xl:justify-between gap-12">
     <div data-hero-text class="max-w-3xl text-center xl:text-left">
       <span
@@ -76,12 +79,11 @@ const { t } = Astro.props;
         {t.viewProjects}
       </a>
         <a
-          href="https://wa.me/393447817557"
+          href="https://wa.me/393447817557?text=Hola%20Juli%C3%A1n%2C%20me%20gustar%C3%ADa%20hablar%20sobre%20mi%20proyecto%21"
           data-magnetic
           target="_blank"
           rel="noopener noreferrer"
-          class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full font-medium text-sm md:text-base tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300"
-          style="border: 2px solid transparent; background-image: linear-gradient(var(--bg-hex), var(--bg-hex)), linear-gradient(to right, var(--clr-accent-orange), var(--clr-accent-pastel)); background-origin: border-box; background-clip: padding-box, border-box;"
+          class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full font-medium text-sm md:text-base tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300 wa-btn"
         >
           <span class="absolute inset-0 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           <span class="relative z-10 flex items-center gap-2">

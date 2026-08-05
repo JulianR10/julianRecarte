@@ -1,0 +1,78 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Nav from "@components/Nav.astro";
+import CaseStudy from "@components/CaseStudy.astro";
+import Footer from "@components/Footer.astro";
+import { projects } from "@data/projects";
+
+import es from "@i18n/es.json";
+import en from "@i18n/en.json";
+import it from "@i18n/it.json";
+import { safeT } from "@i18n/safe-t";
+
+const langs = ["es", "en", "it"] as const;
+const translations = { es, en, it };
+
+export function getStaticPaths() {
+  const paths = ["es", "en", "it"] as const;
+  return paths.flatMap((lang) =>
+    projects.map((project) => ({ params: { lang, slug: project.slug } }))
+  );
+}
+
+const { lang, slug } = Astro.params as { lang: string; slug: string };
+const raw = translations[lang as keyof typeof translations];
+if (!raw) return Astro.redirect("/es/");
+
+const project = projects.find((p) => p.slug === slug);
+if (!project) return Astro.redirect(`/${lang}/`);
+
+const t = safeT(raw);
+const shared = t.caseStudies;
+const narrative = (t.caseStudies as Record<string, any>)[project.slug] || {};
+
+const {
+  stackLabel,
+  viewSite,
+  comingSoon,
+  backLabel,
+  ctaButton,
+} = shared;
+const cs = {
+  stackLabel,
+  viewSite,
+  comingSoon,
+  backLabel,
+  ctaButton,
+  ...narrative,
+};
+
+const canonical = `https://julianrecarte.dev/${lang}/proyectos/${project.slug}/`;
+const alternates = langs.map((l) => ({
+  lang: l,
+  href: `https://julianrecarte.dev/${l}/proyectos/${project.slug}/`,
+}));
+
+const pageTitle = `${cs.title || project.title} | Julián Recarte`;
+const pageDescription = cs.subtitle || "";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  lang={lang}
+  canonical={canonical}
+  alternates={alternates}
+  article={{
+    headline: `${cs.title || project.title} — case study`,
+    description: pageDescription,
+    url: canonical,
+    image: project.screenshots[0]?.src,
+  }}
+  t={t.layout}
+  lock
+>
+  <Nav slot="nav" lang={lang} t={t.nav} prefix={`/${lang}/`} fixed={false} />
+  <CaseStudy lang={lang} project={project} t={cs} />
+  <Footer slot="footer" t={t.footer} />
+</Layout>

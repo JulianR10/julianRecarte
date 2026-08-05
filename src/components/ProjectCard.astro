@@ -3,20 +3,27 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 interface Props {
+  lang: string;
+  slug: string;
   title: string;
   description: string;
   style: string;
+  accent: string;
   image?: ImageMetadata;
-  href?: string;
+  liveUrl?: string;
   viewSite?: string;
   comingSoon?: string;
+  caseLabel?: string;
+  className?: string;
 }
 
-const { title, description, style, image, href, viewSite, comingSoon } = Astro.props;
+const { lang, slug, title, description, style, accent, image, liveUrl, viewSite, comingSoon, caseLabel, className } = Astro.props;
+
+const caseStudyHref = `/${lang}/proyectos/${slug}/`;
 
 const wrapperAttrs: Record<string, any> = {
   "data-project-card": true,
-  class: "group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5 block no-underline",
+  class: `${className || ""} group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5`.trim(),
 };
 ---
 
@@ -54,15 +61,37 @@ const wrapperAttrs: Record<string, any> = {
     <p class="text-copy/60 dark:text-dark-muted text-sm leading-relaxed mb-6">
       {description}
     </p>
-    {href ? (
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-3">
+      {liveUrl ? (
+        <a
+          href={liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel text-white font-medium text-xs md:text-sm tracking-wider uppercase shadow-md transition-transform duration-300 md:group-hover:scale-105"
+        >
+          {viewSite}
+        </a>
+      ) : null}
       <a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel text-white font-medium text-xs md:text-sm tracking-wider uppercase shadow-md transition-transform duration-300 md:group-hover:scale-105"
+        href={caseStudyHref}
+        class="group/link inline-flex items-center gap-2 text-sm font-semibold tracking-wide uppercase cursor-pointer transition-opacity duration-300 hover:opacity-70"
+        style={`color: ${accent}`}
+        aria-label={`${caseLabel || "Case study"}: ${title}`}
       >
-        {viewSite}
+        {caseLabel}
+        <svg
+          class="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
       </a>
-    ) : null}
+    </div>
   </div>
 </article>

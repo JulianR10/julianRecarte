@@ -4,6 +4,7 @@ import { defineAnimation } from "@scripts/gsap-factory";
 export const cardTilt = defineAnimation((gsap: typeof gsap) => {
   const cards = document.querySelectorAll<HTMLElement>("[data-project-card]");
   if (!cards.length) return;
+  if (window.matchMedia("(hover: none)").matches) return;
 
   const cleanupFns: (() => void)[] = [];
 

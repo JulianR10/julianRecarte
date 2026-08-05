@@ -4,11 +4,29 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 import WhatsAppIcon from "@components/WhatsAppIcon.astro";
 import "@styles/globals.css";
 
+interface Alternate {
+  lang: string;
+  href: string;
+}
+
+interface ArticleData {
+  headline: string;
+  description?: string;
+  url?: string;
+  image?: string;
+  datePublished?: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
   jobTitle?: string;
   lang?: string;
+  processSteps?: { title: string; description: string }[];
+  canonical?: string;
+  alternates?: Alternate[];
+  article?: ArticleData;
+  lock?: boolean;
   t?: {
     skipLink: string;
     backToTop: string;
@@ -20,6 +38,15 @@ const {
   description = "Convierto ideas en experiencias web interactivas.",
   jobTitle = "Desarrollador web FullStack",
   lang = "es",
+  processSteps = [],
+  canonical = `https://julianrecarte.dev/${lang}/`,
+  alternates = [
+    { lang: "es", href: "https://julianrecarte.dev/es/" },
+    { lang: "en", href: "https://julianrecarte.dev/en/" },
+    { lang: "it", href: "https://julianrecarte.dev/it/" },
+  ],
+  article,
+  lock = false,
   t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba" },
 } = Astro.props;
 ---
@@ -44,35 +71,29 @@ const {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? "article" : "website"} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={`https://julianrecarte.dev/${lang}/`} />
-    <meta property="og:image" content="https://julianrecarte.dev/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={description} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === "es" ? "es_ES" : lang === "en" ? "en_US" : "it_IT"} />
     <meta property="og:site_name" content="Julián Recarte" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://julianrecarte.dev/og-image.png" />
 
     <!-- Hreflang -->
-    <link rel="alternate" hreflang="es" href="https://julianrecarte.dev/es/" />
-    <link rel="alternate" hreflang="en" href="https://julianrecarte.dev/en/" />
-    <link rel="alternate" hreflang="it" href="https://julianrecarte.dev/it/" />
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.lang} href={a.href} />
+    ))}
     <link rel="alternate" hreflang="x-default" href="https://julianrecarte.dev/" />
-    <link rel="canonical" href={`https://julianrecarte.dev/${lang}/`} />
+    <link rel="canonical" href={canonical} />
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Julián Recarte",
-      "image": "https://julianrecarte.dev/og-image.png",
       "jobTitle": jobTitle,
       description,
       "url": `https://julianrecarte.dev/${lang}/`,
@@ -95,6 +116,44 @@ const {
       ],
       "knowsLanguage": ["Spanish", "English", "Italian"]
     })}></script>
+
+    {article && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.headline,
+        "description": article.description,
+        "url": article.url || canonical,
+        "image": article.image,
+        "inLanguage": lang,
+        "author": {
+          "@type": "Person",
+          "name": "Julián Recarte",
+          "url": `https://julianrecarte.dev/${lang}/`,
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": "Julián Recarte",
+          "url": `https://julianrecarte.dev/${lang}/`,
+        },
+        ...(article.datePublished ? { "datePublished": article.datePublished } : {}),
+      })}></script>
+    )}
+
+    {processSteps.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": jobTitle,
+        "description": description,
+        "step": processSteps.map((step, i) => ({
+          "@type": "HowToStep",
+          "position": i + 1,
+          "name": step.title,
+          "text": step.description,
+        })),
+      })}></script>
+    )}
 
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link
@@ -134,10 +193,8 @@ const {
       gtag('config', 'G-R1ZPHT8LX2');
     </script>
   </head>
-  <body transition:animate="slide">
+  <body transition:animate="slide" class={lock ? "is-locked" : undefined}>
     <a href="#main-content" class="skip-link">{t.skipLink}</a>
-    <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none"></div>
-    <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-40"></div>
     <header><slot name="nav" /></header>
     <slot name="hero" />
     <main id="main-content" class="w-full max-w-[100vw] overflow-x-clip">

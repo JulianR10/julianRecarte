@@ -25,6 +25,9 @@
     "highlight": "destacados",
     "comingSoon": "Próximamente",
     "viewSite": "Ver sitio",
+    "caseStudy": "Caso de estudio",
+    "carouselLabel": "Carrusel de proyectos",
+    "gotoProject": "Ir al proyecto",
     "items": [
       {
         "title": "Triba",
@@ -111,6 +114,37 @@
     "whatsapp": "WhatsApp",
     "instagram": "Instagram",
     "email": "Email"
+  },
+  "caseStudies": {
+    "stackLabel": "Stack",
+    "viewSite": "Ver sitio",
+    "comingSoon": "Próximamente",
+    "backLabel": "Volver a proyectos",
+    "ctaButton": "Hablemos por WhatsApp",
+    "triba": {
+      "title": "Triba",
+      "subtitle": "Revista digital con sistema de suscripción, newsletter automática y programa de colaboradores.",
+      "challengeTitle": "El desafío",
+      "challenge": "La revista necesitaba más que una página bonita: requería una base sólida sobre la que crecer. Sistema de suscripciones, newsletter que se enviara sola con cada edición, un catálogo de números publicados y un programa de colaboradores con formulario de postulación. Todo con una lectura cómoda en cualquier dispositivo.",
+      "solutionTitle": "La solución",
+      "solution": "Diseñé una plataforma editorial responsive con navegación fluida y lectura cómoda. El sistema de suscripciones alimenta la newsletter automática, que distribuye cada edición a los lectores sin intervención manual. El catálogo ordena los números publicados y el programa de colaboradores abre la puerta a nuevos contenidos."
+    },
+    "sp-soluciones-textiles": {
+      "title": "SP Soluciones Textiles",
+      "subtitle": "Landing page con catálogo de servicios y conexión directa a WhatsApp.",
+      "challengeTitle": "El desafío",
+      "challenge": "Una landing page que reflejara la calidad de los estampados y acompañara al cliente hasta el contacto. Sin fricciones: información clara, galería de trabajos y un camino directo a WhatsApp.",
+      "solutionTitle": "La solución",
+      "solution": "Diseñé una landing page limpia con la identidad de la marca: catálogo de servicios, galería de trabajos y botones de WhatsApp visibles en todo momento. El diseño se centra en llevar al visitante a la conversación."
+    },
+    "multiservizi": {
+      "title": "Multiservizi SRL",
+      "subtitle": "Catálogo digital para una funeraria mayorista con venta de artículos.",
+      "challengeTitle": "El desafío",
+      "challenge": "Un sector delicado que exige seriedad y respeto sin perder funcionalidad. El catálogo debía ordenar muchos productos y tipos de artículos, con una navegación simple que no abrumara al visitante.",
+      "solutionTitle": "La solución",
+      "solution": "Diseñé un catálogo digital completo con navegación fluida, pensado para ordenar los artículos por categoría y facilitar la consulta. El tono visual acompaña la sobriedad del rubro sin sacrificar claridad."
+    }
   },
   "footer": {
     "copyright": "© {year}"

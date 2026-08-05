@@ -31,7 +31,7 @@ export function initTheme(): void {
   const darkHandler = () => setTheme(true, lightBtn, darkBtn, indicator);
 
   if (lightBtn && darkBtn && indicator) {
-    setTheme(document.documentElement.classList.contains("dark"), lightBtn, darkBtn, indicator);
+    setTheme(localStorage.getItem("dark-mode") === "true", lightBtn, darkBtn, indicator);
     lightBtn.addEventListener("click", lightHandler);
     darkBtn.addEventListener("click", darkHandler);
     themeCleanups.push(() => {

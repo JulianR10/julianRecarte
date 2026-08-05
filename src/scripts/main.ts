@@ -11,6 +11,7 @@ import { magnetic } from "@scripts/magnetic";
 import { initRevealObserver, destroyRevealObserver } from "@scripts/reveal-observer";
 import { initBackToTop, destroyBackToTop } from "@scripts/back-to-top";
 import { initTestimonials, destroyTestimonials } from "@scripts/testimonials-carousel";
+import { initProjects, destroyProjects } from "@scripts/projects-carousel";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,6 +31,7 @@ export function initAll(): void {
   initRevealObserver();
   initBackToTop();
   initTestimonials();
+  initProjects();
   ScrollTrigger.refresh();
 }
 
@@ -39,4 +41,5 @@ export function destroyAll(): void {
   destroyRevealObserver();
   destroyBackToTop();
   destroyTestimonials();
+  destroyProjects();
 }

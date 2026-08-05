@@ -25,6 +25,9 @@
     "highlight": "evidenza",
     "comingSoon": "Prossimamente",
     "viewSite": "Vedi sito",
+    "caseStudy": "Caso di studio",
+    "carouselLabel": "Carosello di progetti",
+    "gotoProject": "Vai al progetto",
     "items": [
       {
         "title": "Triba",
@@ -111,6 +114,37 @@
     "whatsapp": "WhatsApp",
     "instagram": "Instagram",
     "email": "Email"
+  },
+  "caseStudies": {
+    "stackLabel": "Stack",
+    "viewSite": "Vedi sito",
+    "comingSoon": "Prossimamente",
+    "backLabel": "Torna ai progetti",
+    "ctaButton": "Parliamo su WhatsApp",
+    "triba": {
+      "title": "Triba",
+      "subtitle": "Rivista digitale con sistema di abbonamento, newsletter automatica e programma di collaboratori.",
+      "challengeTitle": "La sfida",
+      "challenge": "La rivista aveva bisogno di più di una pagina bella: serviva una base solida su cui crescere. Sistema di abbonamenti, newsletter che si inviasse da sola a ogni edizione, un catalogo di numeri pubblicati e un programma di collaboratori con modulo di candidatura. Il tutto con lettura comoda su qualsiasi dispositivo.",
+      "solutionTitle": "La soluzione",
+      "solution": "Ho progettato una piattaforma editoriale responsive con navigazione fluida e lettura comoda. Il sistema di abbonamenti alimenta la newsletter automatica, che distribuisce ogni edizione ai lettori senza intervento manuale. Il catalogo ordina i numeri pubblicati e il programma di collaboratori apre la porta a nuovi contenuti."
+    },
+    "sp-soluciones-textiles": {
+      "title": "SP Soluciones Textiles",
+      "subtitle": "Landing page con catalogo servizi e connessione diretta a WhatsApp.",
+      "challengeTitle": "La sfida",
+      "challenge": "Una landing page che rispecchiasse la qualità delle stampe e accompagnasse il cliente al contatto. Senza attriti: informazioni chiare, galleria di lavori e un percorso diretto a WhatsApp.",
+      "solutionTitle": "La soluzione",
+      "solution": "Ho progettato una landing page pulita con l'identità del marchio: catalogo servizi, galleria di lavori e pulsanti WhatsApp sempre visibili. Il design è pensato per portare il visitatore alla conversazione."
+    },
+    "multiservizi": {
+      "title": "Multiservizi SRL",
+      "subtitle": "Catalogo digitale per un'impresa funebre all'ingrosso.",
+      "challengeTitle": "La sfida",
+      "challenge": "Un settore delicato che richiede serietà e rispetto senza perdere funzionalità. Il catalogo doveva ordinare molti prodotti e tipi di articoli, con una navigazione semplice che non sopraffacesse il visitatore.",
+      "solutionTitle": "La soluzione",
+      "solution": "Ho progettato un catalogo digitale completo con navigazione fluida, pensato per ordinare gli articoli per categoria e facilitare la consultazione. Il tono visivo accompagna la sobrietà del settore senza sacrificare chiarezza."
+    }
   },
   "footer": {
     "copyright": "© {year}"
