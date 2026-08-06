@@ -14,10 +14,11 @@ interface Props {
   viewSite?: string;
   comingSoon?: string;
   caseLabel?: string;
+  showCase?: boolean;
   className?: string;
 }
 
-const { lang, slug, title, description, style, accent, image, liveUrl, viewSite, comingSoon, caseLabel, className } = Astro.props;
+const { lang, slug, title, description, style, accent, image, liveUrl, viewSite, comingSoon, caseLabel, showCase = true, className } = Astro.props;
 
 const caseStudyHref = `/${lang}/proyectos/${slug}/`;
 
@@ -72,6 +73,7 @@ const wrapperAttrs: Record<string, any> = {
           {viewSite}
         </a>
       ) : null}
+      {showCase ? (
       <a
         href={caseStudyHref}
         class="group/link inline-flex items-center gap-2 text-sm font-semibold tracking-wide uppercase cursor-pointer transition-opacity duration-300 hover:opacity-70"
@@ -92,6 +94,7 @@ const wrapperAttrs: Record<string, any> = {
           <path d="M5 12h14M12 5l7 7-7 7" />
         </svg>
       </a>
+      ) : null}
     </div>
   </div>
 </article>

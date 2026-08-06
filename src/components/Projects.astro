@@ -55,6 +55,7 @@ const { lang, t } = Astro.props;
             viewSite={t.viewSite}
             comingSoon={project.comingSoon ? t.comingSoon : undefined}
             caseLabel={t.caseStudy}
+            showCase={!project.comingSoon}
             className="min-w-[85%] sm:min-w-[65%] snap-start sm:snap-center md:min-w-0 md:snap-none"
           />
         );
