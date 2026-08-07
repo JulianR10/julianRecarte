@@ -2,16 +2,18 @@
 
 ## 🎯 Proyecto
 
-Portfolio web moderno y altamente visual de Julián Recarte, Desarrollador web FullStack. Multi-idioma (ES/EN/IT) con animaciones fluidas y diseño responsive.
+Portfolio web moderno y altamente visual de Julián Recarte, Desarrollador web FullStack. Multi-idioma (ES/EN/IT) con animaciones fluidas, scroll suave y diseño responsive. Incluye páginas de *case study* por proyecto.
 
 ## 🛠️ Stack Tecnológico
 
-- **Framework:** Astro 4.15.0
-- **Estilos:** TailwindCSS 3.4.3
-- **Animaciones:** GSAP 3.12.2
-- **Scroll Suave:** Lenis 1.1.11
-- **Tipografía:** Outfit (headings) + Satoshi (body)
+- **Framework:** Astro 4.15
+- **Estilos:** TailwindCSS 3.4
+- **Animaciones:** GSAP 3.12 (ScrollTrigger)
+- **Scroll Suave:** Lenis
+- **Tipografía:** Mozilla Headline (display) + Satoshi (body)
+- **Testing:** Vitest + Happy DOM
 - **Utilidades:** autoprefixer, postcss, @astrojs/sitemap
+- **Deploy:** Vercel (`julianrecarte.dev`)
 
 ## 📁 Estructura de Carpetas
 
@@ -19,97 +21,94 @@ Portfolio web moderno y altamente visual de Julián Recarte, Desarrollador web F
 julianRecarte/
 ├── src/
 │   ├── layouts/
-│   │   └── Layout.astro              # Layout principal con Lenis, fonts y dark mode
+│   │   └── Layout.astro           # Shell: head, SEO, fonts, dark mode, lifecycle
 │   ├── pages/
+│   │   ├── index.astro            # Redirección por idioma (detecta navegador)
 │   │   └── [lang]/
-│   │       └── index.astro           # Página principal (multi-idioma)
+│   │       ├── index.astro        # Página principal multi-idioma
+│   │       └── proyectos/
+│   │           └── [slug].astro   # Case study por proyecto
 │   ├── components/
-│   │   ├── Nav.astro                 # Navegación sticky
-│   │   ├── Hero.astro                # Sección hero con animación zap
-│   │   ├── Projects.astro            # Grid de proyectos
-│   │   ├── ProjectCard.astro         # Card de proyecto con tilt
-│   │   ├── Process.astro             # Sección de proceso/trabajo
-│   │   ├── Testimonials.astro        # Carousel de testimonios (3D)
-│   │   ├── Contact.astro             # Formulario de contacto
-│   │   ├── SectionHeader.astro       # Componente reutilizable de encabezado de sección
-│   │   ├── Footer.astro              # Footer
-│   │   ├── Waves.astro               # Efecto de olas SVG
-│   │   ├── Cursor.astro              # Cursor personalizado
-│   │   └── Logo.astro                # Componente logo
-│   ├── scripts/
-│   │   ├── main.js                   # Punto de entrada JS
-│   │   ├── testimonios-carousel.js   # Lógica del carousel de testimonios
-│   │   ├── animations.js             # Animaciones GSAP globales
-│   │   ├── card-tilt.js              # Efecto tilt 3D en cards
-│   │   ├── cine-text.js              # Animación de texto cinematográfico
-│   │   ├── hero-scroll.js            # Scroll-driven hero
-│   │   ├── hero-zap.js               # Animación zap del hero
-│   │   ├── nav.js                    # Lógica de navegación
-│   │   ├── back-to-top.js            # Botón de ir arriba con partículas
-│   │   └── waves.js                  # Animación de olas
+│   │   ├── Nav.astro              # Navegación + overlay mobile
+│   │   ├── Hero.astro             # Hero con animación zap
+│   │   ├── Projects.astro         # Grid/carrusel de proyectos
+│   │   ├── ProjectCard.astro      # Card con tilt 3D
+│   │   ├── CaseStudy.astro        # Página de caso de estudio
+│   │   ├── Process.astro
+│   │   ├── Testimonials.astro     # Carrusel de testimonios
+│   │   ├── Contact.astro
+│   │   ├── Footer.astro
+│   │   ├── SectionHeader.astro    # Encabezado reutilizable
+│   │   ├── Waves.astro            # Olas SVG
+│   │   ├── Logo.astro
+│   │   ├── LangSelector.astro     # Selector de idioma
+│   │   ├── WhatsAppIcon.astro
+│   │   └── flags/                 # Banderas ES/EN/IT
+│   ├── data/
+│   │   ├── projects.ts            # Metadatos e imágenes de proyectos
+│   │   ├── project-content.ts     # Resuelve copy por slug (falla en dev)
+│   │   └── process.ts             # Pasos del proceso
+│   ├── scripts/                   # Módulos TS con ciclo de vida
+│   │   ├── component.ts           # primitivo defineComponent (scope + cleanup)
+│   │   ├── lifecycle.ts           # createLifecycle (ViewTransitions)
+│   │   ├── main.ts                # Orquestador global
+│   │   ├── gsap-factory.ts        # defineAnimation (GSAP contextual)
+│   │   ├── scroll-source.ts       # Bus de eventos de scroll
+│   │   ├── lenis-adapter.ts       # Adaptador Lenis
+│   │   ├── nav.ts                 # Nav completa en un módulo
+│   │   ├── reveal-observer.ts     # Fade-in por scroll
+│   │   ├── back-to-top.ts         # Botón volver arriba con partículas
+│   │   ├── testimonials-carousel.ts · projects-carousel.ts
+│   │   ├── animations.ts · hero-scroll.ts · hero-zap.ts
+│   │   ├── cine-text.ts · magnetic.ts · card-tilt.ts · waves.ts
+│   │   └── *.test.ts              # Pruebas unitarias
 │   ├── styles/
-│   │   └── globals.css               # Estilos globales, CSS custom properties y utilidades
+│   │   └── globals.css
 │   └── i18n/
-│       ├── es.json                   # Contenido en español
-│       ├── en.json                   # Contenido en inglés
-│       └── it.json                   # Contenido en italiano
+│       ├── es.json · en.json · it.json
+│       └── safe-t.ts              # Proxy de traducción tolerante
 ├── public/
-│   └── robots.txt
 ├── astro.config.mjs
 ├── tailwind.config.mjs
 ├── tsconfig.json
+├── vitest.config.ts
 └── package.json
 ```
 
 ## 🚀 Instalación y Desarrollo
 
-### 1. Instalar dependencias
 ```bash
 npm install
-```
-
-### 2. Iniciar servidor de desarrollo
-```bash
-npm run dev
-```
-El sitio estará disponible en `http://localhost:4321/`
-
-### 3. Compilar para producción
-```bash
-npm run build
-```
-
-### 4. Preview de producción
-```bash
-npm run preview
+npm run dev       # http://localhost:4321/
+npm run build     # salida en dist/
+npm run preview   # preview de producción
+npm test          # corre Vitest
 ```
 
 ## 🎨 Identidad Visual
 
 ### Colores
-- **Fondo:** `#F2ECE4` (Beige claro)
-- **Accent 1:** `#FF5C2B` (Naranja vibrante)
-- **Accent 2:** `#FFB088` (Naranja pastel)
-- **Accent 3:** `#5B1FFF` (Morado)
+- **Fondo claro:** `#E8E0D0` (beige)
+- **Fondo dark:** `#1C1A18`
+- **Texto:** `#1A1613` (claro) · `#F0F0F0` (oscuro)
+- **Accent:** naranja `#FF5C2B` · pastel `#FFB088` · morado `#5B1FFF`
 
 ### Tipografía
-- **Headings:** Outfit (400)
-- **Body:** Satoshi (400, 500)
+- **Display:** Mozilla Headline (width comprimible)
+- **Body:** Satoshi (400, 500, 700)
 
 ## 🎬 Características
 
-- ✅ Scroll suave con Lenis
-- ✅ Animaciones GSAP (scroll-driven, reveal, stagger)
-- ✅ Carousel de testimonios con efecto Cover (card nueva cubre a la anterior)
-- ✅ Efecto tilt 3D en cards de proyectos
-- ✅ Animación cinematográfica de texto
-- ✅ Cursor personalizado
-- ✅ Efecto de olas SVG
-- ✅ Navegación sticky con transiciones
-- ✅ Multi-idioma (ES/EN/IT)
-- ✅ Dark mode
+- ✅ Scroll suave con Lenis + bus de scroll (`scroll-source`)
+- ✅ Animaciones GSAP (scroll-driven, reveal, stagger, contextuales)
+- ✅ Primitivo de ciclo de vida `defineComponent` (scope + cleanup centralizado)
+- ✅ Nav en un módulo único (theme, auto-hide, active-section, overlay, idioma)
+- ✅ Multi-idioma (ES/EN/IT) + case studies por proyecto
+- ✅ Dark mode persistente
+- ✅ SEO (sitemap, JSON-LD, hreflang)
+- ✅ Pruebas unitarias con Vitest + Happy DOM
 - ✅ Responsive design con Tailwind
-- ✅ Deployado en Vercel con dominio julianrecarte.dev
+- ✅ Desplegado en Vercel — julianrecarte.dev
 
 ## 📧 Contacto
 

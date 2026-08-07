@@ -34,7 +34,7 @@ export const projects: Project[] = [
     heroImage: LaptopGirado,
     mockup: mockups,
     screenshots: [celuFirme, celuGirado, tabletVerticalFirme, LaptopGirado],
-    style: "radial-gradient(circle at 25% 20%, rgba(222,6,46,0.35), transparent 50%), radial-gradient(circle at 75% 60%, rgba(255,90,125,0.25), transparent 50%), linear-gradient(135deg, rgba(255,195,195,0.2), rgba(255,235,230,0.15))",
+    style: "radial-gradient(circle at 25% 20%, rgba(222,6,46,0.15), transparent 55%), radial-gradient(circle at 75% 60%, rgba(255,90,125,0.10), transparent 50%), linear-gradient(135deg, rgba(255,195,195,0.10), rgba(255,235,230,0.08))",
   },
   {
     title: "SP Soluciones Textiles",

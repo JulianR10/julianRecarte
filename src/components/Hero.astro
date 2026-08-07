@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import heroImg from "@assets/images/yo.webp";
+import heroImg from "@assets/images/yo2.webp";
 import WhatsAppIcon from "@components/WhatsAppIcon.astro";
 
 interface Props {
@@ -20,7 +20,7 @@ const { t } = Astro.props;
 
 <section
   id="hero"
-  class="relative min-h-screen xl:h-screen sticky top-0 z-[1] flex items-center px-6 md:py-24 overflow-hidden"
+  class="relative min-h-dvh xl:h-dvh sticky top-0 z-[1] flex items-center px-6 md:py-24 overflow-hidden"
 >
   <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none"></div>
   <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-40"></div>
@@ -36,13 +36,6 @@ const { t } = Astro.props;
         <span data-zap-clone class="absolute inset-0 pointer-events-none zap-glow-orange" aria-hidden="true">{t.label}</span>
       </span>
 
-      <h1
-        data-reveal-heading
-        class="text-[2.5rem] sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-4 leading-tight text-copy dark:text-dark-copy text-balance"
-      >
-        {t.greetingPrefix}<span class="text-accent-orange whitespace-nowrap">{t.greetingName}</span>
-      </h1>
-
       <div class="flex xl:hidden justify-center my-8">
         <div class="w-44 sm:w-56 max-w-[55vw] aspect-[2/3] rounded-[2rem] p-[2px] bg-gradient-to-br from-accent-warm to-accent-warm/5 dark:bg-gradient-to-tl dark:from-accent-warm dark:to-accent-warm/5 shadow-xl">
           <div class="w-full h-full rounded-[2rem] overflow-hidden">
@@ -51,13 +44,20 @@ const { t } = Astro.props;
               alt="Julián Recarte"
               width={1024}
               height={1536}
-              class="w-full h-full object-cover scale-[1.55] translate-y-[4%]"
+              class="w-full h-full object-cover scale-[1.78] translate-y-[14%]"
               loading="eager"
               decoding="async"
             />
           </div>
         </div>
       </div>
+
+      <h1
+        data-reveal-heading
+        class="text-[2.5rem] sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-4 leading-tight text-copy dark:text-dark-copy text-balance"
+      >
+        {t.greetingPrefix}<span class="text-accent-orange whitespace-nowrap">{t.greetingName}</span>
+      </h1>
 
       <p
         data-reveal
@@ -101,7 +101,7 @@ const { t } = Astro.props;
           <Image
             src={heroImg}
             alt="Julián Recarte"
-            class="w-full h-full object-cover scale-[1.2] translate-y-[4%]"
+            class="w-full h-full object-cover scale-[1.38] translate-y-[14%]"
             loading="eager"
             decoding="async"
           />
