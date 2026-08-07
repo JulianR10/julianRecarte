@@ -1,6 +1,6 @@
-let revealObserver: IntersectionObserver | null = null;
+import { defineComponent } from "@scripts/component";
 
-export function initRevealObserver(): void {
+export const revealObserver = defineComponent("reveal-observer", () => {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   const els = document.querySelectorAll("[data-reveal], [data-reveal-heading], [data-reveal-stagger]");
@@ -15,24 +15,19 @@ export function initRevealObserver(): void {
     }
   });
 
-  revealObserver = new IntersectionObserver(
+  const observer = new IntersectionObserver(
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("revealed");
-          revealObserver!.unobserve(entry.target);
+          observer.unobserve(entry.target);
         }
       });
     },
     { threshold: 0.15 }
   );
 
-  items.forEach((el) => revealObserver!.observe(el));
-}
+  items.forEach((el) => observer.observe(el));
 
-export function destroyRevealObserver(): void {
-  if (revealObserver) {
-    revealObserver.disconnect();
-    revealObserver = null;
-  }
-}
+  return () => observer.disconnect();
+});

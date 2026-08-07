@@ -27,21 +27,7 @@
     "viewSite": "Ver sitio",
     "caseStudy": "Caso de estudio",
     "carouselLabel": "Carrusel de proyectos",
-    "gotoProject": "Ir al proyecto",
-    "items": [
-      {
-        "title": "Triba",
-        "description": "Desarrollo de una revista digital completa: sistema de suscripción, newsletter automática, catálogo de ediciones y programa de colaboradores con formulario de postulación. Diseño editorial responsive con navegación fluida y lectura cómoda en cualquier dispositivo."
-      },
-      {
-        "title": "SP Soluciones Textiles",
-        "description": "Landing page para emprendimiento textil con catálogo de servicios, galería de trabajos y conexión directa a WhatsApp. Diseño limpio con identidad de marca."
-      },
-      {
-        "title": "Multiservizi SRL",
-        "description": "Funeraria italiana con venta mayorista de artículos: cerámicas, cajones, adornos y más. Catálogo digital completo con navegación fluida."
-      }
-    ]
+    "gotoProject": "Ir al proyecto"
   },
   "testimonials": {
     "label": "Testimonios",
@@ -123,6 +109,7 @@
     "ctaButton": "Hablemos por WhatsApp",
     "triba": {
       "title": "Triba",
+      "description": "Desarrollo de una revista digital completa: sistema de suscripción, newsletter automática, catálogo de ediciones y programa de colaboradores con formulario de postulación. Diseño editorial responsive con navegación fluida y lectura cómoda en cualquier dispositivo.",
       "subtitle": "Revista digital con sistema de suscripción, newsletter automática y programa de colaboradores.",
       "challengeTitle": "El desafío",
       "challenge": "La revista necesitaba más que una página bonita: requería una base sólida sobre la que crecer. Sistema de suscripciones, newsletter que se enviara sola con cada edición, un catálogo de números publicados y un programa de colaboradores con formulario de postulación. Todo con una lectura cómoda en cualquier dispositivo.",
@@ -131,6 +118,7 @@
     },
     "sp-soluciones-textiles": {
       "title": "SP Soluciones Textiles",
+      "description": "Landing page para emprendimiento textil con catálogo de servicios, galería de trabajos y conexión directa a WhatsApp. Diseño limpio con identidad de marca.",
       "subtitle": "Landing page con catálogo de servicios y conexión directa a WhatsApp.",
       "challengeTitle": "El desafío",
       "challenge": "Una landing page que reflejara la calidad de los estampados y acompañara al cliente hasta el contacto. Sin fricciones: información clara, galería de trabajos y un camino directo a WhatsApp.",
@@ -139,6 +127,7 @@
     },
     "multiservizi": {
       "title": "Multiservizi SRL",
+      "description": "Funeraria italiana con venta mayorista de artículos: cerámicas, cajones, adornos y más. Catálogo digital completo con navegación fluida.",
       "subtitle": "Catálogo digital para una funeraria mayorista con venta de artículos.",
       "challengeTitle": "El desafío",
       "challenge": "Un sector delicado que exige seriedad y respeto sin perder funcionalidad. El catálogo debía ordenar muchos productos y tipos de artículos, con una navegación simple que no abrumara al visitante.",

@@ -1,4 +1,4 @@
-let cleanup: (() => void) | null = null;
+import { defineComponent } from "@scripts/component";
 
 function updateDots(active: number): void {
   const dots = document.querySelectorAll<HTMLElement>(".test-dot");
@@ -13,7 +13,7 @@ function updateDots(active: number): void {
   });
 }
 
-export function initTestimonials(): void {
+export const testimonialsCarousel = defineComponent("testimonials-carousel", () => {
   const cards = document.querySelectorAll<HTMLElement>(".testimonio-card");
   const prevBtn = document.getElementById("test-prev")!;
   const nextBtn = document.getElementById("test-next")!;
@@ -54,7 +54,6 @@ export function initTestimonials(): void {
   prevBtn.addEventListener("click", onPrev);
   nextBtn.addEventListener("click", onNext);
 
-  // dot click handling
   const dots = document.querySelectorAll<HTMLElement>(".test-dot");
   const dotHandlers: (() => void)[] = [];
   dots.forEach((dot) => {
@@ -81,7 +80,7 @@ export function initTestimonials(): void {
 
   layout();
 
-  cleanup = () => {
+  return () => {
     prevBtn.removeEventListener("click", onPrev);
     nextBtn.removeEventListener("click", onNext);
     track.removeEventListener("pointerdown", onPointerDown);
@@ -91,11 +90,4 @@ export function initTestimonials(): void {
     locked = false;
     lockTimer = null;
   };
-}
-
-export function destroyTestimonials(): void {
-  if (cleanup) {
-    cleanup();
-    cleanup = null;
-  }
-}
+});

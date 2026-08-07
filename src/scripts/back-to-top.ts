@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import { defineComponent } from "@scripts/component";
 import { onScroll } from "@scripts/scroll-source";
 import { scrollToTop } from "@scripts/lenis-adapter";
 
@@ -8,11 +9,7 @@ const HIDE_CLASSES = ["translate-y-20", "opacity-0", "pointer-events-none"];
 const BURST_COLORS = ["#FF5C2B", "#5B1FFF", "#FF7A4F", "#8A5CFF"];
 const BURST_COUNT = 24;
 
-let backToTopCleanup: (() => void) | null = null;
-
-export function initBackToTop(): void {
-  if (backToTopCleanup) return;
-
+export const backToTop = defineComponent("back-to-top", () => {
   const btn = document.getElementById("btn-top");
   const arrow = document.getElementById("arrow-top");
   const wa = document.getElementById("btn-whatsapp");
@@ -104,15 +101,10 @@ export function initBackToTop(): void {
   btn.addEventListener("mouseleave", onLeave);
   btn.addEventListener("click", onClick);
 
-  backToTopCleanup = () => {
+  return () => {
     scrollCleanup();
     btn.removeEventListener("mouseenter", onEnter);
     btn.removeEventListener("mouseleave", onLeave);
     btn.removeEventListener("click", onClick);
   };
-}
-
-export function destroyBackToTop(): void {
-  backToTopCleanup?.();
-  backToTopCleanup = null;
-}
+});

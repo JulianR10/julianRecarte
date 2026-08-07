@@ -27,21 +27,7 @@
     "viewSite": "View site",
     "caseStudy": "Case study",
     "carouselLabel": "Projects carousel",
-    "gotoProject": "Go to project",
-    "items": [
-      {
-        "title": "Triba",
-        "description": "Development of a complete digital magazine: subscription system, automated newsletter, editions catalog, and a contributor program with application form. Editorial design with smooth navigation and comfortable reading on any device."
-      },
-      {
-        "title": "SP Soluciones Textiles",
-        "description": "Landing page for a textile business with service catalog, work gallery, and direct WhatsApp connection. Clean design with brand identity."
-      },
-      {
-        "title": "Multiservizi SRL",
-        "description": "Italian funeral home offering wholesale products: ceramics, coffins, decorations and more. Complete digital catalog with smooth navigation."
-      }
-    ]
+    "gotoProject": "Go to project"
   },
   "testimonials": {
     "label": "Testimonials",
@@ -123,6 +109,7 @@
     "ctaButton": "Let's talk on WhatsApp",
     "triba": {
       "title": "Triba",
+      "description": "Development of a complete digital magazine: subscription system, automated newsletter, editions catalog, and a contributor program with application form. Editorial design with smooth navigation and comfortable reading on any device.",
       "subtitle": "Digital magazine with subscription system, automated newsletter and contributor program.",
       "challengeTitle": "The challenge",
       "challenge": "The magazine needed more than a nice page — it needed a solid foundation to grow on. A subscription system, a newsletter that sent itself with every edition, a catalog of published issues and a contributor program with an application form. All with comfortable reading on any device.",
@@ -131,6 +118,7 @@
     },
     "sp-soluciones-textiles": {
       "title": "SP Soluciones Textiles",
+      "description": "Landing page for a textile business with service catalog, work gallery, and direct WhatsApp connection. Clean design with brand identity.",
       "subtitle": "Landing page with service catalog and direct WhatsApp connection.",
       "challengeTitle": "The challenge",
       "challenge": "A landing page that reflected the quality of the prints and guided the customer to contact. No friction: clear information, a work gallery and a direct path to WhatsApp.",
@@ -139,6 +127,7 @@
     },
     "multiservizi": {
       "title": "Multiservizi SRL",
+      "description": "Italian funeral home offering wholesale products: ceramics, coffins, decorations and more. Complete digital catalog with smooth navigation.",
       "subtitle": "Digital catalog for a wholesale funeral home.",
       "challengeTitle": "The challenge",
       "challenge": "A delicate industry that demands seriousness and respect without losing functionality. The catalog had to organize many products and types of items, with simple navigation that didn't overwhelm visitors.",

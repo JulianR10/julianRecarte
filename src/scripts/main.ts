@@ -8,10 +8,10 @@ import { heroScroll } from "@scripts/hero-scroll";
 import { progressAnimations } from "@scripts/animations";
 import { cineText } from "@scripts/cine-text";
 import { magnetic } from "@scripts/magnetic";
-import { initRevealObserver, destroyRevealObserver } from "@scripts/reveal-observer";
-import { initBackToTop, destroyBackToTop } from "@scripts/back-to-top";
-import { initTestimonials, destroyTestimonials } from "@scripts/testimonials-carousel";
-import { initProjects, destroyProjects } from "@scripts/projects-carousel";
+import { revealObserver } from "@scripts/reveal-observer";
+import { backToTop } from "@scripts/back-to-top";
+import { testimonialsCarousel } from "@scripts/testimonials-carousel";
+import { projectsCarousel } from "@scripts/projects-carousel";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,18 +28,18 @@ const animations = [
 export function initAll(): void {
   initLenis();
   animations.forEach((a) => a.init(gsap));
-  initRevealObserver();
-  initBackToTop();
-  initTestimonials();
-  initProjects();
+  revealObserver.init();
+  backToTop.init();
+  testimonialsCarousel.init();
+  projectsCarousel.init();
   ScrollTrigger.refresh();
 }
 
 export function destroyAll(): void {
   destroyLenis();
   animations.forEach((a) => a.destroy());
-  destroyRevealObserver();
-  destroyBackToTop();
-  destroyTestimonials();
-  destroyProjects();
+  revealObserver.destroy();
+  backToTop.destroy();
+  testimonialsCarousel.destroy();
+  projectsCarousel.destroy();
 }

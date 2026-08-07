@@ -1,4 +1,4 @@
-let cleanup: (() => void) | null = null;
+import { defineComponent } from "@scripts/component";
 
 function updateDots(active: number): void {
   document.querySelectorAll<HTMLElement>(".project-dot").forEach((dot, i) => {
@@ -12,7 +12,7 @@ function updateDots(active: number): void {
   });
 }
 
-export function initProjects(): void {
+export const projectsCarousel = defineComponent("projects-carousel", () => {
   if (window.matchMedia("(min-width: 768px)").matches) return;
 
   const track = document.getElementById("projects-track")!;
@@ -54,16 +54,9 @@ export function initProjects(): void {
   track.addEventListener("scroll", onScroll, { passive: true });
   updateDots(lastIndex);
 
-  cleanup = () => {
+  return () => {
     track.removeEventListener("scroll", onScroll);
     dotHandlers.forEach((h, i) => dots[i]?.removeEventListener("click", h));
     cancelAnimationFrame(scrollRaf);
   };
-}
-
-export function destroyProjects(): void {
-  if (cleanup) {
-    cleanup();
-    cleanup = null;
-  }
-}
+});

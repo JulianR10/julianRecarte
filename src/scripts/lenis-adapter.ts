@@ -1,7 +1,7 @@
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { notifyListeners, scrollToTop as baseScrollToTop } from "@scripts/scroll-source";
+import { notifyListeners } from "@scripts/scroll-source";
 
 let instance: Lenis | null = null;
 let tickerCleanup: (() => void) | null = null;
@@ -39,5 +39,5 @@ export function destroyLenis(): void {
 
 export function scrollToTop(duration: number = 1.2): void {
   if (instance) instance.scrollTo(0, { duration });
-  else baseScrollToTop(duration);
+  else window.scrollTo({ top: 0, behavior: "smooth" });
 }

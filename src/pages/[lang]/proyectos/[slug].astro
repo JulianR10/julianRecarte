@@ -4,6 +4,7 @@ import Nav from "@components/Nav.astro";
 import CaseStudy from "@components/CaseStudy.astro";
 import Footer from "@components/Footer.astro";
 import { projects } from "@data/projects";
+import { getProjectCopy } from "@data/project-content";
 
 import es from "@i18n/es.json";
 import en from "@i18n/en.json";
@@ -28,8 +29,6 @@ const project = projects.find((p) => p.slug === slug);
 if (!project) return Astro.redirect(`/${lang}/`);
 
 const t = safeT(raw);
-const shared = t.caseStudies;
-const narrative = (t.caseStudies as Record<string, any>)[project.slug] || {};
 
 const {
   stackLabel,
@@ -37,14 +36,14 @@ const {
   comingSoon,
   backLabel,
   ctaButton,
-} = shared;
+} = t.caseStudies;
 const cs = {
   stackLabel,
   viewSite,
   comingSoon,
   backLabel,
   ctaButton,
-  ...narrative,
+  ...getProjectCopy(project.slug, lang),
 };
 
 const canonical = `https://julianrecarte.dev/${lang}/proyectos/${project.slug}/`;

@@ -17,10 +17,6 @@ export function notifyListeners(scroll: number, velocity: number, direction: num
   });
 }
 
-export function scrollToTop(duration: number = 1.2): void {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
 export function clearListeners(): void {
   listeners.clear();
 }
