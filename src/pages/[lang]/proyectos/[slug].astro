@@ -17,7 +17,9 @@ const translations = { es, en, it };
 export function getStaticPaths() {
   const paths = ["es", "en", "it"] as const;
   return paths.flatMap((lang) =>
-    projects.map((project) => ({ params: { lang, slug: project.slug } }))
+    projects
+      .filter((project) => !project.comingSoon)
+      .map((project) => ({ params: { lang, slug: project.slug } }))
   );
 }
 
@@ -30,19 +32,9 @@ if (!project) return Astro.redirect(`/${lang}/`);
 
 const t = safeT(raw);
 
-const {
-  stackLabel,
-  viewSite,
-  comingSoon,
-  backLabel,
-  ctaButton,
-} = t.caseStudies;
+const { backLabel } = t.caseStudies;
 const cs = {
-  stackLabel,
-  viewSite,
-  comingSoon,
   backLabel,
-  ctaButton,
   ...getProjectCopy(project.slug, lang),
 };
 

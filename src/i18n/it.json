@@ -53,14 +53,14 @@
         "company": "Triba"
       },
       {
-        "quote": "Avevamo bisogno di una landing page che rispecchiasse la qualità delle nostre stampe e Julián l'ha azzeccata. Veloce, preciso e con una pazienza enorme per ogni modifica richiesta. Molto raccomandato.",
+        "quote": "Siamo molto soddisfatti del lavoro di Julián. Si sente già la qualità e la cura che sta mettendo nel nostro sito, e non vediamo l'ora di vederlo online. Siamo in ottime mani.",
         "initials": "FP",
         "name": "Federico Pleitavino",
         "role": "Titolare",
         "company": "SP Estampados"
       },
       {
-        "quote": "Affrontare un sito web per un'impresa funebre non è facile, ma Julián ha saputo dare il tono giusto: serio, rispettoso e funzionale. Il catalogo online ci ha aperto molte porte. Molto soddisfatto del risultato.",
+        "quote": "Julián sta dando vita al nostro sito con un tono giusto e professionale, che riflette la nostra serietà e il nostro rispetto. Siamo felici dei progressi e non vediamo l'ora che il progetto vada online.",
         "initials": "GP",
         "name": "Gianluca Petrungaro",
         "role": "Titolare",
@@ -102,37 +102,27 @@
     "email": "Email"
   },
   "caseStudies": {
-    "stackLabel": "Stack",
-    "viewSite": "Vedi sito",
-    "comingSoon": "Prossimamente",
     "backLabel": "Torna ai progetti",
-    "ctaButton": "Parliamo su WhatsApp",
     "triba": {
       "title": "Triba",
       "description": "Sviluppo di una rivista digitale completa: sistema di abbonamento, newsletter automatica, catalogo di edizioni e programma di collaboratori con modulo di candidatura. Design editoriale responsive con navigazione fluida e lettura comoda su qualsiasi dispositivo.",
       "subtitle": "Rivista digitale con sistema di abbonamento, newsletter automatica e programma di collaboratori.",
       "challengeTitle": "La sfida",
-      "challenge": "La rivista aveva bisogno di più di una pagina bella: serviva una base solida su cui crescere. Sistema di abbonamenti, newsletter che si inviasse da sola a ogni edizione, un catalogo di numeri pubblicati e un programma di collaboratori con modulo di candidatura. Il tutto con lettura comoda su qualsiasi dispositivo.",
+      "challenge": "La rivista aveva bisogno di molto più di un sito web: gestire gli abbonamenti, inviare una newsletter automatica a ogni edizione, archiviare i numeri pubblicati e offrire un programma di collaboratori. Il tutto con lettura comoda su qualsiasi dispositivo.",
       "solutionTitle": "La soluzione",
-      "solution": "Ho progettato una piattaforma editoriale responsive con navigazione fluida e lettura comoda. Il sistema di abbonamenti alimenta la newsletter automatica, che distribuisce ogni edizione ai lettori senza intervento manuale. Il catalogo ordina i numeri pubblicati e il programma di collaboratori apre la porta a nuovi contenuti."
+      "solution": "Ho progettato una piattaforma editoriale responsive e intuitiva: abbonamenti integrati con newsletter automatica, archivio delle edizioni precedenti e un programma di collaboratori che semplifica l'ingresso di nuovi autori.",
+      "plusTitle": "Gestione autonoma",
+      "plus": "Ho sviluppato un pannello di amministrazione su misura affinché il team pubblichi edizioni, gestisca gli abbonati e amministri il contenuto con semplicità, senza dipendere da uno sviluppatore."
     },
     "sp-soluciones-textiles": {
       "title": "SP Soluciones Textiles",
       "description": "Landing page per un'impresa tessile con catalogo servizi, galleria lavori e connessione diretta a WhatsApp. Design pulito con identità di marca.",
-      "subtitle": "Landing page con catalogo servizi e connessione diretta a WhatsApp.",
-      "challengeTitle": "La sfida",
-      "challenge": "Una landing page che rispecchiasse la qualità delle stampe e accompagnasse il cliente al contatto. Senza attriti: informazioni chiare, galleria di lavori e un percorso diretto a WhatsApp.",
-      "solutionTitle": "La soluzione",
-      "solution": "Ho progettato una landing page pulita con l'identità del marchio: catalogo servizi, galleria di lavori e pulsanti WhatsApp sempre visibili. Il design è pensato per portare il visitatore alla conversazione."
+      "subtitle": "Landing page con catalogo servizi e connessione diretta a WhatsApp."
     },
     "multiservizi": {
       "title": "Multiservizi SRL",
       "description": "Impresa funebre italiana con vendita all'ingrosso di articoli: ceramiche, casse, addobbi e molto altro. Catalogo digitale completo con navigazione fluida.",
-      "subtitle": "Catalogo digitale per un'impresa funebre all'ingrosso.",
-      "challengeTitle": "La sfida",
-      "challenge": "Un settore delicato che richiede serietà e rispetto senza perdere funzionalità. Il catalogo doveva ordinare molti prodotti e tipi di articoli, con una navigazione semplice che non sopraffacesse il visitatore.",
-      "solutionTitle": "La soluzione",
-      "solution": "Ho progettato un catalogo digitale completo con navigazione fluida, pensato per ordinare gli articoli per categoria e facilitare la consultazione. Il tono visivo accompagna la sobrietà del settore senza sacrificare chiarezza."
+      "subtitle": "Catalogo digitale per un'impresa funebre all'ingrosso."
     }
   },
   "footer": {

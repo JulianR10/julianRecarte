@@ -6,7 +6,8 @@ import celuFirme from "@assets/images/celuFirme.webp";
 import celuGirado from "@assets/images/celuGirado.webp";
 import tabletVerticalFirme from "@assets/images/tabletVerticalFirme.webp";
 import LaptopGirado from "@assets/images/LaptopGirado.webp";
-import mockups from "@assets/images/mockups.webp";
+import mockupsDesktop from "@assets/images/mockupsDesktop.webp";
+import mockupMobile from "@assets/images/mockupMobile.webp";
 
 export interface Project {
   title: string;
@@ -20,6 +21,7 @@ export interface Project {
   image?: ImageMetadata;
   heroImage?: ImageMetadata;
   mockup?: ImageMetadata;
+  mockupMobile?: ImageMetadata;
   screenshots: ImageMetadata[];
 }
 
@@ -32,7 +34,8 @@ export const projects: Project[] = [
     accent: "#DE062E",
     image: tribaLogo,
     heroImage: LaptopGirado,
-    mockup: mockups,
+    mockup: mockupsDesktop,
+    mockupMobile: mockupMobile,
     screenshots: [celuFirme, celuGirado, tabletVerticalFirme, LaptopGirado],
     style: "radial-gradient(circle at 25% 20%, rgba(222,6,46,0.15), transparent 55%), radial-gradient(circle at 75% 60%, rgba(255,90,125,0.10), transparent 50%), linear-gradient(135deg, rgba(255,195,195,0.10), rgba(255,235,230,0.08))",
   },

@@ -14,6 +14,8 @@ export interface ProjectCopy {
   challenge: string;
   solutionTitle: string;
   solution: string;
+  plusTitle?: string;
+  plus?: string;
 }
 
 export function getProjectCopy(slug: string, lang: string): ProjectCopy {
@@ -35,5 +37,7 @@ export function getProjectCopy(slug: string, lang: string): ProjectCopy {
     challenge: "",
     solutionTitle: "",
     solution: "",
+    plusTitle: "",
+    plus: "",
   };
 }

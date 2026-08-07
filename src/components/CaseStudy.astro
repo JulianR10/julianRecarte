@@ -6,7 +6,6 @@ interface Props {
   lang: string;
   project: Project;
   t: {
-    comingSoon: string;
     backLabel: string;
     title: string;
     subtitle: string;
@@ -14,11 +13,14 @@ interface Props {
     challenge: string;
     solutionTitle: string;
     solution: string;
+    plusTitle?: string;
+    plus?: string;
   };
 }
 
 const { lang, project, t } = Astro.props;
 const accent = project.accent;
+const mobileMockup = project.mockupMobile ?? project.mockup;
 ---
 
 <div class="relative flex-1 min-h-0 h-full" style={`--project-accent: ${accent}`}>
@@ -38,7 +40,7 @@ const accent = project.accent;
     style={`--project-accent: ${accent}; --project-style: ${project.style}`}
   >
     <h1 class="sr-only">{t.title}</h1>
-    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_660px] gap-6 lg:gap-10 items-start">
+    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_660px] gap-6 lg:gap-10 items-center">
 
       <div class="flex flex-col items-center text-center lg:text-left lg:items-start gap-6">
         <div class="flex flex-col items-center lg:items-start">
@@ -54,7 +56,7 @@ const accent = project.accent;
             </div>
           )}
 
-          <p data-reveal class="max-w-2xl mx-auto lg:mx-0 text-base md:text-lg leading-snug text-copy/70 dark:text-dark-muted">
+          <p data-reveal class="max-w-2xl mx-auto lg:mx-0 text-base md:text-lg leading-snug text-copy/70 dark:text-[#A0A0A0]">
             {t.subtitle}
           </p>
         </div>
@@ -63,15 +65,35 @@ const accent = project.accent;
           <h2 class="case-accent mb-2 text-sm font-medium tracking-[0.3em] uppercase">
             {t.challengeTitle}
           </h2>
-          <p class="text-sm md:text-base leading-relaxed text-copy/70 dark:text-dark-muted">
+          <p class="text-sm md:text-base leading-relaxed text-copy/70 dark:text-[#A0A0A0]">
             {t.challenge}
           </p>
         </div>
 
-        {project.mockup && (
+        <div data-reveal class="w-full max-w-2xl mx-auto lg:mx-0 lg:w-auto">
+          <h2 class="case-accent mb-2 text-sm font-medium tracking-[0.3em] uppercase">
+            {t.solutionTitle}
+          </h2>
+          <p class="text-sm md:text-base leading-relaxed text-copy/70 dark:text-[#A0A0A0]">
+            {t.solution}
+          </p>
+        </div>
+
+        {t.plus && t.plusTitle && (
+          <div data-reveal class="w-full max-w-2xl mx-auto lg:mx-0 lg:w-auto">
+            <h2 class="case-accent mb-2 text-sm font-medium tracking-[0.3em] uppercase">
+              {t.plusTitle}
+            </h2>
+            <p class="text-sm md:text-base leading-relaxed text-copy/70 dark:text-[#A0A0A0]">
+              {t.plus}
+            </p>
+          </div>
+        )}
+
+        {mobileMockup && (
           <div data-reveal class="w-[320px] sm:w-[540px] mx-auto lg:hidden">
             <Image
-              src={project.mockup}
+              src={mobileMockup}
               alt={`${t.title} — mockups`}
               widths={[320, 540]}
               sizes="(min-width: 640px) 540px, 320px"
@@ -80,29 +102,10 @@ const accent = project.accent;
             />
           </div>
         )}
-
-        <div data-reveal class="w-full max-w-2xl mx-auto lg:mx-0 lg:w-auto">
-          <h2 class="case-accent mb-2 text-sm font-medium tracking-[0.3em] uppercase">
-            {t.solutionTitle}
-          </h2>
-          <p class="text-sm md:text-base leading-relaxed text-copy/70 dark:text-dark-muted">
-            {t.solution}
-          </p>
-        </div>
-
-        {project.comingSoon && (
-          <div data-reveal class="flex flex-col items-center lg:items-start gap-4">
-            <span
-              class="case-accent case-badge inline-flex items-center px-4 py-2 rounded-full text-xs font-medium tracking-wider uppercase border"
-            >
-              {t.comingSoon}
-            </span>
-          </div>
-        )}
       </div>
 
       {project.mockup && (
-        <div data-reveal class="hidden lg:block sticky top-28 self-start">
+        <div data-reveal class="hidden lg:flex h-full items-center justify-center py-8">
           <Image
             src={project.mockup}
             alt={`${t.title} — mockups`}
@@ -110,7 +113,7 @@ const accent = project.accent;
             sizes="(min-width: 1024px) 660px"
             loading="eager"
             decoding="async"
-            class="w-[660px]"
+            class="w-[660px] max-h-[70vh] object-contain"
           />
         </div>
       )}
@@ -137,9 +140,9 @@ const accent = project.accent;
 
   :global(.dark) .case-hero {
     background:
-      radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--project-accent) 22%, transparent), transparent 55%),
-      radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--project-accent) 14%, transparent), transparent 50%),
-      linear-gradient(rgba(22, 20, 18, 0.62), rgba(22, 20, 18, 0.62)),
+      radial-gradient(circle at 20% 25%, color-mix(in srgb, var(--project-accent) 14%, transparent), transparent 55%),
+      radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--project-accent) 8%, transparent), transparent 50%),
+      linear-gradient(rgba(22, 20, 18, 0.66), rgba(22, 20, 18, 0.66)),
       var(--project-style),
       var(--bg-hex);
   }

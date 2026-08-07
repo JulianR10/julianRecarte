@@ -53,14 +53,14 @@
         "company": "Triba"
       },
       {
-        "quote": "We needed a landing page that reflected the quality of our prints and Julián nailed it. Fast, neat, and incredibly patient with every change I asked for. Highly recommended.",
+        "quote": "We're really happy with Julián's work. You can already feel the quality and the care he's putting into our website, and we can't wait to see the project live. We're in very good hands.",
         "initials": "FP",
         "name": "Federico Pleitavino",
         "role": "Owner",
         "company": "SP Estampados"
       },
       {
-        "quote": "Building a website for a funeral home is not easy, but Julián found the right tone: serious, respectful, and functional. The online catalog opened many doors for us. Very happy with the result.",
+        "quote": "Julián is bringing our website to life with a just, professional tone that reflects our seriousness and respect. We're thrilled with the progress and can't wait to see the project go online.",
         "initials": "GP",
         "name": "Gianluca Petrungaro",
         "role": "Owner",
@@ -102,37 +102,27 @@
     "email": "Email"
   },
   "caseStudies": {
-    "stackLabel": "Stack",
-    "viewSite": "View site",
-    "comingSoon": "Coming soon",
     "backLabel": "Back to projects",
-    "ctaButton": "Let's talk on WhatsApp",
     "triba": {
       "title": "Triba",
       "description": "Development of a complete digital magazine: subscription system, automated newsletter, editions catalog, and a contributor program with application form. Editorial design with smooth navigation and comfortable reading on any device.",
       "subtitle": "Digital magazine with subscription system, automated newsletter and contributor program.",
       "challengeTitle": "The challenge",
-      "challenge": "The magazine needed more than a nice page — it needed a solid foundation to grow on. A subscription system, a newsletter that sent itself with every edition, a catalog of published issues and a contributor program with an application form. All with comfortable reading on any device.",
+      "challenge": "The magazine needed far more than a website: managing subscriptions, sending an automatic newsletter with each edition, archiving published issues and offering a contributor program. All with comfortable reading on any device.",
       "solutionTitle": "The solution",
-      "solution": "I designed a responsive editorial platform with smooth navigation and comfortable reading. The subscription system feeds the automated newsletter, which distributes every edition to readers with no manual work. The catalog organizes published issues and the contributor program opens the door to new content."
+      "solution": "I designed a responsive, intuitive editorial platform: subscriptions integrated with an automated newsletter, an archive of past issues and a contributor program that simplifies onboarding new authors.",
+      "plusTitle": "Autonomous management",
+      "plus": "I built a custom admin panel so the team can publish editions, manage subscribers and handle all the content easily, without depending on a developer."
     },
     "sp-soluciones-textiles": {
       "title": "SP Soluciones Textiles",
       "description": "Landing page for a textile business with service catalog, work gallery, and direct WhatsApp connection. Clean design with brand identity.",
-      "subtitle": "Landing page with service catalog and direct WhatsApp connection.",
-      "challengeTitle": "The challenge",
-      "challenge": "A landing page that reflected the quality of the prints and guided the customer to contact. No friction: clear information, a work gallery and a direct path to WhatsApp.",
-      "solutionTitle": "The solution",
-      "solution": "I designed a clean landing page with brand identity: service catalog, work gallery and WhatsApp buttons visible at all times. The design focuses on taking the visitor to the conversation."
+      "subtitle": "Landing page with service catalog and direct WhatsApp connection."
     },
     "multiservizi": {
       "title": "Multiservizi SRL",
       "description": "Italian funeral home offering wholesale products: ceramics, coffins, decorations and more. Complete digital catalog with smooth navigation.",
-      "subtitle": "Digital catalog for a wholesale funeral home.",
-      "challengeTitle": "The challenge",
-      "challenge": "A delicate industry that demands seriousness and respect without losing functionality. The catalog had to organize many products and types of items, with simple navigation that didn't overwhelm visitors.",
-      "solutionTitle": "The solution",
-      "solution": "I designed a complete digital catalog with smooth navigation, built to organize items by category and ease consultation. The visual tone matches the sobriety of the industry without sacrificing clarity."
+      "subtitle": "Digital catalog for a wholesale funeral home."
     }
   },
   "footer": {
