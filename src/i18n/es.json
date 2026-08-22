@@ -1,6 +1,6 @@
 {
   "nav": {
-    "projects": "Proyectos",
+    "projects": "Portfolio",
     "process": "Proceso",
     "contact": "Contacto",
     "lightMode": "Modo claro",
@@ -20,9 +20,9 @@
     "contact": "Contactar"
   },
   "projects": {
-    "label": "Proyectos",
-    "title": "Trabajos",
-    "highlight": "destacados",
+    "label": "Portfolio",
+    "title": "Algunos",
+    "highlight": "proyectos",
     "comingSoon": "Próximamente",
     "viewSite": "Ver sitio",
     "caseStudy": "Caso de estudio",
@@ -112,7 +112,10 @@
       "solutionTitle": "La solución",
       "solution": "Diseñé una plataforma editorial responsive e intuitiva: suscripciones integradas con newsletter automática, archivo de ediciones anteriores y un programa de colaboradores que simplifica la incorporación de autores.",
       "plusTitle": "Gestión autónoma",
-      "plus": "Desarrollé un panel de administración a medida para que el equipo publique ediciones, gestione suscriptores y administre el contenido con sencillez, sin depender de un desarrollador."
+      "plus": "Desarrollé un panel de administración a medida para que el equipo publique ediciones, gestione suscriptores y administre el contenido en ambos idiomas (español e inglés) con sencillez, sin depender de un desarrollador.",
+      "adminPanel": {
+        "badges": ["Panel admin", "Panel suscriptores", "Multilenguaje", "Autogestión total", "Suscripción multimoneda"]
+      }
     },
     "sp-soluciones-textiles": {
       "title": "SP Soluciones Textiles",
@@ -121,7 +124,7 @@
     },
     "multiservizi": {
       "title": "Multiservizi SRL",
-      "description": "Funeraria italiana con venta mayorista de artículos: cerámicas, cajones, adornos y más. Catálogo digital completo con navegación fluida.",
+      "description": "Funeraria italiana con venta mayorista de artículos: cerámicas, ataúdes, adornos y más. Catálogo digital completo con navegación fluida.",
       "subtitle": "Catálogo digital para una funeraria mayorista con venta de artículos."
     }
   },

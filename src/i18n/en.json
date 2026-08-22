@@ -1,6 +1,6 @@
 {
   "nav": {
-    "projects": "Projects",
+    "projects": "Portfolio",
     "process": "Process",
     "contact": "Contact",
     "lightMode": "Light mode",
@@ -20,9 +20,9 @@
     "contact": "Contact"
   },
   "projects": {
-    "label": "Projects",
-    "title": "Featured",
-    "highlight": "work",
+    "label": "Portfolio",
+    "title": "Selected",
+    "highlight": "projects",
     "comingSoon": "Coming soon",
     "viewSite": "View site",
     "caseStudy": "Case study",
@@ -112,7 +112,10 @@
       "solutionTitle": "The solution",
       "solution": "I designed a responsive, intuitive editorial platform: subscriptions integrated with an automated newsletter, an archive of past issues and a contributor program that simplifies onboarding new authors.",
       "plusTitle": "Autonomous management",
-      "plus": "I built a custom admin panel so the team can publish editions, manage subscribers and handle all the content easily, without depending on a developer."
+      "plus": "I built a custom admin panel so the team can publish editions, manage subscribers and handle all the content in both languages (Spanish and English) easily, without depending on a developer.",
+      "adminPanel": {
+        "badges": ["Admin panel", "Subscribers panel", "Multilanguage", "Full self-management", "Multicurrency subscription"]
+      }
     },
     "sp-soluciones-textiles": {
       "title": "SP Soluciones Textiles",

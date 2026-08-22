@@ -1,0 +1,33 @@
+---
+interface Props {
+  t: {
+    badges: string[];
+  };
+}
+
+const { t } = Astro.props;
+---
+
+<div data-reveal class="w-full">
+  <ul class="flex flex-wrap justify-center lg:justify-start gap-2" aria-label="Admin panel features">
+    {t.badges.map((badge) => (
+      <li class="admin-badge rounded-full border px-3.5 py-1.5 text-[10px] md:text-[11px] font-medium">
+        {badge}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .admin-badge {
+    color: var(--project-accent);
+    border-color: color-mix(in srgb, var(--project-accent) 35%, transparent);
+    background-color: color-mix(in srgb, var(--project-accent) 8%, transparent);
+  }
+
+  :global(.dark) .admin-badge {
+    color: color-mix(in srgb, var(--project-accent) 60%, #fff);
+    border-color: color-mix(in srgb, var(--project-accent) 50%, #fff);
+    background-color: color-mix(in srgb, var(--project-accent) 20%, transparent);
+  }
+</style>

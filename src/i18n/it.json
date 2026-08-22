@@ -1,6 +1,6 @@
 {
   "nav": {
-    "projects": "Progetti",
+    "projects": "Portfolio",
     "process": "Processo",
     "contact": "Contatti",
     "lightMode": "Modalità chiara",
@@ -20,9 +20,9 @@
     "contact": "Contattami"
   },
   "projects": {
-    "label": "Progetti",
-    "title": "Lavori in",
-    "highlight": "evidenza",
+    "label": "Portfolio",
+    "title": "Alcuni",
+    "highlight": "progetti",
     "comingSoon": "Prossimamente",
     "viewSite": "Vedi sito",
     "caseStudy": "Caso di studio",
@@ -112,7 +112,10 @@
       "solutionTitle": "La soluzione",
       "solution": "Ho progettato una piattaforma editoriale responsive e intuitiva: abbonamenti integrati con newsletter automatica, archivio delle edizioni precedenti e un programma di collaboratori che semplifica l'ingresso di nuovi autori.",
       "plusTitle": "Gestione autonoma",
-      "plus": "Ho sviluppato un pannello di amministrazione su misura affinché il team pubblichi edizioni, gestisca gli abbonati e amministri il contenuto con semplicità, senza dipendere da uno sviluppatore."
+      "plus": "Ho sviluppato un pannello di amministrazione su misura affinché il team pubblichi edizioni, gestisca gli abbonati e amministri il contenuto in entrambe le lingue (spagnolo e inglese) con semplicità, senza dipendere da uno sviluppatore.",
+      "adminPanel": {
+        "badges": ["Pannello admin", "Pannello abbonati", "Multilingue", "Autogestione totale", "Abbonamento multivaluta"]
+      }
     },
     "sp-soluciones-textiles": {
       "title": "SP Soluciones Textiles",

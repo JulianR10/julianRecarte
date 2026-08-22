@@ -16,6 +16,9 @@ export interface ProjectCopy {
   solution: string;
   plusTitle?: string;
   plus?: string;
+  adminPanel?: {
+    badges: string[];
+  };
 }
 
 export function getProjectCopy(slug: string, lang: string): ProjectCopy {

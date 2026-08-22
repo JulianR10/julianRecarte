@@ -32,6 +32,17 @@ describe("getProjectCopy", () => {
     }
   });
 
+  it("returns the triba adminPanel (badges) in every language", () => {
+    for (const lang of LANGS) {
+      const triba = getProjectCopy("triba", lang);
+      expect(triba.adminPanel, `${lang}/triba adminPanel`).toBeTruthy();
+      expect(triba.adminPanel?.badges, `${lang}/triba badges`).toHaveLength(5);
+      for (const badge of triba.adminPanel?.badges ?? []) {
+        expect(badge, `${lang}/badge`).not.toBe("");
+      }
+    }
+  });
+
   it("throws in dev for an unknown slug instead of returning a silent ''", () => {
     expect(() => getProjectCopy("proyecto-inexistente", "es")).toThrow(/caseStudies/);
     expect(() => getProjectCopy("triba", "de")).toThrow(/caseStudies/);
