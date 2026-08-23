@@ -1,5 +1,6 @@
 {
   "nav": {
+    "solutions": "Soluciones",
     "projects": "Portfolio",
     "process": "Proceso",
     "contact": "Contacto",
@@ -18,6 +19,27 @@
     "cta": "¿Hablamos de tu proyecto?",
     "viewProjects": "Ver proyectos",
     "contact": "Contactar"
+  },
+  "soluciones": {
+    "label": "Soluciones",
+    "title": "Elegí por dónde",
+    "highlight": "empezar",
+    "cta": "Hablemos de tu proyecto",
+    "hint": "¿Tenés una idea diferente o querés combinar soluciones? Creamos un proyecto adaptado 100% a tus necesidades.",
+    "items": [
+      {
+        "title": "Presencia",
+        "description": "Landing o sitio institucional, diseño responsive e integración directa con WhatsApp para que te contacten sin fricción."
+      },
+      {
+        "title": "Catálogo",
+        "description": "Productos o servicios organizados por categorías, con filtros, galería y formularios para captar consultas."
+      },
+      {
+        "title": "Venta",
+        "description": "Ecommerce completo con pagos, cuentas de usuario y suscripciones. Todo listo para vender y escalar."
+      }
+    ]
   },
   "projects": {
     "label": "Portfolio",

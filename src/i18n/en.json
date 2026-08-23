@@ -1,5 +1,6 @@
 {
   "nav": {
+    "solutions": "Solutions",
     "projects": "Portfolio",
     "process": "Process",
     "contact": "Contact",
@@ -18,6 +19,27 @@
     "cta": "Shall we talk about your project?",
     "viewProjects": "View projects",
     "contact": "Contact"
+  },
+  "soluciones": {
+    "label": "Solutions",
+    "title": "Choose where",
+    "highlight": "to start",
+    "cta": "Let's talk about your project",
+    "hint": "Have a different idea or want to combine solutions? We'll create a project 100% tailored to your needs.",
+    "items": [
+      {
+        "title": "Presence",
+        "description": "Landing or institutional site, responsive design and direct WhatsApp integration so clients can reach you frictionlessly."
+      },
+      {
+        "title": "Catalog",
+        "description": "Products or services organized by categories, with filters, gallery and forms to capture inquiries."
+      },
+      {
+        "title": "Sales",
+        "description": "Full ecommerce with payments, user accounts and subscriptions. Ready to sell and scale."
+      }
+    ]
   },
   "projects": {
     "label": "Portfolio",

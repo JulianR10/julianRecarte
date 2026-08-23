@@ -70,6 +70,7 @@ export const nav = defineComponent("nav", (scope) => {
 
   // --- active section ------------------------------------------------------
   const sections = [
+    { id: "soluciones", link: document.querySelector<HTMLElement>('.desktop-link[href="#soluciones"]') },
     { id: "proyectos", link: document.querySelector<HTMLElement>('.desktop-link[href="#proyectos"]') },
     { id: "proceso", link: document.querySelector<HTMLElement>('.desktop-link[href="#proceso"]') },
     { id: "contacto", link: document.querySelector<HTMLElement>('.desktop-link[href="#contacto"]') },

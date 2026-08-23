@@ -1,0 +1,19 @@
+---
+interface Props {
+  edge: "top" | "bottom";
+}
+
+const { edge } = Astro.props;
+---
+
+{edge === "top" ? (
+  <div
+    aria-hidden="true"
+    class="section-fade section-fade-top pointer-events-none absolute left-0 right-0"
+  ></div>
+) : (
+  <div
+    aria-hidden="true"
+    class="section-fade section-fade-bottom pointer-events-none absolute left-0 right-0"
+  ></div>
+)}

@@ -65,13 +65,31 @@ const mobileMockup = project.mockupMobile ?? project.mockup;
         <div class="flex flex-col items-center lg:items-start">
           {project.image && (
             <div data-reveal class="mb-5 flex justify-center lg:justify-start">
-              <img
-                src={project.image.src}
-                alt={`${t.title} logo`}
-                class="h-14 md:h-16 w-auto object-contain"
-                loading="eager"
-                decoding="async"
-              />
+              {project.slug === "triba" ? (
+                <a
+                  href="https://www.universotriba.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${t.title} — visitar sitio`}
+                  class="inline-flex hover:opacity-80 transition-opacity duration-300"
+                >
+                  <img
+                    src={project.image.src}
+                    alt={`${t.title} logo`}
+                    class="h-14 md:h-16 w-auto object-contain"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={project.image.src}
+                  alt={`${t.title} logo`}
+                  class="h-14 md:h-16 w-auto object-contain"
+                  loading="eager"
+                  decoding="async"
+                />
+              )}
             </div>
           )}
 

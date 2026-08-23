@@ -38,8 +38,10 @@ src/
 [lang]/index.astro (page orchestrator)
 ├── Layout.astro (shell: head, slots, scripts)
 │   ├── slot "nav"  → Nav.astro + nav.js
-│   ├── slot "hero" → Hero.astro
-│   └── slot default → Waves, Projects, Testimonials, Process, Contact, Footer
+│   ├── slot "hero" → Hero.astro + SectionFade (bottom)
+│   └── slot default → Waves, Soluciones (+SectionFade top), Projects, Testimonials, Process, Contact, Footer
+├── CaseStudy.astro (en [lang]/proyectos/[slug].astro)
+└── SectionFade.astro (reutilizable, token --section-fade-h)
 ```
 
 ### Script Lifecycle (ViewTransitions)
@@ -68,7 +70,7 @@ const cleanup = onScroll((scroll, velocity, direction) => { /* ... */ });
 
 ### Language Switching
 
-`LangSelector.astro` renders flag buttons. `nav.ts` handles dropdown toggle and navigates via `window.location.pathname` rewrite (full page reload with ViewTransitions slide).
+`LangSelector.astro` renders language codes `ES/EN/IT` (no flags, per W3C — flags = countries, not languages) in two instances `desktop`/`overlay` (`LangSelector.astro:22`, `Nav.astro:89`). Dropdown `72px` (`--dd-min-w`, `LangSelector.astro:73,93`) with `scaleY` transition, `Nav.astro:89` inner `overflow-visible` to avoid clipping on mobile. `nav.ts` handles dropdown toggle and navigates via `window.location.pathname` rewrite (full page reload with ViewTransitions slide).
 
 ## The `data-*` Hook System
 
@@ -88,6 +90,7 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 | `[data-wave]` | waves.ts | SVG path morph + scroll parallax depth |
 | `[data-magnetic]` | magnetic.ts | Magnetic button hover (Hero CTAs, Contact links) |
 | `[data-process-step]` | animations.ts | Process image scale on scroll |
+| `[data-solu-line]` | soluciones-lines.ts | Separator line draw (scaleX) for Soluciones |
 
 ## Known Pitfalls
 
@@ -133,6 +136,7 @@ Elements with `will-change: transform/opacity/filter` get promoted to GPU layers
 | `card-tilt.ts` | 3D card tilt + shine | No (mouse-based) | Yes |
 | `magnetic.ts` | Magnetic hover on CTAs / contact links | No (mouse-based) | Yes |
 | `cine-text.ts` | Character stagger reveal | Yes | Yes |
+| `soluciones-lines.ts` | Soluciones separator draw | Yes | Yes |
 
 All modules use `defineAnimation` / `gsap.context()` for scoped cleanup. `destroy()` calls `ctx.kill()`.
 
@@ -150,6 +154,20 @@ Three languages in `src/i18n/`. The `safeT()` Proxy in `[lang]/index.astro` retu
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 ```
+
+Simple approach: beige at 95% opacity + minimal blur. No saturate, no separate scrolled state. Transition only on transform for show/hide animations.
+
+## Soluciones — Sección editorial
+
+Ubicada entre Hero y Projects (`[lang]/index.astro:33`). Sin cards (intencional) para no repetir `ProjectCard`/`Testimonials`.
+
+- **Layout:** lista editorial `grid-cols-[300px_1fr]` con separadores `h-px bg-black/[0.08]` animados vía `[data-solu-line]` (`soluciones-lines.ts` scaleX 0→1 0.6s stagger 0.08). Contenedor `max-w-7xl` (alineado con resto, no `5xl`). Título `Elegí por dónde / empezar` (it/en: `Scegli da dove / iniziare`, `Choose where / to start`), hint central `italic text-wrap: balance` + CTA único `w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg` (mismo que Hero primario).
+- **IDs:** `soluciones` (nav anchor), nav `IntersectionObserver` en `nav.ts` incluye `soluciones`.
+- **i18n:** `soluciones { label, title, highlight, hint, cta, items[3] }` en `es/en/it.json`.
+
+## SectionFade — Sistema de transición
+
+Token `--section-fade-h: 128px` en `globals.css:25`. Componente `SectionFade.astro` (`edge="top"|"bottom"`) con curva ease de 7 paradas `color-mix(in srgb, var(--bg-hex) X%, transparent)` para fundido imperceptible. Doble fundido: `Hero bottom` (dentro, `bottom:0`) + `Soluciones top` (fuera, `top: calc(-1*var)`). Solo para sticky hero, no se extiende a otras secciones.
 
 Simple approach: beige at 95% opacity + minimal blur. No saturate, no separate scrolled state. Transition only on transform for show/hide animations.
 
@@ -183,7 +201,11 @@ mayor oportunidad de retorno actual.
 | 7 | **Footer (cierre)** | Solo copyright + firma | Falta mini-navegación / sociales / CTA de cierre para no depender del scroll | Medio | Bajo |
 | 8 | **Floating (WhatsApp + Top)** | Ambos aparecen al scroll | Funcionan bien; oportunidad menor de tooltip/label | Bajo | Bajo |
 
-## Case Studies — Plan en pausa (retomar luego)
+## Case Studies — Implementado (Triba live)
+
+Página dedicada por proyecto en `[lang]/proyectos/[slug].astro` (slug invariante, `switchLang` conserva path). Triba live con `logoTriba` linkeado a `https://www.universotriba.com/` en `CaseStudy.astro:66`; SP y Multiservizi en `comingSoon`. Usa `SectionFade` no, hero con `fondoTriba.webp` + veil `color-mix`.
+
+## Case Studies — Plan en pausa (histórico)
 
 Feature aprobado: **una página de case study por producto** (`/es/proyectos/<slug>/`). Resuelve
 SEO/IA (#5 del audit) y ataca el foco recomendado del mapa UX (#3 Projects). Enfoque confirmado:

@@ -12,6 +12,7 @@ import { revealObserver } from "@scripts/reveal-observer";
 import { backToTop } from "@scripts/back-to-top";
 import { testimonialsCarousel } from "@scripts/testimonials-carousel";
 import { projectsCarousel } from "@scripts/projects-carousel";
+import { solucionesLines } from "@scripts/soluciones-lines";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +24,7 @@ const animations = [
   magnetic,
   progressAnimations,
   cineText,
+  solucionesLines,
 ];
 
 export function initAll(): void {

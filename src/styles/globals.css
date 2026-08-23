@@ -22,6 +22,7 @@
   --rgb-accent-pastel: 255, 176, 136;
   --navbar-h: 76px;
   scroll-padding-top: var(--navbar-h, 76px);
+  --section-fade-h: 128px;
 }
 
 :root.dark {
@@ -221,13 +222,47 @@ h6 {
 }
 
 /* ============================================
-    WhatsApp Button
-    ============================================ */
+     WhatsApp Button
+     ============================================ */
   .wa-btn {
     border: 2px solid transparent;
     background-image: linear-gradient(var(--bg-hex), var(--bg-hex)), linear-gradient(to right, var(--clr-accent-orange), var(--clr-accent-pastel));
     background-origin: border-box;
     background-clip: padding-box, border-box;
+  }
+
+/* ============================================
+     Section Edge Fades — structural system
+     Token: --section-fade-h (default 128px, sutil con recorrido)
+     Uso: <SectionFade edge="top|bottom" /> dentro de section relative
+     Doble fundido: Hero bottom + siguiente section top
+     Curva ease con múltiples paradas para fundido imperceptible
+    ============================================ */
+  .section-fade {
+    height: var(--section-fade-h);
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg-hex) 0%, transparent) 0%,
+      color-mix(in srgb, var(--bg-hex) 5%, transparent) 22%,
+      color-mix(in srgb, var(--bg-hex) 18%, transparent) 38%,
+      color-mix(in srgb, var(--bg-hex) 42%, transparent) 54%,
+      color-mix(in srgb, var(--bg-hex) 72%, transparent) 72%,
+      color-mix(in srgb, var(--bg-hex) 92%, transparent) 88%,
+      var(--bg-hex) 100%
+    );
+  }
+
+  .section-fade-top {
+    top: calc(-1 * var(--section-fade-h));
+  }
+
+  .section-fade-bottom {
+    bottom: 0;
+  }
+
+  /* Soluciones — sutil line draw (A+B) */
+  [data-solu-line] {
+    transform: scaleX(0);
   }
 
 /* ============================================
@@ -244,5 +279,9 @@ h6 {
 
   html {
     scroll-behavior: auto;
+  }
+
+  [data-solu-line] {
+    transform: scaleX(1) !important;
   }
 }

@@ -3,6 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import Waves from "@components/Waves.astro";
 import Nav from "@components/Nav.astro";
 import Hero from "@components/Hero.astro";
+import Soluciones from "@components/Soluciones.astro";
 import Projects from "@components/Projects.astro";
 import Process from "@components/Process.astro";
 import Contact from "@components/Contact.astro";
@@ -30,6 +31,7 @@ const t = safeT(raw);
   <Waves />
   <Nav slot="nav" lang={lang} t={t.nav} />
   <Hero slot="hero" t={t.hero} />
+  <Soluciones t={t.soluciones} />
   <Projects lang={lang} t={t.projects} />
   <Testimonials t={t.testimonials} />
   <Process t={t.process} />

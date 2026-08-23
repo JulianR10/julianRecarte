@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import heroImg from "@assets/images/yo.webp";
 import WhatsAppIcon from "@components/WhatsAppIcon.astro";
+import SectionFade from "@components/SectionFade.astro";
 
 interface Props {
   t: {
@@ -111,4 +112,5 @@ const { t } = Astro.props;
 
   </div>
 
+  <SectionFade edge="bottom" />
 </section>

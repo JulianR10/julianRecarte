@@ -1,5 +1,6 @@
 {
   "nav": {
+    "solutions": "Soluzioni",
     "projects": "Portfolio",
     "process": "Processo",
     "contact": "Contatti",
@@ -18,6 +19,27 @@
     "cta": "Parliamo del tuo progetto?",
     "viewProjects": "Vedi progetti",
     "contact": "Contattami"
+  },
+  "soluciones": {
+    "label": "Soluzioni",
+    "title": "Scegli da dove",
+    "highlight": "iniziare",
+    "cta": "Parliamo del tuo progetto",
+    "hint": "Hai un'idea diversa o vuoi combinare soluzioni? Creiamo un progetto adattato al 100% alle tue esigenze.",
+    "items": [
+      {
+        "title": "Presenza",
+        "description": "Landing o sito istituzionale, design responsive e integrazione diretta con WhatsApp per farti contattare senza attrito."
+      },
+      {
+        "title": "Catalogo",
+        "description": "Prodotti o servizi organizzati per categorie, con filtri, galleria e moduli per raccogliere richieste."
+      },
+      {
+        "title": "Vendita",
+        "description": "Ecommerce completo con pagamenti, account utente e abbonamenti. Pronto per vendere e scalare."
+      }
+    ]
   },
   "projects": {
     "label": "Portfolio",
