@@ -24,7 +24,7 @@ const caseStudyHref = `/${lang}/proyectos/${slug}/`;
 
 const wrapperAttrs: Record<string, any> = {
   "data-project-card": true,
-  class: `${className || ""} group relative rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5`.trim(),
+  class: `${className || ""} group relative overflow-hidden isolate rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5`.trim(),
 };
 ---
 
@@ -32,11 +32,11 @@ const wrapperAttrs: Record<string, any> = {
   <div data-card-shine class="pointer-events-none absolute inset-0 rounded-2xl opacity-0 z-[1]"></div>
 
   <div
-    class="aspect-[4/3] relative overflow-hidden rounded-2xl"
+    class="aspect-[4/3] relative overflow-hidden rounded-t-2xl"
     style={image ? undefined : "background: " + style}
   >
     {image ? (
-      <Image src={image} alt={title} width={400} height={300} loading="lazy" decoding="async" class="w-full h-full object-contain p-8" style={`background: ${style}; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25))`} />
+      <Image src={image} alt={title} width={400} height={300} loading="lazy" decoding="async" class="w-full h-full object-contain p-8 rounded-t-2xl" style={`background: ${style}; filter: drop-shadow(0 6px 20px rgba(0,0,0,0.25))`} />
     ) : (
       <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTAgMjBoNDBNMjAgMHY0MCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjAuNSIgc3Ryb2tlLW9wYWNpdHk9IjAuMDYiLz48L3N2Zz4=')] opacity-50">
       </div>
@@ -56,7 +56,7 @@ const wrapperAttrs: Record<string, any> = {
   </div>
 
   <div class="p-6 md:p-8">
-    <h3 class="text-2xl font-medium mb-3 text-accent-purple transition-colors duration-300 md:group-hover:text-accent-orange">
+    <h3 class="text-2xl font-medium mb-3 text-accent-orange transition-colors duration-300 md:group-hover:text-accent-purple">
       {title}
     </h3>
     <p class="text-copy/60 dark:text-dark-muted text-sm leading-relaxed mb-6">
