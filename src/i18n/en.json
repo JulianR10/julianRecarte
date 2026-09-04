@@ -15,7 +15,10 @@
     "label": "FullStack Web Developer",
     "greetingPrefix": "Hi, I'm ",
     "greetingName": "Julián Recarte",
-    "subtitle": "I turn brands into interactive web experiences for businesses that want to stand out.",
+    "subtitlePrefix": "I turn",
+    "subtitleWords": ["ideas", "projects", "visions", "concepts"],
+    "subtitleTail": "into interactive web",
+    "subtitleLine2": "experiences for businesses that want to stand out.",
     "cta": "Shall we talk about your project?",
     "viewProjects": "View projects",
     "contact": "Contact"
@@ -25,7 +28,8 @@
     "title": "Choose where",
     "highlight": "to start",
     "cta": "Let's talk about your project",
-    "hint": "Have a different idea or want to combine solutions? We'll create a project 100% tailored to your needs.",
+    "hint": "Have a different idea or want to combine solutions? We'll create a project ",
+    "hintHighlight": "100% tailored to your needs.",
     "items": [
       {
         "title": "Presence",

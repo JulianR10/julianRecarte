@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initLenis, destroyLenis } from "@scripts/lenis-adapter";
 import { waves } from "@scripts/waves";
 import { heroZap } from "@scripts/hero-zap";
+import { heroRotator } from "@scripts/hero-rotator";
 import { cardTilt } from "@scripts/card-tilt";
 import { heroScroll } from "@scripts/hero-scroll";
 import { progressAnimations } from "@scripts/animations";
@@ -20,6 +21,7 @@ const animations = [
   heroScroll,
   waves,
   heroZap,
+  heroRotator,
   cardTilt,
   magnetic,
   progressAnimations,

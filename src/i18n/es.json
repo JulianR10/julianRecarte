@@ -15,7 +15,10 @@
     "label": "Desarrollador web FullStack",
     "greetingPrefix": "Hola, soy ",
     "greetingName": "Julián Recarte",
-    "subtitle": "Convierto ideas en experiencias web interactivas para negocios que buscan destacar.",
+    "subtitlePrefix": "Convierto",
+    "subtitleWords": ["ideas", "proyectos", "visiones", "conceptos"],
+    "subtitleTail": "en experiencias web",
+    "subtitleLine2": "interactivas para negocios que buscan destacar.",
     "cta": "¿Hablamos de tu proyecto?",
     "viewProjects": "Ver proyectos",
     "contact": "Contactar"
@@ -25,7 +28,8 @@
     "title": "Elegí por dónde",
     "highlight": "empezar",
     "cta": "Hablemos de tu proyecto",
-    "hint": "¿Tenés una idea diferente o querés combinar soluciones? Creamos un proyecto adaptado 100% a tus necesidades.",
+    "hint": "¿Tenés una idea diferente o querés combinar soluciones? Creamos un proyecto ",
+    "hintHighlight": "adaptado 100% a tus necesidades.",
     "items": [
       {
         "title": "Presencia",
@@ -37,7 +41,7 @@
       },
       {
         "title": "Venta",
-        "description": "Ecommerce completo con pagos, cuentas de usuario y suscripciones. Todo listo para vender y escalar."
+          "description": "Ecommerce completo con sistema de pagos, cuentas de usuario y suscripciones. Todo listo para vender y escalar."
       }
     ]
   },

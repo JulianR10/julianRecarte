@@ -9,7 +9,10 @@ interface Props {
     label: string;
     greetingPrefix: string;
     greetingName: string;
-    subtitle: string;
+    subtitlePrefix: string;
+    subtitleWords: string[];
+    subtitleTail: string;
+    subtitleLine2: string;
     cta: string;
     viewProjects: string;
     contact: string;
@@ -62,9 +65,30 @@ const { t } = Astro.props;
 
       <p
         data-reveal
-        class="text-base sm:text-lg md:text-xl tracking-tight mb-6 text-copy/60 dark:text-dark-copy/60 text-balance"
+        class="text-base sm:text-lg md:text-xl tracking-tight mb-6 text-copy/60 dark:text-dark-copy/60"
       >
-        {t.subtitle}
+        <span class="block">
+          {t.subtitlePrefix}{" "}
+          <span
+            data-rotator
+            class="relative inline-block align-baseline text-accent-orange font-medium"
+            aria-live="polite"
+          >
+            {(Array.isArray(t.subtitleWords) ? t.subtitleWords : []).map((word, i) => (
+              <span
+                data-rotator-word
+                class:list={["whitespace-nowrap", i === 0 ? "relative inline-block" : "absolute left-0 top-0 opacity-0 invisible"]}
+                aria-hidden={i !== 0 ? "true" : undefined}
+              >
+                <span class="rotator-base relative inline-block">{word}</span>
+                <span data-rotator-zap aria-hidden="true" class="absolute inset-0 pointer-events-none zap-glow-brand">{word}</span>
+                <span data-rotator-zap aria-hidden="true" class="absolute inset-0 pointer-events-none zap-glow-orange">{word}</span>
+              </span>
+            ))}
+          </span>{" "}
+          {t.subtitleTail}
+        </span>
+        <span class="block">{t.subtitleLine2}</span>
       </p>
 
       <p data-reveal class="font-satoshi text-base sm:text-lg md:text-xl italic text-accent-orange/80 mt-6 mb-8 text-balance">

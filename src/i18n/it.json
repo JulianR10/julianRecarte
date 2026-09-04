@@ -15,7 +15,10 @@
     "label": "Sviluppatore Web FullStack",
     "greetingPrefix": "Ciao, sono ",
     "greetingName": "Julián Recarte",
-    "subtitle": "Trasformo marchi in esperienze web interattive per aziende che vogliono distinguersi.",
+    "subtitlePrefix": "Trasformo",
+    "subtitleWords": ["idee", "progetti", "visioni", "concetti"],
+    "subtitleTail": "in esperienze web",
+    "subtitleLine2": "interattive per aziende che vogliono distinguersi.",
     "cta": "Parliamo del tuo progetto?",
     "viewProjects": "Vedi progetti",
     "contact": "Contattami"
@@ -25,7 +28,8 @@
     "title": "Scegli da dove",
     "highlight": "iniziare",
     "cta": "Parliamo del tuo progetto",
-    "hint": "Hai un'idea diversa o vuoi combinare soluzioni? Creiamo un progetto adattato al 100% alle tue esigenze.",
+    "hint": "Hai un'idea diversa o vuoi combinare soluzioni? Creiamo un progetto ",
+    "hintHighlight": "adattato al 100% alle tue esigenze.",
     "items": [
       {
         "title": "Presenza",

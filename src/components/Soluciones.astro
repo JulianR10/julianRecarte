@@ -1,6 +1,5 @@
 ---
 import SectionHeader from "./SectionHeader.astro";
-import SectionFade from "./SectionFade.astro";
 
 interface SolucionItem {
   title: string;
@@ -14,6 +13,7 @@ interface Props {
     highlight: string;
     cta: string;
     hint: string;
+    hintHighlight: string;
     items: SolucionItem[];
   };
 }
@@ -23,10 +23,8 @@ const { t } = Astro.props;
 
 <section
   id="soluciones"
-  class="relative z-[2] px-6 py-16 md:py-24"
-  style="background-color: var(--bg-hex)"
+  class="relative z-[2] px-6 py-16 md:py-24 bg-transparent"
 >
-  <SectionFade edge="top" />
   <div class="max-w-7xl mx-auto">
     <SectionHeader label={t.label} title={t.title} highlight={t.highlight} />
 
@@ -55,7 +53,7 @@ const { t } = Astro.props;
     </div>
 
     <p class="text-center text-sm md:text-base italic text-copy/60 dark:text-dark-muted max-w-2xl mx-auto mt-10 md:mt-12" style="text-wrap: balance;" data-reveal>
-      {t.hint}
+      {t.hint}<span class="underline decoration-accent-orange decoration-2 underline-offset-4">{t.hintHighlight}</span>
     </p>
 
     <div class="flex justify-center mt-10 md:mt-12" data-reveal>

@@ -1,5 +1,10 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import SectionHeader from "./SectionHeader.astro";
+import logoTriba from "@assets/images/logoTriba.svg";
+import logoSP from "@assets/images/logoSP.png";
+import logoMultiservizi from "@assets/images/logoMultiservizi.png";
 
 interface TestimonialItem {
   quote: string;
@@ -23,6 +28,17 @@ interface Props {
 }
 
 const { t } = Astro.props;
+
+// Avatar: logo de la empresa según el testimonio; si no hay match, iniciales.
+const companyLogos: { match: RegExp; logo: ImageMetadata }[] = [
+  { match: /triba/i, logo: logoTriba },
+  { match: /multiservizi/i, logo: logoMultiservizi },
+  { match: /sp|estampado/i, logo: logoSP },
+];
+
+function logoFor(company: string): ImageMetadata | null {
+  return companyLogos.find(({ match }) => match.test(company))?.logo ?? null;
+}
 ---
 
 <section id="testimonios" class="relative z-[1] px-6 py-16 md:py-24 overflow-visible">
@@ -54,9 +70,26 @@ const { t } = Astro.props;
               &ldquo;{item.quote}&rdquo;
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent-orange/30 to-accent-purple/30 flex items-center justify-center text-xs font-bold text-accent-orange flex-shrink-0">
-                {item.initials}
-              </div>
+              {(() => {
+                const logo = logoFor(item.company);
+                return logo ? (
+                  <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center flex-shrink-0 overflow-hidden p-1.5 shadow-md">
+                    <Image
+                      src={logo}
+                      alt={item.company}
+                      width={96}
+                      height={96}
+                      class="w-full h-full object-contain"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : (
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent-orange/30 to-accent-purple/30 flex items-center justify-center text-xs font-bold text-accent-orange flex-shrink-0">
+                    {item.initials}
+                  </div>
+                );
+              })()}
               <div class="min-w-0">
                 <h3 class="text-base font-bold text-copy dark:text-dark-copy truncate">{item.name}</h3>
                 <p class="text-sm text-copy/50 dark:text-dark-muted/60 truncate">{item.role} &mdash; {item.company}</p>

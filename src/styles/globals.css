@@ -192,6 +192,19 @@ h6 {
 }
 
 /* ============================================
+   Outlined section taglines (editorial)
+   Relleno transparente + trazo fino. Con red de
+   seguridad: sin soporte, queda naranja sólido.
+   ============================================ */
+@supports (-webkit-text-stroke: 1px black) {
+  .label-outline {
+    color: transparent;
+    -webkit-text-stroke: 0.75px var(--clr-accent-orange);
+    paint-order: stroke fill;
+  }
+}
+
+/* ============================================
    Card Shine
    ============================================ */
 [data-card-shine] {
