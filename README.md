@@ -96,7 +96,7 @@ npm test          # corre Vitest
 
 ### Tipografía
 
-- **Display:** Outfit (variable, `wght` 500..700 — títulos a `600`)
+- **Display:** Outfit (variable, `wght` 500..700 — títulos a `500`)
 - **Body:** Satoshi (400, 500, 700)
 
 ## 🎬 Características

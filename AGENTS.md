@@ -283,7 +283,7 @@ es "entrar al mundo del producto" manteniendo coherencia con el sistema (beige `
 copy `#1A1613`, Outfit display + Satoshi body).
 
 - Nuevo token `--project-accent` derivado del gradiente de cada proyecto (eyebrow, hover, wash).
-- Tipografía existente; título del proyecto en Outfit (`600`).
+- Tipografía existente; título del proyecto en Outfit (`500`).
 - **Sin marcadores numerados** (01/02/03): el contenido es narrativo. Eyebrows semánticos:
   *El proyecto / El desafío / La solución / Resultados*.
 - Resultados como bloques cortos con viñeta, **no** stats inventadas ni "big number" template.
