@@ -14,6 +14,8 @@ export interface Project {
   title: string;
   slug: string;
   year: string;
+  /** Fecha de publicación (ISO 8601, YYYY-MM-DD) para el JSON-LD del case study. */
+  publishedAt?: string;
   stack: string[];
   accent: string;
   style: string;
@@ -30,7 +32,8 @@ export const projects: Project[] = [
   {
     title: "Triba",
     slug: "triba",
-    year: "2025",
+    year: "2026",
+    publishedAt: "2026-08-02",
     stack: ["Astro", "Tailwind", "Supabase", "Node"],
     accent: "#DE062E",
     liveUrl: "https://www.universotriba.com/",
@@ -44,7 +47,8 @@ export const projects: Project[] = [
   {
     title: "Multiservizi SRL",
     slug: "multiservizi",
-    year: "2025",
+    year: "2026",
+    publishedAt: "2026-10-14",
     stack: ["Astro", "Tailwind", "Supabase", "Node"],
     accent: "#800020",
     liveUrl: "https://www.multiservizifunerari.online/",

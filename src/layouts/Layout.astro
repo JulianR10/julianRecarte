@@ -15,6 +15,7 @@ interface ArticleData {
   url?: string;
   image?: string;
   datePublished?: string;
+  dateModified?: string;
 }
 
 interface Props {
@@ -26,6 +27,10 @@ interface Props {
   canonical?: string;
   alternates?: Alternate[];
   article?: ArticleData;
+  ogImage?: string;
+  personBio?: string;
+  schema?: Record<string, unknown>[];
+  noindex?: boolean;
   lock?: boolean;
   t?: {
     skipLink: string;
@@ -46,9 +51,33 @@ const {
     { lang: "it", href: "https://julianrecarte.dev/it/" },
   ],
   article,
+  ogImage,
+  personBio,
+  schema = [],
+  noindex = false,
   lock = false,
   t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba" },
 } = Astro.props;
+
+const SITE = "https://julianrecarte.dev";
+const DEFAULT_LOCALE = "es";
+
+// URL absoluta de la imagen Open Graph (default: portada del sitio).
+const ogImageUrl = (ogImage || "/og-cover.jpg").startsWith("http")
+  ? (ogImage as string)
+  : `${SITE}${ogImage || "/og-cover.jpg"}`;
+
+// x-default apunta a la versión del idioma por defecto (antes: home fijo).
+const xDefault = alternates.find((a) => a.lang === DEFAULT_LOCALE)?.href ?? canonical;
+
+// og:locale principal + alternativos.
+const localeMap: Record<string, string> = { es: "es_ES", en: "en_US", it: "it_IT" };
+const ogLocale = localeMap[lang] ?? "es_ES";
+const ogLocaleAlternates = Object.entries(localeMap)
+  .filter(([code]) => code !== lang)
+  .map(([, value]) => value);
+
+const personDescription = personBio || description;
 ---
 
 <!doctype html>
@@ -58,10 +87,17 @@ const {
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preloads / hints por página (p. ej. imagen LCP del hero). -->
+    <slot name="head" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="Julián Recarte" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#E8E0D0" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1C1A18" media="(prefers-color-scheme: dark)" />
     <meta name="google-site-verification" content="uCipOPVggRgVZ-5D8k06oVtNT1oeVXRMeu4rabjkL9o" />
+    <link rel="me" href="https://github.com/JulianR10" />
+    <link rel="me" href="https://instagram.com/julianrecarte.dev" />
+    <link rel="me" href="https://www.linkedin.com/in/julianrecarte/" />
     <title>{title}</title>
 
     <!-- Favicon -->
@@ -75,32 +111,44 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:locale" content={lang === "es" ? "es_ES" : lang === "en" ? "en_US" : "it_IT"} />
+    <meta property="og:locale" content={ogLocale} />
+    {ogLocaleAlternates.map((loc) => <meta property="og:locale:alternate" content={loc} />)}
     <meta property="og:site_name" content="Julián Recarte" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={title} />
 
     <!-- Hreflang -->
     {alternates.map((a) => (
       <link rel="alternate" hreflang={a.lang} href={a.href} />
     ))}
-    <link rel="alternate" hreflang="x-default" href="https://julianrecarte.dev/" />
+    <link rel="alternate" hreflang="x-default" href={xDefault} />
     <link rel="canonical" href={canonical} />
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Person",
+      "@id": `${SITE}/#person`,
       "name": "Julián Recarte",
       "jobTitle": jobTitle,
-      description,
-      "url": `https://julianrecarte.dev/${lang}/`,
+      "description": personDescription,
+      "url": `${SITE}/${lang}/`,
+      "image": `${SITE}/og-cover.jpg`,
+      "email": "julianrecarteweb@gmail.com",
       "sameAs": [
         "https://github.com/JulianR10",
         "https://instagram.com/julianrecarte.dev",
-        "https://wa.me/393447817557"
+        "https://www.linkedin.com/in/julianrecarte/"
       ],
       "knowsAbout": [
         "Full Stack Development",
@@ -110,33 +158,46 @@ const {
         "Astro",
         "GSAP",
         "TailwindCSS",
+        "Supabase",
         "Three.js",
-        "TypeScript",
-        "Framer Motion"
+        "TypeScript"
       ],
-      "knowsLanguage": ["Spanish", "English", "Italian"]
+      "knowsLanguage": [
+        { "@type": "Language", "name": "Spanish", "alternateName": "es" },
+        { "@type": "Language", "name": "English", "alternateName": "en" },
+        { "@type": "Language", "name": "Italian", "alternateName": "it" }
+      ]
     })}></script>
 
     {article && (
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Article",
+        "@id": `${article.url || canonical}#article`,
+        "mainEntityOfPage": { "@type": "WebPage", "@id": article.url || canonical },
         "headline": article.headline,
         "description": article.description,
         "url": article.url || canonical,
         "image": article.image,
         "inLanguage": lang,
-        "author": {
-          "@type": "Person",
-          "name": "Julián Recarte",
-          "url": `https://julianrecarte.dev/${lang}/`,
-        },
+        "author": { "@id": `${SITE}/#person` },
         "publisher": {
-          "@type": "Person",
+          "@type": "Organization",
           "name": "Julián Recarte",
-          "url": `https://julianrecarte.dev/${lang}/`,
+          "url": `${SITE}/${lang}/`,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `${SITE}/og-cover.jpg`,
+            "width": 1200,
+            "height": 630,
+          },
         },
         ...(article.datePublished ? { "datePublished": article.datePublished } : {}),
+        ...(article.dateModified
+          ? { "dateModified": article.dateModified }
+          : article.datePublished
+            ? { "dateModified": article.datePublished }
+            : {}),
       })}></script>
     )}
 
@@ -144,8 +205,8 @@ const {
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "HowTo",
-        "name": jobTitle,
-        "description": description,
+        "name": `Cómo trabajo — ${jobTitle}`,
+        "description": personDescription,
         "step": processSteps.map((step, i) => ({
           "@type": "HowToStep",
           "position": i + 1,
@@ -154,6 +215,10 @@ const {
         })),
       })}></script>
     )}
+
+    {schema.map((node) => (
+      <script type="application/ld+json" set:html={JSON.stringify(node)} />
+    ))}
 
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link

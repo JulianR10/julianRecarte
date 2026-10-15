@@ -5,6 +5,7 @@ import CaseStudy from "@components/CaseStudy.astro";
 import Footer from "@components/Footer.astro";
 import { projects } from "@data/projects";
 import { getProjectCopy } from "@data/project-content";
+import { breadcrumbSchema } from "@data/schema";
 
 import es from "@i18n/es.json";
 import en from "@i18n/en.json";
@@ -46,6 +47,30 @@ const alternates = langs.map((l) => ({
 
 const pageTitle = `${cs.title || project.title} | Julián Recarte`;
 const pageDescription = cs.subtitle || "";
+
+const SITE = "https://julianrecarte.dev";
+const projectOg: Record<string, string> = {
+  triba: "/og-triba.jpg",
+  multiservizi: "/og-multiservizi.jpg",
+};
+const ogImage = projectOg[project.slug] ?? "/og-cover.jpg";
+// Última modificación: fecha del build (sitio estático → coincide con el deploy).
+const buildDate = new Date().toISOString().slice(0, 10);
+const articleImage = project.screenshots[0]?.src ?? project.mockup?.src;
+const articleImageAbs = articleImage
+  ? articleImage.startsWith("http")
+    ? articleImage
+    : `${SITE}${articleImage}`
+  : `${SITE}${ogImage}`;
+
+const schema = [
+  breadcrumbSchema({
+    lang,
+    homeLabel: t.layout.home,
+    name: cs.title || project.title,
+    path: `/${lang}/proyectos/${project.slug}/`,
+  }),
+];
 ---
 
 <Layout
@@ -54,16 +79,21 @@ const pageDescription = cs.subtitle || "";
   lang={lang}
   canonical={canonical}
   alternates={alternates}
+  ogImage={ogImage}
+  personBio={t.layout.bio}
+  schema={schema}
   article={{
     headline: `${cs.title || project.title} — case study`,
     description: pageDescription,
     url: canonical,
-    image: project.screenshots[0]?.src,
+    image: articleImageAbs,
+    datePublished: project.publishedAt,
+    dateModified: buildDate,
   }}
   t={t.layout}
   lock
 >
   <Nav slot="nav" lang={lang} t={t.nav} prefix={`/${lang}/`} fixed={false} />
   <CaseStudy lang={lang} project={project} t={cs} />
-  <Footer slot="footer" t={t.footer} />
+  <Footer slot="footer" lang={lang} t={t.footer} />
 </Layout>

@@ -1,0 +1,48 @@
+# Julián Recarte — Desarrollador Web FullStack
+
+> Julián Recarte es desarrollador web FullStack. Diseña y construye sitios y aplicaciones web a medida con Astro, Tailwind CSS, GSAP y Supabase. Trabaja en español, inglés e italiano, de forma 100% remota para clientes de todo el mundo.
+>
+> Julián Recarte is a FullStack web developer building custom websites and web apps with Astro, Tailwind CSS, GSAP and Supabase. He works in Spanish, English and Italian, fully remote for clients worldwide.
+
+## Datos
+
+- Nombre: Julián Recarte
+- Rol: Desarrollador web FullStack (Frontend + Backend)
+- Idiomas: Español (es), Inglés (en), Italiano (it)
+- Modalidad: 100% remoto, sin fronteras
+- Stack: Astro, Tailwind CSS, GSAP, Supabase, Node.js, TypeScript, React
+- Servicios: landing pages, sitios institucionales, catálogos digitales, ecommerce, paneles de administración y paneles de cliente a medida
+- Enfoque: diseño responsivo, animaciones, rendimiento y autogestión de contenido para el cliente
+
+## Contacto
+
+- Email: julianrecarteweb@gmail.com
+- WhatsApp: https://wa.me/393447817557
+- GitHub: https://github.com/JulianR10
+- LinkedIn: https://www.linkedin.com/in/julianrecarte/
+- Instagram: https://instagram.com/julianrecarte.dev
+
+## Páginas principales
+
+- Español: https://julianrecarte.dev/es/
+- English: https://julianrecarte.dev/en/
+- Italiano: https://julianrecarte.dev/it/
+- Sobre mí (bio, datos, servicios y FAQ): https://julianrecarte.dev/es/sobre/
+
+## Casos de estudio
+
+- [Triba](https://julianrecarte.dev/es/proyectos/triba/) — Revista digital con sistema de suscripciones, newsletter automática y programa de colaboradores. Panel de administración a medida (contenido y suscriptores, multiidioma español/inglés), archivo de ediciones y suscripción multimoneda. Stack: Astro, Tailwind, Supabase, Node.
+- [Multiservizi SRL](https://julianrecarte.dev/es/proyectos/multiservizi/) — Plataforma mayorista para funeraria en Calabria (Italia): catálogo digital, panel cliente para pedidos y panel admin con estadísticas de ventas. Stack: Astro, Tailwind, Supabase, Node.
+
+## Soluciones
+
+- **Presencia** — Landing page o sitio institucional, diseño responsivo e integración directa con WhatsApp.
+- **Catálogo** — Productos o servicios organizados por categorías, con filtros, galería y formularios de consulta.
+- **Venta** — Ecommerce completo con pagos, cuentas de usuario y suscripciones.
+
+## Proceso de trabajo
+
+1. Briefing — conversación sobre ideas, objetivos, marca y audiencia.
+2. Boceto — arquitectura de información, wireframes y diseño de interfaz.
+3. Desarrollo — implementación con tecnologías modernas, animaciones y rendimiento.
+4. Iteración — revisión, ajustes y refinamiento junto al cliente.

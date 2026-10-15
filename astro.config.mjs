@@ -9,6 +9,9 @@ export default defineConfig({
   integrations: [
     tailwind(),
     sitemap({
+      // La raíz `/` es solo un redirect 308 hacia /es/: excluirla evita el
+      // conflicto hreflang (dos URLs reclamando es-ES).
+      filter: (page) => page !== "https://julianrecarte.dev/",
       i18n: {
         defaultLocale: "es",
         locales: {
