@@ -19,7 +19,12 @@ const outDir = resolve(__dirname, "..", "public");
 
 const W = 1200;
 const H = 630;
-const FONT = "Arial, 'Helvetica Neue', Verdana, sans-serif";
+/**
+ * El rasterizador de sharp (librsvg) solo ve fuentes **instaladas en el sistema**,
+ * no las webfonts del sitio (Fontshare/Google). Por eso las marcas del sitio van
+ * primero (se usan si están instaladas) y Arial queda como último recurso.
+ */
+const FONT = "Satoshi, 'Bricolage Grotesque', Arial, sans-serif";
 
 const beige = "#E8E0D0";
 const ink = "#1A1613";

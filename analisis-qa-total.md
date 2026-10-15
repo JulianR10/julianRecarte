@@ -95,10 +95,10 @@ Sistema: tokens `globals.css:8-26` (`--bg-hex #E8E0D0`, `--copy #1A1613`, `accen
 
 ### 3.2 Tipografía
 
-Carga `Layout.astro:158-175`: Fontshare Satoshi 400/500/700 + Google Mozilla Headline variable, `display=swap` correcto. Pero:
+Carga `Layout.astro:158-175`: Fontshare Satoshi 400/500/700 + Google Bricolage Grotesque variable, `display=swap` correcto. Pero:
 
 1. `preload as="style"` sin `onload` (`:159-164`): preload + stylesheet a la misma URL = doble fetch potencial. Añadir `onload="this.rel='stylesheet'"` o dejar solo `preconnect + stylesheet`.
-2. Fallbacks pobres: `globals.css:53 "Satoshi", sans-serif`, `:106 "Mozilla Headline", sans-serif` → ampliar a `system-ui, -apple-system, "Segoe UI"` y `"Arial Narrow"`. Eje `wdth` nunca usado (`font-stretch` ausente; contradice signature "título comprimido").
+2. Fallbacks pobres (`"Satoshi", sans-serif` / familia display sin stack) → **resuelto**: stacks de sistema en body, títulos y skip-link.
 3. Jerarquía plana: `Hero.astro:61` y `SectionHeader.astro:24` ambos `6xl` en `lg`; 4 escalas de `h3` (`Soluciones:44 2xl→3xl bold`, `Process:90 3xl→5xl medium`, `ProjectCard:59 2xl`, `Testimonials:94 base bold` — único `bold` del sistema). Definir tabla `display 40/60, title 24/32, body 16/18`.
 4. `.label-outline` (`globals.css:199-205`) sin `color` base fuera de `@supports` (funciona por accidente vía `text-accent-orange` del markup).
 5. `tracking 0.3em` uppercase en `text-xs/sm` (`Hero:36`, `SectionHeader:16`, `Process:85`) desborda en IT (`Testimonianze`) en 360px → `0.22em` mobile, `0.3em` solo `md:+`; añadir `text-balance` en títulos (hoy solo Hero/Soluciones/Process lo tienen). `Hero:94 font-satoshi` redundante (body ya es Satoshi).
@@ -159,7 +159,7 @@ OK: title/description únicos por idioma (`Layout:30`), canonical + hreflang + x
 
 - **Crítico:** sin `og:image` / `twitter:image` (`Layout:73-83`), sin asset `og-*`. Crear `public/og-cover.jpg 1200×630` (+ `og-triba.jpg`) y props `ogImage` con default absoluto.
 - `og:locale:alternate` (`en_US` / `it_IT`) ausente.
-- `CaseStudy:61` `h1.sr-only` desperdicia SEO visual → visible estilo Mozilla.
+- `CaseStudy:61` `h1.sr-only` desperdicia SEO visual → visible con la tipografía display.
 - Solo 6 URLs indexables (`[slug]:19-24` filtra `!comingSoon`) → publicar `comingSoon` con `noindex` + CTA o `ItemList` en home.
 - `404.html` sin `<meta robots=noindex>`, sin branding, sin CTA contacto.
 - Redirect `/→/es/` vía JS (`index.astro:9-15`, doble salto + FOUC) → mover a `astro.config` redirects o middleware.
@@ -198,7 +198,7 @@ OK: title/description únicos por idioma (`Layout:30`), canonical + hreflang + x
 ## 11. Preguntas abiertas (responder antes de construir)
 
 1. **Alcance:** ¿ejecuto el P0 completo primero o quieres un solo foco (ej. SEO+OG vs a11y vs código muerto)?
-2. **OG image:** ¿genero `og-cover.jpg` con tu identidad (beige/naranja/Mozilla) o me pasas diseño propio?
+2. **OG image:** ¿genero `og-cover.jpg` con tu identidad (beige/naranja/tipografía display) o me pasas diseño propio?
 3. **Astro 5 / Tailwind 4:** ¿migro en rama separada ahora o lo dejamos como P2?
 4. **`year` / `stack` / `screenshots`:** ¿los mostramos en CaseStudy/Card (completo copy) o los borro?
 5. **SP y Multiservizi:** ¿publico rutas `comingSoon` con `noindex` + CTA o las mantengo fuera del sitemap?
