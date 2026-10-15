@@ -2,6 +2,10 @@ import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
 export const heroZap = defineAnimation((gsap: typeof gsap) => {
+  // Parpadeo infinito y decorativo: con movimiento reducido no arranca.
+  // Los clones ya arrancan en opacity 0 por CSS, así que la etiqueta queda limpia.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const clones = Array.from(document.querySelectorAll<HTMLElement>("[data-zap-clone]"));
   if (!clones.length) return;
 

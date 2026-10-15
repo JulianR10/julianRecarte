@@ -7,6 +7,10 @@ const DWELL_SECONDS = 3.5;
 const WIDTH_SECONDS = 0.4;
 
 export const heroRotator = defineAnimation((gsap: typeof gsap) => {
+  // Autoplay infinito de palabras sinónimas (ideas / proyectos / visiones):
+  // con movimiento reducido queda fija la primera, que el markup ya muestra.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const rotator = document.querySelector<HTMLElement>("[data-rotator]");
   if (!rotator) return;
   const words = Array.from(rotator.querySelectorAll<HTMLElement>("[data-rotator-word]"));
