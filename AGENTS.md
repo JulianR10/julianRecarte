@@ -145,7 +145,7 @@ La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, 
 | `.t-index` | Contador editorial (01, 02) | 12px, 500, `.22em`, tabular |
 | `.t-h1` | Título de página (Hero, `/sobre`) | 2.5rem → 3rem → `lg:` 3.75rem |
 | `.t-h2` | Título de sección y de página interior | 2.25rem → 3rem |
-| `.t-h3` | Título de ítem (card, servicio) | 1.5rem → 1.875rem |
+| `.t-h3` | Título de ítem (card, servicio) y H1 del case study | 1.5rem → 1.875rem |
 | `.t-h4` | Título chico (autor, paso) | 1.125rem → 1.25rem |
 | `.t-feature` | Título de panel (timeline de Proceso) | 1.875rem → 2.25rem |
 | `.t-lead` | Párrafo de entrada | 1.125rem → 1.25rem |
@@ -167,6 +167,7 @@ La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, 
 | Decorativo | `text-copy/30 dark:text-dark-muted/40` | índices `aria-hidden` |
 
 - `/70` en claro ≈ 5.5:1 y `dark-muted` en oscuro ≈ 4.9:1 → **AA en ambos temas**. Un `/60` en claro da 4.0:1 (falla AA); no usar.
+- **El H1 del case study no puede crecer**: la página usa `lock` (`body.is-locked` → `height:100dvh; overflow:hidden` en ≥768px) y su columna de texto mide ~276px a 1024px (grid `[1fr_660px]`). "Multiservizi" a 3rem ocupa ~300px → desborda y se **recorta sin scroll**. Por eso queda en `.t-h3` (su tamaño histórico). Para subirlo hay que ensanchar la columna o desbloquear la página, no cambiar el rol.
 - Los roles van en `@layer components`, así que **cualquier utilidad de Tailwind los sobrescribe**. Si un elemento conserva un `md:text-lg` suelto, esa utilidad gana y el rol queda muerto: al asignar un rol hay que **quitar** sus utilidades de tamaño/interlineado/tracking.
 - `h1`–`h6` llevan `font-weight: 500` + `line-height: var(--lh-heading)` (1.25) como red de seguridad en `globals.css`; los headings sin `leading-*` ya no heredan el 1.6 del body.
 - Los `font-bold` que quedan son **solo** los dos H3 con gradiente (Outfit 700). Todo lo demás es 500.
