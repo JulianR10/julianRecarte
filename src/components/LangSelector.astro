@@ -27,7 +27,7 @@ const langCodes: Record<string, string> = {
     id={isOverlay ? "overlay-lang-btn" : "lang-btn"}
     aria-expanded="false"
     aria-haspopup="true"
-    class="lang-btn flex items-center gap-1.5 md:px-2 md:py-1.5 px-3 py-2.5 rounded-lg t-badge transition-colors duration-300"
+    class="lang-btn flex items-center gap-1.5 min-h-[44px] md:px-2 md:py-1.5 px-3 py-2.5 rounded-lg t-badge transition-colors duration-300"
     aria-label={switchLang}
   >
     <span>{langCodes[lang]}</span>
@@ -53,7 +53,7 @@ const langCodes: Record<string, string> = {
       <button
         type="button"
         data-lang={l}
-        class="lang-option flex items-center justify-center w-full px-4 py-2.5 t-badge transition-colors duration-200"
+        class="lang-option flex items-center justify-center w-full min-h-[44px] px-4 py-2.5 t-badge transition-colors duration-200"
       >
         <span>{langCodes[l]}</span>
       </button>

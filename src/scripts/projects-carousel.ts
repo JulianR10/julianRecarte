@@ -6,9 +6,11 @@ function updateDots(active: number): void {
     if (i === active) {
       dot.classList.remove("bg-copy/20", "dark:bg-dark-muted/20");
       dot.classList.add("bg-accent-orange", "scale-125");
+      dot.setAttribute("aria-current", "true");
     } else {
       dot.classList.add("bg-copy/20", "dark:bg-dark-muted/20");
       dot.classList.remove("bg-accent-orange", "scale-125");
+      dot.removeAttribute("aria-current");
     }
   });
 }

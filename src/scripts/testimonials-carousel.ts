@@ -6,9 +6,11 @@ function updateDots(active: number): void {
     if (i === active) {
       dot.classList.remove("bg-copy/20", "dark:bg-dark-muted/20");
       dot.classList.add("bg-accent-orange", "scale-125");
+      dot.setAttribute("aria-current", "true");
     } else {
       dot.classList.add("bg-copy/20", "dark:bg-dark-muted/20");
       dot.classList.remove("bg-accent-orange", "scale-125");
+      dot.removeAttribute("aria-current");
     }
   });
 }
@@ -18,7 +20,8 @@ export const testimonialsCarousel = defineComponent("testimonials-carousel", () 
   const prevBtn = document.getElementById("test-prev")!;
   const nextBtn = document.getElementById("test-next")!;
   const track = document.getElementById("testimonios-track")!;
-  if (!cards.length || !prevBtn || !nextBtn || !track) return;
+  const region = document.getElementById("testimonios");
+  if (!cards.length || !prevBtn || !nextBtn || !track || !region) return;
 
   let active = 0;
   let locked = false;
@@ -32,10 +35,22 @@ export const testimonialsCarousel = defineComponent("testimonials-carousel", () 
 
   function layout(): void {
     cards.forEach((card, i) => {
-      if (i === active) setState(card, "active");
-      else if (i === (active + 1) % cards.length) setState(card, "peek-right");
-      else if (i === (active - 1 + cards.length) % cards.length) setState(card, "peek-left");
-      else setState(card, "hidden");
+      let state = "hidden";
+      if (i === active) state = "active";
+      else if (i === (active + 1) % cards.length) state = "peek-right";
+      else if (i === (active - 1 + cards.length) % cards.length) state = "peek-left";
+      setState(card, state);
+
+      // Solo la tarjeta activa es alcanzable: las de peek están apiladas
+      // detrás y las ocultas tienen opacity 0. Sin inert, Tab y el lector de
+      // pantalla las recorren igual (y se oyen testimonios que no se ven).
+      if (state === "active") {
+        card.removeAttribute("inert");
+        card.removeAttribute("aria-hidden");
+      } else {
+        card.setAttribute("inert", "");
+        card.setAttribute("aria-hidden", "true");
+      }
     });
     updateDots(active);
   }
@@ -78,6 +93,20 @@ export const testimonialsCarousel = defineComponent("testimonials-carousel", () 
   track.addEventListener("pointerup", onPointerUp);
   track.style.touchAction = "pan-y";
 
+  // Teclado: ← → cuando el foco está dentro de la sección (contenedor del
+  // carrusel, flechas o puntos). Fuera de ella no interceptamos, para no
+  // pisar el scroll por teclado de la página.
+  const onKeydown = (e: KeyboardEvent): void => {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      onPrev();
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      onNext();
+    }
+  };
+  region.addEventListener("keydown", onKeydown);
+
   layout();
 
   return () => {
@@ -85,6 +114,7 @@ export const testimonialsCarousel = defineComponent("testimonials-carousel", () 
     nextBtn.removeEventListener("click", onNext);
     track.removeEventListener("pointerdown", onPointerDown);
     track.removeEventListener("pointerup", onPointerUp);
+    region.removeEventListener("keydown", onKeydown);
     dotHandlers.forEach((h, i) => dots[i]?.removeEventListener("click", h));
     if (lockTimer) clearTimeout(lockTimer);
     locked = false;

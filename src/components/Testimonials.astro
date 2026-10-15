@@ -45,9 +45,9 @@ function logoFor(company: string): ImageMetadata | null {
   <div class="max-w-7xl mx-auto">
     <SectionHeader label={t.label} title={t.title} highlight={t.highlight} id="test-title" />
 
-    <div id="testimonios-carousel" class="flex items-center max-w-3xl mx-auto" role="region" aria-roledescription="carousel" aria-label={t.carouselLabel}>
+    <div id="testimonios-carousel" tabindex="0" class="flex items-center max-w-3xl mx-auto" role="region" aria-roledescription="carousel" aria-label={t.carouselLabel}>
       <button id="test-prev" type="button"
-        class="shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white dark:bg-dark-card border border-black/5 dark:border-dark-muted/20 shadow-md flex items-center justify-center text-copy dark:text-dark-copy hover:bg-accent-orange hover:text-white hover:border-accent-orange transition-all duration-300"
+        class="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white dark:bg-dark-card border border-black/5 dark:border-dark-muted/20 shadow-md flex items-center justify-center text-copy dark:text-dark-copy hover:bg-accent-orange hover:text-white hover:border-accent-orange transition-all duration-300"
         aria-label={t.prev}>
         <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M15 19l-7-7 7-7" />
@@ -100,7 +100,7 @@ function logoFor(company: string): ImageMetadata | null {
       </div>
 
       <button id="test-next" type="button"
-        class="shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white dark:bg-dark-card border border-black/5 dark:border-dark-muted/20 shadow-md flex items-center justify-center text-copy dark:text-dark-copy hover:bg-accent-orange hover:text-white hover:border-accent-orange transition-all duration-300"
+        class="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white dark:bg-dark-card border border-black/5 dark:border-dark-muted/20 shadow-md flex items-center justify-center text-copy dark:text-dark-copy hover:bg-accent-orange hover:text-white hover:border-accent-orange transition-all duration-300"
         aria-label={t.next}>
         <svg class="w-4 h-4 md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 5l7 7-7 7" />
@@ -112,9 +112,9 @@ function logoFor(company: string): ImageMetadata | null {
       {t.items.map((_, i) => (
         <button
           type="button"
-          class="test-dot w-3 h-3 p-4 rounded-full transition-all duration-300 cursor-pointer border-none bg-clip-content"
+          class="test-dot w-11 h-11 p-4 rounded-full transition-all duration-300 cursor-pointer border-none bg-clip-content"
           data-index={i}
-          aria-label={`Ir al testimonio ${i + 1}`}
+          aria-label={`${t.gotoTestimonial} ${i + 1}`}
         ></button>
       ))}
     </div>

@@ -62,7 +62,7 @@ const { lang, t } = Astro.props;
       {projects.map((_, i) => (
         <button
           type="button"
-          class="project-dot w-3 h-3 p-4 rounded-full transition-all duration-300 cursor-pointer border-none bg-clip-content bg-copy/20 dark:bg-dark-muted/20"
+          class="project-dot w-11 h-11 p-4 rounded-full transition-all duration-300 cursor-pointer border-none bg-clip-content bg-copy/20 dark:bg-dark-muted/20"
           data-index={i}
           aria-label={`${t.gotoProject} ${i + 1}`}
         ></button>

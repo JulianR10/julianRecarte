@@ -63,7 +63,8 @@
     "starRating": "5 de 5 estrellas",
     "prev": "Testimonio anterior",
     "next": "Siguiente testimonio",
-    "carouselLabel": "Carousel de testimonios",
+    "carouselLabel": "Carrusel de testimonios",
+    "gotoTestimonial": "Ir al testimonio",
     "items": [
       {
         "quote": "Trabajar con Julián fue un antes y después para Triba. Entendió al toque nuestra visión y la convirtió en una revista digital que realmente nos representa. Profesional, paciente y con mucho ojo para el detalle.",

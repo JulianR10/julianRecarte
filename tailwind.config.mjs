@@ -15,7 +15,7 @@ export default {
         dark: {
           card: "#252525",
           copy: "#F0F0F0",
-          muted: "#888888",
+          muted: "#A8A8A8",
         },
       },
       fontFamily: {

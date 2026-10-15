@@ -105,6 +105,24 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 
 **Fix:** `reveal-observer.ts` añade `.revealed` a todos los items cuando hay movimiento reducido (contenido visible, sin animación). `cine-text.ts` ya lo hacía bien.
 
+### La regla CSS de reduced-motion no frena a GSAP
+
+`globals.css` neutraliza animaciones y transiciones **CSS**, pero GSAP anima por rAF: sus tweens siguen corriendo igual. Por eso cada bucle infinito se corta en JS, no en CSS:
+
+| Módulo | Con movimiento reducido |
+|--------|------------------------|
+| `lenis-adapter.ts` | No se crea Lenis. Un listener de scroll nativo alimenta `onScroll()` + `ScrollTrigger.update()` (sin él, "volver arriba" y el resaltado del nav se quedan congelados) y `scrollToTop` salta en seco |
+| `hero-zap.ts` | No arranca (los clones ya están en `opacity: 0` por CSS) |
+| `waves.ts` | No arranca; las olas quedan en el trazo del markup |
+| `hero-rotator.ts` | No arranca; queda la primera palabra, que el markup ya muestra |
+| `reveal-observer.ts`, `cine-text.ts` | Añaden `.revealed` sin animar |
+
+## Accesibilidad
+
+- **Targets táctiles ≥ 44px** — `.lang-btn` y `.lang-option` (`min-h-[44px]`), flechas de Testimonios y redes del Footer (`w-11 h-11`, eran 40px). Los puntos de los dos carruseles son `w-11 h-11 p-4` + `bg-clip-content`: con el `box-sizing: border-box` de Preflight, el `w-3 h-3 p-4` anterior los dejaba en **12px** (el padding se recortaba y el punto casi no se veía).
+- **Carruseles** — los puntos exponen `aria-current`. Testimonios: `tabindex="0"` en el contenedor, navegación con ← → (listener en `#testimonios`, así funciona también con el foco en los puntos) y `inert` + `aria-hidden` en las tarjetas no activas — sin eso, Tab y el lector de pantalla recorrían testimonios invisibles. Proyectos ya es un scroll horizontal nativo con `tabindex="0"` (teclado gratis) y sus puntos son `md:hidden`.
+- **Contraste AA en ambos temas** — `dark.muted` subió de `#888888` (4.9:1) a `#A8A8A8` (7.3:1) sobre `#1C1A18`.
+
 ### manualChunks en Astro va como función, no como objeto
 
 Astro intercepta `output.manualChunks` comparando el `id` **absoluto** del módulo (`node_modules/astro/dist/core/build/plugins/util.js`), así que la forma objeto (`{ gsap: ["gsap"] }`) no matchea nunca. Usar la forma de función:
@@ -273,7 +291,22 @@ Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine 
 - **`Person`** — `@id` estable (`/#person`), `email`, `image` (`og-cover.jpg`), `sameAs` (GitHub/Instagram/LinkedIn, sin `wa.me`) y `knowsLanguage` como objetos `Language`.
 - **`Article`** (case studies) — `datePublished` desde `projects.ts` (`publishedAt`, ISO) y `dateModified` = fecha de build; `image` absoluta, `mainEntityOfPage`, `publisher` con logo.
 - **`AboutPage`** en `/sobre` — declara el tipo de página con `mainEntity`/`about` → `#person` e `isPartOf` → `#website` (ficha de entidad para IA).
-- **Headers de seguridad** — `vercel.json` emite `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`. **Sin CSP todavía** (requiere nonce/hash para el `gtag` inline + allowlist de fontshare/googleapis).
+- **Headers de seguridad** — `vercel.json` emite `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` y **`Content-Security-Policy`**.
+- **CSP** — allowlist: `script-src 'self' + hashes + googletagmanager`, `style-src 'self' 'unsafe-inline' + fontshare/googleapis` (Astro inlinea `<style>` y hay `style="…"` inline → `'unsafe-inline'` es inevitable), `font-src cdn.fontshare.com + fonts.gstatic.com`, `connect-src` a GA y `vitals.vercel-insights.com`, `frame-ancestors 'none'`.
+  - Los **hashes** cubren los 2 únicos scripts inline: el bootstrap de dark mode (12 páginas) y el redirect por idioma de `/`. **Si se toca cualquiera de esos scripts, el hash deja de valer y el script se bloquea en silencio** (dark mode parpadea, `/` no redirige). Recalcular con:
+    ```bash
+    npm run build && node -e "
+    const fs=require('fs'),crypto=require('crypto');
+    const h=fs.readFileSync('dist/es/index.html','utf8');
+    for(const m of h.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*ld\+json)[^>]*>([\s\S]*?)<\/script>/g))
+      console.log('sha256-'+crypto.createHash('sha256').update(m[1],'utf8').digest('base64'));
+    "
+    ```
+  - El snippet de gtag **no** necesita hash: al no llevar `is:inline`, Astro lo bundlea en `hoisted.js` (mismo origen).
+  - Los `<script type="application/ld+json">` **no** están sujetos a `script-src` (son data blocks, no se ejecutan).
+  - Speed Insights carga su script desde `/_vercel/speed-insights/script.js` → `'self'`.
+  - Verificación sin navegador: extraer cada `src`/`href`/`url()` del build y contrastarlo con las directivas (los orígenes deben dar OK y los hashes coincidir con `vercel.json`).
+  - **Falta**: el snippet de gtag corre una sola vez (módulo ESM cacheado) → **las navegaciones con ViewTransitions no disparan pageview**. Se arregla con `astro:page-load` + `gtag('event','page_view')`.
 - **LCP / preload** — `Layout` expone `<slot name="head" />`; el home inyecta `<link rel="preload" as="image">` de la imagen del hero (misma optimización que `<Image>`, vía `getImage()`), con `fetchpriority="high"` y `width`/`height` explícitos. `fondoTriba` usa `<Image>`.
 - **`/` (raíz)** — `noindex` en `src/pages/index.astro`; el 308 a `/es/` lo resuelve `vercel.json`.
 - **Sitemap** — `astro.config.mjs` excluye la raíz `/` (es solo redirect a `/es/`) para evitar el conflicto hreflang `es-ES`.
