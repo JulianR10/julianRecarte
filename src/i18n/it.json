@@ -2,6 +2,7 @@
   "nav": {
     "solutions": "Soluzioni",
     "projects": "Portfolio",
+    "about": "Chi sono",
     "process": "Processo",
     "contact": "Contatti",
     "lightMode": "Modalità chiara",
@@ -127,6 +128,42 @@
     "instagram": "Instagram",
     "email": "Email"
   },
+  "about": {
+    "label": "Sviluppatore Web FullStack",
+    "title": "Chi è",
+    "highlight": "Julián Recarte",
+    "intro": "Sono Julián Recarte, sviluppatore web FullStack. Aiuto aziende e brand a costruire una presenza online che si vede bene, carica veloce e porta clienti. Progetto e sviluppo landing page, siti istituzionali, cataloghi ed ecommerce su misura, curando ogni dettaglio: tipografia, animazioni, prestazioni e accessibilità.",
+    "metaDescription": "Julián Recarte, sviluppatore web FullStack. Landing page, siti, cataloghi ed ecommerce su misura. 100% da remoto, in spagnolo, inglese e italiano.",
+    "teaserLabel": "Chi sono",
+    "teaserTitle": "Dietro",
+    "teaserHighlight": "ogni progetto",
+    "teaserText": "Sono uno sviluppatore web FullStack e lavoro 100% da remoto con clienti di tutto il mondo, in spagnolo, inglese e italiano. Trasformo le idee in siti veloci, curati e pensati per portare risultati.",
+    "cta": "Scopri di più su di me",
+    "factsTitle": "In sintesi",
+    "facts": [
+      { "label": "Ruolo", "value": "Sviluppatore web FullStack (frontend + backend)" },
+      { "label": "Lingue", "value": "Spagnolo · Inglese · Italiano" },
+      { "label": "Modalità", "value": "100% da remoto, clienti in tutto il mondo" },
+      { "label": "Stack", "value": "Astro · Tailwind CSS · GSAP · Supabase · Node.js · TypeScript" },
+      { "label": "Servizi", "value": "Landing page · Siti istituzionali · Cataloghi · Ecommerce · Pannelli admin su misura" }
+    ],
+    "servicesTitle": "Cosa posso fare per il tuo progetto",
+    "processTitle": "Come lavoro",
+    "faqLabel": "Domande frequenti",
+    "faqTitle": "Le domande",
+    "faqHighlight": "più frequenti",
+    "faq": [
+      { "q": "Quali servizi offri?", "a": "Progetto e sviluppo landing page, siti istituzionali, cataloghi digitali, ecommerce e pannelli di amministrazione su misura. Integro anche sistemi di abbonamento, newsletter e pagamenti." },
+      { "q": "Lavori da remoto?", "a": "Sì. Lavoro 100% da remoto con clienti di tutto il mondo, in spagnolo, inglese e italiano." },
+      { "q": "Quanto tempo richiede un progetto?", "a": "Una landing page è di solito pronta in 1-2 settimane; un sito con catalogo o ecommerce richiede 3-6 settimane, in base a portata e contenuti." },
+      { "q": "Quali tecnologie usi?", "a": "Principalmente Astro, Tailwind CSS, GSAP, Supabase, Node.js e TypeScript. Scelgo la tecnologia in base a ciò che serve al progetto." },
+      { "q": "Posso modificare il sito da solo?", "a": "Sì. Quando il progetto lo richiede, sviluppo un pannello di amministrazione su misura per gestire contenuti, prodotti o ordini senza dipendere da uno sviluppatore." },
+      { "q": "Come iniziamo?", "a": "Scrivimi su WhatsApp o via email con la tua idea. Facciamo un briefing, propongo un approccio e un preventivo, e partiamo." }
+    ],
+    "ctaTitle": "Lavoriamo insieme?",
+    "ctaBody": "Raccontami la tua idea e vediamo come portarla sul web.",
+    "backHome": "Torna alla home"
+  },
   "caseStudies": {
     "backLabel": "Torna ai progetti",
     "triba": {
@@ -164,13 +201,16 @@
     }
   },
   "footer": {
-    "copyright": "© {year}"
+    "copyright": "© {year}",
+    "about": "Chi sono"
   },
   "layout": {
     "skipLink": "Vai al contenuto principale",
     "backToTop": "Torna su",
+    "home": "Home",
     "title": "Julián Recarte | Sviluppatore Web FullStack",
     "description": "Trasformo marchi in esperienze web interattive.",
-    "jobTitle": "Sviluppatore Web FullStack"
+    "jobTitle": "Sviluppatore Web FullStack",
+    "bio": "Julián Recarte è uno sviluppatore web FullStack. Progetta e realizza siti e applicazioni web su misura —landing page, cataloghi ed ecommerce— con Astro, Tailwind CSS e Supabase. Lavora in spagnolo, inglese e italiano, da remoto per clienti in tutto il mondo."
   }
 }

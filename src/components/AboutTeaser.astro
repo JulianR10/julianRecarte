@@ -1,0 +1,43 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+interface Props {
+  lang: string;
+  t: {
+    teaserLabel: string;
+    teaserTitle: string;
+    teaserHighlight: string;
+    teaserText: string;
+    cta: string;
+  };
+}
+
+const { lang, t } = Astro.props;
+---
+
+<section id="sobre" class="relative z-[2] px-6 py-16 md:py-24">
+  <div class="max-w-3xl mx-auto text-center">
+    <SectionHeader label={t.teaserLabel} title={t.teaserTitle} highlight={t.teaserHighlight} />
+
+    <p
+      data-reveal
+      class="text-lg md:text-xl text-copy/60 dark:text-dark-muted leading-relaxed max-w-2xl mx-auto mb-10 md:mb-12"
+      style="text-wrap: balance;"
+    >
+      {t.teaserText}
+    </p>
+
+    <div class="flex justify-center" data-reveal>
+      <a
+        href={`/${lang}/sobre/`}
+        data-magnetic
+        class="inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full font-medium text-sm md:text-base tracking-wider uppercase shadow-lg"
+      >
+        {t.cta}
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

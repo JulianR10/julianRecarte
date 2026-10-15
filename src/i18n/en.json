@@ -2,6 +2,7 @@
   "nav": {
     "solutions": "Solutions",
     "projects": "Portfolio",
+    "about": "About",
     "process": "Process",
     "contact": "Contact",
     "lightMode": "Light mode",
@@ -127,6 +128,42 @@
     "instagram": "Instagram",
     "email": "Email"
   },
+  "about": {
+    "label": "FullStack Web Developer",
+    "title": "About",
+    "highlight": "Julián Recarte",
+    "intro": "I'm Julián Recarte, a FullStack web developer. I help businesses and brands build an online presence that looks great, loads fast and brings in clients. I design and develop landing pages, corporate sites, catalogs and custom ecommerce, taking care of every detail: typography, animations, performance and accessibility.",
+    "metaDescription": "Julián Recarte, FullStack web developer. Custom landing pages, sites, catalogs and ecommerce. 100% remote, in Spanish, English and Italian.",
+    "teaserLabel": "About",
+    "teaserTitle": "Behind",
+    "teaserHighlight": "every project",
+    "teaserText": "I'm a FullStack web developer working 100% remotely with clients worldwide, in Spanish, English and Italian. I turn ideas into fast, well-crafted websites built to deliver results.",
+    "cta": "More about me",
+    "factsTitle": "At a glance",
+    "facts": [
+      { "label": "Role", "value": "FullStack web developer (frontend + backend)" },
+      { "label": "Languages", "value": "Spanish · English · Italian" },
+      { "label": "Work style", "value": "100% remote, clients worldwide" },
+      { "label": "Stack", "value": "Astro · Tailwind CSS · GSAP · Supabase · Node.js · TypeScript" },
+      { "label": "Services", "value": "Landing pages · Corporate sites · Catalogs · Ecommerce · Custom admin panels" }
+    ],
+    "servicesTitle": "What I can do for your project",
+    "processTitle": "How I work",
+    "faqLabel": "FAQ",
+    "faqTitle": "Frequently asked",
+    "faqHighlight": "questions",
+    "faq": [
+      { "q": "What services do you offer?", "a": "I design and develop landing pages, corporate sites, digital catalogs, ecommerce and custom admin panels. I also integrate subscription systems, newsletters and payments." },
+      { "q": "Do you work remotely?", "a": "Yes. I work 100% remotely with clients worldwide, in Spanish, English and Italian." },
+      { "q": "How long does a project take?", "a": "A landing page is usually ready in 1 to 2 weeks; a site with a catalog or ecommerce takes 3 to 6 weeks, depending on scope and content." },
+      { "q": "What technologies do you use?", "a": "Mainly Astro, Tailwind CSS, GSAP, Supabase, Node.js and TypeScript. I choose the technology based on what each project needs." },
+      { "q": "Can I edit the site myself?", "a": "Yes. When the project needs it, I build a custom admin panel so you can manage content, products or orders without depending on a developer." },
+      { "q": "How do we start?", "a": "Message me on WhatsApp or email with your idea. We do a briefing, I propose an approach and a budget, and we get started." }
+    ],
+    "ctaTitle": "Let's work together?",
+    "ctaBody": "Tell me your idea and let's see how to bring it to the web.",
+    "backHome": "Back to home"
+  },
   "caseStudies": {
     "backLabel": "Back to projects",
     "triba": {
@@ -164,13 +201,16 @@
     }
   },
   "footer": {
-    "copyright": "© {year}"
+    "copyright": "© {year}",
+    "about": "About"
   },
   "layout": {
     "skipLink": "Skip to main content",
     "backToTop": "Back to top",
+    "home": "Home",
     "title": "Julián Recarte | FullStack Web Developer",
     "description": "I turn brands into interactive web experiences.",
-    "jobTitle": "FullStack Web Developer"
+    "jobTitle": "FullStack Web Developer",
+    "bio": "Julián Recarte is a FullStack web developer. He designs and builds custom websites and web apps —landing pages, catalogs and ecommerce— with Astro, Tailwind CSS and Supabase. He works in Spanish, English and Italian, remotely for clients worldwide."
   }
 }

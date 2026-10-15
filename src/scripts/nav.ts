@@ -69,12 +69,22 @@ export const nav = defineComponent("nav", (scope) => {
   }
 
   // --- active section ------------------------------------------------------
-  const sections = [
-    { id: "soluciones", link: document.querySelector<HTMLElement>('.desktop-link[href="#soluciones"]') },
-    { id: "proyectos", link: document.querySelector<HTMLElement>('.desktop-link[href="#proyectos"]') },
-    { id: "proceso", link: document.querySelector<HTMLElement>('.desktop-link[href="#proceso"]') },
-    { id: "contacto", link: document.querySelector<HTMLElement>('.desktop-link[href="#contacto"]') },
-  ].filter((s): s is { id: string; link: HTMLElement } => s.link !== null);
+  const sectionIds = ["soluciones", "proyectos", "sobre", "contacto"];
+  const sections = sectionIds
+    .map((id) => ({
+      id,
+      link: document.querySelector<HTMLElement>(`.desktop-link[data-nav-section="${id}"]`),
+    }))
+    .filter((s): s is { id: string; link: HTMLElement } => s.link !== null);
+
+  // En la página /sobre/ no hay sección #sobre: se marca el link por ruta.
+  if (window.location.pathname.includes("/sobre")) {
+    const aboutLink = sections.find((s) => s.id === "sobre")?.link;
+    if (aboutLink) {
+      aboutLink.classList.add("active");
+      aboutLink.setAttribute("aria-current", "page");
+    }
+  }
 
   if (sections.length) {
     const observer = new IntersectionObserver(

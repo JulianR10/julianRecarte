@@ -22,9 +22,10 @@ class FakeIO {
 function setupDom(): void {
   document.body.innerHTML = `
     <nav id="main-nav">
-      <a class="desktop-link" href="#proyectos">Proyectos</a>
-      <a class="desktop-link" href="#proceso">Proceso</a>
-      <a class="desktop-link" href="#contacto">Contacto</a>
+      <a class="desktop-link" data-nav-section="soluciones" href="#soluciones">Soluciones</a>
+      <a class="desktop-link" data-nav-section="proyectos" href="#proyectos">Proyectos</a>
+      <a class="desktop-link" data-nav-section="sobre" href="/es/sobre/">Sobre mi</a>
+      <a class="desktop-link" data-nav-section="contacto" href="#contacto">Contacto</a>
       <div id="theme-toggle">
         <div id="theme-indicator"></div>
         <button id="light-toggle">light</button>
@@ -52,8 +53,8 @@ function setupDom(): void {
       <button id="overlay-light-toggle">light</button>
       <button id="overlay-dark-toggle">dark</button>
     </div>
+    <section id="soluciones"></section>
     <section id="proyectos"></section>
-    <section id="proceso"></section>
     <section id="contacto"></section>
   `;
 }
@@ -101,17 +102,17 @@ describe("nav", () => {
   it("marks the active section on the desktop link", () => {
     const io = FakeIO.instances[FakeIO.instances.length - 1];
     const proyectos = document.getElementById("proyectos")!;
-    const link = document.querySelector<HTMLElement>('.desktop-link[href="#proyectos"]')!;
+    const link = document.querySelector<HTMLElement>('[data-nav-section="proyectos"]')!;
 
     io.trigger(proyectos);
     expect(link.classList.contains("active")).toBe(true);
     expect(link.getAttribute("aria-current")).toBe("page");
 
-    const proceso = document.getElementById("proceso")!;
-    const procesoLink = document.querySelector<HTMLElement>('.desktop-link[href="#proceso"]')!;
-    io.trigger(proceso);
+    const contacto = document.getElementById("contacto")!;
+    const contactoLink = document.querySelector<HTMLElement>('[data-nav-section="contacto"]')!;
+    io.trigger(contacto);
     expect(link.classList.contains("active")).toBe(false);
-    expect(procesoLink.classList.contains("active")).toBe(true);
+    expect(contactoLink.classList.contains("active")).toBe(true);
   });
 
   it("opens and closes the mobile menu", () => {

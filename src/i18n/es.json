@@ -2,6 +2,7 @@
   "nav": {
     "solutions": "Soluciones",
     "projects": "Portfolio",
+    "about": "Sobre mí",
     "process": "Proceso",
     "contact": "Contacto",
     "lightMode": "Modo claro",
@@ -127,6 +128,42 @@
     "instagram": "Instagram",
     "email": "Email"
   },
+  "about": {
+    "label": "Desarrollador web FullStack",
+    "title": "Sobre",
+    "highlight": "Julián Recarte",
+    "intro": "Soy Julián Recarte, desarrollador web FullStack. Ayudo a negocios y marcas a tener presencia online que se ve bien, carga rápido y trae clientes. Diseño y desarrollo landing pages, sitios institucionales, catálogos y ecommerce a medida, cuidando cada detalle: tipografía, animaciones, rendimiento y accesibilidad.",
+    "metaDescription": "Julián Recarte, desarrollador web FullStack. Landing pages, sitios, catálogos y ecommerce a medida. 100% remoto, en español, inglés e italiano.",
+    "teaserLabel": "Sobre mí",
+    "teaserTitle": "Detrás de",
+    "teaserHighlight": "cada proyecto",
+    "teaserText": "Soy desarrollador web FullStack y trabajo 100% remoto con clientes de todo el mundo, en español, inglés e italiano. Convierto ideas en sitios rápidos, cuidados y pensados para traer resultados.",
+    "cta": "Conocer más sobre mí",
+    "factsTitle": "En resumen",
+    "facts": [
+      { "label": "Rol", "value": "Desarrollador web FullStack (frontend + backend)" },
+      { "label": "Idiomas", "value": "Español · Inglés · Italiano" },
+      { "label": "Modalidad", "value": "100% remoto, clientes en todo el mundo" },
+      { "label": "Stack", "value": "Astro · Tailwind CSS · GSAP · Supabase · Node.js · TypeScript" },
+      { "label": "Servicios", "value": "Landing pages · Sitios institucionales · Catálogos · Ecommerce · Paneles a medida" }
+    ],
+    "servicesTitle": "Qué puedo hacer por tu proyecto",
+    "processTitle": "Cómo trabajo",
+    "faqLabel": "Preguntas frecuentes",
+    "faqTitle": "Lo que",
+    "faqHighlight": "preguntan",
+    "faq": [
+      { "q": "¿Qué servicios ofrecés?", "a": "Diseño y desarrollo landing pages, sitios institucionales, catálogos digitales, ecommerce y paneles de administración a medida. También integro sistemas de suscripción, newsletter y pagos." },
+      { "q": "¿Trabajás de forma remota?", "a": "Sí. Trabajo 100% remoto con clientes de todo el mundo, en español, inglés e italiano." },
+      { "q": "¿Cuánto tarda un proyecto?", "a": "Una landing suele estar lista en 1 a 2 semanas; un sitio con catálogo o ecommerce, entre 3 y 6 semanas, según el alcance y los contenidos." },
+      { "q": "¿Con qué tecnologías trabajás?", "a": "Principalmente Astro, Tailwind CSS, GSAP, Supabase, Node.js y TypeScript. Elijo la tecnología según lo que cada proyecto necesita." },
+      { "q": "¿Puedo editar el sitio yo mismo?", "a": "Sí. Cuando el proyecto lo necesita, desarrollo un panel de administración a medida para que gestiones contenido, productos o pedidos sin depender de un desarrollador." },
+      { "q": "¿Cómo empezamos?", "a": "Escribime por WhatsApp o email con tu idea. Hacemos un briefing, te propongo un enfoque y un presupuesto, y arrancamos." }
+    ],
+    "ctaTitle": "¿Trabajamos juntos?",
+    "ctaBody": "Contame tu idea y vemos cómo llevarla a la web.",
+    "backHome": "Volver al inicio"
+  },
   "caseStudies": {
     "backLabel": "Volver a proyectos",
     "triba": {
@@ -164,13 +201,16 @@
     }
   },
   "footer": {
-    "copyright": "© {year}"
+    "copyright": "© {year}",
+    "about": "Sobre mí"
   },
   "layout": {
     "skipLink": "Ir al contenido principal",
     "backToTop": "Volver arriba",
+    "home": "Inicio",
     "title": "Julián Recarte | Desarrollador web FullStack",
     "description": "Convierto ideas en experiencias web interactivas.",
-    "jobTitle": "Desarrollador web FullStack"
+    "jobTitle": "Desarrollador web FullStack",
+    "bio": "Julián Recarte es desarrollador web FullStack. Diseña y construye sitios y aplicaciones web a medida —landing pages, catálogos y ecommerce— con Astro, Tailwind CSS y Supabase. Trabaja en español, inglés e italiano, de forma remota para clientes de todo el mundo."
   }
 }

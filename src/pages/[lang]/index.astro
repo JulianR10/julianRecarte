@@ -1,10 +1,13 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { getImage } from "astro:assets";
+import heroImg from "@assets/images/yo.webp";
 import Waves from "@components/Waves.astro";
 import Nav from "@components/Nav.astro";
 import Hero from "@components/Hero.astro";
 import Soluciones from "@components/Soluciones.astro";
 import Projects from "@components/Projects.astro";
+import AboutTeaser from "@components/AboutTeaser.astro";
 import Process from "@components/Process.astro";
 import Contact from "@components/Contact.astro";
 import Testimonials from "@components/Testimonials.astro";
@@ -14,6 +17,14 @@ import es from "@i18n/es.json";
 import en from "@i18n/en.json";
 import it from "@i18n/it.json";
 import { safeT } from "@i18n/safe-t";
+import { projects } from "@data/projects";
+import { getProjectCopy } from "@data/project-content";
+import {
+  websiteSchema,
+  professionalServiceSchema,
+  projectsItemList,
+  reviewsSchema,
+} from "@data/schema";
 
 export async function getStaticPaths() {
   const langs = ["es", "en", "it"];
@@ -25,16 +36,42 @@ const translations = { es, en, it };
 const raw = translations[lang as keyof typeof translations];
 if (!raw) return Astro.redirect("/es/");
 const t = safeT(raw);
+
+// Solo los proyectos con página de caso de estudio entran al ItemList.
+const publicProjects = projects
+  .filter((p) => !p.comingSoon)
+  .map((p) => {
+    const copy = getProjectCopy(p.slug, lang);
+    return { title: copy.title, slug: p.slug, description: copy.description };
+  });
+
+const schema = [
+  websiteSchema(lang),
+  professionalServiceSchema({
+    lang,
+    jobTitle: t.layout.jobTitle,
+    bio: t.layout.bio,
+    services: t.soluciones.items,
+  }),
+  projectsItemList(lang, publicProjects),
+  ...reviewsSchema(t.testimonials.items),
+];
+
+// Preload de la imagen LCP (retrato del hero) con la misma optimización que
+// usa <Image> en Hero.astro, para que el navegador la descubra antes.
+const heroPreload = await getImage({ src: heroImg, width: 1024, height: 1536 });
 ---
 
-<Layout title={t.layout.title} description={t.layout.description} jobTitle={t.layout.jobTitle} lang={lang} processSteps={t.process.steps} t={t.layout}>
+<Layout title={t.layout.title} description={t.layout.description} jobTitle={t.layout.jobTitle} lang={lang} personBio={t.layout.bio} processSteps={t.process.steps} schema={schema} t={t.layout}>
+  <link slot="head" rel="preload" as="image" href={heroPreload.src} fetchpriority="high" />
   <Waves />
   <Nav slot="nav" lang={lang} t={t.nav} />
   <Hero slot="hero" t={t.hero} />
   <Soluciones t={t.soluciones} />
   <Projects lang={lang} t={t.projects} />
+  <AboutTeaser lang={lang} t={t.about} />
   <Testimonials t={t.testimonials} />
   <Process t={t.process} />
   <Contact t={t.contact} />
-  <Footer slot="footer" t={t.footer} />
+  <Footer slot="footer" lang={lang} t={t.footer} />
 </Layout>
