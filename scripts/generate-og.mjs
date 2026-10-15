@@ -24,7 +24,7 @@ const H = 630;
  * no las webfonts del sitio (Fontshare/Google). Por eso las marcas del sitio van
  * primero (se usan si están instaladas) y Arial queda como último recurso.
  */
-const FONT = "Satoshi, 'Bricolage Grotesque', Arial, sans-serif";
+const FONT = "Satoshi, Outfit, Arial, sans-serif";
 
 const beige = "#E8E0D0";
 const ink = "#1A1613";

@@ -10,7 +10,7 @@ Portfolio web moderno y altamente visual de Julián Recarte, Desarrollador web F
 - **Estilos:** TailwindCSS 3.4
 - **Animaciones:** GSAP 3.12 (ScrollTrigger)
 - **Scroll Suave:** Lenis
-- **Tipografía:** Bricolage Grotesque (display) + Satoshi (body)
+- **Tipografía:** Outfit (display) + Satoshi (body)
 - **Testing:** Vitest + Happy DOM
 - **Utilidades:** autoprefixer, postcss, @astrojs/sitemap
 - **Deploy:** Vercel (`julianrecarte.dev`)
@@ -96,7 +96,7 @@ npm test          # corre Vitest
 
 ### Tipografía
 
-- **Display:** Bricolage Grotesque (eje `wdth` 75..100 disponible)
+- **Display:** Outfit (variable, `wght` 500..700 — títulos a `600`)
 - **Body:** Satoshi (400, 500, 700)
 
 ## 🎬 Características

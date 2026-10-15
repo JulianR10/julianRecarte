@@ -95,7 +95,7 @@ Sistema: tokens `globals.css:8-26` (`--bg-hex #E8E0D0`, `--copy #1A1613`, `accen
 
 ### 3.2 Tipografía
 
-Carga `Layout.astro:158-175`: Fontshare Satoshi 400/500/700 + Google Bricolage Grotesque variable, `display=swap` correcto. Pero:
+Carga `Layout.astro:158-175`: Fontshare Satoshi 400/500/700 + Google Outfit variable, `display=swap` correcto. Pero:
 
 1. `preload as="style"` sin `onload` (`:159-164`): preload + stylesheet a la misma URL = doble fetch potencial. Añadir `onload="this.rel='stylesheet'"` o dejar solo `preconnect + stylesheet`.
 2. Fallbacks pobres (`"Satoshi", sans-serif` / familia display sin stack) → **resuelto**: stacks de sistema en body, títulos y skip-link.

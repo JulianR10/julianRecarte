@@ -121,10 +121,10 @@ manualChunks(id) {
 
 Si un eje del `css2` está fuera del rango real de la familia, Google responde **HTTP 400** y **no llega ningún `@font-face`** → el navegador cae al fallback sin error visible fuera de DevTools › Network.
 
-- **Bricolage Grotesque** (`h1`–`h6`): ejes `opsz 12..96`, `wdth 75..100`, `wght 200..800`. URL: `family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap`.
+- **Outfit** (`h1`–`h6`): único eje `wght 100..900`; el sitio pide `wght@500..700`. URL: `family=Outfit:wght@500..700&display=swap`.
 - Verificar siempre: `curl -s -o /dev/null -w "%{http_code}\n" "<url>"` → debe dar **200**.
 - Rangos oficiales: `https://fonts.google.com/metadata/fonts` (campo `axes` de cada familia).
-- Stack del sitio: **Satoshi** (body/UI, Fontshare) + **Bricolage Grotesque** (`h1`–`h6`, Google Fonts; variable `font-weight: 200 800`, ~13 KB woff2).
+- Stack del sitio: **Satoshi** (body/UI, Fontshare) + **Outfit** (`h1`–`h6`, Google Fonts; variable `font-weight: 100 900`, ~15 KB woff2, sin eje de ancho).
 
 ### backdrop-filter won't blur GSAP-animated text
 
@@ -280,10 +280,10 @@ SEO/IA (#5 del audit) y ataca el foco recomendado del mapa UX (#3 Projects). Enf
 El case study **viste la paleta del proyecto**, no la del sitio. Cada proyecto ya tiene su
 identidad en `projects.ts` (gradiente: Triba=rojo, SP=ámbar, Multiservizi=burdeos). La página
 es "entrar al mundo del producto" manteniendo coherencia con el sistema (beige `#E8E0D0`,
-copy `#1A1613`, Bricolage Grotesque display + Satoshi body).
+copy `#1A1613`, Outfit display + Satoshi body).
 
 - Nuevo token `--project-accent` derivado del gradiente de cada proyecto (eyebrow, hover, wash).
-- Tipografía existente; título del proyecto en Bricolage Grotesque (eje `wdth` disponible).
+- Tipografía existente; título del proyecto en Outfit (`600`).
 - **Sin marcadores numerados** (01/02/03): el contenido es narrativo. Eyebrows semánticos:
   *El proyecto / El desafío / La solución / Resultados*.
 - Resultados como bloques cortos con viñeta, **no** stats inventadas ni "big number" template.
@@ -294,7 +294,7 @@ copy `#1A1613`, Bricolage Grotesque display + Satoshi body).
 NAV persistente
 HERO · wash del gradiente del proyecto (signature)
   eyebrow: CASO DE ESTUDIO · AÑO · logo del proyecto
-  H1: nombre del proyecto (Bricolage Grotesque)
+  H1: nombre del proyecto (Outfit)
   stack chips + [Ver sitio →] / [Próximamente]
 El proyecto    · párrafo apertura (2 col desktop)
 El desafío ║ La solución   (split, eyebrow por col)
