@@ -82,16 +82,16 @@ const { t } = Astro.props;
             class={`flex flex-col justify-center ${i % 2 === 1 ? "md:order-1" : ""}`}
           >
             <span
-              class="inline-block text-xs font-medium tracking-[0.3em] uppercase text-accent-orange/60 mb-4"
+              class="t-eyebrow inline-block text-accent-orange/60 mb-4"
             >
               {t.stepLabel} {step.num}
             </span>
             <h3
-              class="text-3xl md:text-4xl lg:text-5xl font-medium mb-6 leading-tight"
+              class="t-feature font-medium mb-6"
             >
               {s.title}
             </h3>
-            <p class="text-copy/60 dark:text-dark-muted leading-relaxed text-base md:text-lg" style="text-wrap: balance;">
+            <p class="t-body-lg text-copy/70 dark:text-dark-muted text-balance">
               {s.description}
             </p>
           </div>

@@ -66,7 +66,7 @@ function logoFor(company: string): ImageMetadata | null {
                 </svg>
               ))}
             </div>
-            <p class="text-copy/70 dark:text-dark-muted text-base md:text-lg leading-relaxed mb-8 md:mb-10">
+            <p class="t-body-lg text-copy/70 dark:text-dark-muted mb-8 md:mb-10">
               &ldquo;{item.quote}&rdquo;
             </p>
             <div class="flex items-center gap-3">
@@ -85,14 +85,14 @@ function logoFor(company: string): ImageMetadata | null {
                     />
                   </div>
                 ) : (
-                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent-orange/30 to-accent-purple/30 flex items-center justify-center text-xs font-bold text-accent-orange flex-shrink-0">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-accent-orange/30 to-accent-purple/30 flex items-center justify-center t-badge text-accent-orange flex-shrink-0">
                     {item.initials}
                   </div>
                 );
               })()}
               <div class="min-w-0">
-                <h3 class="text-base font-bold text-copy dark:text-dark-copy truncate">{item.name}</h3>
-                <p class="text-sm text-copy/50 dark:text-dark-muted/60 truncate">{item.role} &mdash; {item.company}</p>
+                <h3 class="t-h4 font-medium text-copy dark:text-dark-copy truncate">{item.name}</h3>
+                <p class="t-meta text-copy/70 dark:text-dark-muted truncate">{item.role} &mdash; {item.company}</p>
               </div>
             </div>
           </article>

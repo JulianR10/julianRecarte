@@ -11,7 +11,7 @@ const { t } = Astro.props;
 <div data-reveal class="w-full">
   <ul class="flex flex-wrap justify-center lg:justify-start gap-2" aria-label="Admin panel features">
     {t.badges.map((badge) => (
-      <li class="admin-badge rounded-full border px-3.5 py-1.5 text-[10px] md:text-[11px] font-medium">
+      <li class="admin-badge rounded-full border px-3.5 py-1.5 t-badge">
         {badge}
       </li>
     ))}

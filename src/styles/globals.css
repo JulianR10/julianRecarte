@@ -23,6 +23,28 @@
   --navbar-h: 76px;
   scroll-padding-top: var(--navbar-h, 76px);
   --section-fade-h: 128px;
+
+  /* Type scale — tamaños */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.5rem;
+  --fs-3xl: 1.875rem;
+  --fs-4xl: 2.25rem;
+  --fs-5xl: 3rem;
+  --fs-6xl: 3.75rem;
+  --fs-h1: 2.5rem; /* móvil: 40px, entre 4xl y 5xl */
+
+  /* Type scale — interlineado y tracking */
+  --lh-heading: 1.25;
+  --lh-body: 1.625;
+  --tr-tight: -0.025em;
+  --tr-label: 0.05em;
+  --tr-link: 0.1em;
+  --tr-eyebrow: 0.3em;
+  --tr-index: 0.22em;
 }
 
 :root.dark {
@@ -105,6 +127,134 @@ h5,
 h6 {
   font-family: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-weight: 500;
+  line-height: var(--lh-heading);
+}
+
+/* ============================================
+   Type roles
+   Un rol = tamaño + interlineado + tracking.
+   El color y el peso quedan siempre en utilidades
+   (Satoshi no tiene 600: 400 = texto, 500 = énfasis).
+   Los roles viven en @layer components, así que
+   cualquier utilidad de Tailwind los puede sobrescribir.
+   ============================================ */
+@layer components {
+  /* Label sobre un título de sección */
+  .t-eyebrow {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: var(--tr-eyebrow);
+    text-transform: uppercase;
+  }
+
+  /* Contador editorial (01, 02, 03) */
+  .t-index {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: var(--tr-index);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Título de página */
+  .t-h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--tr-tight);
+  }
+
+  /* Título de sección */
+  .t-h2 {
+    font-size: var(--fs-4xl);
+    line-height: var(--lh-heading);
+  }
+
+  /* Título de ítem (card, servicio) */
+  .t-h3 {
+    font-size: var(--fs-2xl);
+    line-height: var(--lh-heading);
+    letter-spacing: var(--tr-tight);
+  }
+
+  /* Título chico (paso, autor, pregunta) */
+  .t-h4 {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-heading);
+  }
+
+  /* Título de panel (timeline de Proceso) */
+  .t-feature {
+    font-size: var(--fs-3xl);
+    line-height: var(--lh-heading);
+  }
+
+  /* Párrafo de entrada */
+  .t-lead {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-body);
+  }
+
+  /* Párrafo descriptivo */
+  .t-body {
+    font-size: var(--fs-sm);
+    line-height: var(--lh-body);
+  }
+
+  /* Párrafo descriptivo largo (cita, subtítulo de case study) */
+  .t-body-lg {
+    font-size: var(--fs-base);
+    line-height: var(--lh-body);
+  }
+
+  /* Texto secundario y links sin énfasis */
+  .t-meta {
+    font-size: var(--fs-sm);
+  }
+
+  /* Label de botón / pill */
+  .t-label {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+  }
+
+  /* Badge de estado o de feature */
+  .t-badge {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+  }
+
+  /* Link de navegación (nav, footer) */
+  .t-link {
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tr-link);
+    text-transform: uppercase;
+  }
+
+  /* Link dentro de contenido (volver, caso de estudio) */
+  .t-link-quiet {
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 768px) {
+    .t-h1 { font-size: var(--fs-5xl); }
+    .t-h2 { font-size: var(--fs-5xl); }
+    .t-h3 { font-size: var(--fs-3xl); }
+    .t-h4 { font-size: var(--fs-xl); }
+    .t-feature { font-size: var(--fs-4xl); }
+    .t-lead { font-size: var(--fs-xl); }
+    .t-body { font-size: var(--fs-base); }
+    .t-body-lg { font-size: var(--fs-lg); }
+    .t-label { font-size: var(--fs-base); }
+  }
+
+  @media (min-width: 1024px) {
+    .t-h1 { font-size: var(--fs-6xl); }
+  }
 }
 
 /* ============================================

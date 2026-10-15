@@ -33,7 +33,7 @@ const { t } = Astro.props;
     <div data-hero-text class="max-w-3xl text-center xl:text-left">
       <span
         data-reveal
-        class="relative inline-block text-sm font-medium tracking-[0.3em] uppercase text-accent-orange mb-6 md:mb-8"
+        class="t-eyebrow relative inline-block text-accent-orange mb-6 md:mb-8"
       >
         <span class="zap-text">{t.label}</span>
         <span data-zap-clone class="absolute inset-0 pointer-events-none zap-glow-brand" aria-hidden="true">{t.label}</span>
@@ -59,7 +59,7 @@ const { t } = Astro.props;
 
       <h1
         data-reveal-heading
-        class="text-[2.5rem] sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-4 leading-tight text-copy dark:text-dark-copy text-balance"
+        class="t-h1 font-medium mb-4 text-copy dark:text-dark-copy text-balance"
       >
         {t.greetingPrefix}<span class="text-accent-orange whitespace-nowrap">{t.greetingName}</span>
         <span class="sr-only"> — {t.label}</span>
@@ -67,7 +67,7 @@ const { t } = Astro.props;
 
       <p
         data-reveal
-        class="text-base sm:text-lg md:text-xl tracking-tight mb-6 text-copy/60 dark:text-dark-copy/60"
+        class="t-lead mb-6 text-copy/70 dark:text-dark-muted"
       >
         <span class="block">
           {t.subtitlePrefix}{" "}
@@ -93,7 +93,7 @@ const { t } = Astro.props;
         <span class="block">{t.subtitleLine2}</span>
       </p>
 
-      <p data-reveal class="font-satoshi text-base sm:text-lg md:text-xl italic text-accent-orange/80 mt-6 mb-8 text-balance">
+      <p data-reveal class="t-lead italic text-accent-orange/80 mt-6 mb-8 text-balance">
         {t.cta}
       </p>
 
@@ -101,7 +101,7 @@ const { t } = Astro.props;
       <a
         href="#proyectos"
         data-magnetic
-        class="inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full font-medium text-sm md:text-base tracking-wider uppercase shadow-lg"
+        class="inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full t-label shadow-lg"
       >
         {t.viewProjects}
       </a>
@@ -110,7 +110,7 @@ const { t } = Astro.props;
           data-magnetic
           target="_blank"
           rel="noopener noreferrer"
-          class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full font-medium text-sm md:text-base tracking-wider uppercase overflow-hidden text-accent-orange hover:text-white transition-colors duration-300 wa-btn"
+          class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full t-label overflow-hidden text-accent-orange hover:text-white transition-colors duration-300 wa-btn"
         >
           <span class="absolute inset-0 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           <span class="relative z-10 flex items-center gap-2">

@@ -125,6 +125,51 @@ Si un eje del `css2` está fuera del rango real de la familia, Google responde *
 - Verificar siempre: `curl -s -o /dev/null -w "%{http_code}\n" "<url>"` → debe dar **200**.
 - Rangos oficiales: `https://fonts.google.com/metadata/fonts` (campo `axes` de cada familia).
 - Stack del sitio: **Satoshi** (body/UI, Fontshare) + **Outfit** (`h1`–`h6`, Google Fonts; variable `font-weight: 100 900`, ~15 KB woff2, sin eje de ancho).
+- **Peticiones exactas** (nada que no se use):
+  - Satoshi: `f[]=satoshi@400,500,400i` (Fontshare tiene **3 pesos: 400/500/700** y **no tiene 600**).
+  - Outfit: `wght@500..700` (500 títulos, 700 solo los H3 con gradiente).
+
+### Fontshare: las itálicas van con el sufijo `i`, y no existe el 600
+
+- La sintaxis de Fontshare **no** es la de Google. Para itálicas reales hay que sufijar el peso con `i`: `f[]=satoshi@400,500,400i` (3 caras, 1 itálica). Alternativas que **no** funcionan: `@1,400,500,700` (0 itálicas), `@2,400` (devuelve 1 cara pero no es itálica).
+- **Satoshi no declara 600**: `font-semibold` se resolvía como 700 (falsa negrita). El sistema quedó en **400 = texto, 500 = énfasis, 700 = solo títulos con gradiente** (esos son Outfit, no Satoshi). Si aparece un `<strong>` o un 600 nuevo, hay que añadirlo a la URL — hoy renderiza sintético.
+- Antes de tocar la URL: `curl -s "<url>" | grep -c "@font-face"` y `grep -c "font-style: italic"`.
+
+### Sistema tipográfico: roles en `globals.css`
+
+La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, `--tr-*`) + **15 clases de rol** dentro de `@layer components`. Un rol fija **tamaño + interlineado + tracking (+ uppercase)**; el **color y el peso quedan siempre en utilidades** de Tailwind.
+
+| Rol | Uso | Móvil → `md:` |
+|---|---|---|
+| `.t-eyebrow` | Label sobre un título de sección | 14px, 500, `.3em`, uppercase |
+| `.t-index` | Contador editorial (01, 02) | 12px, 500, `.22em`, tabular |
+| `.t-h1` | Título de página (Hero, `/sobre`) | 2.5rem → 3rem → `lg:` 3.75rem |
+| `.t-h2` | Título de sección y de página interior | 2.25rem → 3rem |
+| `.t-h3` | Título de ítem (card, servicio) | 1.5rem → 1.875rem |
+| `.t-h4` | Título chico (autor, paso) | 1.125rem → 1.25rem |
+| `.t-feature` | Título de panel (timeline de Proceso) | 1.875rem → 2.25rem |
+| `.t-lead` | Párrafo de entrada | 1.125rem → 1.25rem |
+| `.t-body` | Párrafo descriptivo | 0.875rem → 1rem |
+| `.t-body-lg` | Párrafo largo / cita / subtítulo | 1rem → 1.125rem |
+| `.t-meta` | Texto secundario | 0.875rem |
+| `.t-label` | Label de botón / pill | 0.875rem → 1rem, 500, `.05em`, uppercase |
+| `.t-badge` | Badge de estado | 0.75rem, 500, `.05em`, uppercase |
+| `.t-link` | Link de nav / footer | 0.875rem, `.1em`, uppercase |
+| `.t-link-quiet` | Link dentro de contenido (volver, caso de estudio) | 0.875rem, `.05em`, uppercase |
+
+**Reglas de color** (utilidades, solo 3 valores + primario):
+
+| Tono | Clase | Uso |
+|---|---|---|
+| Primario | `text-copy dark:text-dark-copy` | títulos, valores |
+| Secundario | `text-copy/70 dark:text-dark-muted` | body, lead, meta, citas |
+| Link/UI | `text-copy/80 dark:text-dark-copy` | nav, footer, contacto |
+| Decorativo | `text-copy/30 dark:text-dark-muted/40` | índices `aria-hidden` |
+
+- `/70` en claro ≈ 5.5:1 y `dark-muted` en oscuro ≈ 4.9:1 → **AA en ambos temas**. Un `/60` en claro da 4.0:1 (falla AA); no usar.
+- Los roles van en `@layer components`, así que **cualquier utilidad de Tailwind los sobrescribe**. Si un elemento conserva un `md:text-lg` suelto, esa utilidad gana y el rol queda muerto: al asignar un rol hay que **quitar** sus utilidades de tamaño/interlineado/tracking.
+- `h1`–`h6` llevan `font-weight: 500` + `line-height: var(--lh-heading)` (1.25) como red de seguridad en `globals.css`; los headings sin `leading-*` ya no heredan el 1.6 del body.
+- Los `font-bold` que quedan son **solo** los dos H3 con gradiente (Outfit 700). Todo lo demás es 500.
 
 ### backdrop-filter won't blur GSAP-animated text
 
