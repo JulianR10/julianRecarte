@@ -57,7 +57,7 @@ function logoFor(company: string): ImageMetadata | null {
       <div id="testimonios-track" class="relative flex-1 mx-3 md:mx-9" style="min-height: 380px;" aria-live="polite">
         {t.items.map((item, i) => (
           <article
-            class="testimonio-card absolute inset-x-0 top-0 p-6 md:p-10 lg:p-12 rounded-[1.75rem] bg-white dark:bg-dark-card border border-black/5 dark:border-dark-muted/20 shadow-xl transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            class={`testimonio-card ${i === 0 ? "card-active" : "card-hidden"} absolute inset-x-0 top-0 p-6 md:p-10 lg:p-12 rounded-[1.75rem] bg-white dark:bg-dark-card border border-black/5 dark:border-dark-muted/20 shadow-xl transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]`}
           >
             <div class="flex items-center gap-1 mb-6 md:mb-8" role="img" aria-label={t.starRating}>
               {Array.from({ length: 5 }).map((_, j) => (
