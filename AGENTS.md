@@ -47,17 +47,21 @@ src/
 
 ### Script Lifecycle (ViewTransitions)
 
-Every interactive script uses `createLifecycle(init, destroy)` from `@scripts/lifecycle.js`:
+Every interactive script uses `createLifecycle(name, init, destroy)` from `@scripts/lifecycle.js`:
 
 ```js
 // In Layout.astro <script>:
 import { initAll, destroyAll } from "@scripts/main.js";
 import { createLifecycle } from "@scripts/lifecycle.js";
-createLifecycle(initAll, destroyAll);
+createLifecycle("main", initAll, destroyAll);
+
+// In Nav.astro <script> (mismo registro, listeners únicos):
+createLifecycle("nav", initNav, destroyNav);
 ```
 
 - `astro:before-swap` → calls `destroy()` (clean listeners, kill GSAP contexts)
 - `astro:page-load` → calls `init()` (re-attach listeners, re-create animations)
+- `name` deduplica: un solo par de listeners para todos los componentes; si el `<script>` se re-evalúa tras una navegación, el par nuevo reemplaza al anterior en vez de sumarse (evita N× `init`).
 
 ### Shared Scroll Utility
 
@@ -94,6 +98,24 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 | `[data-solu-line]` | soluciones-lines.ts | Separator line draw (scaleX) for Soluciones |
 
 ## Known Pitfalls
+
+### prefers-reduced-motion deja el contenido invisible
+
+`[data-reveal]` / `[data-reveal-stagger]` arrancan en `opacity: 0` (`globals.css`) y solo se ven cuando JS añade `.revealed`. Si un módulo sale temprano con `prefers-reduced-motion` **sin** añadir la clase, el contenido queda invisible para siempre (el `globals.css` reduced-motion solo acorta la animación, no cambia la opacidad).
+
+**Fix:** `reveal-observer.ts` añade `.revealed` a todos los items cuando hay movimiento reducido (contenido visible, sin animación). `cine-text.ts` ya lo hacía bien.
+
+### manualChunks en Astro va como función, no como objeto
+
+Astro intercepta `output.manualChunks` comparando el `id` **absoluto** del módulo (`node_modules/astro/dist/core/build/plugins/util.js`), así que la forma objeto (`{ gsap: ["gsap"] }`) no matchea nunca. Usar la forma de función:
+
+```js
+manualChunks(id) {
+  if (id.includes("node_modules/gsap")) return "gsap";
+  if (id.includes("node_modules/lenis")) return "lenis";
+}
+```
+
 
 ### backdrop-filter won't blur GSAP-animated text
 

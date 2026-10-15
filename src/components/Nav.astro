@@ -200,5 +200,5 @@ const hrefFor = (item: NavItem) => item.href ?? `${prefix}#${item.id}`;
 <script>
   import { initNav, destroyNav } from "@scripts/nav";
   import { createLifecycle } from "@scripts/lifecycle";
-  createLifecycle(initNav, destroyNav);
+  createLifecycle("nav", initNav, destroyNav);
 </script>

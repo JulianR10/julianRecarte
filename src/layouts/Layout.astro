@@ -35,6 +35,7 @@ interface Props {
   t?: {
     skipLink: string;
     backToTop: string;
+    whatsapp?: string;
   };
 }
 
@@ -56,7 +57,7 @@ const {
   schema = [],
   noindex = false,
   lock = false,
-  t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba" },
+  t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba", whatsapp: "Contactar por WhatsApp" },
 } = Astro.props;
 
 const SITE = "https://julianrecarte.dev";
@@ -270,7 +271,7 @@ const personDescription = personBio || description;
     <script>
       import { initAll, destroyAll } from "@scripts/main";
       import { createLifecycle } from "@scripts/lifecycle";
-      createLifecycle(initAll, destroyAll);
+      createLifecycle("main", initAll, destroyAll);
     </script>
 
 
@@ -282,7 +283,7 @@ const personDescription = personBio || description;
       rel="noopener noreferrer"
       class="fixed bottom-8 right-24 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-[var(--bg-hex)]/80 dark:bg-dark-card/90 backdrop-blur-lg shadow-lg transition-all duration-300 cursor-pointer outline-none translate-y-20 opacity-0 pointer-events-none hover:scale-110 text-accent-orange"
       data-lenis-prevent
-      aria-label="WhatsApp"
+      aria-label={t.whatsapp || "WhatsApp"}
     >
       <WhatsAppIcon class="w-7 h-7" />
     </a>
