@@ -39,8 +39,9 @@ src/
 ├── Layout.astro (shell: head, slots, scripts)
 │   ├── slot "nav"  → Nav.astro + nav.js
 │   ├── slot "hero" → Hero.astro + SectionFade (bottom)
-│   └── slot default → Waves, Soluciones (+SectionFade top), Projects, Testimonials, Process, Contact, Footer
+│   └── slot default → Waves, Soluciones (+SectionFade top), Projects, AboutTeaser, Testimonials, Process, Contact, Footer
 ├── CaseStudy.astro (en [lang]/proyectos/[slug].astro)
+├── Sobre.astro (en [lang]/sobre.astro) — página "Sobre mí" (bio + FAQ)
 └── SectionFade.astro (reutilizable, token --section-fade-h)
 ```
 
@@ -183,6 +184,28 @@ npm run build     # outputs to dist/
 ```
 
 Deployed to Vercel at `https://julianrecarte.dev/`. Domain configured with Vercel.
+
+## SEO & GEO (SEO para IA)
+
+Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine Optimization:
+
+- **`public/llms.txt`** — resumen citable para LLMs (quién, stack, servicios, contacto, URLs canónicas, casos de estudio, `/sobre/`). Enlazado desde `robots.txt`.
+- **`public/robots.txt`** — `Allow` explícito para crawlers de IA (`GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-Web`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`, `CCBot`) + Sitemap.
+- **Imágenes OG 1200×630** — `public/og-cover.jpg`, `og-triba.jpg`, `og-multiservizi.jpg`. Se generan con `node scripts/generate-og.mjs` (usa `sharp`). El script es una herramienta local, no corre en el build.
+- **`src/data/schema.ts`** — builders de JSON-LD (`websiteSchema`, `aboutPageSchema`, `professionalServiceSchema`, `projectsItemList`, `reviewsSchema`, `faqSchema`, `breadcrumbSchema`). Layout siempre emite `Person` (+ `Article`/`HowTo`), y cada página suma nodos vía la prop `schema` de `Layout`.
+- **`Person`** — `@id` estable (`/#person`), `email`, `image` (`og-cover.jpg`), `sameAs` (GitHub/Instagram/LinkedIn, sin `wa.me`) y `knowsLanguage` como objetos `Language`.
+- **`Article`** (case studies) — `datePublished` desde `projects.ts` (`publishedAt`, ISO) y `dateModified` = fecha de build; `image` absoluta, `mainEntityOfPage`, `publisher` con logo.
+- **`AboutPage`** en `/sobre` — declara el tipo de página con `mainEntity`/`about` → `#person` e `isPartOf` → `#website` (ficha de entidad para IA).
+- **Headers de seguridad** — `vercel.json` emite `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` y `Permissions-Policy`. **Sin CSP todavía** (requiere nonce/hash para el `gtag` inline + allowlist de fontshare/googleapis).
+- **LCP / preload** — `Layout` expone `<slot name="head" />`; el home inyecta `<link rel="preload" as="image">` de la imagen del hero (misma optimización que `<Image>`, vía `getImage()`), con `fetchpriority="high"` y `width`/`height` explícitos. `fondoTriba` usa `<Image>`.
+- **`/` (raíz)** — `noindex` en `src/pages/index.astro`; el 308 a `/es/` lo resuelve `vercel.json`.
+- **Sitemap** — `astro.config.mjs` excluye la raíz `/` (es solo redirect a `/es/`) para evitar el conflicto hreflang `es-ES`.
+- **`x-default`** — dinámico: apunta a la versión del idioma por defecto del `alternates` (antes estaba fijo al home).
+- **Página `/sobre`** (`src/pages/[lang]/sobre.astro`) — página citable con FAQ visible (`<details>`) + `AboutPage`, `FAQPage`, `ProfessionalService` y `BreadcrumbList`. Enlazada desde el `Footer` y desde el menú principal (**Sobre mí**, ítem de ruta, no ancla).
+- **Menú** — `Nav.astro` mezcla ítems ancla (`#id`) y de ruta (`href`); todos llevan `data-nav-section` para el resaltado de sección activa (`nav.ts`, ids `soluciones · proyectos · sobre · contacto`). **Proceso** ya no está en el menú (su contenido sigue en la home, accesible por scroll).
+- **Teaser "Sobre mí"** — `AboutTeaser.astro` en la home (entre Projects y Testimonios), copy corto y **distinto** al de `/sobre/`, con CTA a la página dedicada (refuerza el internal linking).
+- **H1** — Hero incluye el rol (`sr-only`) y los case studies muestran un `<h1>` visible con el nombre del proyecto.
+- **i18n** — claves nuevas: `layout.bio`, `layout.home`, `footer.about`, `nav.about`, sección `about` (incluye `metaDescription`, `faq` y claves del teaser).
 
 ## UX Improvement Map (division de componentes / flujos)
 

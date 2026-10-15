@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "test": "vitest run",
+    "og": "node scripts/generate-og.mjs",
     "astro": "astro",
     "format": "prettier --write ."
   },
