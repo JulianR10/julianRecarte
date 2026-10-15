@@ -185,7 +185,7 @@ La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, 
 | Decorativo | `text-copy/30 dark:text-dark-muted/40` | índices `aria-hidden` |
 
 - `/70` en claro ≈ 5.5:1 y `dark-muted` en oscuro ≈ 4.9:1 → **AA en ambos temas**. Un `/60` en claro da 4.0:1 (falla AA); no usar.
-- **El H1 del case study no puede crecer**: la página usa `lock` (`body.is-locked` → `height:100dvh; overflow:hidden` en ≥768px) y su columna de texto mide ~276px a 1024px (grid `[1fr_660px]`). "Multiservizi" a 3rem ocupa ~300px → desborda y se **recorta sin scroll**. Por eso queda en `.t-h3` (su tamaño histórico). Para subirlo hay que ensanchar la columna o desbloquear la página, no cambiar el rol.
+- **El H1 del case study no puede crecer**: su columna de texto mide ~276px a 1024px de ancho (grid `lg:grid-cols-[1fr_660px]`, columna de mockup fija en 660px) y "Multiservizi" a 3rem ocupa ~300px → desborda. Por eso queda en `.t-h3` (su tamaño histórico). Para subirlo hay que **ensanchar la columna** (o rearmar el hero en dos filas), no cambiar el rol. Ya **no** es un problema de alto: la página scrollea (ver *Case study — layout*).
 - Los roles van en `@layer components`, así que **cualquier utilidad de Tailwind los sobrescribe**. Si un elemento conserva un `md:text-lg` suelto, esa utilidad gana y el rol queda muerto: al asignar un rol hay que **quitar** sus utilidades de tamaño/interlineado/tracking.
 - `h1`–`h6` llevan `font-weight: 500` + `line-height: var(--lh-heading)` (1.25) como red de seguridad en `globals.css`; los headings sin `leading-*` ya no heredan el 1.6 del body.
 - Los `font-bold` que quedan son **solo** los dos H3 con gradiente (Outfit 700). Todo lo demás es 500.
@@ -337,6 +337,16 @@ mayor oportunidad de retorno actual.
 ## Case Studies — Implementado (Triba + Multiservizi live)
 
 Páginas dedicadas por proyecto en `[lang]/proyectos/[slug].astro` (slug invariante, `switchLang` conserva path). Triba y Multiservizi live con logo linkeado a su `liveUrl` (`CaseStudy.astro` generalizado: si hay `liveUrl`, el logo linkea; si no, `<img>` plano). SP en `comingSoon`. Orden de cards: Triba, Multiservizi, SP (los live primero). Usa `SectionFade` no, hero con `fondoTriba.webp` + veil `color-mix` (solo Triba; Multiservizi usa su wash burdeos). Mockup Multiservizi solo desktop (`mockupDesktopMulti.webp`, fallback en mobile hasta cargar el dedicado).
+
+### Layout: página normal con scroll (nada de `lock`)
+
+La página **no** está bloqueada. Antes usaba `lock` (`body.is-locked` → `height:100dvh; overflow:hidden` en ≥768px) y todo el case study quedaba comprimido en **una sola pantalla**: la nav (76px) y el footer (~130px) eran hijos del mismo flex column de `100dvh` y le robaban alto al hero. El contenido solo "entraba" porque estaba encogido a la fuerza — H1 bajado a `.t-h3` y mockup capado con `max-h-[70vh]` + `object-contain` (que además lo encogía y le dejaba aire a los costados). Con viewport bajo (1024×600), zoom ≥125% o en `en`/`it` (el subtítulo envuelve en más líneas) se **recortaba en silencio**, sin scroll ni barra.
+
+- `body.is-locked`, el `lock` de `Layout` y el `lock` de `[slug].astro` **se eliminaron** (era su único uso). El `main` vuelve a fluir, el footer deja de robar altura y los botones flotantes (WhatsApp / subir) vuelven a aparecer en estas páginas.
+- Hero: `pt-[calc(var(--navbar-h)+3rem)] pb-16 md:pt-[calc(var(--navbar-h)+4rem)] md:pb-24 lg:pb-28` (Tailwind normaliza el `+` a `calc(var(--navbar-h) + 3rem)`; sin espacios sería CSS inválido, pero eso lo resuelve el plugin).
+- Mockup a **tamaño natural** (`w-full h-auto`): 1200×1320 → 726px de alto a 660px de ancho.
+- Los `[data-reveal]` vuelven a dispararse **al scrollear** (antes disparaban todos juntos: todo estaba en viewport).
+- La **nav es fija** (como el home) y el botón "volver" pasó a `absolute top-24 md:top-28` para no quedar debajo de ella.
 
 ## Case Studies — Plan en pausa (histórico)
 

@@ -31,7 +31,6 @@ interface Props {
   personBio?: string;
   schema?: Record<string, unknown>[];
   noindex?: boolean;
-  lock?: boolean;
   t?: {
     skipLink: string;
     backToTop: string;
@@ -56,7 +55,6 @@ const {
   personBio,
   schema = [],
   noindex = false,
-  lock = false,
   t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba", whatsapp: "Contactar por WhatsApp" },
 } = Astro.props;
 
@@ -254,7 +252,7 @@ const personDescription = personBio || description;
       gtag('config', 'G-R1ZPHT8LX2');
     </script>
   </head>
-  <body transition:animate="slide" class={lock ? "is-locked" : undefined}>
+  <body transition:animate="slide">
     <a href="#main-content" class="skip-link">{t.skipLink}</a>
     <header><slot name="nav" /></header>
     <slot name="hero" />

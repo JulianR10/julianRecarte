@@ -91,9 +91,8 @@ const schema = [
     dateModified: buildDate,
   }}
   t={t.layout}
-  lock
 >
-  <Nav slot="nav" lang={lang} t={t.nav} prefix={`/${lang}/`} fixed={false} />
+  <Nav slot="nav" lang={lang} t={t.nav} prefix={`/${lang}/`} />
   <CaseStudy lang={lang} project={project} t={cs} />
   <Footer slot="footer" lang={lang} t={t.footer} />
 </Layout>
