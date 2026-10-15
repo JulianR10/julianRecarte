@@ -19,7 +19,7 @@ export default {
         },
       },
       fontFamily: {
-        satoshi: ["Satoshi", "sans-serif"],
+        satoshi: ["Satoshi", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
       },
 
     },

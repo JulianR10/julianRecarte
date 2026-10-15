@@ -117,6 +117,16 @@ manualChunks(id) {
 ```
 
 
+### Google Fonts: un eje fuera de rango devuelve 400 (la fuente no carga, en silencio)
+
+Si un eje del `css2` está fuera del rango real de la familia, Google responde **HTTP 400** y **no llega ningún `@font-face`** → el navegador cae al fallback sin error visible fuera de DevTools › Network.
+
+- **Mozilla Headline**: `wdth 75..125`, **`wght 200..700`** (no `100..900`). URL válida: `family=Mozilla+Headline:wdth,wght@75..125,200..700&display=swap`.
+- Verificar siempre: `curl -s -o /dev/null -w "%{http_code}\n" "<url>"` → debe dar **200**.
+- Rangos oficiales: `https://fonts.google.com/metadata/fonts` (campo `axes` de cada familia).
+- Stack real del sitio: **Satoshi** (body/UI, Fontshare) + **Mozilla Headline** (`h1`–`h6`, Google Fonts). Con UA de Chrome, Google sirve una **fuente variable** (`font-weight: 200 700; font-stretch: 75% 125%`, ~20 KB woff2).
+- El eje `wdth` está disponible pero **no se usa**: no hay `font-stretch` en el CSS, así que el "titular comprimido" no ocurre.
+
 ### backdrop-filter won't blur GSAP-animated text
 
 **Root cause:** GSAP's `fromTo` targeting `filter: "blur(0px)"` creates GPU layers. `blur(0px)` ≠ `none` — any non-none filter value creates a stacking context and promotes to GPU layer. Chrome's `backdrop-filter` cannot sample across GPU-composited layers.
