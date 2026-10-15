@@ -65,9 +65,9 @@ const mobileMockup = project.mockupMobile ?? project.mockup;
         <div class="flex flex-col items-center lg:items-start">
           {project.image && (
             <div data-reveal class="mb-5 flex justify-center lg:justify-start">
-              {project.slug === "triba" ? (
+              {project.liveUrl ? (
                 <a
-                  href="https://www.universotriba.com/"
+                  href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${t.title} — visitar sitio`}

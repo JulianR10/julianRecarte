@@ -151,7 +151,16 @@
     "multiservizi": {
       "title": "Multiservizi SRL",
       "description": "Funeraria italiana con venta mayorista de artículos: cerámicas, ataúdes, adornos y más. Catálogo digital completo con navegación fluida.",
-      "subtitle": "Catálogo digital para una funeraria mayorista con venta de artículos."
+      "subtitle": "Plataforma mayorista para funeraria en Calabria: catálogo digital, panel cliente y panel admin con estadísticas de ventas.",
+      "challengeTitle": "El desafío",
+      "challenge": "Petrungaro Multiservizi vendía al por mayor artículos funerarios —cerámicas, ataúdes, adornos— con gestión manual de pedidos. Necesitaba un catálogo digital ordenado para sus clientes y una forma clara de seguir qué se vende.",
+      "solutionTitle": "La solución",
+      "solution": "Diseñé una plataforma con catálogo mayorista, panel cliente para consultar productos y hacer pedidos, y panel admin para gestionar productos, clientes y pedidos desde un solo lugar.",
+      "plusTitle": "Datos para decidir",
+      "plus": "El panel admin incluye gráficos estadísticos de ventas para ver tendencias y productos más vendidos, con autogestión total sin depender de un desarrollador.",
+      "adminPanel": {
+        "badges": ["Panel admin", "Panel cliente", "Catálogo mayorista", "Estadísticas de ventas", "Autogestión total"]
+      }
     }
   },
   "footer": {

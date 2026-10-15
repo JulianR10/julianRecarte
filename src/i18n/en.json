@@ -151,7 +151,16 @@
     "multiservizi": {
       "title": "Multiservizi SRL",
       "description": "Italian funeral home offering wholesale products: ceramics, coffins, decorations and more. Complete digital catalog with smooth navigation.",
-      "subtitle": "Digital catalog for a wholesale funeral home."
+      "subtitle": "Wholesale platform for a funeral home in Calabria: digital catalog, client panel and admin panel with sales statistics.",
+      "challengeTitle": "The challenge",
+      "challenge": "Petrungaro Multiservizi sold funeral products wholesale —ceramics, coffins, decorations— with manual order management. It needed an organized digital catalog for its clients and a clear way to track what sells.",
+      "solutionTitle": "The solution",
+      "solution": "I designed a platform with a wholesale catalog, a client panel to browse products and place orders, and an admin panel to manage products, clients and orders from a single place.",
+      "plusTitle": "Data to decide",
+      "plus": "The admin panel includes sales statistics charts to spot trends and best-selling products, with full self-management without depending on a developer.",
+      "adminPanel": {
+        "badges": ["Admin panel", "Client panel", "Wholesale catalog", "Sales statistics", "Full self-management"]
+      }
     }
   },
   "footer": {

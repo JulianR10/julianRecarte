@@ -194,16 +194,16 @@ mayor oportunidad de retorno actual.
 |---|---|---|---|---|---|
 | 1 | **Hero (flujo de entrada)** | Pantalla completa sticky, sin indicador de scroll | Falta un tercer CTA secundario granular | Alto | Bajo |
 | 2 | **Nav (orientación)** | Links ancla; sin botón de acción en desktop | Falta un CTA "Hablemos / Contactar" persistente en desktop y breadcrumb visual de sección activa más claro | Alto | Bajo |
-| 3 | **Projects (pilar de venta)** | 3 cards, solo 1 con "Ver sitio", sin filtros ni caso de estudio | Severa falta de profundidad: solo 1 proyecto en vivo, cards sin click fuera de Triba, sin categorías | **Muy alto (Foco recomendado)** | Medio |
+| 3 | **Projects (pilar de venta)** | 3 cards (Triba, Multiservizi live + SP "Próximamente"); cards sin botón "Ver sitio", solo link "Caso de estudio" anclado al fondo | Falta profundidad en SP; sin filtros ni categorías | **Muy alto (Foco recomendado)** | Medio |
 | 4 | **Testimonials (prueba social)** | Carousel con 4 items; sin autoplay ni teclado | Falta autoplay opcional, navegación con ← →, y en desktop mostrar 2 cards | Medio | Bajo |
 | 5 | **Contact (conversión)** | 3 botones: WhatsApp, IG, Email | Falta WhatsApp con **mensaje pre-cargado** y (opcional) número/timing; email sin asunto | Alto | Bajo |
 | 6 | **Process (confianza)** | Timeline de 4 pasos | Está bien; oportunidad menor de profundidad visual por paso | Bajo | Bajo |
 | 7 | **Footer (cierre)** | Solo copyright + firma | Falta mini-navegación / sociales / CTA de cierre para no depender del scroll | Medio | Bajo |
 | 8 | **Floating (WhatsApp + Top)** | Ambos aparecen al scroll | Funcionan bien; oportunidad menor de tooltip/label | Bajo | Bajo |
 
-## Case Studies — Implementado (Triba live)
+## Case Studies — Implementado (Triba + Multiservizi live)
 
-Página dedicada por proyecto en `[lang]/proyectos/[slug].astro` (slug invariante, `switchLang` conserva path). Triba live con `logoTriba` linkeado a `https://www.universotriba.com/` en `CaseStudy.astro:66`; SP y Multiservizi en `comingSoon`. Usa `SectionFade` no, hero con `fondoTriba.webp` + veil `color-mix`.
+Páginas dedicadas por proyecto en `[lang]/proyectos/[slug].astro` (slug invariante, `switchLang` conserva path). Triba y Multiservizi live con logo linkeado a su `liveUrl` (`CaseStudy.astro` generalizado: si hay `liveUrl`, el logo linkea; si no, `<img>` plano). SP en `comingSoon`. Orden de cards: Triba, Multiservizi, SP (los live primero). Usa `SectionFade` no, hero con `fondoTriba.webp` + veil `color-mix` (solo Triba; Multiservizi usa su wash burdeos). Mockup Multiservizi solo desktop (`mockupDesktopMulti.webp`, fallback en mobile hasta cargar el dedicado).
 
 ## Case Studies — Plan en pausa (histórico)
 
@@ -278,7 +278,7 @@ audacia; todo lo demás silencioso. Sin animaciones nuevas: reusar `data-reveal-
 2. `es/en/it.json` → sección `caseStudies` con copy drafteado (Triba ya drafteado; falta SP y Multiservizi).
 3. `src/pages/[lang]/proyectos/[slug].astro` → `getStaticPaths()` (3 slugs × 3 idiomas), usa `Layout`.
 4. `src/components/CaseStudy.astro` → hero + secciones narrativas + schema `Article` en head.
-5. `ProjectCard.astro` → `href` interno al case study; botón "Ver sitio" (solo Triba) como acción secundaria.
+5. `ProjectCard.astro` → `href` interno al case study; sin botón "Ver sitio" en cards (paridad visual entre Triba y Multiservizi, decisión explícita). `liveUrl` en `projects.ts` solo alimenta el logo linkeado del case study. Link "Caso de estudio" anclado al fondo (`article` + contenido en `flex-col`, bloque de acciones con `mt-auto`) para alinear cards con descripciones de distinto largo.
 6. Sitemap + hreflang automáticos (ruta en `[lang]`, Layout ya emite alternates).
 
 ### Preguntas abiertas (responder antes de construir)

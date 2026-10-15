@@ -22,13 +22,13 @@ describe("getProjectCopy", () => {
       expect(triba.challenge, `${lang}/triba challenge`).not.toBe("");
       expect(triba.solution, `${lang}/triba solution`).not.toBe("");
 
+      const multi = getProjectCopy("multiservizi", lang);
+      expect(multi.challenge, `${lang}/multi challenge`).not.toBe("");
+      expect(multi.solution, `${lang}/multi solution`).not.toBe("");
+
       const sp = getProjectCopy("sp-soluciones-textiles", lang);
       expect(sp.challenge, `${lang}/sp challenge`).toBeFalsy();
       expect(sp.solution, `${lang}/sp solution`).toBeFalsy();
-
-      const multi = getProjectCopy("multiservizi", lang);
-      expect(multi.challenge, `${lang}/multi challenge`).toBeFalsy();
-      expect(multi.solution, `${lang}/multi solution`).toBeFalsy();
     }
   });
 

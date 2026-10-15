@@ -151,7 +151,16 @@
     "multiservizi": {
       "title": "Multiservizi SRL",
       "description": "Impresa funebre italiana con vendita all'ingrosso di articoli: ceramiche, casse, addobbi e molto altro. Catalogo digitale completo con navigazione fluida.",
-      "subtitle": "Catalogo digitale per un'impresa funebre all'ingrosso."
+      "subtitle": "Piattaforma all'ingrosso per impresa funebre in Calabria: catalogo digitale, pannello cliente e pannello admin con statistiche di vendita.",
+      "challengeTitle": "La sfida",
+      "challenge": "Petrungaro Multiservizi vendeva all'ingrosso articoli funebri —ceramiche, casse, addobbi— con gestione manuale degli ordini. Serviva un catalogo digitale ordinato per i clienti e un modo chiaro per seguire le vendite.",
+      "solutionTitle": "La soluzione",
+      "solution": "Ho progettato una piattaforma con catalogo all'ingrosso, pannello cliente per consultare i prodotti e fare ordini, e pannello admin per gestire prodotti, clienti e ordini da un unico posto.",
+      "plusTitle": "Dati per decidere",
+      "plus": "Il pannello admin include grafici statistici sulle vendite per vedere tendenze e prodotti più venduti, con autogestione totale senza dipendere da uno sviluppatore.",
+      "adminPanel": {
+        "badges": ["Pannello admin", "Pannello cliente", "Catalogo all'ingrosso", "Statistiche di vendita", "Autogestione totale"]
+      }
     }
   },
   "footer": {
