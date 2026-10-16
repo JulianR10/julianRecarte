@@ -41,7 +41,7 @@ src/
 │   ├── slot "hero" → Hero.astro + SectionFade (bottom)
 │   └── slot default → Waves, Soluciones (+SectionFade top), Projects, AboutTeaser, Testimonials, Process, Contact, Footer
 ├── CaseStudy.astro (en [lang]/proyectos/[slug].astro)
-├── Sobre.astro (en [lang]/sobre.astro) — página "Sobre mí" (bio + FAQ)
+├── sobre-mi.astro (en [lang]/) — página "Sobre mí": hero con retrato + firma, banda de stack, datos y FAQ
 └── SectionFade.astro (reutilizable, token --section-fade-h)
 ```
 
@@ -96,6 +96,9 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 | `[data-magnetic]` | magnetic.ts | Magnetic button hover (Hero CTAs, Contact links) |
 | `[data-process-step]` | animations.ts | Process image scale on scroll |
 | `[data-solu-line]` | soluciones-lines.ts | Separator line draw (scaleX) for Soluciones |
+| `[data-about-hero]` | about-parallax.ts | Scroll trigger del hero de `/sobre-mi/` |
+| `[data-about-portrait]` | about-parallax.ts | Retrato: deriva +32px al scrollear (parallax) |
+| `[data-about-wash]` | about-parallax.ts | Wash del hero: deriva −32px (parallax opuesto) |
 
 ## Known Pitfalls
 
@@ -107,15 +110,15 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 
 ### La regla CSS de reduced-motion no frena a GSAP
 
-`globals.css` neutraliza animaciones y transiciones **CSS**, pero GSAP anima por rAF: sus tweens siguen corriendo igual. Por eso cada bucle infinito se corta en JS, no en CSS:
+`globals.css` neutraliza animaciones y transiciones **CSS** (`animation-duration: 0.01ms; animation-iteration-count: 1`), pero GSAP anima por rAF: sus tweens siguen corriendo igual. El corte real está en JS:
 
 | Módulo | Con movimiento reducido |
 |--------|------------------------|
+| Cualquier módulo de `defineAnimation` | No arranca: la fábrica retorna en `gsap-factory.ts:19` **antes** de crear el context. No hace falta un guard propio |
 | `lenis-adapter.ts` | No se crea Lenis. Un listener de scroll nativo alimenta `onScroll()` + `ScrollTrigger.update()` (sin él, "volver arriba" y el resaltado del nav se quedan congelados) y `scrollToTop` salta en seco |
-| `hero-zap.ts` | No arranca (los clones ya están en `opacity: 0` por CSS) |
-| `waves.ts` | No arranca; las olas quedan en el trazo del markup |
-| `hero-rotator.ts` | No arranca; queda la primera palabra, que el markup ya muestra |
-| `reveal-observer.ts`, `cine-text.ts` | Añaden `.revealed` sin animar |
+| `reveal-observer.ts` | Añade `.revealed` sin animar (si no, `[data-reveal]` queda invisible) |
+| `cine-text.ts` | Procesa el DOM y añade `.revealed`, sin tweens |
+| Banda de stack de `/sobre-mi/` (CSS puro) | La animación CSS se acorta a 0.01ms y vuelve al estado inicial (`translateX(0)`) → queda el primer tramo fijo |
 
 ## Accesibilidad
 
@@ -161,7 +164,7 @@ La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, 
 |---|---|---|
 | `.t-eyebrow` | Label sobre un título de sección | 14px, 500, `.3em`, uppercase |
 | `.t-index` | Contador editorial (01, 02) | 12px, 500, `.22em`, tabular |
-| `.t-h1` | Título de página (Hero, `/sobre`) | 2.5rem → 3rem → `lg:` 3.75rem |
+| `.t-h1` | Título de página (Hero, `/sobre-mi`) | 2.5rem → 3rem → `lg:` 3.75rem |
 | `.t-h2` | Título de sección y de página interior | 2.25rem → 3rem |
 | `.t-h3` | Título de ítem (card, servicio) y H1 del case study | 1.5rem → 1.875rem |
 | `.t-h4` | Título chico (autor, paso) | 1.125rem → 1.25rem |
@@ -233,8 +236,11 @@ Elements with `will-change: transform/opacity/filter` get promoted to GPU layers
 | `magnetic.ts` | Magnetic hover on CTAs / contact links | No (mouse-based) | Yes |
 | `cine-text.ts` | Character stagger reveal | Yes | Yes |
 | `soluciones-lines.ts` | Soluciones separator draw | Yes | Yes |
+| `about-parallax.ts` | Retrato + wash de `/sobre-mi/` | Yes (scrub) | Yes |
 
 All modules use `defineAnimation` / `gsap.context()` for scoped cleanup. `destroy()` calls `ctx.kill()`.
+
+**`defineAnimation` ya corta todo con `prefers-reduced-motion`** (`checkReducedMotion`, default `true`): los módulos no necesitan su propio guard. Solo `cine-text.ts` lo desactiva (`{ checkReducedMotion: false }`) porque necesita procesar el DOM y añadir `.revealed` sin animar. `lenis-adapter.js` y `reveal-observer.ts` no pasan por la fábrica y se gatean solos.
 
 ## i18n
 
@@ -261,6 +267,21 @@ Ubicada entre Hero y Projects (`[lang]/index.astro:33`). Sin cards (intencional)
 - **IDs:** `soluciones` (nav anchor), nav `IntersectionObserver` en `nav.ts` incluye `soluciones`.
 - **i18n:** `soluciones { label, title, highlight, hint, cta, items[3] }` en `es/en/it.json`.
 
+## Página /sobre-mi — Retrato editorial
+
+`src/pages/[lang]/sobre-mi.astro` (slug invariante `sobre-mi` → el `switchLang` conserva el path). Solo su propio contenido: **una página de "sobre mí", para navegar la web se vuelve a la home**.
+
+- **Qué NO tiene** (a propósito): **Servicios** (leía `t.soluciones.items`), **Proceso** (leía `t.process.steps`) y `<Contact />` — duplicaban el home, y la FAQ ya cubre los servicios. Sin `<Contact />` tampoco existe `#contacto`, así que el `IntersectionObserver` del nav no puede robarle el `active` a "Sobre mí" (`nav.ts` lo marca por ruta cuando `pathname` incluye `/sobre-mi`).
+- **Hero** a dos columnas (`lg:grid-cols-[1fr_340px]`, mobile apilado): eyebrow outlined (`label-outline`) + H1 `.t-h1` (`data-reveal-heading`) + intro, y el **retrato** con `aspect-[2/3]` + `scale-[1.78] translate-y-[14%]` — **el mismo encuadre que el Hero del home** (el `scale`/`translate` son relativos, así que la composición es igual a cualquier tamaño). El fondo del retrato es el gradiente del marco (`from-accent-warm to-accent-warm/5`) visto a través del cutout transparente de `yo.webp`.
+- **Firma** — `firma.png` en un pill `bg-[var(--bg-hex)] dark:bg-dark-card` con `-bottom-6`, **dentro** del marco del retrato (`data-about-portrait`) para que el parallax mueva los dos juntos. `.signature` (brightness(0) + invert en oscuro) vive en `globals.css`, compartido con el Footer.
+- **Banda de stack** — ticker CSS puro entre el hero y los datos: `aria-hidden` en el track + `<ul class="sr-only">` con la lista real (accesible e indexable). 2 grupos idénticos de `about.stack` ×2 y `translateX(-50%)` → loop sin salto (el espaciado va como `px-5` en cada `<li>`, **no** como `gap`, o el −50% no coincide). `mask-image` desvanece los bordes. Sin JS: con movimiento reducido la regla de `globals.css` la deja en `translateX(0)`.
+- **Wash** del hero — dos focos `radial-gradient` con `color-mix` (naranja + pastel, solo cálidos: el morado sobre beige ensuciaba). Se mueve con el parallax.
+- **Datos** — `about.facts` en grilla `md:grid-cols-2` (4 items → 2×2 balanceada), cada uno con `.t-index` + `label`/`value` y `border-t`.
+- **FAQ** — `SectionHeader` + `<details>` numerados dentro de `[data-reveal-stagger]`.
+- **Cierre** — hairline + pill "Volver al inicio" con `[data-magnetic]`.
+- **Anims** — `about-parallax.ts` (`[data-about-hero/portrait/wash]`, scrub) + los reveals existentes. Nada nuevo de GSAP.
+- **i18n:** `about { label, title, highlight, intro, metaDescription, teaser*, cta, factsLabel, facts[4], stack[6], faq*, backHome }`. Ya **no** existen `servicesTitle`, `processTitle`, `ctaTitle` ni `ctaBody`.
+
 ## SectionFade — Sistema de transición
 
 Token `--section-fade-h: 128px` en `globals.css:25`. Componente `SectionFade.astro` (`edge="top"|"bottom"`) con curva ease de 7 paradas `color-mix(in srgb, var(--bg-hex) X%, transparent)` para fundido imperceptible. Doble fundido: `Hero bottom` (dentro, `bottom:0`) + `Soluciones top` (fuera, `top: calc(-1*var)`). Solo para sticky hero, no se extiende a otras secciones.
@@ -284,13 +305,13 @@ Deployed to Vercel at `https://julianrecarte.dev/`. Domain configured with Verce
 
 Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine Optimization:
 
-- **`public/llms.txt`** — resumen citable para LLMs (quién, stack, servicios, contacto, URLs canónicas, casos de estudio, `/sobre/`). Enlazado desde `robots.txt`.
+- **`public/llms.txt`** — resumen citable para LLMs (quién, stack, servicios, contacto, URLs canónicas, casos de estudio, `/sobre-mi/`). Enlazado desde `robots.txt`.
 - **`public/robots.txt`** — `Allow` explícito para crawlers de IA (`GPTBot`, `OAI-SearchBot`, `ChatGPT-User`, `ClaudeBot`, `Claude-Web`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`, `CCBot`) + Sitemap.
 - **Imágenes OG 1200×630** — `public/og-cover.jpg`, `og-triba.jpg`, `og-multiservizi.jpg`. Se generan con `node scripts/generate-og.mjs` (usa `sharp`). El script es una herramienta local, no corre en el build.
 - **`src/data/schema.ts`** — builders de JSON-LD (`websiteSchema`, `aboutPageSchema`, `professionalServiceSchema`, `projectsItemList`, `reviewsSchema`, `faqSchema`, `breadcrumbSchema`). Layout siempre emite `Person` (+ `Article`/`HowTo`), y cada página suma nodos vía la prop `schema` de `Layout`.
 - **`Person`** — `@id` estable (`/#person`), `email`, `image` (`og-cover.jpg`), `sameAs` (GitHub/Instagram/LinkedIn, sin `wa.me`) y `knowsLanguage` como objetos `Language`.
 - **`Article`** (case studies) — `datePublished` desde `projects.ts` (`publishedAt`, ISO) y `dateModified` = fecha de build; `image` absoluta, `mainEntityOfPage`, `publisher` con logo.
-- **`AboutPage`** en `/sobre` — declara el tipo de página con `mainEntity`/`about` → `#person` e `isPartOf` → `#website` (ficha de entidad para IA).
+- **`AboutPage`** en `/sobre-mi` — declara el tipo de página con `mainEntity`/`about` → `#person` e `isPartOf` → `#website` (ficha de entidad para IA).
 - **Headers de seguridad** — `vercel.json` emite `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` y **`Content-Security-Policy`**.
 - **CSP** — allowlist: `script-src 'self' + hashes + googletagmanager`, `style-src 'self' 'unsafe-inline' + fontshare/googleapis` (Astro inlinea `<style>` y hay `style="…"` inline → `'unsafe-inline'` es inevitable), `font-src cdn.fontshare.com + fonts.gstatic.com`, `connect-src` a GA y `vitals.vercel-insights.com`, `frame-ancestors 'none'`.
   - Los **hashes** cubren los 2 únicos scripts inline: el bootstrap de dark mode (12 páginas) y el redirect por idioma de `/`. **Si se toca cualquiera de esos scripts, el hash deja de valer y el script se bloquea en silencio** (dark mode parpadea, `/` no redirige). Recalcular con:
@@ -311,9 +332,9 @@ Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine 
 - **`/` (raíz)** — `noindex` en `src/pages/index.astro`; el 308 a `/es/` lo resuelve `vercel.json`.
 - **Sitemap** — `astro.config.mjs` excluye la raíz `/` (es solo redirect a `/es/`) para evitar el conflicto hreflang `es-ES`.
 - **`x-default`** — dinámico: apunta a la versión del idioma por defecto del `alternates` (antes estaba fijo al home).
-- **Página `/sobre`** (`src/pages/[lang]/sobre.astro`) — página citable con FAQ visible (`<details>`) + `AboutPage`, `FAQPage`, `ProfessionalService` y `BreadcrumbList`. Enlazada desde el `Footer` y desde el menú principal (**Sobre mí**, ítem de ruta, no ancla).
+- **Página `/sobre-mi`** (`src/pages/[lang]/sobre-mi.astro`) — página citable con FAQ visible (`<details>`) + `AboutPage`, `FAQPage`, `ProfessionalService` y `BreadcrumbList`. Enlazada desde el `Footer` y desde el menú principal (**Sobre mí**, ítem de ruta, no ancla).
 - **Menú** — `Nav.astro` mezcla ítems ancla (`#id`) y de ruta (`href`); todos llevan `data-nav-section` para el resaltado de sección activa (`nav.ts`, ids `soluciones · proyectos · sobre · contacto`). **Proceso** ya no está en el menú (su contenido sigue en la home, accesible por scroll).
-- **Teaser "Sobre mí"** — `AboutTeaser.astro` en la home (entre Projects y Testimonios), copy corto y **distinto** al de `/sobre/`, con CTA a la página dedicada (refuerza el internal linking).
+- **Teaser "Sobre mí"** — `AboutTeaser.astro` en la home (entre Projects y Testimonios), copy corto y **distinto** al de `/sobre-mi/`, con CTA a la página dedicada (refuerza el internal linking).
 - **H1** — Hero incluye el rol (`sr-only`) y los case studies muestran un `<h1>` visible con el nombre del proyecto.
 - **i18n** — claves nuevas: `layout.bio`, `layout.home`, `footer.about`, `nav.about`, sección `about` (incluye `metaDescription`, `faq` y claves del teaser).
 
