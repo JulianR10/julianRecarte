@@ -140,16 +140,15 @@
     "teaserHighlight": "cada proyecto",
     "teaserText": "Soy desarrollador web FullStack y trabajo 100% remoto con clientes de todo el mundo, en español, inglés e italiano. Convierto ideas en sitios rápidos, cuidados y pensados para traer resultados.",
     "cta": "Conocer más sobre mí",
+    "factsLabel": "Perfil",
     "factsTitle": "En resumen",
     "facts": [
       { "label": "Rol", "value": "Desarrollador web FullStack (frontend + backend)" },
       { "label": "Idiomas", "value": "Español · Inglés · Italiano" },
       { "label": "Modalidad", "value": "100% remoto, clientes en todo el mundo" },
-      { "label": "Stack", "value": "Astro · Tailwind CSS · GSAP · Supabase · Node.js · TypeScript" },
       { "label": "Servicios", "value": "Landing pages · Sitios institucionales · Catálogos · Ecommerce · Paneles a medida" }
     ],
-    "servicesTitle": "Qué puedo hacer por tu proyecto",
-    "processTitle": "Cómo trabajo",
+    "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "Preguntas frecuentes",
     "faqTitle": "Lo que",
     "faqHighlight": "preguntan",
@@ -161,8 +160,6 @@
       { "q": "¿Puedo editar el sitio yo mismo?", "a": "Sí. Cuando el proyecto lo necesita, desarrollo un panel de administración a medida para que gestiones contenido, productos o pedidos sin depender de un desarrollador." },
       { "q": "¿Cómo empezamos?", "a": "Escribime por WhatsApp o email con tu idea. Hacemos un briefing, te propongo un enfoque y un presupuesto, y arrancamos." }
     ],
-    "ctaTitle": "¿Trabajamos juntos?",
-    "ctaBody": "Contame tu idea y vemos cómo llevarla a la web.",
     "backHome": "Volver al inicio"
   },
   "caseStudies": {

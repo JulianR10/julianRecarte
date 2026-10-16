@@ -77,8 +77,9 @@ export const nav = defineComponent("nav", (scope) => {
     }))
     .filter((s): s is { id: string; link: HTMLElement } => s.link !== null);
 
-  // En la página /sobre/ no hay sección #sobre: se marca el link por ruta.
-  if (window.location.pathname.includes("/sobre")) {
+  // En /sobre-mi/ no existen las secciones #soluciones/#proyectos/#contacto:
+  // el link de ruta se marca a mano (el observer no observa nada y no lo pisa).
+  if (window.location.pathname.includes("/sobre-mi")) {
     const aboutLink = sections.find((s) => s.id === "sobre")?.link;
     if (aboutLink) {
       aboutLink.classList.add("active");

@@ -27,7 +27,7 @@
 - Español: https://julianrecarte.dev/es/
 - English: https://julianrecarte.dev/en/
 - Italiano: https://julianrecarte.dev/it/
-- Sobre mí (bio, datos, servicios y FAQ): https://julianrecarte.dev/es/sobre/
+- Sobre mí (bio, datos, servicios y FAQ): https://julianrecarte.dev/es/sobre-mi/
 
 ## Casos de estudio
 

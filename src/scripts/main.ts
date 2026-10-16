@@ -14,6 +14,7 @@ import { backToTop } from "@scripts/back-to-top";
 import { testimonialsCarousel } from "@scripts/testimonials-carousel";
 import { projectsCarousel } from "@scripts/projects-carousel";
 import { solucionesLines } from "@scripts/soluciones-lines";
+import { aboutParallax } from "@scripts/about-parallax";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,6 +28,7 @@ const animations = [
   progressAnimations,
   cineText,
   solucionesLines,
+  aboutParallax,
 ];
 
 export function initAll(): void {

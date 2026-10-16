@@ -24,7 +24,7 @@ function setupDom(): void {
     <nav id="main-nav">
       <a class="desktop-link" data-nav-section="soluciones" href="#soluciones">Soluciones</a>
       <a class="desktop-link" data-nav-section="proyectos" href="#proyectos">Proyectos</a>
-      <a class="desktop-link" data-nav-section="sobre" href="/es/sobre/">Sobre mi</a>
+      <a class="desktop-link" data-nav-section="sobre" href="/es/sobre-mi/">Sobre mi</a>
       <a class="desktop-link" data-nav-section="contacto" href="#contacto">Contacto</a>
       <div id="theme-toggle">
         <div id="theme-indicator"></div>
@@ -113,6 +113,18 @@ describe("nav", () => {
     io.trigger(contacto);
     expect(link.classList.contains("active")).toBe(false);
     expect(contactoLink.classList.contains("active")).toBe(true);
+  });
+
+  it("marks the route link as the current page on /sobre-mi/", () => {
+    destroyNav();
+    window.history.pushState({}, "", "/es/sobre-mi/");
+    initNav();
+
+    const link = document.querySelector<HTMLElement>('[data-nav-section="sobre"]')!;
+    expect(link.classList.contains("active")).toBe(true);
+    expect(link.getAttribute("aria-current")).toBe("page");
+
+    window.history.pushState({}, "", "/");
   });
 
   it("opens and closes the mobile menu", () => {

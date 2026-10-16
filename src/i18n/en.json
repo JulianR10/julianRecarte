@@ -140,16 +140,15 @@
     "teaserHighlight": "every project",
     "teaserText": "I'm a FullStack web developer working 100% remotely with clients worldwide, in Spanish, English and Italian. I turn ideas into fast, well-crafted websites built to deliver results.",
     "cta": "More about me",
+    "factsLabel": "Profile",
     "factsTitle": "At a glance",
     "facts": [
       { "label": "Role", "value": "FullStack web developer (frontend + backend)" },
       { "label": "Languages", "value": "Spanish · English · Italian" },
       { "label": "Work style", "value": "100% remote, clients worldwide" },
-      { "label": "Stack", "value": "Astro · Tailwind CSS · GSAP · Supabase · Node.js · TypeScript" },
       { "label": "Services", "value": "Landing pages · Corporate sites · Catalogs · Ecommerce · Custom admin panels" }
     ],
-    "servicesTitle": "What I can do for your project",
-    "processTitle": "How I work",
+    "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "FAQ",
     "faqTitle": "Frequently asked",
     "faqHighlight": "questions",
@@ -161,8 +160,6 @@
       { "q": "Can I edit the site myself?", "a": "Yes. When the project needs it, I build a custom admin panel so you can manage content, products or orders without depending on a developer." },
       { "q": "How do we start?", "a": "Message me on WhatsApp or email with your idea. We do a briefing, I propose an approach and a budget, and we get started." }
     ],
-    "ctaTitle": "Let's work together?",
-    "ctaBody": "Tell me your idea and let's see how to bring it to the web.",
     "backHome": "Back to home"
   },
   "caseStudies": {

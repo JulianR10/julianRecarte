@@ -1,0 +1,271 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Nav from "@components/Nav.astro";
+import Footer from "@components/Footer.astro";
+import SectionHeader from "@components/SectionHeader.astro";
+import { Image, getImage } from "astro:assets";
+
+import retrato from "@assets/images/yo.webp";
+import firma from "@assets/images/firma.png";
+
+import es from "@i18n/es.json";
+import en from "@i18n/en.json";
+import it from "@i18n/it.json";
+import { safeT } from "@i18n/safe-t";
+
+import {
+  websiteSchema,
+  professionalServiceSchema,
+  aboutPageSchema,
+  faqSchema,
+  breadcrumbSchema,
+} from "@data/schema";
+
+export function getStaticPaths() {
+  return ["es", "en", "it"].map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: string };
+const translations = { es, en, it };
+const raw = translations[lang as keyof typeof translations];
+if (!raw) return Astro.redirect("/es/");
+
+const t = safeT(raw);
+const about = t.about;
+
+const canonical = `https://julianrecarte.dev/${lang}/sobre-mi/`;
+const alternates = ["es", "en", "it"].map((l) => ({
+  lang: l,
+  href: `https://julianrecarte.dev/${l}/sobre-mi/`,
+}));
+
+const pageTitle = `${about.title} ${about.highlight} | ${t.layout.jobTitle}`;
+const pageDescription = about.metaDescription;
+
+// Mismo par width/height que la <Image> del retrato: la URL preloadeada
+// es exactamente la que el navegador va a pedir (LCP del hero).
+const retratoPreload = await getImage({ src: retrato, width: 1024, height: 1536 });
+
+const schema = [
+  websiteSchema(lang),
+  aboutPageSchema({
+    lang,
+    name: pageTitle,
+    description: pageDescription,
+    path: `/${lang}/sobre-mi/`,
+  }),
+  professionalServiceSchema({
+    lang,
+    jobTitle: t.layout.jobTitle,
+    bio: t.layout.bio,
+    services: t.soluciones.items,
+  }),
+  breadcrumbSchema({
+    lang,
+    homeLabel: t.layout.home,
+    name: `${about.title} ${about.highlight}`,
+    path: `/${lang}/sobre-mi/`,
+  }),
+  faqSchema(about.faq),
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  jobTitle={t.layout.jobTitle}
+  lang={lang}
+  canonical={canonical}
+  alternates={alternates}
+  ogImage="/og-cover.jpg"
+  personBio={t.layout.bio}
+  schema={schema}
+  t={t.layout}
+>
+  <link slot="head" rel="preload" as="image" href={retratoPreload.src} fetchpriority="high" />
+
+  <Nav slot="nav" lang={lang} t={t.nav} prefix={`/${lang}/`} />
+
+  <!-- Hero: retrato + bio -->
+  <section
+    data-about-hero
+    class="relative px-6 pt-[calc(var(--navbar-h)+3rem)] pb-24 md:pt-[calc(var(--navbar-h)+4rem)] md:pb-32"
+  >
+    <div data-about-wash aria-hidden="true" class="about-wash pointer-events-none absolute inset-0"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-14 lg:gap-20 items-center">
+      <!-- Texto -->
+      <div class="flex flex-col items-center text-center lg:items-start lg:text-left">
+        <a
+          href={`/${lang}/`}
+          data-reveal
+          class="inline-flex items-center gap-2 t-link-quiet font-medium text-copy/70 dark:text-dark-muted hover:text-accent-orange transition-colors duration-300 py-3 mb-5"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          {about.backHome}
+        </a>
+
+        <span data-reveal-heading class="t-eyebrow inline-block text-accent-orange label-outline mb-6">
+          {about.label}
+        </span>
+
+        <h1 data-reveal-heading class="t-h1 font-medium text-copy dark:text-dark-copy text-balance mb-6">
+          {about.title} <span class="text-accent-orange whitespace-nowrap">{about.highlight}</span>
+        </h1>
+
+        <p data-reveal class="t-lead text-copy/70 dark:text-dark-muted max-w-2xl">
+          {about.intro}
+        </p>
+      </div>
+
+      <!-- Retrato + firma -->
+      <div data-reveal class="relative mx-auto w-56 sm:w-64 lg:w-full max-w-[340px]">
+        <div
+          data-about-portrait
+          class="relative w-full aspect-[2/3] rounded-[2rem] p-[2px] bg-gradient-to-br from-accent-warm to-accent-warm/5 dark:bg-gradient-to-tl dark:from-accent-warm dark:to-accent-warm/5 shadow-xl"
+        >
+          <div class="w-full h-full rounded-[2rem] overflow-hidden">
+            <Image
+              src={retrato}
+              alt="Julián Recarte"
+              width={1024}
+              height={1536}
+              class="w-full h-full object-cover scale-[1.78] translate-y-[14%]"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+
+          <!-- Firma: dentro del retrato, así el parallax mueve los dos juntos -->
+          <span class="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center rounded-full bg-[var(--bg-hex)] dark:bg-dark-card px-5 py-3 shadow-lg">
+            <img src={firma.src} alt="" aria-hidden="true" width={100} height={25} class="signature h-5 w-auto" />
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack: banda editorial animada (decorativa; la lista accesible va en sr-only) -->
+  <div
+    data-reveal
+    class="about-stack relative border-y border-black/[0.08] dark:border-dark-muted/20 py-7 overflow-hidden"
+  >
+    <div class="about-stack-track flex w-max" aria-hidden="true">
+      {[0, 1].map(() => (
+        <ul class="flex items-center">
+          {[...about.stack, ...about.stack].map((item) => (
+            <li class="flex items-center gap-5 px-5 whitespace-nowrap t-label text-copy/70 dark:text-dark-muted">
+              {item}
+              <span class="text-accent-orange">·</span>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+
+    <ul class="sr-only">
+      {about.stack.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- En resumen -->
+  <section class="relative px-6 py-16 md:py-24">
+    <div class="max-w-6xl mx-auto">
+      <SectionHeader label={about.factsLabel} title={about.factsTitle} highlight="" />
+
+      <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-16">
+        {about.facts.map((fact, i) => (
+          <div
+            data-reveal
+            class="flex flex-col border-t border-black/[0.08] dark:border-dark-muted/20 pt-5 pb-7"
+          >
+            <span aria-hidden="true" class="t-index text-copy/30 dark:text-dark-muted/40">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <dt class="t-label text-copy/70 dark:text-dark-muted mt-1">{fact.label}</dt>
+            <dd class="t-body-lg text-copy dark:text-dark-copy">{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="relative px-6 py-16 md:py-24">
+    <div class="max-w-3xl mx-auto">
+      <SectionHeader label={about.faqLabel} title={about.faqTitle} highlight={about.faqHighlight} />
+
+      <div class="border-t border-black/[0.08] dark:border-dark-muted/20" data-reveal-stagger>
+        {about.faq.map((item, i) => (
+          <details class="group border-b border-black/[0.08] dark:border-dark-muted/20">
+            <summary class="flex items-start gap-4 md:gap-6 cursor-pointer list-none py-6 t-body-lg font-medium text-copy dark:text-dark-copy hover:text-accent-orange transition-colors duration-300">
+              <span aria-hidden="true" class="t-index shrink-0 pt-1 text-copy/30 dark:text-dark-muted/40">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="flex-1">{item.q}</span>
+              <svg class="w-5 h-5 mt-1 shrink-0 text-accent-orange transition-transform duration-300 group-open:rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </summary>
+            <p class="t-body pb-7 pl-10 md:pl-14 pr-4 text-copy/70 dark:text-dark-muted">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cierre -->
+  <section class="relative px-6 pb-20 md:pb-28">
+    <div class="max-w-3xl mx-auto flex flex-col items-center gap-8" data-reveal>
+      <span aria-hidden="true" class="block w-16 h-px bg-black/[0.08] dark:bg-dark-muted/30"></span>
+
+      <a
+        href={`/${lang}/`}
+        data-magnetic
+        class="inline-flex items-center justify-center gap-3 rounded-full border border-black/[0.08] dark:border-dark-muted/20 px-8 py-4 t-label font-medium text-copy/80 dark:text-dark-copy hover:border-accent-orange hover:text-accent-orange transition-colors duration-300"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        {about.backHome}
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" lang={lang} t={t.footer} />
+</Layout>
+
+<style>
+  /* Wash del hero: dos focos suaves de la paleta que dan profundidad al retrato. */
+  .about-wash {
+    background:
+      radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--clr-accent-orange) 14%, transparent), transparent 58%),
+      radial-gradient(circle at 10% 72%, color-mix(in srgb, var(--clr-accent-pastel) 18%, transparent), transparent 52%);
+  }
+
+  :global(.dark) .about-wash {
+    background:
+      radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--clr-accent-orange) 10%, transparent), transparent 58%),
+      radial-gradient(circle at 10% 72%, color-mix(in srgb, var(--clr-accent-pastel) 8%, transparent), transparent 52%);
+  }
+
+  /* Banda del stack: ticker continuo (sin JS) con bordes desvanecidos. */
+  .about-stack {
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .about-stack-track {
+    animation: about-marquee 44s linear infinite;
+  }
+
+  @keyframes about-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
