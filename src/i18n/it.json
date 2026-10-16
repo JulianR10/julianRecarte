@@ -127,7 +127,8 @@
     "description": "Hai un progetto in mente? Sono aperto a nuove opportunità e collaborazioni. Parliamone.",
     "whatsapp": "WhatsApp",
     "instagram": "Instagram",
-    "email": "Email"
+    "email": "Email",
+    "emailSubject": "Richiesta su un progetto web"
   },
   "about": {
     "label": "Sviluppatore Web FullStack",
@@ -206,6 +207,7 @@
     "skipLink": "Vai al contenuto principale",
     "backToTop": "Torna su",
     "whatsapp": "Contatta su WhatsApp",
+    "whatsappMessage": "Ciao Julián, vorrei parlare del mio progetto!",
     "home": "Home",
     "title": "Julián Recarte | Sviluppatore Web FullStack",
     "description": "Trasformo marchi in esperienze web interattive.",

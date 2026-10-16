@@ -66,12 +66,12 @@ const heroPreload = await getImage({ src: heroImg, width: 1024, height: 1536 });
   <link slot="head" rel="preload" as="image" href={heroPreload.src} fetchpriority="high" />
   <Waves />
   <Nav slot="nav" lang={lang} t={t.nav} />
-  <Hero slot="hero" t={t.hero} />
+  <Hero slot="hero" t={t.hero} waMessage={t.layout.whatsappMessage} />
   <Soluciones t={t.soluciones} />
   <Projects lang={lang} t={t.projects} />
   <AboutTeaser lang={lang} t={t.about} />
   <Testimonials t={t.testimonials} />
   <Process t={t.process} />
-  <Contact t={t.contact} />
+  <Contact t={t.contact} waMessage={t.layout.whatsappMessage} />
   <Footer slot="footer" lang={lang} t={t.footer} />
 </Layout>

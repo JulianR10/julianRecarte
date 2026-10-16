@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import heroImg from "@assets/images/yo.webp";
 import WhatsAppIcon from "@components/WhatsAppIcon.astro";
 import SectionFade from "@components/SectionFade.astro";
+import { waLink } from "@data/contact";
 
 interface Props {
   t: {
@@ -17,9 +18,11 @@ interface Props {
     viewProjects: string;
     contact: string;
   };
+  /** Mensaje precargado del WhatsApp: vive en `layout` porque lo comparte todo el sitio. */
+  waMessage: string;
 }
 
-const { t } = Astro.props;
+const { t, waMessage } = Astro.props;
 ---
 
 <section
@@ -106,7 +109,7 @@ const { t } = Astro.props;
         {t.viewProjects}
       </a>
         <a
-          href="https://wa.me/393447817557?text=Hola%20Juli%C3%A1n%2C%20me%20gustar%C3%ADa%20hablar%20sobre%20mi%20proyecto%21"
+          href={waLink(waMessage)}
           data-magnetic
           target="_blank"
           rel="noopener noreferrer"

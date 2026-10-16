@@ -2,6 +2,7 @@
 import { ViewTransitions } from "astro:transitions";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import WhatsAppIcon from "@components/WhatsAppIcon.astro";
+import { waLink } from "@data/contact";
 import "@styles/globals.css";
 
 interface Alternate {
@@ -35,6 +36,7 @@ interface Props {
     skipLink: string;
     backToTop: string;
     whatsapp?: string;
+    whatsappMessage?: string;
   };
 }
 
@@ -55,7 +57,12 @@ const {
   personBio,
   schema = [],
   noindex = false,
-  t = { skipLink: "Ir al contenido principal", backToTop: "Volver arriba", whatsapp: "Contactar por WhatsApp" },
+  t = {
+    skipLink: "Ir al contenido principal",
+    backToTop: "Volver arriba",
+    whatsapp: "Contactar por WhatsApp",
+    whatsappMessage: "Hola Julián, me gustaría hablar sobre mi proyecto!",
+  },
 } = Astro.props;
 
 const SITE = "https://julianrecarte.dev";
@@ -250,6 +257,22 @@ const personDescription = personBio || description;
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-R1ZPHT8LX2');
+
+      // ViewTransitions: este módulo corre una sola vez (queda cacheado), así que
+      // las navegaciones cliente NO dispararían pageview. `astro:page-load` también
+      // se dispara en la carga inicial, y esa ya la cuenta `gtag('config')`.
+      let firstLoad = true;
+      document.addEventListener("astro:page-load", () => {
+        if (firstLoad) {
+          firstLoad = false;
+          return;
+        }
+        gtag("event", "page_view", {
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          page_title: document.title,
+        });
+      });
     </script>
   </head>
   <body transition:animate="slide">
@@ -271,7 +294,7 @@ const personDescription = personBio || description;
 
     <a
       id="btn-whatsapp"
-      href="https://wa.me/393447817557"
+      href={waLink(t.whatsappMessage)}
       target="_blank"
       rel="noopener noreferrer"
       class="fixed bottom-8 right-24 z-30 flex items-center justify-center w-12 h-12 rounded-full bg-[var(--bg-hex)]/80 dark:bg-dark-card/90 backdrop-blur-lg shadow-lg transition-all duration-300 cursor-pointer outline-none translate-y-20 opacity-0 pointer-events-none hover:scale-110 text-accent-orange"

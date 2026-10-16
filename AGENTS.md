@@ -290,7 +290,9 @@ Simple approach: beige at 95% opacity + minimal blur. No saturate, no separate s
 
 ## Analytics
 
-`@vercel/speed-insights` se inyecta en el `<head>` de `Layout.astro` mediante el componente `<SpeedInsights />`. No requiere configuración adicional — Vercel recolecta los datos automáticamente.
+- `@vercel/speed-insights` se inyecta en el `<head>` de `Layout.astro` mediante el componente `<SpeedInsights />`. No requiere configuración adicional — Vercel recolecta los datos automáticamente.
+- **GA4 (`G-R1ZPHT8LX2`)** — el snippet de gtag vive en el `<head>` de `Layout.astro` y Astro lo bundlea (`hoisted.js`). Corre **una sola vez** (módulo ESM cacheado), así que las navegaciones cliente de ViewTransitions no dispararían pageview: el mismo script escucha `astro:page-load` y emite `gtag("event","page_view",{ page_location, page_path, page_title })`. `astro:page-load` también se dispara en la **carga inicial**, y esa ya la cuenta `gtag('config')` → un flag `firstLoad` la descarta (sin él cada visita contaría doble). Una recarga completa (p. ej. el cambio de idioma, que no pasa por el router) re-ejecuta el módulo: el flag vuelve a `true` y `gtag('config')` cuenta el pageview. **No tocar el bootstrap de dark mode ni el redirect de `/`**: son los scripts con hash de la CSP.
+- **Links de contacto** — `src/data/contact.ts` es la única fuente del teléfono y el email: `waLink(message)` (WhatsApp con mensaje precargado) y `mailtoLink(subject)` (email con asunto). Lo usan el botón flotante de `Layout`, `Hero` y `Contact`. El copy vive **una sola vez** en i18n: `layout.whatsappMessage` (mensaje de WhatsApp, global) y `contact.emailSubject`; `Hero` y `Contact` lo reciben como prop `waMessage` desde la página. Los iconos del `Footer` siguen con `wa.me` pelado (fila de iconos, sin texto).
 
 ## Build & Deploy
 
@@ -327,7 +329,7 @@ Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine 
   - Los `<script type="application/ld+json">` **no** están sujetos a `script-src` (son data blocks, no se ejecutan).
   - Speed Insights carga su script desde `/_vercel/speed-insights/script.js` → `'self'`.
   - Verificación sin navegador: extraer cada `src`/`href`/`url()` del build y contrastarlo con las directivas (los orígenes deben dar OK y los hashes coincidir con `vercel.json`).
-  - **Falta**: el snippet de gtag corre una sola vez (módulo ESM cacheado) → **las navegaciones con ViewTransitions no disparan pageview**. Se arregla con `astro:page-load` + `gtag('event','page_view')`.
+  - El pageview de las navegaciones cliente **no** pide directivas nuevas: lo emite el propio snippet bundleado (ver **Analytics**).
 - **LCP / preload** — `Layout` expone `<slot name="head" />`; el home inyecta `<link rel="preload" as="image">` de la imagen del hero (misma optimización que `<Image>`, vía `getImage()`), con `fetchpriority="high"` y `width`/`height` explícitos. `fondoTriba` usa `<Image>`.
 - **`/` (raíz)** — `noindex` en `src/pages/index.astro`; el 308 a `/es/` lo resuelve `vercel.json`.
 - **Sitemap** — `astro.config.mjs` excluye la raíz `/` (es solo redirect a `/es/`) para evitar el conflicto hreflang `es-ES`.
@@ -350,7 +352,7 @@ mayor oportunidad de retorno actual.
 | 2 | **Nav (orientación)** | Links ancla; sin botón de acción en desktop | Falta un CTA "Hablemos / Contactar" persistente en desktop y breadcrumb visual de sección activa más claro | Alto | Bajo |
 | 3 | **Projects (pilar de venta)** | 3 cards (Triba, Multiservizi live + SP "Próximamente"); cards sin botón "Ver sitio", solo link "Caso de estudio" anclado al fondo | Falta profundidad en SP; sin filtros ni categorías | **Muy alto (Foco recomendado)** | Medio |
 | 4 | **Testimonials (prueba social)** | Carousel con 4 items; sin autoplay ni teclado | Falta autoplay opcional, navegación con ← →, y en desktop mostrar 2 cards | Medio | Bajo |
-| 5 | **Contact (conversión)** | 3 botones: WhatsApp, IG, Email | Falta WhatsApp con **mensaje pre-cargado** y (opcional) número/timing; email sin asunto | Alto | Bajo |
+| 5 | **Contact (conversión)** | 3 botones: WhatsApp, IG, Email — WhatsApp con **mensaje precargado** y email con **asunto**, en los 3 idiomas (`src/data/contact.ts`) | Queda opcional mencionar número/timing en el copy | Medio | Bajo |
 | 6 | **Process (confianza)** | Timeline de 4 pasos | Está bien; oportunidad menor de profundidad visual por paso | Bajo | Bajo |
 | 7 | **Footer (cierre)** | Solo copyright + firma | Falta mini-navegación / sociales / CTA de cierre para no depender del scroll | Medio | Bajo |
 | 8 | **Floating (WhatsApp + Top)** | Ambos aparecen al scroll | Funcionan bien; oportunidad menor de tooltip/label | Bajo | Bajo |
