@@ -9,8 +9,6 @@ export const magnetic = defineAnimation((gsap: typeof gsap) => {
   const cleanupFns: Array<() => void> = [];
 
   buttons.forEach((btn) => {
-    btn.style.willChange = "transform";
-
     const onMove = (e: MouseEvent): void => {
       const rect = btn.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
@@ -22,6 +20,10 @@ export const magnetic = defineAnimation((gsap: typeof gsap) => {
       const moveX = (x / dist) * strength * factor || 0;
       const moveY = (y / dist) * strength * factor || 0;
 
+      // will-change solo mientras dura el hover: permanente promociona a GPU
+      // en idle y deja al botón invisible para el backdrop-filter del nav.
+      btn.style.willChange = "transform";
+
       gsap.to(btn, {
         x: moveX,
         y: moveY,
@@ -32,6 +34,8 @@ export const magnetic = defineAnimation((gsap: typeof gsap) => {
     };
 
     const onLeave = (): void => {
+      btn.style.willChange = "";
+
       gsap.to(btn, {
         x: 0,
         y: 0,

@@ -20,10 +20,8 @@ const MORPH: readonly [string, string][] = [
 const DEPTH: readonly number[] = [0.28, -0.18, 0.12];
 
 export const waves = defineAnimation((gsap: typeof gsap) => {
-  // Morph en loop + parallax de scroll: decorativo. Con movimiento reducido
-  // las olas quedan en su trazo del markup (estáticas).
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
+  // Morph en loop + parallax de scroll: decorativo. `defineAnimation` lo corta
+  // con movimiento reducido y las olas quedan en su trazo del markup.
   const paths = document.querySelectorAll<SVGPathElement>("[data-wave]");
   if (!paths.length) return;
 
