@@ -5,7 +5,7 @@ import Footer from "@components/Footer.astro";
 import SectionHeader from "@components/SectionHeader.astro";
 import { Image, getImage } from "astro:assets";
 
-import retrato from "@assets/images/yo.webp";
+import retrato from "@assets/images/sobreMi.webp";
 import firma from "@assets/images/firma.png";
 
 import es from "@i18n/es.json";
@@ -42,9 +42,9 @@ const alternates = ["es", "en", "it"].map((l) => ({
 const pageTitle = `${about.title} ${about.highlight} | ${t.layout.jobTitle}`;
 const pageDescription = about.metaDescription;
 
-// Mismo par width/height que la <Image> del retrato: la URL preloadeada
+// Mismo transform que la <Image> del retrato: la URL preloadeada
 // es exactamente la que el navegador va a pedir (LCP del hero).
-const retratoPreload = await getImage({ src: retrato, width: 1024, height: 1536 });
+const retratoPreload = await getImage({ src: retrato, width: 1024 });
 
 const schema = [
   websiteSchema(lang),
@@ -124,15 +124,26 @@ const schema = [
       <div data-reveal class="relative mx-auto w-56 sm:w-64 lg:w-full max-w-[340px]">
         <div
           data-about-portrait
-          class="relative w-full aspect-[2/3] rounded-[2rem] p-[2px] bg-gradient-to-br from-accent-warm to-accent-warm/5 dark:bg-gradient-to-tl dark:from-accent-warm dark:to-accent-warm/5 shadow-xl"
+          class="relative w-full aspect-[2/3] rounded-[2rem] p-[2px] bg-black/[0.08] dark:bg-dark-muted/25 shadow-xl"
         >
-          <div class="w-full h-full rounded-[2rem] overflow-hidden">
+          <div
+            class="relative w-full h-full rounded-[2rem] overflow-hidden bg-[var(--bg-hex)] dark:bg-dark-card"
+          >
+            <!-- Glow cálido del pie de la tarjeta: el retrato es un recorte con
+                 alfa, así que se ve a través suyo. -->
+            <span
+              aria-hidden="true"
+              class="pointer-events-none absolute -bottom-1/4 left-1/2 w-[130%] h-[55%] -translate-x-1/2 rounded-full bg-accent-warm/25 blur-3xl dark:bg-accent-orange/20"
+            ></span>
+
+            <!-- Encuadre propio de sobreMi.webp: el sujeto está pegado al borde
+                 superior del archivo, así que la imagen se alinea arriba
+                 (translate = (scale−1)/2) y la figura sentada entra completa. -->
             <Image
               src={retrato}
               alt="Julián Recarte"
               width={1024}
-              height={1536}
-              class="w-full h-full object-cover scale-[1.78] translate-y-[14%]"
+              class="relative w-full h-full object-cover scale-[1.04] translate-y-[2%]"
               loading="eager"
               fetchpriority="high"
               decoding="async"
