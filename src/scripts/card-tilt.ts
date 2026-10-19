@@ -2,7 +2,8 @@ import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
 export const cardTilt = defineAnimation((gsap: typeof gsap) => {
-  const cards = document.querySelectorAll<HTMLElement>("[data-project-card]");
+  // Cards de proyectos + cualquier superficie con [data-tilt] (p. ej. el disco de /sobre-mi).
+  const cards = document.querySelectorAll<HTMLElement>("[data-project-card], [data-tilt]");
   if (!cards.length) return;
   if (window.matchMedia("(hover: none)").matches) return;
 

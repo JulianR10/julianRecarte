@@ -41,7 +41,7 @@ src/
 │   ├── slot "hero" → Hero.astro + SectionFade (bottom)
 │   └── slot default → Waves, Soluciones (+SectionFade top), Projects, AboutTeaser, Testimonials, Process, Contact, Footer
 ├── CaseStudy.astro (en [lang]/proyectos/[slug].astro)
-├── sobre-mi.astro (en [lang]/) — página "Sobre mí": hero con retrato + firma, banda de stack, datos y FAQ
+├── sobre-mi.astro (en [lang]/) — página "Sobre mí": hero con retrato en disco, banda de stack, datos y FAQ
 └── SectionFade.astro (reutilizable, token --section-fade-h)
 ```
 
@@ -86,7 +86,7 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 | `[data-reveal]` | reveal-observer.ts | Fade-in on scroll (IntersectionObserver) |
 | `[data-reveal-heading]` | cine-text.ts | Character-level stagger reveal |
 | `[data-reveal-stagger]` | reveal-observer.ts | Observe each child individually |
-| `[data-project-card]` | card-tilt.ts | 3D tilt on mouse hover |
+| `[data-project-card]` / `[data-tilt]` | card-tilt.ts | 3D tilt on mouse hover (cards de proyectos y disco de /sobre-mi) |
 | `[data-card-shine]` | card-tilt.ts | Radial gradient shine overlay |
 | `[data-hero-text]` | hero-scroll.ts | Fade-out + slide on scroll |
 | `[data-hero-image]` | hero-scroll.ts | Scale-down on scroll |
@@ -97,8 +97,12 @@ Components use `data-*` attributes as hooks between HTML and JS. These are the "
 | `[data-process-step]` | animations.ts | Process image scale on scroll |
 | `[data-solu-line]` | soluciones-lines.ts | Separator line draw (scaleX) for Soluciones |
 | `[data-about-hero]` | about-parallax.ts | Scroll trigger del hero de `/sobre-mi/` |
-| `[data-about-portrait]` | about-parallax.ts | Retrato: deriva +32px al scrollear (parallax) |
+| `[data-about-portrait]` | about-parallax.ts | Disco (foto + arco del rol): al scrollear baja 32px, se achica a 0.9 y se atenúa a 0.55 (eco de la salida del hero del home) |
+| `[data-about-arc]` | about-parallax.ts | Arco del rol: gira 24° alrededor del disco con el scroll |
 | `[data-about-wash]` | about-parallax.ts | Wash del hero: deriva −32px (parallax opuesto) |
+| `[data-about-reveal]` | about-intro.ts | Retrato: aparición (opacidad + blur → `none`) + zoom-out de la `<img>` |
+| `[data-about-stack]` | about-intro.ts | Marquee del stack: playbackRate + skew según velocidad de scroll |
+| `[data-count-to]` | about-intro.ts | Contador 0 → N al entrar en viewport |
 
 ## Known Pitfalls
 
@@ -148,7 +152,7 @@ Si un eje del `css2` está fuera del rango real de la familia, Google responde *
 - Stack del sitio: **Satoshi** (body/UI, Fontshare) + **Outfit** (`h1`–`h6`, Google Fonts; variable `font-weight: 100 900`, ~15 KB woff2, sin eje de ancho).
 - **Peticiones exactas** (nada que no se use):
   - Satoshi: `f[]=satoshi@400,500,400i` (Fontshare tiene **3 pesos: 400/500/700** y **no tiene 600**).
-  - Outfit: `wght@500..700` (500 títulos, 700 solo los H3 con gradiente).
+  - Outfit: `wght@500..700` (500 títulos, 700 solo los H3 de Soluciones).
 
 ### Fontshare: las itálicas van con el sufijo `i`, y no existe el 600
 
@@ -191,7 +195,12 @@ La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, 
 - **El H1 del case study no puede crecer**: su columna de texto mide ~276px a 1024px de ancho (grid `lg:grid-cols-[1fr_660px]`, columna de mockup fija en 660px) y "Multiservizi" a 3rem ocupa ~300px → desborda. Por eso queda en `.t-h3` (su tamaño histórico). Para subirlo hay que **ensanchar la columna** (o rearmar el hero en dos filas), no cambiar el rol. Ya **no** es un problema de alto: la página scrollea (ver *Case study — layout*).
 - Los roles van en `@layer components`, así que **cualquier utilidad de Tailwind los sobrescribe**. Si un elemento conserva un `md:text-lg` suelto, esa utilidad gana y el rol queda muerto: al asignar un rol hay que **quitar** sus utilidades de tamaño/interlineado/tracking.
 - `h1`–`h6` llevan `font-weight: 500` + `line-height: var(--lh-heading)` (1.25) como red de seguridad en `globals.css`; los headings sin `leading-*` ya no heredan el 1.6 del body.
-- Los `font-bold` que quedan son **solo** los dos H3 con gradiente (Outfit 700). Todo lo demás es 500.
+- Los `font-bold` que quedan son **solo** los H3 de Soluciones (Outfit 700, `text-accent-deep` sólido). Todo lo demás es 500.
+- **Nada de texto con gradiente recortado** (`bg-clip-text` + `text-transparent`) sobre colores que son variables (`accent-ink`/`deep`): Chrome puede no repintar el fondo cuando la variable cambia (tema, ViewTransitions) y el texto queda **invisible pero seleccionable**. Le pasó a "Presencia / Catálogo / Venta"; por eso hoy son color sólido.
+
+### cine-text: las letras van agrupadas por palabra
+
+`cine-text.ts` parte cada `[data-reveal-heading]` en un `<span class="cine-char">` `inline-block` por letra. Si las letras quedan sueltas, **cada una es un punto de corte**: en una pantalla angosta el título se parte en cualquier letra ("DESARROLLADOR WEB FULLSTAC / K"). Por eso cada palabra va en un `.cine-word` (`inline-block` + `white-space: nowrap`) y los espacios quedan como **texto normal** (no como spans `white-space: pre`): el corte solo cae entre palabras. Arreglarlo con `<br>`, `text-wrap` o achicando el tracking en un título puntual no sirve: el problema es del split y afecta a todos los títulos.
 
 ### backdrop-filter won't blur GSAP-animated text
 
@@ -232,11 +241,12 @@ Elements with `will-change: transform/opacity/filter` get promoted to GPU layers
 | `hero-zap.ts` | Glitch flash on hero label | No (time-based) | Yes |
 | `waves.ts` | SVG path morph + scroll parallax | Yes (scrub) + loop | Yes |
 | `animations.ts` | Progress bar, process line, step images | Yes | Yes |
-| `card-tilt.ts` | 3D card tilt + shine | No (mouse-based) | Yes |
+| `card-tilt.ts` | 3D tilt + shine (cards y disco de /sobre-mi) | No (mouse-based) | Yes |
 | `magnetic.ts` | Magnetic hover on CTAs / contact links | No (mouse-based) | Yes |
 | `cine-text.ts` | Character stagger reveal | Yes | Yes |
-| `soluciones-lines.ts` | Soluciones separator draw | Yes | Yes |
-| `about-parallax.ts` | Retrato + wash de `/sobre-mi/` | Yes (scrub) | Yes |
+| `soluciones-lines.ts` | Separadores de Soluciones y "Cómo trabajo" (por sección) | Yes | Yes |
+| `about-parallax.ts` | Disco (baja + se achica + se atenúa), arco que gira y wash de `/sobre-mi/` | Yes (scrub) | Yes |
+| `about-intro.ts` | Reveal del retrato, contadores y marquee de `/sobre-mi/` | Yes (contadores) + ticker | Yes |
 
 All modules use `defineAnimation` / `gsap.context()` for scoped cleanup. `destroy()` calls `ctx.kill()`.
 
@@ -259,11 +269,71 @@ Three languages in `src/i18n/`. The `safeT()` Proxy in `[lang]/index.astro` retu
 
 Simple approach: beige at 95% opacity + minimal blur. No saturate, no separate scrolled state. Transition only on transform for show/hide animations.
 
+## Sistema de marca
+
+Fuente única: tokens en `tailwind.config.mjs` + `globals.css`. Auditado contra todo `src/`; las reglas de abajo son las que el código cumple hoy.
+
+### Paleta: solo cálidos
+
+| Token | Valor | Uso |
+|---|---|---|
+| `bg-hex` (var) | `#E8E0D0` / `#1C1A18` | Fondo (cambia con el tema) |
+| `copy` | `#1A1613` | Texto primario en claro, label de los CTA, superficie de la banda invertida |
+| `dark.card` / `dark.copy` / `dark.muted` | `#252525` / `#F0F0F0` / `#A8A8A8` | Tema oscuro |
+| `accent.orange` / `warm` / `pastel` | `#FF5C2B` / `#FF7A4F` / `#FFB088` | **Superficies**: CTA, sol, íconos, bordes de acento, glows |
+| `accent.ink` (var) | `#B33A0E` → orange en oscuro | **Texto chico** en naranja |
+| `accent.deep` (var) | `#D2491A` → orange en oscuro | **Texto grande** (≥ 24px) en naranja |
+
+- **El violeta (`#5B1FFF`) se eliminó** (token incluido). Barra de progreso, orb del hero, olas, glow del zap y avatares pasaron a naranja/warm/pastel. No reintroducir acentos fríos.
+- **Sin hex en componentes.** Usar clases o `theme("colors.x")` dentro de `<style>`. Excepciones: `<meta name="theme-color">` y el `style` del redirect de `/` (no pueden leer variables), y los colores propios de cada proyecto (`--project-accent` del case study).
+
+### Tinta naranja (contraste AA)
+
+`#FF5C2B` sobre el beige da **2.35:1**: no sirve como texto, ni siquiera grande.
+
+| Par | Contraste |
+|---|---|
+| `ink` / beige | 4.54 ✓ (texto chico) |
+| `deep` / beige | 3.40 ✓ (texto ≥ 24px) |
+| `orange` / `#1C1A18` | 5.63 ✓ (por eso en oscuro la tinta vuelve al naranja) |
+| `copy` / orange · `copy` / pastel | 5.84 · 10.12 ✓ (label de CTA) |
+| blanco / orange · blanco / pastel | 3.08 · 1.78 ✗ (por eso los CTA ya no van en blanco) |
+
+- `ink` y `deep` son **variables** (`--clr-accent-ink` / `--clr-accent-deep`), no hex: en `:root.dark` y dentro de `.surface-ink` (superficies oscuras en tema claro, p. ej. `.about-band`) valen `--clr-accent-orange`. No hace falta `dark:` en cada uso. Como son variables, **no aceptan modificador de opacidad** (`text-accent-ink/80` no genera nada).
+- Texto chico (eyebrows, links, `t-link-quiet`, label del CTA `accent`, hovers de texto, link activo del nav, índice abierto del FAQ) → `text-accent-ink`.
+- Palabra destacada de H1/H2 (`SectionHeader`, Hero, /sobre-mi), H3 de `ProjectCard` y stats del bento → `text-accent-deep`.
+- `.label-outline` pinta el trazo con `--clr-accent-ink`.
+- Íconos decorativos `aria-hidden` (estrellas, ✦, `+` del FAQ, íconos del bento) siguen en `text-accent-orange`.
+- Hover de un link de texto: **no** cambiar a otro color de acento. Subrayado (`hover:underline`) o flecha que se desplaza.
+
+### Botón: `Button.astro`
+
+Único lugar donde viven los CTA (`href`, `variant`, `external`, `magnetic` = true, `class`, slot para ícono + texto). Todas las variantes llevan `t-label`, `px-6 py-3 md:px-8 md:py-4`, `rounded-full` y `whitespace-nowrap`.
+
+| Variante | Aspecto | Uso |
+|---|---|---|
+| `primary` | Gradiente `orange → pastel` + label `text-copy` + `shadow-lg` | Acción principal (WhatsApp, "Ver proyectos", "Hablemos") |
+| `accent` | Borde gradiente (`.wa-btn`) + label `text-accent-ink`; al hover se rellena y el label pasa a `text-copy` | Acción secundaria junto a un primario |
+| `outline` | Borde `.line-control` + `text-copy/80`; hover a tinta | Acciones terciarias (email, Instagram) |
+
+Fuera de `Button` quedan solo controles que no son CTA de página: el pill "Ver sitio" de `ProjectCard`, los ítems del menú mobile (`bg-accent-orange` + `text-copy`) y los botones redondos de ícono (flechas, flotantes, redes del footer).
+
+### Líneas, sombras, radios y contenedor
+
+- **Líneas (2 roles)** en `@layer components`: `.line-hair` (`black/8%` · oscuro `dark-muted/20%`) para separadores, bordes de tarjeta, banda y footer; `.line-control` (`black/20%` · `dark-muted/30%`) para botones con borde. Se usan con `border` / `border-t` / `border-y` (`border line-hair`). Los separadores de 1px pintados con fondo (`h-px bg-black/[0.08]`) equivalen a `hair`.
+- **Sombras:** `shadow-card` → `hover:shadow-card-hover` en tarjetas (Projects, Process); `shadow-lg` en CTA y flotantes; `shadow-md` en controles chicos; `shadow-xl` en retrato y tarjeta de testimonio. Nada de `shadow-[…]` arbitrarias.
+- **Radios:** `rounded-full` para todo control (botones, pills, selector de idioma, skip link) y `rounded-2xl` para tarjetas. Las excepciones son intencionales: `rounded-[2rem]` en el retrato del hero y `rounded-[1.75rem]` en la tarjeta de testimonio.
+- **Contenedor:** `max-w-7xl mx-auto` en toda sección de layout (= Nav y Footer, así el contenido arranca alineado con el logo en todas las páginas). Las columnas de **lectura** usan `max-w-3xl` / `2xl` / `xl` (FAQ, AboutTeaser, Testimonios, párrafos). No usar `5xl`/`6xl`.
+
+### Pendiente detectado (fuera del alcance de marca)
+
+- **Hero de la home con movimiento reducido:** el hero es `sticky` y su salida (fade + slide) la hace `hero-scroll.ts` vía `defineAnimation`, que no corre con `prefers-reduced-motion` → el hero queda **pegado detrás de todas las secciones** (las secciones no tienen fondo propio). Falta un fallback CSS (p. ej. `position: relative` del hero bajo `prefers-reduced-motion`).
+
 ## Soluciones — Sección editorial
 
 Ubicada entre Hero y Projects (`[lang]/index.astro:33`). Sin cards (intencional) para no repetir `ProjectCard`/`Testimonials`.
 
-- **Layout:** lista editorial `grid-cols-[300px_1fr]` con separadores `h-px bg-black/[0.08]` animados vía `[data-solu-line]` (`soluciones-lines.ts` scaleX 0→1 0.6s stagger 0.08). Contenedor `max-w-7xl` (alineado con resto, no `5xl`). Título `Elegí por dónde / empezar` (it/en: `Scegli da dove / iniziare`, `Choose where / to start`), hint central `italic text-wrap: balance` + CTA único `w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg` (mismo que Hero primario).
+- **Layout:** lista editorial `grid-cols-[300px_1fr]` con separadores `h-px bg-black/[0.08]` animados vía `[data-solu-line]` (`soluciones-lines.ts` scaleX 0→1 0.6s stagger 0.08). Contenedor `max-w-7xl` (alineado con resto, no `5xl`). Título `Elegí por dónde / empezar` (it/en: `Scegli da dove / iniziare`, `Choose where / to start`), hint central `italic text-wrap: balance` + CTA único `<Button>` primario (ver **Sistema de marca**).
 - **IDs:** `soluciones` (nav anchor), nav `IntersectionObserver` en `nav.ts` incluye `soluciones`.
 - **i18n:** `soluciones { label, title, highlight, hint, cta, items[3] }` en `es/en/it.json`.
 
@@ -271,17 +341,19 @@ Ubicada entre Hero y Projects (`[lang]/index.astro:33`). Sin cards (intencional)
 
 `src/pages/[lang]/sobre-mi.astro` (slug invariante `sobre-mi` → el `switchLang` conserva el path). Solo su propio contenido: **una página de "sobre mí", para navegar la web se vuelve a la home**.
 
-- **Qué NO tiene** (a propósito): **Servicios** (leía `t.soluciones.items`), **Proceso** (leía `t.process.steps`) y `<Contact />` — duplicaban el home, y la FAQ ya cubre los servicios. Sin `<Contact />` tampoco existe `#contacto`, así que el `IntersectionObserver` del nav no puede robarle el `active` a "Sobre mí" (`nav.ts` lo marca por ruta cuando `pathname` incluye `/sobre-mi`).
-- **Hero** a dos columnas (`lg:grid-cols-[1fr_340px]`, mobile apilado): eyebrow outlined (`label-outline`) + H1 `.t-h1` (`data-reveal-heading`) + intro, y el **retrato** con `aspect-[2/3]` + `scale-[1.04] translate-y-[2%]`. La foto es otra que la del home (**`sobreMi.webp`**, él sentado con las piernas dobladas; el home sigue con `yo.webp`), así que el encuadre es propio y **no** se toca al cambiar el del Hero: el sujeto de `sobreMi.webp` está pegado al borde superior del archivo, y la regla `translate = (scale−1)/2` (2% con `scale 1.04`) **alinea el borde superior del archivo con el borde superior de la tarjeta** → entra la figura entera (96% del alto, 85% del ancho; la cara queda ~128px en la tarjeta de 340px). Subir cualquiera de los dos valores recorta el pelo.
-- **Fondo del retrato** — tarjeta "papel": `bg-[var(--bg-hex)] dark:bg-dark-card` (se adapta al tema) + un **glow cálido** en el pie (`w-[130%] h-[55%]` redondeado `bg-accent-warm/25 blur-3xl`, recortado por el `overflow-hidden` y visible a través del cutout) + el anillo de 2px como **hairline** (`bg-black/[0.08] dark:bg-dark-muted/25`). Antes era un degradé naranja de esquina a esquina. El glow va **antes** que la `<Image>` y ésta lleva `relative` (si no, el absoluto taparía la foto).
-- **Firma** — `firma.png` en un pill `bg-[var(--bg-hex)] dark:bg-dark-card` con `-bottom-6`, **dentro** del marco del retrato (`data-about-portrait`) para que el parallax mueva los dos juntos. `.signature` (brightness(0) + invert en oscuro) vive en `globals.css`, compartido con el Footer.
-- **Banda de stack** — ticker CSS puro entre el hero y los datos: `aria-hidden` en el track + `<ul class="sr-only">` con la lista real (accesible e indexable). 2 grupos idénticos de `about.stack` ×2 y `translateX(-50%)` → loop sin salto (el espaciado va como `px-5` en cada `<li>`, **no** como `gap`, o el −50% no coincide). `mask-image` desvanece los bordes. Sin JS: con movimiento reducido la regla de `globals.css` la deja en `translateX(0)`.
-- **Wash** del hero — dos focos `radial-gradient` con `color-mix` (naranja + pastel, solo cálidos: el morado sobre beige ensuciaba). Se mueve con el parallax.
-- **Datos** — `about.facts` en grilla `md:grid-cols-2` (4 items → 2×2 balanceada), cada uno con `.t-index` + `label`/`value` y `border-t`.
-- **FAQ** — `SectionHeader` + `<details>` numerados dentro de `[data-reveal-stagger]`.
-- **Cierre** — hairline + pill "Volver al inicio" con `[data-magnetic]`.
-- **Anims** — `about-parallax.ts` (`[data-about-hero/portrait/wash]`, scrub) + los reveals existentes. Nada nuevo de GSAP.
-- **i18n:** `about { label, title, highlight, intro, metaDescription, teaser*, cta, factsLabel, facts[4], stack[6], faq*, backHome }`. Ya **no** existen `servicesTitle`, `processTitle`, `ctaTitle` ni `ctaBody`.
+- **Qué NO tiene** (a propósito): **Servicios** (leía `t.soluciones.items`), **Proceso** (leía `t.process.steps`) y `<Contact />` — duplicaban el home. El cierre es una **banda CTA propia sin `id="contacto"`**, así que el `IntersectionObserver` del nav no puede robarle el `active` a "Sobre mí" (`nav.ts` lo marca por ruta cuando `pathname` incluye `/sobre-mi`).
+- **Orden:** Hero → banda de stack → En resumen (bento) → Cómo trabajo → FAQ → Cierre CTA.
+- **Hero** con el texto en `lg:max-w-[48%]` y el retrato absoluto a la derecha (mobile apilado y centrado): **sin eyebrow** (el rol va en el arco del sol; `sr-only` para lectores) + H1 `.t-h1` (`data-reveal-heading`) "Sobre **mí**" (sin el nombre: el `<title>` lo recupera como `Sobre mí | Julián Recarte, <jobTitle>`) + `introLead` (`t-lead`, color primario) + `intro` (`t-body-lg`) + 2 CTA del home (WhatsApp gradiente con `waLink(layout.whatsappMessage)` y "Ver proyectos" `wa-btn` → `/${lang}/#proyectos`). El link "Volver al inicio" de arriba se quitó: vive solo en el cierre.
+- **Retrato en disco** — la foto va **dentro** del sol: disco `aspect-square` con `rounded-full overflow-hidden` y el gradiente `from-accent-orange to-accent-pastel` de fondo. `sobreMi.webp` (el home sigue con `yo.webp`) es un **recorte con alfa** cuyo único corte duro es la espalda contra el borde derecho del archivo → la figura va **centrada** y algo más grande que el disco (`<Image>` absoluta, `left-[-9%] top-0 w-[110%]`) para que ese corte caiga **fuera** del círculo; arriba entra la cabeza entera y abajo el disco corta a la altura de las rodillas. (Centrar la imagen al 80% deja el corte de la espalda a la vista dentro del círculo.) Sin marco, firma, esfumados ni sol chico (se probaron y se sacaron). **Mobile:** el disco va en flujo, centrado, arriba del H1 (`w-[78%] max-w-[380px]`). **Desktop:** absoluto contra la sección, centrado en alto (`top-[calc(50%+var(--navbar-h)/2)] -translate-y-1/2`) y alineado al borde derecho del contenedor 7xl (`right-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]`), `w-[min(38vw,520px)]`. Dos capas: la de afuera centra y hace el reveal (`data-about-reveal`, solo opacidad + blur); la de adentro lleva **todo** lo de GSAP (`data-about-portrait`: scroll → `y` + `scale` + `opacity`; `data-tilt`: tilt 3D con el mouse de `card-tilt.ts` + brillo `data-card-shine`), así nada pisa el `translate` del centrado. Es el lenguaje de movimiento del resto del sitio (salida del hero del home, tilt de las cards), más suave porque este hero no es sticky. Como el texto queda estático en `lg`, la sección lleva `isolate` y el wash `-z-10`.
+- **Arco del rol** — `about.label` ("Desarrollador web FullStack") ya **no** es eyebrow del hero: va **una sola vez** por fuera del disco, desde un poco debajo de la mitad izquierda (`arcFrom = 206°`) hasta pasar apenas el punto más alto (`arcTo = 82°`), en sentido horario. SVG `inset-0` dentro de la capa del parallax (se mueve con el disco y además **gira 24°** con el scroll, `data-about-arc`), con `textPath` sobre un arco de radio `arcR = 53` en un `viewBox` de 100 (disco = radio 50) → escala con él. `textLength` = largo exacto del arco (`lengthAdjust="spacing"`), así la frase lo cubre entero en los 3 idiomas. Letra en unidades del viewBox (`6`) + `word-spacing: 1.6` (textLength reparte el espacio igual entre todas las letras y las palabras se pegaban; con `3` quedaban sueltas), `fill-accent-ink`, 500, uppercase. Es `aria-hidden`; el rol queda en un `<p class="sr-only">` al inicio de la columna de texto. Si el rol cambia de largo, el arco no se toca: `textLength` lo reparte (si queda muy apretado o muy espaciado, ajustar `font-size`).
+- **Banda de stack** — ticker CSS **decorativo** entre el hero y los datos, ítems en `.t-eyebrow` (14px, Satoshi, uppercase espaciado, `text-copy/70`; hover a tinta) con separador `✦` de 10px, banda `py-4 md:py-5`, loop de 32s: `aria-hidden` en el track + `<ul class="sr-only">` con la lista real. 2 grupos idénticos de `about.stack` ×2 y `translateX(-50%)` → loop sin salto (el espaciado va como `px-3` en cada `<li>`, **no** como `gap`, o el −50% no coincide). Hover (desktop) la pausa. `about-intro.ts` toma su `CSSAnimation` (`getAnimations()[0]`) y sube `playbackRate` con la velocidad de `onScroll` (decae a 1 en el ticker) + `skewX` en los `<ul>`. Con movimiento reducido la regla de `globals.css` la deja en `translateX(0)`.
+- **Wash** del hero — dos focos `radial-gradient` con `color-mix` (naranja + pastel, solo cálidos). Se mueve con el parallax.
+- **En resumen (bento)** — header a la izquierda (`SectionHeader centered={false}`; con eso el `h2` pierde el `mx-auto`), "En **resumen**". `about.facts` en `md:grid-cols-3`, el 1º y el 4º con `md:col-span-2` (2+1 / 1+2). Todas las tarjetas tienen la misma anatomía: cabecera (`dt` `.t-badge` a la izquierda + `icon` `code`/`globe`/`remote`/`layers` a la derecha) y un `dd` anclado abajo (`mt-auto`) con el `stat` opcional (+ `suffix`, contador `[data-count-to]`) sobre el `value` → en cada fila las tarjetas arrancan y cierran a la misma altura. Sin `stat`, el `value` es el protagonista (`.t-h4`); con `stat`, es su pie (`.t-body` secundario). Compactas (`p-5 md:p-6`, `gap-6`, sin alto mínimo) y con un tinte leve distinto cada una (`factTint`: blanco/40, naranja/6%, pastel/14%, warm/4%), alternado para que dos vecinas no repitan tono. Los `value` con `·` se renderizan como chips `.t-badge`. Hover: `translateY(-4px)` + sombra naranja (CSS).
+- **Cómo trabajo** — `about.principles[3]` en lista editorial igual a Soluciones (`.t-index` + `.t-h4` + `.t-body`) con separadores `[data-solu-line]`. **Banda invertida** (`.about-band surface-ink`: `theme(colors.copy)` en claro, `theme(colors.dark.card)` en oscuro; `.surface-ink` devuelve la tinta naranja al naranja vivo) para cortar las secciones beige: los hijos usan los colores del tema oscuro fijos (`text-dark-copy` / `text-dark-muted`, líneas `bg-white/[0.1]`) y el H2 hereda el color de la banda.
+- **FAQ** — `<details>` numerados dentro de `[data-reveal-stagger]`. Altura animada con `::details-content` + `interpolate-size: allow-keywords` (mejora progresiva: sin soporte abre en seco). El `+` es un círculo que rota 45° y se rellena al abrir.
+- **Cierre** — banda CTA (`closing*`): `SectionHeader` + texto + WhatsApp gradiente + email (`mailtoLink(contact.emailSubject)`) + link quieto "Volver al inicio".
+- **Anims** — `about-parallax.ts` (scrub) + `about-intro.ts` (retrato, contadores, marquee) + los reveals existentes. `soluciones-lines.ts` agrupa las líneas por `<section>` → cada sección dispara las suyas.
+- **i18n:** `about { label, title, highlight, introLead, intro, ctaPrimary, ctaSecondary, metaDescription, teaser*, cta, factsLabel, factsTitle, factsHighlight, facts[4]{label,value,stat?,suffix?,icon?}, stack[6], faq*, principles*, closing*, backHome }`.
 
 ## SectionFade — Sistema de transición
 

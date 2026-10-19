@@ -132,9 +132,12 @@
   },
   "about": {
     "label": "Sviluppatore Web FullStack",
-    "title": "Chi è",
-    "highlight": "Julián Recarte",
-    "intro": "Sono Julián Recarte, sviluppatore web FullStack. Aiuto aziende e brand a costruire una presenza online che si vede bene, carica veloce e porta clienti. Progetto e sviluppo landing page, siti istituzionali, cataloghi ed ecommerce su misura, curando ogni dettaglio: tipografia, animazioni, prestazioni e accessibilità.",
+    "title": "Chi",
+    "highlight": "sono",
+    "introLead": "Progetto e sviluppo siti web belli da vedere, veloci da caricare e che portano clienti.",
+    "intro": "Sono Julián Recarte, sviluppatore web FullStack. Aiuto aziende e brand con landing page, siti istituzionali, cataloghi ed ecommerce su misura, curando ciò che conta davvero: che carichi veloce, che trasformi le visite in clienti e che sia facile da trovare per persone, motori di ricerca e modelli di IA.",
+    "ctaPrimary": "Parliamo del tuo progetto",
+    "ctaSecondary": "Vedi i progetti",
     "metaDescription": "Julián Recarte, sviluppatore web FullStack. Landing page, siti, cataloghi ed ecommerce su misura. 100% da remoto, in spagnolo, inglese e italiano.",
     "teaserLabel": "Chi sono",
     "teaserTitle": "Dietro",
@@ -142,12 +145,13 @@
     "teaserText": "Sono uno sviluppatore web FullStack e lavoro 100% da remoto con clienti di tutto il mondo, in spagnolo, inglese e italiano. Trasformo le idee in siti veloci, curati e pensati per portare risultati.",
     "cta": "Scopri di più su di me",
     "factsLabel": "Profilo",
-    "factsTitle": "In sintesi",
+    "factsTitle": "In",
+    "factsHighlight": "sintesi",
     "facts": [
-      { "label": "Ruolo", "value": "Sviluppatore web FullStack (frontend + backend)" },
-      { "label": "Lingue", "value": "Spagnolo · Inglese · Italiano" },
-      { "label": "Modalità", "value": "100% da remoto, clienti in tutto il mondo" },
-      { "label": "Servizi", "value": "Landing page · Siti istituzionali · Cataloghi · Ecommerce · Pannelli admin su misura" }
+      { "label": "Ruolo", "value": "Sviluppatore web FullStack (frontend + backend)", "icon": "code" },
+      { "label": "Lingue", "value": "Spagnolo · Inglese · Italiano", "stat": "3", "icon": "globe" },
+      { "label": "Modalità", "value": "Da remoto, clienti in tutto il mondo", "stat": "100", "suffix": "%", "icon": "remote" },
+      { "label": "Servizi", "value": "Landing page · Siti istituzionali · Cataloghi · Ecommerce · Pannelli admin su misura", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "Domande frequenti",
@@ -161,6 +165,20 @@
       { "q": "Posso modificare il sito da solo?", "a": "Sì. Quando il progetto lo richiede, sviluppo un pannello di amministrazione su misura per gestire contenuti, prodotti o ordini senza dipendere da uno sviluppatore." },
       { "q": "Come iniziamo?", "a": "Scrivimi su WhatsApp o via email con la tua idea. Facciamo un briefing, propongo un approccio e un preventivo, e partiamo." }
     ],
+    "principlesLabel": "Come lavoro",
+    "principlesTitle": "Ciò che",
+    "principlesHighlight": "conta per me",
+    "principles": [
+      { "title": "Prestazioni prima di tutto", "text": "Ogni sito è costruito per caricare veloce su qualsiasi dispositivo e connessione. La velocità non è un extra: è ciò che trattiene i visitatori e migliora il posizionamento." },
+      { "title": "Cura in ogni pixel", "text": "Tipografia, spaziature, animazioni e accessibilità curate nei minimi dettagli. Un sito curato trasmette la stessa fiducia che vuoi trasmettere con il tuo brand." },
+      { "title": "Comunicazione diretta", "text": "Parli con me, senza intermediari. Ti aggiorno in ogni fase, in spagnolo, inglese o italiano, e rispondo in fretta." }
+    ],
+    "closingLabel": "Contatti",
+    "closingTitle": "Hai un progetto",
+    "closingHighlight": "in mente?",
+    "closingText": "Raccontami la tua idea e ti rispondo con un approccio e un preventivo. Senza impegno.",
+    "closingWhatsapp": "Scrivimi su WhatsApp",
+    "closingEmail": "Invia un'email",
     "backHome": "Torna alla home"
   },
   "caseStudies": {

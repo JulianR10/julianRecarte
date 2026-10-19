@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import heroImg from "@assets/images/yo.webp";
 import WhatsAppIcon from "@components/WhatsAppIcon.astro";
+import Button from "@components/Button.astro";
 import SectionFade from "@components/SectionFade.astro";
 import { waLink } from "@data/contact";
 
@@ -30,13 +31,13 @@ const { t, waMessage } = Astro.props;
   class="min-h-dvh xl:h-dvh sticky top-0 z-[1] flex items-center px-6 pt-[var(--navbar-h)] md:py-24 overflow-hidden"
 >
   <div data-hero-orb class="hidden md:block fixed top-1/4 -left-32 w-96 h-96 rounded-full orb-accent blur-3xl pointer-events-none"></div>
-  <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-purple/10 blur-3xl pointer-events-none dark:bg-accent-purple/5 z-40"></div>
+  <div data-hero-orb class="hidden md:block fixed -top-36 -right-20 w-72 h-72 rounded-full bg-accent-pastel/20 blur-3xl pointer-events-none dark:bg-accent-pastel/5 z-40"></div>
 
   <div class="max-w-7xl mx-auto w-full flex items-center justify-center xl:justify-between gap-12">
     <div data-hero-text class="max-w-3xl text-center xl:text-left">
       <span
         data-reveal
-        class="t-eyebrow relative inline-block text-accent-orange mb-6 md:mb-8"
+        class="t-eyebrow relative inline-block text-accent-ink mb-6 md:mb-8"
       >
         <span class="zap-text">{t.label}</span>
         <span data-zap-clone class="absolute inset-0 pointer-events-none zap-glow-brand" aria-hidden="true">{t.label}</span>
@@ -64,7 +65,7 @@ const { t, waMessage } = Astro.props;
         data-reveal-heading
         class="t-h1 font-medium mb-4 text-copy dark:text-dark-copy text-balance"
       >
-        {t.greetingPrefix}<span class="text-accent-orange whitespace-nowrap">{t.greetingName}</span>
+        {t.greetingPrefix}<span class="text-accent-deep whitespace-nowrap">{t.greetingName}</span>
         <span class="sr-only"> — {t.label}</span>
       </h1>
 
@@ -76,7 +77,7 @@ const { t, waMessage } = Astro.props;
           {t.subtitlePrefix}{" "}
           <span
             data-rotator
-            class="relative inline-block align-baseline text-accent-orange font-medium"
+            class="relative inline-block align-baseline text-accent-ink font-medium"
             aria-live="polite"
           >
             {(Array.isArray(t.subtitleWords) ? t.subtitleWords : []).map((word, i) => (
@@ -96,31 +97,16 @@ const { t, waMessage } = Astro.props;
         <span class="block">{t.subtitleLine2}</span>
       </p>
 
-      <p data-reveal class="t-lead italic text-accent-orange/80 mt-6 mb-8 text-balance">
+      <p data-reveal class="t-lead italic text-accent-ink mt-6 mb-8 text-balance">
         {t.cta}
       </p>
 
       <div data-reveal class="flex flex-col sm:flex-row gap-3 justify-center xl:justify-start items-center">
-      <a
-        href="#proyectos"
-        data-magnetic
-        class="inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-accent-orange to-accent-pastel backdrop-blur-lg text-white rounded-full t-label shadow-lg"
-      >
-        {t.viewProjects}
-      </a>
-        <a
-          href={waLink(waMessage)}
-          data-magnetic
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group relative inline-flex items-center justify-center gap-2 w-auto px-6 py-3 md:px-8 md:py-4 rounded-full t-label overflow-hidden text-accent-orange hover:text-white transition-colors duration-300 wa-btn"
-        >
-          <span class="absolute inset-0 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          <span class="relative z-10 flex items-center gap-2">
-            <WhatsAppIcon />
-            {t.contact}
-          </span>
-        </a>
+        <Button href="#proyectos">{t.viewProjects}</Button>
+        <Button href={waLink(waMessage)} variant="accent" external>
+          <WhatsAppIcon />
+          {t.contact}
+        </Button>
       </div>
 
     </div>

@@ -27,7 +27,7 @@ const langCodes: Record<string, string> = {
     id={isOverlay ? "overlay-lang-btn" : "lang-btn"}
     aria-expanded="false"
     aria-haspopup="true"
-    class="lang-btn flex items-center gap-1.5 min-h-[44px] md:px-2 md:py-1.5 px-3 py-2.5 rounded-lg t-badge transition-colors duration-300"
+    class="lang-btn flex items-center gap-1.5 min-h-[44px] md:px-2 md:py-1.5 px-3 py-2.5 rounded-full t-badge transition-colors duration-300"
     aria-label={switchLang}
   >
     <span>{langCodes[lang]}</span>
@@ -63,33 +63,30 @@ const langCodes: Record<string, string> = {
 
 <style>
   .lang-selector {
-    --btn-color: color-mix(in srgb, var(--clr-accent-orange) 0%, var(--copy, #1A1613));
-    --btn-color-hover: var(--clr-accent-orange);
+    --btn-color: var(--copy);
+    --btn-color-hover: var(--clr-accent-ink);
     --dd-bg: var(--bg-hex);
-    --dd-border: color-mix(in srgb, var(--copy, #1A1613) 10%, transparent);
-    --dd-text: color-mix(in srgb, var(--copy, #1A1613) 80%, transparent);
-    --dd-hover-bg: color-mix(in srgb, var(--copy, #1A1613) 5%, transparent);
-    --dd-hover-text: var(--clr-accent-orange);
+    --dd-border: color-mix(in srgb, var(--copy) 10%, transparent);
+    --dd-text: color-mix(in srgb, var(--copy) 80%, transparent);
+    --dd-hover-bg: color-mix(in srgb, var(--copy) 5%, transparent);
+    --dd-hover-text: var(--clr-accent-ink);
     --dd-min-w: 72px;
     --dd-radius: 0.75rem;
   }
 
+  /* En oscuro el dropdown sube un nivel (tarjeta) para separarse del nav. */
   :root.dark .lang-selector {
-    --btn-color: color-mix(in srgb, var(--clr-accent-orange) 0%, #F0F0F0);
-    --dd-bg: #1A1A1A;
-    --dd-border: color-mix(in srgb, #F0F0F0 10%, transparent);
-    --dd-text: color-mix(in srgb, #F0F0F0 80%, transparent);
-    --dd-hover-bg: color-mix(in srgb, #F0F0F0 5%, transparent);
+    --dd-bg: theme("colors.dark.card");
   }
 
   .lang-selector.overlay {
     --btn-color: rgba(255, 255, 255, 0.8);
-    --btn-color-hover: #ffffff;
+    --btn-color-hover: white;
     --dd-bg: rgba(255, 255, 255, 0.15);
     --dd-border: rgba(255, 255, 255, 0.25);
     --dd-text: rgba(255, 255, 255, 0.7);
     --dd-hover-bg: rgba(255, 255, 255, 0.15);
-    --dd-hover-text: #ffffff;
+    --dd-hover-text: white;
     --dd-min-w: 72px;
     --dd-radius: 0.5rem;
   }

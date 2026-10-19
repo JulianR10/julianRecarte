@@ -133,8 +133,11 @@
   "about": {
     "label": "Desarrollador web FullStack",
     "title": "Sobre",
-    "highlight": "Julián Recarte",
-    "intro": "Soy Julián Recarte, desarrollador web FullStack. Ayudo a negocios y marcas a tener presencia online que se ve bien, carga rápido y trae clientes. Diseño y desarrollo landing pages, sitios institucionales, catálogos y ecommerce a medida, cuidando cada detalle: tipografía, animaciones, rendimiento y accesibilidad.",
+    "highlight": "mí",
+    "introLead": "Diseño y desarrollo sitios web que se ven bonitos, cargan rápido y traen clientes.",
+    "intro": "Soy Julián Recarte, desarrollador web FullStack. Ayudo a negocios y marcas con landing pages, sitios institucionales, catálogos y ecommerce a medida, cuidando lo que más importa: que cargue rápido, que convierta visitas en clientes y que te encuentren fácil personas, buscadores y modelos de IA.",
+    "ctaPrimary": "Hablemos de tu proyecto",
+    "ctaSecondary": "Ver proyectos",
     "metaDescription": "Julián Recarte, desarrollador web FullStack. Landing pages, sitios, catálogos y ecommerce a medida. 100% remoto, en español, inglés e italiano.",
     "teaserLabel": "Sobre mí",
     "teaserTitle": "Detrás de",
@@ -142,12 +145,13 @@
     "teaserText": "Soy desarrollador web FullStack y trabajo 100% remoto con clientes de todo el mundo, en español, inglés e italiano. Convierto ideas en sitios rápidos, cuidados y pensados para traer resultados.",
     "cta": "Conocer más sobre mí",
     "factsLabel": "Perfil",
-    "factsTitle": "En resumen",
+    "factsTitle": "En",
+    "factsHighlight": "resumen",
     "facts": [
-      { "label": "Rol", "value": "Desarrollador web FullStack (frontend + backend)" },
-      { "label": "Idiomas", "value": "Español · Inglés · Italiano" },
-      { "label": "Modalidad", "value": "100% remoto, clientes en todo el mundo" },
-      { "label": "Servicios", "value": "Landing pages · Sitios institucionales · Catálogos · Ecommerce · Paneles a medida" }
+      { "label": "Rol", "value": "Desarrollador web FullStack (frontend + backend)", "icon": "code" },
+      { "label": "Idiomas", "value": "Español · Inglés · Italiano", "stat": "3", "icon": "globe" },
+      { "label": "Modalidad", "value": "Remoto, clientes en todo el mundo", "stat": "100", "suffix": "%", "icon": "remote" },
+      { "label": "Servicios", "value": "Landing pages · Sitios institucionales · Catálogos · Ecommerce · Paneles a medida", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "Preguntas frecuentes",
@@ -161,6 +165,20 @@
       { "q": "¿Puedo editar el sitio yo mismo?", "a": "Sí. Cuando el proyecto lo necesita, desarrollo un panel de administración a medida para que gestiones contenido, productos o pedidos sin depender de un desarrollador." },
       { "q": "¿Cómo empezamos?", "a": "Escribime por WhatsApp o email con tu idea. Hacemos un briefing, te propongo un enfoque y un presupuesto, y arrancamos." }
     ],
+    "principlesLabel": "Cómo trabajo",
+    "principlesTitle": "Lo que",
+    "principlesHighlight": "me importa",
+    "principles": [
+      { "title": "Rendimiento primero", "text": "Cada sitio se construye para cargar rápido en cualquier dispositivo y conexión. La velocidad no es un extra: es lo que retiene a tus visitas y mejora tu posicionamiento." },
+      { "title": "Detalle en cada píxel", "text": "Tipografía, espaciado, animaciones y accesibilidad cuidados al milímetro. Un sitio prolijo transmite la misma confianza que querés que transmita tu marca." },
+      { "title": "Comunicación directa", "text": "Hablás conmigo, sin intermediarios. Te mantengo al tanto en cada etapa, en español, inglés o italiano, y respondo rápido." }
+    ],
+    "closingLabel": "Contacto",
+    "closingTitle": "¿Tenés un proyecto",
+    "closingHighlight": "en mente?",
+    "closingText": "Contame tu idea y te respondo con un enfoque y un presupuesto. Sin compromiso.",
+    "closingWhatsapp": "Escribime por WhatsApp",
+    "closingEmail": "Enviar un email",
     "backHome": "Volver al inicio"
   },
   "caseStudies": {

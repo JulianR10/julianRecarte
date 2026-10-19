@@ -133,8 +133,11 @@
   "about": {
     "label": "FullStack Web Developer",
     "title": "About",
-    "highlight": "Julián Recarte",
-    "intro": "I'm Julián Recarte, a FullStack web developer. I help businesses and brands build an online presence that looks great, loads fast and brings in clients. I design and develop landing pages, corporate sites, catalogs and custom ecommerce, taking care of every detail: typography, animations, performance and accessibility.",
+    "highlight": "me",
+    "introLead": "I design and build websites that look beautiful, load fast and bring in clients.",
+    "intro": "I'm Julián Recarte, a FullStack web developer. I help businesses and brands with custom landing pages, corporate sites, catalogs and ecommerce, taking care of what matters most: fast loading, turning visitors into clients, and being easy to find for people, search engines and AI models.",
+    "ctaPrimary": "Let's talk about your project",
+    "ctaSecondary": "View projects",
     "metaDescription": "Julián Recarte, FullStack web developer. Custom landing pages, sites, catalogs and ecommerce. 100% remote, in Spanish, English and Italian.",
     "teaserLabel": "About",
     "teaserTitle": "Behind",
@@ -142,12 +145,13 @@
     "teaserText": "I'm a FullStack web developer working 100% remotely with clients worldwide, in Spanish, English and Italian. I turn ideas into fast, well-crafted websites built to deliver results.",
     "cta": "More about me",
     "factsLabel": "Profile",
-    "factsTitle": "At a glance",
+    "factsTitle": "At a",
+    "factsHighlight": "glance",
     "facts": [
-      { "label": "Role", "value": "FullStack web developer (frontend + backend)" },
-      { "label": "Languages", "value": "Spanish · English · Italian" },
-      { "label": "Work style", "value": "100% remote, clients worldwide" },
-      { "label": "Services", "value": "Landing pages · Corporate sites · Catalogs · Ecommerce · Custom admin panels" }
+      { "label": "Role", "value": "FullStack web developer (frontend + backend)", "icon": "code" },
+      { "label": "Languages", "value": "Spanish · English · Italian", "stat": "3", "icon": "globe" },
+      { "label": "Work style", "value": "Remote, clients worldwide", "stat": "100", "suffix": "%", "icon": "remote" },
+      { "label": "Services", "value": "Landing pages · Corporate sites · Catalogs · Ecommerce · Custom admin panels", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "FAQ",
@@ -161,6 +165,20 @@
       { "q": "Can I edit the site myself?", "a": "Yes. When the project needs it, I build a custom admin panel so you can manage content, products or orders without depending on a developer." },
       { "q": "How do we start?", "a": "Message me on WhatsApp or email with your idea. We do a briefing, I propose an approach and a budget, and we get started." }
     ],
+    "principlesLabel": "How I work",
+    "principlesTitle": "What I",
+    "principlesHighlight": "care about",
+    "principles": [
+      { "title": "Performance first", "text": "Every site is built to load fast on any device and connection. Speed isn't an extra: it's what keeps your visitors around and improves your search ranking." },
+      { "title": "Detail in every pixel", "text": "Typography, spacing, animations and accessibility crafted with care. A polished site conveys the same trust you want your brand to convey." },
+      { "title": "Direct communication", "text": "You talk to me, no middlemen. I keep you updated at every stage, in Spanish, English or Italian, and I reply fast." }
+    ],
+    "closingLabel": "Contact",
+    "closingTitle": "Got a project",
+    "closingHighlight": "in mind?",
+    "closingText": "Tell me your idea and I'll get back to you with an approach and a quote. No strings attached.",
+    "closingWhatsapp": "Message me on WhatsApp",
+    "closingEmail": "Send an email",
     "backHome": "Back to home"
   },
   "caseStudies": {

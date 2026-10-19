@@ -8,15 +8,28 @@ function wrapTextNodes(el: HTMLElement): HTMLElement[] {
   let node: Text | null;
   while ((node = walker.nextNode() as Text | null)) textNodes.push(node);
 
+  // Cada palabra va en un `.cine-word` que no se parte, y los espacios quedan como
+  // texto normal: así el título corta entre palabras (si las letras fueran sueltas,
+  // cada una sería un punto de corte y una palabra podría partirse en cualquier letra).
   textNodes.forEach((node) => {
     if (!node.textContent!.trim()) return;
     const fragment = document.createDocumentFragment();
-    Array.from(node.textContent!).forEach((char) => {
-      const span = document.createElement("span");
-      span.className = "cine-char";
-      span.textContent = char === " " ? " " : char;
-      fragment.appendChild(span);
-      chars.push(span);
+    node.textContent!.split(/(\s+)/).forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) {
+        fragment.appendChild(document.createTextNode(part));
+        return;
+      }
+      const word = document.createElement("span");
+      word.className = "cine-word";
+      Array.from(part).forEach((char) => {
+        const span = document.createElement("span");
+        span.className = "cine-char";
+        span.textContent = char;
+        word.appendChild(span);
+        chars.push(span);
+      });
+      fragment.appendChild(word);
     });
     node.parentNode!.replaceChild(fragment, node);
   });

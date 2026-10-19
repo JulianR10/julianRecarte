@@ -13,7 +13,7 @@ const { label, title, highlight, id, centered = true, class: className = "" } = 
 
 <div class:list={[{ "text-center": centered }, "mb-16 md:mb-20", className]} data-reveal>
   <span
-    class="t-eyebrow inline-block text-accent-orange label-outline mb-6"
+    class="t-eyebrow inline-block text-accent-ink label-outline mb-6"
     data-reveal-heading
   >
     {label}
@@ -21,8 +21,8 @@ const { label, title, highlight, id, centered = true, class: className = "" } = 
   <h2
     id={id}
     data-reveal-heading
-    class="t-h2 font-medium max-w-3xl mx-auto"
+    class:list={["t-h2 font-medium max-w-3xl", { "mx-auto": centered }]}
   >
-    {title} <span class="text-accent-orange whitespace-nowrap">{highlight}</span>
+    {title} <span class="text-accent-deep whitespace-nowrap">{highlight}</span>
   </h2>
 </div>

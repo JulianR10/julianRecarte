@@ -2,15 +2,17 @@ import type gsap from "gsap";
 import { defineAnimation } from "@scripts/gsap-factory";
 
 /**
- * Parallax del hero de /sobre-mi/: retrato y wash derivan a distinta
- * velocidad mientras se scrollea. `defineAnimation` no arranca con
+ * Scroll del hero de /sobre-mi/: el disco baja, se achica y se atenúa (eco de la salida del
+ * hero del home, más suave porque acá no es sticky), el arco del rol gira alrededor del disco
+ * y el wash deriva en sentido opuesto. `defineAnimation` no arranca con
  * movimiento reducido → el hero queda estático.
  */
 export const aboutParallax = defineAnimation((gsap: typeof gsap) => {
   const hero = document.querySelector<HTMLElement>("[data-about-hero]");
-  const portrait = hero?.querySelector<HTMLElement>("[data-about-portrait]");
+  const disc = hero?.querySelector<HTMLElement>("[data-about-portrait]");
+  const arc = hero?.querySelector<SVGElement>("[data-about-arc]");
   const wash = hero?.querySelector<HTMLElement>("[data-about-wash]");
-  if (!hero || !portrait) return;
+  if (!hero || !disc) return;
 
   const baseConfig = {
     trigger: hero,
@@ -19,7 +21,11 @@ export const aboutParallax = defineAnimation((gsap: typeof gsap) => {
     scrub: 1,
   };
 
-  gsap.to(portrait, { y: 32, ease: "none", scrollTrigger: baseConfig });
+  gsap.to(disc, { y: 32, scale: 0.9, opacity: 0.55, ease: "none", scrollTrigger: baseConfig });
+
+  if (arc) {
+    gsap.to(arc, { rotation: 24, transformOrigin: "50% 50%", ease: "none", scrollTrigger: baseConfig });
+  }
 
   if (wash) {
     gsap.to(wash, { y: -32, ease: "none", scrollTrigger: baseConfig });

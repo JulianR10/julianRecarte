@@ -10,13 +10,20 @@ export default {
           orange: "#FF5C2B",
           warm: "#FF7A4F",
           pastel: "#FFB088",
-          purple: "#5B1FFF",
+          // Tinta para texto (cambian con el tema vía globals.css: en oscuro = orange).
+          ink: "var(--clr-accent-ink)",
+          deep: "var(--clr-accent-deep)",
         },
         dark: {
           card: "#252525",
           copy: "#F0F0F0",
           muted: "#A8A8A8",
         },
+      },
+      // Sombras de tarjeta (Projects, Process): reposo + hover. Controles flotantes usan shadow-lg/md.
+      boxShadow: {
+        card: "0 4px 20px rgba(26, 22, 19, 0.05)",
+        "card-hover": "0 24px 48px -16px rgba(26, 22, 19, 0.14)",
       },
       fontFamily: {
         satoshi: ["Satoshi", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],

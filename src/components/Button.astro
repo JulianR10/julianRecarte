@@ -1,0 +1,44 @@
+---
+/**
+ * Botón de acción de la marca (link). Única fuente de los 3 estilos de CTA:
+ * - primary: gradiente naranja → pastel con label oscuro (blanco no llega a AA sobre el gradiente).
+ * - accent:  borde gradiente (.wa-btn) con label en tinta naranja; al hover se rellena.
+ * - outline: borde de control (.line-control) para acciones secundarias (email, redes).
+ */
+interface Props {
+  href: string;
+  variant?: "primary" | "accent" | "outline";
+  external?: boolean;
+  magnetic?: boolean;
+  class?: string;
+}
+
+const { href, variant = "primary", external = false, magnetic = true, class: className = "" } = Astro.props;
+
+const variants = {
+  primary: "bg-gradient-to-r from-accent-orange to-accent-pastel text-copy shadow-lg",
+  accent: "wa-btn overflow-hidden text-accent-ink hover:text-copy transition-colors duration-300",
+  outline:
+    "border line-control text-copy/80 dark:text-dark-copy hover:text-accent-ink hover:border-accent-orange/30 hover:bg-accent-orange/5 transition-[color,border-color,background-color] duration-300",
+};
+---
+
+<a
+  href={href}
+  data-magnetic={magnetic ? "" : undefined}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+  class:list={[
+    "group relative inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-full t-label whitespace-nowrap",
+    variants[variant],
+    className,
+  ]}
+>
+  {variant === "accent" && (
+    <span
+      aria-hidden="true"
+      class="absolute inset-0 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    ></span>
+  )}
+  <span class="relative z-10 inline-flex items-center gap-2"><slot /></span>
+</a>

@@ -58,7 +58,7 @@ const mobileMockup = project.mockupMobile ?? project.mockup;
         <div class="case-veil absolute inset-0 pointer-events-none" aria-hidden="true"></div>
       </>
     )}
-    <div class="relative z-10 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_660px] gap-6 lg:gap-10 items-center">
+    <div class="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_660px] gap-6 lg:gap-10 items-center">
       <div class="flex flex-col items-center text-center lg:text-left lg:items-start gap-6">
         <div class="flex flex-col items-center lg:items-start">
           {project.image && (
@@ -206,9 +206,9 @@ const mobileMockup = project.mockupMobile ?? project.mockup;
   }
 
   :global(.dark) .case-accent {
-    color: color-mix(in srgb, var(--project-accent) 60%, #fff);
+    color: color-mix(in srgb, var(--project-accent) 60%, white);
   }
   :global(.dark) .case-accent.case-badge {
-    border-color: color-mix(in srgb, var(--project-accent) 50%, #fff);
+    border-color: color-mix(in srgb, var(--project-accent) 50%, white);
   }
 </style>

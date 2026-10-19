@@ -47,11 +47,11 @@ const socials = [
 ];
 ---
 
-<footer class="border-t border-black/5 dark:border-dark-muted/20 py-8">
+<footer class="border-t line-hair py-8">
   <div class="max-w-7xl mx-auto px-6 flex flex-col items-center gap-5">
     <a
       href={`/${lang}/sobre-mi/`}
-      class="t-link font-medium text-copy/80 dark:text-dark-copy hover:text-accent-orange transition-colors duration-300"
+      class="t-link font-medium text-copy/80 dark:text-dark-copy hover:text-accent-ink transition-colors duration-300"
     >
       {t.about}
     </a>
@@ -65,7 +65,7 @@ const socials = [
             rel={social.external ? "noopener noreferrer" : undefined}
             aria-label={social.label}
             title={social.label}
-            class="flex items-center justify-center w-11 h-11 rounded-full border border-black/10 dark:border-dark-muted/20 text-copy/80 dark:text-dark-copy hover:text-white hover:bg-accent-orange hover:border-accent-orange transition-colors duration-300"
+            class="flex items-center justify-center w-11 h-11 rounded-full border line-hair text-copy/80 dark:text-dark-copy hover:text-copy hover:bg-accent-orange hover:border-accent-orange transition-colors duration-300"
           >
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d={social.path} />

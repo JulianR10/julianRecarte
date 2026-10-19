@@ -24,7 +24,7 @@ const caseStudyHref = `/${lang}/proyectos/${slug}/`;
 
 const wrapperAttrs: Record<string, any> = {
   "data-project-card": true,
-  class: `${className || ""} group relative overflow-hidden isolate rounded-2xl bg-white/50 dark:bg-dark-card/50 border border-black/5 dark:border-dark-muted/20 md:hover:border-black/10 md:dark:hover:border-dark-muted/30 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-[0_4px_20px_rgba(0,0,0,0.04)] md:hover:shadow-xl md:hover:shadow-black/5 flex flex-col`.trim(),
+  class: `${className || ""} group relative overflow-hidden isolate rounded-2xl bg-white/50 dark:bg-dark-card/50 border line-hair md:hover:border-accent-orange/25 transition-shadow duration-500 md:transition-[box-shadow,border-color] duration-500 shadow-card md:hover:shadow-card-hover flex flex-col`.trim(),
 };
 ---
 
@@ -48,7 +48,7 @@ const wrapperAttrs: Record<string, any> = {
     </div>
     {comingSoon ? (
       <div class="absolute top-4 right-4">
-        <span class="t-badge inline-block px-3 py-1 rounded-full bg-accent-orange/90 text-white backdrop-blur-sm shadow-sm">
+        <span class="t-badge inline-block px-3 py-1 rounded-full bg-accent-orange/90 text-copy backdrop-blur-sm shadow-sm">
           {comingSoon}
         </span>
       </div>
@@ -56,7 +56,7 @@ const wrapperAttrs: Record<string, any> = {
   </div>
 
   <div class="p-6 md:p-8 flex flex-col flex-1">
-    <h3 class="t-h3 font-medium mb-3 text-accent-orange transition-colors duration-300 md:group-hover:text-accent-purple">
+    <h3 class="t-h3 font-medium mb-3 text-accent-deep transition-colors duration-300 md:group-hover:text-accent-ink">
       {title}
     </h3>
     <p class="t-body text-copy/70 dark:text-dark-muted mb-6">
@@ -68,7 +68,7 @@ const wrapperAttrs: Record<string, any> = {
           href={liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel text-white t-label shadow-md transition-transform duration-300 md:group-hover:scale-105"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-accent-orange to-accent-pastel text-copy t-label shadow-md transition-transform duration-300 md:group-hover:scale-105"
         >
           {viewSite}
         </a>
@@ -76,7 +76,7 @@ const wrapperAttrs: Record<string, any> = {
       {showCase ? (
       <a
         href={caseStudyHref}
-        class="group/link inline-flex items-center gap-2 t-link-quiet font-medium cursor-pointer transition-colors duration-300 text-accent-orange hover:text-accent-purple"
+        class="group/link inline-flex items-center gap-2 t-link-quiet font-medium cursor-pointer text-accent-ink underline-offset-4 decoration-2 hover:underline"
         aria-label={`${caseLabel || "Case study"}: ${title}`}
       >
         {caseLabel}
