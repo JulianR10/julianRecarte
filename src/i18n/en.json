@@ -151,7 +151,7 @@
       { "label": "Role", "value": "FullStack web developer (frontend + backend)", "icon": "code" },
       { "label": "Languages", "value": "Spanish · English · Italian", "stat": "3", "icon": "globe" },
       { "label": "Work style", "value": "Remote, clients worldwide", "stat": "100", "suffix": "%", "icon": "remote" },
-      { "label": "Services", "value": "Landing pages · Corporate sites · Catalogs · Ecommerce · Custom admin panels", "icon": "layers" }
+      { "label": "Services", "value": "Landing pages · Corporate sites · Catalogs · Ecommerce · Business management", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "FAQ",

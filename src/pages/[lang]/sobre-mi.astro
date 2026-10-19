@@ -73,6 +73,8 @@ const factTint = [
   "bg-accent-pastel/[0.14] dark:bg-accent-pastel/[0.05]",
   "bg-accent-warm/[0.04] dark:bg-dark-card",
 ];
+// Chips de la tarjeta "Idiomas": mismo orden en los 3 JSON (es · en · it).
+const langChips = ["es", "en", "it"];
 
 const schema = [
   websiteSchema(lang),
@@ -227,17 +229,34 @@ const schema = [
         {about.facts.map((fact, i) => (
           <div
             class:list={[
-              "about-card group flex flex-col gap-6 rounded-2xl border line-hair p-5 md:p-6",
+              "about-card group relative flex flex-col gap-6 rounded-2xl border line-hair p-5 md:p-6",
               factSpan[i],
               factTint[i],
             ]}
           >
+            {fact.icon === "globe" && (
+              <!-- Banderita que sube desde el borde, sobre el globo, con el chip activo. -->
+              <span aria-hidden="true" class="about-flags">
+                {langChips.map((l) => (
+                  <span class="about-flag" data-flag={l}>
+                    <span class="about-flag-cloth">
+                      {Array.from({ length: 8 }, (_, s) => (
+                        <span style={`--s:${s}`} />
+                      ))}
+                    </span>
+                  </span>
+                ))}
+              </span>
+            )}
             <!-- Cabecera fija en todas las tarjetas: label a la izquierda, ícono a la derecha. -->
             <div class="flex items-center justify-between gap-4">
               <dt class="t-badge text-copy/70 dark:text-dark-muted">{fact.label}</dt>
               <span
                 aria-hidden="true"
-                class="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-accent-orange/10 text-accent-orange transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110"
+                class:list={[
+                  "flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-accent-orange/10 text-accent-orange transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110",
+                  { "about-globe": fact.icon === "globe" },
+                ]}
               >
                 <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   {fact.icon === "layers" ? (
@@ -262,8 +281,12 @@ const schema = [
               )}
               {fact.value.includes("·") ? (
                 <span class="flex flex-wrap gap-2">
-                  {fact.value.split("·").map((chip) => (
-                    <span class="t-badge rounded-full border line-hair px-3 py-1.5 text-copy/80 dark:text-dark-copy">
+                  {fact.value.split("·").map((chip, j) => (
+                    <span
+                      class="t-badge rounded-full border line-hair px-3 py-1.5 text-copy/80 dark:text-dark-copy"
+                      data-lang-chip={fact.icon === "globe" ? langChips[j] : undefined}
+                      tabindex={fact.icon === "globe" ? 0 : undefined}
+                    >
                       {chip.trim()}
                     </span>
                   ))}
@@ -458,6 +481,115 @@ const schema = [
       box-shadow: 0 20px 40px -20px rgba(var(--rgb-accent-orange), 0.25);
       border-color: rgba(var(--rgb-accent-orange), 0.25);
     }
+  }
+
+  /* Tarjeta "Idiomas": al pasar (o tocar: el chip es enfocable) por un
+     idioma, su bandera sube desde el borde de la tarjeta, sobre el globo, y
+     flamea. Tela en 8 franjas que ondulan escalonadas (solo transform/opacity).
+     Hex de bandera, no de marca. */
+  .about-flags {
+    --flag-w: 39px;
+    --flag-h: 26px;
+    position: absolute;
+    bottom: 100%;
+    /* El mástil cae en el centro del globo (w-10 → 20px del borde del ícono). */
+    right: calc(1.25rem + 20px - var(--flag-w) - 1px);
+    width: calc(var(--flag-w) + 2px);
+    height: 56px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .about-flags { right: calc(1.5rem + 20px - var(--flag-w) - 1px); }
+  }
+  .about-flag {
+    position: absolute;
+    inset: 0;
+    transform: translateY(100%);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  /* Mástil con remate. */
+  .about-flag::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    bottom: 0;
+    width: 2px;
+    border-radius: 2px;
+    --pole: theme("colors.copy");
+    background: linear-gradient(theme("colors.accent.orange") 0 3px, var(--pole) 3px);
+  }
+  :global(.dark) .about-flag::before {
+    --pole: theme("colors.dark.muted");
+  }
+  .about-flag-cloth {
+    position: absolute;
+    left: 2px;
+    top: 4px;
+    display: flex;
+    width: var(--flag-w);
+    height: var(--flag-h);
+  }
+  .about-flag-cloth > span {
+    position: relative;
+    flex: 1;
+    background: var(--flag-art) no-repeat;
+    background-size: var(--flag-w) var(--flag-h);
+    background-position: calc(var(--flag-w) / -8 * var(--s)) 0;
+  }
+  /* Sombra de la onda: misma fase que la franja, anima solo opacidad. */
+  .about-flag-cloth > span::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.2);
+    opacity: 0;
+  }
+  .about-flag[data-flag="es"] { --flag-art: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 6'><path fill='%2374ACDF' d='M0 0h9v6H0z'/><path fill='%23fff' d='M0 2h9v2H0z'/><circle cx='4.5' cy='3' r='.6' fill='%23F6B40E' stroke='%2385340A' stroke-width='.1'/></svg>"); }
+  .about-flag[data-flag="en"] { --flag-art: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30' preserveAspectRatio='none'><clipPath id='t'><path d='M30 15h30v15zv15H0zH0V0zV0h30z'/></clipPath><path fill='%23012169' d='M0 0h60v30H0z'/><path stroke='%23fff' stroke-width='6' d='M0 0l60 30m0-30L0 30'/><path stroke='%23C8102E' stroke-width='4' clip-path='url(%23t)' d='M0 0l60 30m0-30L0 30'/><path stroke='%23fff' stroke-width='10' d='M30 0v30M0 15h60'/><path stroke='%23C8102E' stroke-width='6' d='M30 0v30M0 15h60'/></svg>"); }
+  .about-flag[data-flag="it"] { --flag-art: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'><path fill='%23009246' d='M0 0h1v2H0z'/><path fill='%23fff' d='M1 0h1v2H1z'/><path fill='%23CE2B37' d='M2 0h1v2H2z'/></svg>"); }
+
+  .about-card:has([data-lang-chip="es"]:is(:hover, :focus)) .about-flag[data-flag="es"],
+  .about-card:has([data-lang-chip="en"]:is(:hover, :focus)) .about-flag[data-flag="en"],
+  .about-card:has([data-lang-chip="it"]:is(:hover, :focus)) .about-flag[data-flag="it"] {
+    transform: translateY(0);
+  }
+  .about-card:has([data-lang-chip="es"]:is(:hover, :focus)) .about-flag[data-flag="es"] .about-flag-cloth > span,
+  .about-card:has([data-lang-chip="en"]:is(:hover, :focus)) .about-flag[data-flag="en"] .about-flag-cloth > span,
+  .about-card:has([data-lang-chip="it"]:is(:hover, :focus)) .about-flag[data-flag="it"] .about-flag-cloth > span {
+    animation: about-flag-wave 1.1s ease-in-out infinite;
+    animation-delay: calc(var(--s) * -0.12s);
+  }
+  .about-card:has([data-lang-chip="es"]:is(:hover, :focus)) .about-flag[data-flag="es"] .about-flag-cloth > span::after,
+  .about-card:has([data-lang-chip="en"]:is(:hover, :focus)) .about-flag[data-flag="en"] .about-flag-cloth > span::after,
+  .about-card:has([data-lang-chip="it"]:is(:hover, :focus)) .about-flag[data-flag="it"] .about-flag-cloth > span::after {
+    animation: about-flag-shade 1.1s ease-in-out infinite;
+    animation-delay: calc(var(--s) * -0.12s);
+  }
+  /* La amplitud crece hacia la punta: el lado del mástil queda casi quieto. */
+  @keyframes about-flag-wave {
+    0%, 100% { transform: translateY(calc(var(--s) * -0.3px)); }
+    50% { transform: translateY(calc(var(--s) * 0.3px)); }
+  }
+  @keyframes about-flag-shade {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+  /* El globo reacciona: gira al revés del hover de la tarjeta. */
+  .about-card:has([data-lang-chip]:is(:hover, :focus)) .about-globe {
+    transform: rotate(-12deg) scale(1.1);
+  }
+  [data-lang-chip] {
+    cursor: default;
+    transition: border-color var(--dur-base) ease, color var(--dur-base) ease;
+  }
+  [data-lang-chip]:is(:hover, :focus) {
+    border-color: currentColor;
+  }
+  [data-lang-chip]:focus:not(:focus-visible) {
+    outline: none;
   }
 
   /* FAQ: altura animada con ::details-content (mejora progresiva: sin

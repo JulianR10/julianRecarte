@@ -151,7 +151,7 @@
       { "label": "Rol", "value": "Desarrollador web FullStack (frontend + backend)", "icon": "code" },
       { "label": "Idiomas", "value": "Español · Inglés · Italiano", "stat": "3", "icon": "globe" },
       { "label": "Modalidad", "value": "Remoto, clientes en todo el mundo", "stat": "100", "suffix": "%", "icon": "remote" },
-      { "label": "Servicios", "value": "Landing pages · Sitios institucionales · Catálogos · Ecommerce · Paneles a medida", "icon": "layers" }
+      { "label": "Servicios", "value": "Landing pages · Sitios institucionales · Catálogos · Ecommerce · Gestión de negocio", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "Preguntas frecuentes",
