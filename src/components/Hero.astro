@@ -5,6 +5,7 @@ import WhatsAppIcon from "@components/WhatsAppIcon.astro";
 import Button from "@components/Button.astro";
 import SectionFade from "@components/SectionFade.astro";
 import { waLink } from "@data/contact";
+import { HERO_WIDTHS, HERO_SIZES_MOBILE, HERO_SIZES_DESKTOP } from "@data/hero-image";
 
 interface Props {
   t: {
@@ -52,6 +53,8 @@ const { t, waMessage } = Astro.props;
               alt="Julián Recarte"
               width={1024}
               height={1536}
+              widths={HERO_WIDTHS}
+              sizes={HERO_SIZES_MOBILE}
               class="w-full h-full object-cover scale-[1.78] translate-y-[14%]"
               loading="eager"
               fetchpriority="high"
@@ -119,6 +122,8 @@ const { t, waMessage } = Astro.props;
             alt="Julián Recarte"
             width={1024}
             height={1536}
+            widths={HERO_WIDTHS}
+            sizes={HERO_SIZES_DESKTOP}
             class="w-full h-full object-cover scale-[1.38] translate-y-[14%]"
             loading="eager"
             fetchpriority="high"

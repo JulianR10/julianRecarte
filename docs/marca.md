@@ -98,20 +98,18 @@ La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, 
 
 ## Fuentes
 
-### Google Fonts: un eje fuera de rango devuelve 400 (la fuente no carga, en silencio)
+### Self-hosted en `public/fonts/` (no CDN)
 
-Si un eje del `css2` está fuera del rango real de la familia, Google responde **HTTP 400** y **no llega ningún `@font-face`** → el navegador cae al fallback sin error visible fuera de DevTools › Network.
+Las 4 caras se sirven desde el mismo origen; los `@font-face` están al inicio de `globals.css`. Antes venían de Fontshare y Google Fonts, y esas dos hojas externas bloqueaban el render: en mobile el primer pintado esperaba ~1 s más (PageSpeed mobile 67 → ~94 al mudarlas).
 
-- **Outfit** (`h1`–`h6`): único eje `wght 100..900`; el sitio pide `wght@500..700`. URL: `family=Outfit:wght@500..700&display=swap`.
-- Verificar siempre: `curl -s -o /dev/null -w "%{http_code}\n" "<url>"` → debe dar **200**.
-- Rangos oficiales: `https://fonts.google.com/metadata/fonts` (campo `axes` de cada familia).
-- Stack del sitio: **Satoshi** (body/UI, Fontshare) + **Outfit** (`h1`–`h6`, Google Fonts; variable `font-weight: 100 900`, ~15 KB woff2, sin eje de ancho).
-- **Peticiones exactas** (nada que no se use):
-  - Satoshi: `f[]=satoshi@400,500,400i` (Fontshare tiene **3 pesos: 400/500/700** y **no tiene 600**).
-  - Outfit: `wght@500..700` (500 títulos, 700 solo los H3 de Soluciones).
+| Archivo | Familia | Uso |
+|---|---|---|
+| `satoshi-400.woff2` | Satoshi 400 | Texto (precargada en `Layout.astro`) |
+| `satoshi-400-italic.woff2` | Satoshi 400 itálica | CTA del hero y citas |
+| `satoshi-500.woff2` | Satoshi 500 | Énfasis |
+| `outfit-latin.woff2` | Outfit variable 500–700, subset latin | `h1`–`h6` (precargada) |
 
-### Fontshare: las itálicas van con el sufijo `i`, y no existe el 600
-
-- La sintaxis de Fontshare **no** es la de Google. Para itálicas reales hay que sufijar el peso con `i`: `f[]=satoshi@400,500,400i` (3 caras, 1 itálica). Alternativas que **no** funcionan: `@1,400,500,700` (0 itálicas), `@2,400` (devuelve 1 cara pero no es itálica).
-- **Satoshi no declara 600**: `font-semibold` se resolvía como 700 (falsa negrita). El sistema quedó en **400 = texto, 500 = énfasis, 700 = solo títulos con gradiente** (esos son Outfit, no Satoshi). Si aparece un `<strong>` o un 600 nuevo, hay que añadirlo a la URL — hoy renderiza sintético.
-- Antes de tocar la URL: `curl -s "<url>" | grep -c "@font-face"` y `grep -c "font-style: italic"`.
+- **Satoshi no tiene 600**: `font-semibold` se resolvería como negrita sintética. El sistema es **400 = texto, 500 = énfasis**; el 700 solo existe en Outfit (H3 de Soluciones). Si hace falta otra cara, bajarla de Fontshare (`https://api.fontshare.com/v2/css?f[]=satoshi@<peso>`; itálicas con sufijo `i`, p. ej. `400i`) y sumar su `@font-face`.
+- **Outfit solo trae el subset latin** (cubre es/en/it, incluidas tildes y ñ). Se bajó del CSS de Google Fonts (`family=Outfit:wght@500..700`); su `unicode-range` se copió tal cual.
+- **Caché:** `vercel.json` sirve `/fonts/*` con `max-age=31536000, immutable`. Los nombres no llevan hash, así que **si se reemplaza un archivo hay que renombrarlo** (y actualizar `@font-face` + preload).
+- **Preload:** solo las dos del primer pantallazo. Precargar las demás compite con la imagen LCP.

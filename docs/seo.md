@@ -14,7 +14,7 @@ Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine 
 - **`Article`** (case studies) — `datePublished` desde `projects.ts` (`publishedAt`, ISO) y `dateModified` = fecha de build; `image` absoluta, `mainEntityOfPage`, `publisher` con logo.
 - **`AboutPage`** en `/sobre-mi` — declara el tipo de página con `mainEntity`/`about` → `#person` e `isPartOf` → `#website` (ficha de entidad para IA).
 - **Headers de seguridad** — `vercel.json` emite `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` y **`Content-Security-Policy`**.
-- **CSP** — allowlist: `script-src 'self' + hashes + googletagmanager`, `style-src 'self' 'unsafe-inline' + fontshare/googleapis` (Astro inlinea `<style>` y hay `style="…"` inline → `'unsafe-inline'` es inevitable), `font-src cdn.fontshare.com + fonts.gstatic.com`, `connect-src` a GA y `vitals.vercel-insights.com`, `frame-ancestors 'none'`.
+- **CSP** — allowlist: `script-src 'self' + hashes + googletagmanager`, `style-src 'self' 'unsafe-inline'` (el CSS va inline por `inlineStylesheets: "always"` y hay `style="…"` inline → `'unsafe-inline'` es inevitable), `font-src 'self' data:` (fuentes self-hosted), `connect-src` a GA y `vitals.vercel-insights.com`, `frame-ancestors 'none'`.
   - Los **hashes** cubren los 2 únicos scripts inline: el bootstrap de dark mode (12 páginas) y el redirect por idioma de `/`. **Si se toca cualquiera de esos scripts, el hash deja de valer y el script se bloquea en silencio** (dark mode parpadea, `/` no redirige). Recalcular con:
     ```bash
     npm run build && node -e "
@@ -24,7 +24,7 @@ Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine 
       console.log('sha256-'+crypto.createHash('sha256').update(m[1],'utf8').digest('base64'));
     "
     ```
-  - El snippet de gtag **no** necesita hash: al no llevar `is:inline`, Astro lo bundlea en `hoisted.js` (mismo origen).
+  - El snippet de gtag **no** necesita hash: al no llevar `is:inline`, Astro lo bundlea en `hoisted.js` (mismo origen). Ese snippet inyecta `gtag.js` después del `load` (en `requestIdleCallback`) para que no compita con el primer pintado; los comandos previos quedan en `dataLayer`.
   - Los `<script type="application/ld+json">` **no** están sujetos a `script-src` (son data blocks, no se ejecutan).
   - Speed Insights carga su script desde `/_vercel/speed-insights/script.js` → `'self'`.
   - Verificación sin navegador: extraer cada `src`/`href`/`url()` del build y contrastarlo con las directivas (los orígenes deben dar OK y los hashes coincidir con `vercel.json`).

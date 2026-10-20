@@ -6,6 +6,11 @@ import { fileURLToPath } from "url";
 export default defineConfig({
   site: "https://julianrecarte.dev",
   trailingSlash: "always",
+  build: {
+    // El CSS (~17 KB) va inline: sin el round-trip de los <link> bloqueantes,
+    // el primer pintado en mobile llega antes. La CSP ya permite 'unsafe-inline'.
+    inlineStylesheets: "always",
+  },
   integrations: [
     tailwind(),
     sitemap({

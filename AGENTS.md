@@ -105,8 +105,10 @@ Chrome deja de desenfocar lo que pasa por detrás si:
 ### Build y fuentes
 
 - **`manualChunks` como función**, no como objeto: Astro compara ids absolutos y la forma objeto nunca matchea.
-- **Google Fonts devuelve 400 con un eje fuera de rango** y la fuente no carga, sin aviso. Verificar con `curl -s -o /dev/null -w "%{http_code}" "<url>"`, que debe dar 200.
-- **Fontshare:** las itálicas llevan el sufijo `i` y Satoshi no tiene 600. Detalle en `docs/marca.md`.
+- **Fuentes self-hosted** en `public/fonts/` (`@font-face` en `globals.css`). Nada de CSS de Fontshare/Google Fonts: bloqueaba el render en mobile. Satoshi no tiene 600. Detalle en `docs/marca.md`.
+- **El JS pesado va fuera del camino crítico:** `@scripts/main` (GSAP + Lenis) se importa con `import()` después del primer frame (`Layout.astro`), y `gtag.js` se inyecta tras el `load`. No importar `gsap`/`lenis` de forma estática desde un `<script>` de componente: volvería al bundle inicial y retrasaría el LCP.
+- **CSS inline** (`build.inlineStylesheets: "always"`): evita el round-trip de los `<link>` bloqueantes.
+- **Imagen del hero:** `srcset` + `sizes` compartidos entre `<Image>` y el preload vía `@data/hero-image.ts`. Si cambia el tamaño o el `scale-*` del retrato, actualizar ahí.
 - **CSP con hashes:** el bootstrap de dark mode y el redirect de `/` son los únicos scripts inline. Si se tocan, el hash deja de valer y el script se bloquea en silencio. Hay que recalcularlo (`docs/seo.md`).
 
 ## Accesibilidad

@@ -17,6 +17,7 @@ import es from "@i18n/es.json";
 import en from "@i18n/en.json";
 import it from "@i18n/it.json";
 import { safeT } from "@i18n/safe-t";
+import { HERO_WIDTHS, HERO_SIZES_MOBILE, HERO_SIZES_DESKTOP, HERO_MEDIA_MOBILE, HERO_MEDIA_DESKTOP } from "@data/hero-image";
 import { projects } from "@data/projects";
 import { getProjectCopy } from "@data/project-content";
 import {
@@ -59,11 +60,12 @@ const schema = [
 
 // Preload de la imagen LCP (retrato del hero) con la misma optimización que
 // usa <Image> en Hero.astro, para que el navegador la descubra antes.
-const heroPreload = await getImage({ src: heroImg, width: 1024, height: 1536 });
+const heroPreload = await getImage({ src: heroImg, width: 1024, height: 1536, widths: HERO_WIDTHS });
 ---
 
 <Layout title={t.layout.title} description={t.layout.description} jobTitle={t.layout.jobTitle} lang={lang} personBio={t.layout.bio} processSteps={t.process.steps} schema={schema} t={t.layout}>
-  <link slot="head" rel="preload" as="image" href={heroPreload.src} fetchpriority="high" />
+  <link slot="head" rel="preload" as="image" imagesrcset={heroPreload.srcSet.attribute} imagesizes={HERO_SIZES_MOBILE} media={HERO_MEDIA_MOBILE} fetchpriority="high" />
+  <link slot="head" rel="preload" as="image" imagesrcset={heroPreload.srcSet.attribute} imagesizes={HERO_SIZES_DESKTOP} media={HERO_MEDIA_DESKTOP} fetchpriority="high" />
   <Waves />
   <Nav slot="nav" lang={lang} t={t.nav} />
   <Hero slot="hero" t={t.hero} waMessage={t.layout.whatsappMessage} />

@@ -226,19 +226,9 @@ const personDescription = personBio || description;
       <script type="application/ld+json" set:html={JSON.stringify(node)} />
     ))}
 
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
-    <link
-      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,400i&display=swap"
-      rel="stylesheet"
-      crossorigin
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500..700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fuentes self-hosted (@font-face en globals.css): se precargan las del primer pantallazo. -->
+    <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <script is:inline>
       (function () {
@@ -251,12 +241,25 @@ const personDescription = personBio || description;
     <noscript><style>[data-reveal],[data-reveal-heading],[data-reveal-stagger]{opacity:1!important;transform:none!important}</style></noscript>
     <SpeedInsights />
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R1ZPHT8LX2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-R1ZPHT8LX2');
+
+      // gtag.js (~180 KB) se baja después del `load`, en un momento ocioso: no
+      // compite con el primer pintado. Los comandos de arriba quedan encolados
+      // en `dataLayer` y se procesan al llegar.
+      const loadGtag = () => {
+        const s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=G-R1ZPHT8LX2";
+        document.head.appendChild(s);
+      };
+      const idle = (cb: () => void) =>
+        "requestIdleCallback" in window ? requestIdleCallback(cb, { timeout: 3000 }) : setTimeout(cb, 1);
+      if (document.readyState === "complete") idle(loadGtag);
+      else window.addEventListener("load", () => idle(loadGtag), { once: true });
 
       // ViewTransitions: este módulo corre una sola vez (queda cacheado), así que
       // las navegaciones cliente NO dispararían pageview. `astro:page-load` también
@@ -285,9 +288,29 @@ const personDescription = personBio || description;
     <slot name="footer" />
 
     <script>
-      import { initAll, destroyAll } from "@scripts/main";
       import { createLifecycle } from "@scripts/lifecycle";
-      createLifecycle("main", initAll, destroyAll);
+      // `main` (GSAP + Lenis, ~50 KB) se importa después del primer frame: así no
+      // compite con el primer pintado y el LCP en mobile no espera al JS. Las
+      // navegaciones cliente reusan el módulo ya cargado.
+      // `gen` descarta un init que quedó pendiente si hubo un swap en el medio.
+      type Main = typeof import("@scripts/main");
+      let main: Promise<Main> | null = null;
+      let gen = 0;
+      const loadMain = () =>
+        (main ??= new Promise<void>((r) => requestAnimationFrame(() => setTimeout(r, 0))).then(
+          () => import("@scripts/main")
+        ));
+      createLifecycle(
+        "main",
+        () => {
+          const g = ++gen;
+          loadMain().then((m) => g === gen && m.initAll());
+        },
+        () => {
+          ++gen;
+          main?.then((m) => m.destroyAll());
+        }
+      );
     </script>
 
 
