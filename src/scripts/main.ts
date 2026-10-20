@@ -33,17 +33,38 @@ const animations = [
   aboutIntro,
 ];
 
-export function initAll(): void {
-  initLenis();
-  animations.forEach((a) => a.init(gsap));
-  revealObserver.init();
-  backToTop.init();
-  testimonialsCarousel.init();
-  projectsCarousel.init();
-  ScrollTrigger.refresh();
+// Cede el hilo principal entre paso y paso: así ninguna tarea del init pasa
+// los 50 ms y no suma Total Blocking Time (el init corre después del primer
+// pintado, dentro de la ventana que mide el TBT, sobre todo en desktop).
+const yieldToMain = (): Promise<void> => {
+  const s = (globalThis as { scheduler?: { yield?: () => Promise<void> } }).scheduler;
+  return s?.yield ? s.yield() : new Promise((r) => setTimeout(r, 0));
+};
+
+// Cada init y cada destroy incrementan `run`: un init a medio camino se corta
+// si hubo un swap de ViewTransitions en el medio.
+let run = 0;
+
+export async function initAll(): Promise<void> {
+  const id = ++run;
+  const steps: (() => void)[] = [
+    initLenis,
+    ...animations.map((a) => () => a.init(gsap)),
+    () => revealObserver.init(),
+    () => backToTop.init(),
+    () => testimonialsCarousel.init(),
+    () => projectsCarousel.init(),
+  ];
+  for (const step of steps) {
+    if (id !== run) return;
+    step();
+    await yieldToMain();
+  }
+  if (id === run) ScrollTrigger.refresh();
 }
 
 export function destroyAll(): void {
+  run++;
   destroyLenis();
   animations.forEach((a) => a.destroy());
   revealObserver.destroy();

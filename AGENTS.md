@@ -107,7 +107,8 @@ Chrome deja de desenfocar lo que pasa por detrás si:
 
 - **`manualChunks` como función**, no como objeto: Astro compara ids absolutos y la forma objeto nunca matchea.
 - **Fuentes self-hosted** en `public/fonts/` (`@font-face` en `globals.css`). Nada de CSS de Fontshare/Google Fonts: bloqueaba el render en mobile. Satoshi no tiene 600. Detalle en `docs/marca.md`.
-- **El JS pesado va fuera del camino crítico:** `@scripts/main` (GSAP + Lenis) se importa con `import()` después del primer frame (`Layout.astro`), y `gtag.js` se inyecta tras el `load`. No importar `gsap`/`lenis` de forma estática desde un `<script>` de componente: volvería al bundle inicial y retrasaría el LCP.
+- **El JS pesado va fuera del camino crítico:** `@scripts/main` (GSAP + Lenis) se importa con `import()` después del primer frame (`Layout.astro`), y `gtag.js` se inyecta tras el `load`.
+- **`initAll` es async y cede el hilo entre módulo y módulo** (`scheduler.yield` / `setTimeout`). Como corre después del primer pintado, cae dentro de la ventana del TBT: en una sola tarea llegaba a ~740 ms en mobile y bajaba desktop de 97 a 85. Un módulo nuevo se suma como un paso más de `steps`, nunca como un bloque sincrónico grande. `destroyAll` corta un init a medio camino (contador `run`). No importar `gsap`/`lenis` de forma estática desde un `<script>` de componente: volvería al bundle inicial y retrasaría el LCP.
 - **CSS inline** (`build.inlineStylesheets: "always"`): evita el round-trip de los `<link>` bloqueantes.
 - **Imagen del hero:** `srcset` + `sizes` compartidos entre `<Image>` y el preload vía `@data/hero-image.ts`. Si cambia el tamaño o el `scale-*` del retrato, actualizar ahí.
 - **CSP con hashes:** el bootstrap de dark mode y el redirect de `/` son los únicos scripts inline. Si se tocan, el hash deja de valer y el script se bloquea en silencio. Hay que recalcularlo (`docs/seo.md`).
