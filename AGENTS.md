@@ -97,6 +97,7 @@ Chrome deja de desenfocar lo que pasa por detrás si:
 
 ### Texto y CSS
 
+- **cine-text en dos pasadas:** primero envuelve las letras de todos los títulos y después crea las animaciones. Si se intercalan, cada ScrollTrigger fuerza un reflow y el init pasa de ~60 a ~160 ms en desktop (la tarea más larga del TBT mobile). Aplica a cualquier módulo nuevo que toque el DOM y cree ScrollTriggers.
 - **cine-text:** las letras van dentro de `.cine-word` (`inline-block` + `nowrap`) y los espacios quedan como texto. Si no, el título se parte en cualquier letra ("FULLSTAC / K"). No arreglarlo con `<br>` ni con `text-wrap`.
 - **Nada de `bg-clip-text` + `text-transparent` sobre colores que son variables** (`accent-ink`/`deep`): Chrome no repinta al cambiar de tema y el texto queda invisible pero seleccionable.
 - **`accent-ink`/`deep` son variables:** no aceptan modificador de opacidad (`/80` no genera nada).

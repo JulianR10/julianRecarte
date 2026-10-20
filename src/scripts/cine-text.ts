@@ -43,14 +43,20 @@ export const cineText = defineAnimation((gsap: typeof gsap) => {
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // Dos pasadas: primero todas las escrituras al DOM (envolver letras) y después
+  // las animaciones, cuyos ScrollTrigger leen el layout. Intercaladas forzaban
+  // un reflow por título y el init era la tarea más larga en mobile (TBT).
+  const prepared: { heading: HTMLElement; chars: HTMLElement[] }[] = [];
   headings.forEach((heading) => {
     if (heading.classList.contains("cine-text-processed")) return;
-    const isHero = !!heading.closest("#hero");
     const chars = wrapTextNodes(heading);
     if (!chars.length) return;
-
     heading.classList.add("revealed", "cine-text-processed");
+    prepared.push({ heading, chars });
+  });
 
+  prepared.forEach(({ heading, chars }) => {
+    const isHero = !!heading.closest("#hero");
     if (!prefersReducedMotion) {
       if (!isHero) {
         gsap.fromTo(
