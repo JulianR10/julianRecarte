@@ -2,10 +2,6 @@
 
 > Lo que sigue vigente de las auditorías de septiembre y octubre de 2026 (`analisis-qa-total.md` y `mejoras.md`, ya borradas; están en el historial de git), verificado contra el código. Al resolver un ítem, borrarlo de esta lista. Volver a [AGENTS.md](../AGENTS.md).
 
-## Bugs
-
-- **El hero de la home queda pegado con movimiento reducido.** El hero es `sticky` y su salida la hace `hero-scroll.ts` vía `defineAnimation`, que no corre con `prefers-reduced-motion`. Resultado: queda detrás de todas las secciones, que no tienen fondo propio. Falta un fallback CSS, por ejemplo `position: relative` en el hero bajo esa media query.
-
 ## Copy e i18n
 
 - `about.principles`, "Detalle en cada píxel": todavía menciona "Tipografía", que Julián considera obvia.

@@ -491,4 +491,16 @@ h6 {
   [data-solu-line] {
     transform: scaleX(1) !important;
   }
+
+  /* El hero es sticky y su salida la hace hero-scroll.ts, que no corre con
+     movimiento reducido: sin esto queda clavado detrás de todas las secciones
+     (que no tienen fondo propio). Los orbes pasan de fixed a absolute para
+     quedar dentro del hero en vez de flotar sobre toda la página. */
+  #hero {
+    position: relative;
+  }
+
+  #hero [data-hero-orb] {
+    position: absolute;
+  }
 }

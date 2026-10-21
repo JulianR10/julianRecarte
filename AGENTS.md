@@ -85,6 +85,7 @@ Todos los módulos GSAP tienen `destroy` (`ctx.kill()`). Los de ScrollTrigger: h
 
 - **La regla CSS no frena a GSAP.** `globals.css` acorta las animaciones y transiciones CSS, pero GSAP anima por rAF. El corte real está en `defineAnimation`, que no arranca con `prefers-reduced-motion`, así que los módulos no necesitan un guard propio. Solo `cine-text.ts` lo desactiva (`checkReducedMotion: false`), porque igual tiene que procesar el DOM.
 - **Contenido invisible:** `[data-reveal]` arranca en `opacity: 0`. Todo módulo que salga temprano tiene que añadir `.revealed`, como ya hacen `reveal-observer.ts` y `cine-text.ts`.
+- **Hero sticky:** con movimiento reducido `hero-scroll.ts` no corre, así que `globals.css` pasa `#hero` a `relative` y sus orbes de `fixed` a `absolute`. Si no, el hero queda clavado detrás de todas las secciones. Cualquier elemento `sticky`/`fixed` que dependa de GSAP para salir de pantalla necesita el mismo fallback.
 - **Lenis:** con movimiento reducido no se crea. Un listener de scroll nativo alimenta `onScroll()` + `ScrollTrigger.update()`; sin él, "volver arriba" y el resaltado del nav se congelan.
 
 ### `backdrop-filter` del nav
