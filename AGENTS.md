@@ -102,6 +102,7 @@ Chrome deja de desenfocar lo que pasa por detrás si:
 - **cine-text:** las letras van dentro de `.cine-word` (`inline-block` + `nowrap`) y los espacios quedan como texto. Si no, el título se parte en cualquier letra ("FULLSTAC / K"). No arreglarlo con `<br>` ni con `text-wrap`.
 - **Nada de `bg-clip-text` + `text-transparent` sobre colores que son variables** (`accent-ink`/`deep`): Chrome no repinta al cambiar de tema y el texto queda invisible pero seleccionable.
 - **`accent-ink`/`deep` son variables:** no aceptan modificador de opacidad (`/80` no genera nada).
+- **Hero en mobile:** mide `min-h-svh` (no `dvh`) para no cambiar de alto cuando el navegador esconde la barra de direcciones. Su fade (`hero-scroll.ts`) es corto, con `scrub: true` y `ease: "power2.out"`, porque ese primer tramo del gesto no mueve `scrollY`: con un fade lineal y largo se sentía "el hero sube y después se desvanece".
 - **GSAP pisa el `translate` de Tailwind:** si un elemento se centra con `-translate-*`, las animaciones van en una capa interna (así está el disco de /sobre-mi).
 
 ### Build y fuentes

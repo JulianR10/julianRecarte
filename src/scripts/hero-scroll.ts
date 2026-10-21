@@ -10,17 +10,22 @@ export const heroScroll = defineAnimation((gsap: typeof gsap) => {
   const orbs = document.querySelectorAll<HTMLElement>("[data-hero-orb]");
 
   function createAnimations(isMobile: boolean) {
+    // Mobile: fade corto, sin retraso y con ease para que se note desde el
+    // primer píxel. El primer tramo del gesto lo consume el navegador al
+    // esconder la barra de direcciones (scrollY no cambia), así que un fade
+    // lineal y largo se percibía como "el hero sube y después se desvanece".
+    const ease = isMobile ? "power2.out" : "none";
     const baseConfig = {
       trigger: "#hero",
       start: "top top",
-      end: isMobile ? "bottom-=50% top" : "bottom-=20% top",
-      scrub: isMobile ? 0.3 : 1,
+      end: isMobile ? "bottom-=70% top" : "bottom-=20% top",
+      scrub: isMobile ? true : 1,
       onLeave: () => { hero.style.pointerEvents = "none"; },
       onEnterBack: () => { hero.style.pointerEvents = ""; },
     };
 
     const textEnd: gsap.TweenVars = isMobile
-      ? { opacity: 0, ease: "none" }
+      ? { opacity: 0, ease }
       : { opacity: 0, x: 150, filter: "none", ease: "none" };
 
     if (textContent) {
@@ -34,7 +39,7 @@ export const heroScroll = defineAnimation((gsap: typeof gsap) => {
       gsap.to(imageDiv, {
         opacity: 0,
         scale: isMobile ? 0.85 : 0.8,
-        ease: "none",
+        ease,
         scrollTrigger: baseConfig,
       });
     }
