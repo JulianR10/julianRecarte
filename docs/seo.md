@@ -30,6 +30,7 @@ Assets y convenciones introducidos para SEO clásico + Generative/Answer Engine 
   - Verificación sin navegador: extraer cada `src`/`href`/`url()` del build y contrastarlo con las directivas (los orígenes deben dar OK y los hashes coincidir con `vercel.json`).
   - El pageview de las navegaciones cliente **no** pide directivas nuevas: lo emite el propio snippet bundleado (ver **Analytics**).
 - **LCP / preload** — `Layout` expone `<slot name="head" />`; el home inyecta `<link rel="preload" as="image">` de la imagen del hero (misma optimización que `<Image>`, vía `getImage()`), con `fetchpriority="high"` y `width`/`height` explícitos. `fondoTriba` usa `<Image>`.
+- **Meta description** — `layout.description` (home) y `about.metaDescription` (`/sobre-mi`), también usadas como `og:`/`twitter:description`. Reglas: **empezar con "Julián Recarte"** y quedar en ~140–160 caracteres con rol + servicios + stack. Google reemplaza la description cuando no contiene lo que se buscó: con la anterior ("Convierto ideas en experiencias web interactivas.", 49 caracteres, sin el nombre) mostraba un testimonio al buscar el nombre. Tras cambiarla, pedir reindexación en Search Console (Inspeccionar URL).
 - **`/` (raíz)** — `noindex` en `src/pages/index.astro`; el 308 a `/es/` lo resuelve `vercel.json`.
 - **Sitemap** — `astro.config.mjs` excluye la raíz `/` (es solo redirect a `/es/`) para evitar el conflicto hreflang `es-ES`.
 - **`x-default`** — dinámico: apunta a la versión del idioma por defecto del `alternates` (antes estaba fijo al home).
