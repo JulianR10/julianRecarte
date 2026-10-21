@@ -112,7 +112,7 @@ Chrome deja de desenfocar lo que pasa por detrás si:
 - **El JS pesado va fuera del camino crítico:** `@scripts/main` (GSAP + Lenis) se importa con `import()` después del primer frame (`Layout.astro`), y `gtag.js` se inyecta tras el `load`.
 - **`initAll` es async y cede el hilo entre módulo y módulo** (`scheduler.yield` / `setTimeout`). Como corre después del primer pintado, cae dentro de la ventana del TBT: en una sola tarea llegaba a ~740 ms en mobile y bajaba desktop de 97 a 85. Un módulo nuevo se suma como un paso más de `steps`, nunca como un bloque sincrónico grande. `destroyAll` corta un init a medio camino (contador `run`). No importar `gsap`/`lenis` de forma estática desde un `<script>` de componente: volvería al bundle inicial y retrasaría el LCP.
 - **CSS inline** (`build.inlineStylesheets: "always"`): evita el round-trip de los `<link>` bloqueantes.
-- **Imagen del hero:** `srcset` + `sizes` compartidos entre `<Image>` y el preload vía `@data/hero-image.ts`. Si cambia el tamaño o el `scale-*` del retrato, actualizar ahí.
+- **Imagen del hero:** `srcset` + `sizes` compartidos entre `<Image>` y el preload vía `@data/hero-image.ts`. Si cambia el tamaño o el `scale-*` del retrato, actualizar ahí. La foto pasa al costado desde `min-[900px]` (no `xl`): apilada, en un plegable o iPad en horizontal los CTA quedaban bajo el pliegue. Ese corte también está en los `sizes`/`media` de ese archivo.
 - **CSP con hashes:** el bootstrap de dark mode y el redirect de `/` son los únicos scripts inline. Si se tocan, el hash deja de valer y el script se bloquea en silencio. Hay que recalcularlo (`docs/seo.md`).
 
 ## Accesibilidad
