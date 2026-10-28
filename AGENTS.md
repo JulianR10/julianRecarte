@@ -6,10 +6,10 @@ Este archivo tiene **lo que hay que saber siempre**. El detalle está en `docs/`
 
 | Doc | Contenido |
 |---|---|
+| [docs/manual-de-marca.md](docs/manual-de-marca.md) | Identidad para humanos: esencia, voz, logo, color, tipografía, sí/no |
 | [docs/marca.md](docs/marca.md) | Paleta, contraste, `Button`, líneas/sombras/radios, roles tipográficos, carga de fuentes |
 | [docs/paginas.md](docs/paginas.md) | Anatomía y decisiones de Soluciones, `/sobre-mi`, SectionFade y case studies |
 | [docs/seo.md](docs/seo.md) | `llms.txt`, robots, JSON-LD, CSP, headers, GA4 y links de contacto |
-| [docs/pendientes.md](docs/pendientes.md) | Bugs y mejoras conocidos sin resolver |
 
 ## Comandos
 
@@ -66,14 +66,14 @@ La API entre el HTML y el JS.
 |---|---|---|
 | `[data-reveal]` / `[data-reveal-stagger]` | reveal-observer.ts | Fade-in al entrar en viewport (stagger: cada hijo) |
 | `[data-reveal-heading]` | cine-text.ts | Reveal por letra, agrupado por palabra |
-| `[data-project-card]` / `[data-tilt]` + `[data-card-shine]` | card-tilt.ts | Tilt 3D y brillo con el mouse (cards y disco de /sobre-mi) |
+| `[data-project-card]` / `[data-tilt]` + `[data-card-shine]` | card-tilt.ts | Tilt 3D y brillo con el mouse (cards de proyectos) |
 | `[data-hero-text]` / `[data-hero-image]` / `[data-hero-orb]` | hero-scroll.ts | Salida del hero de la home al scrollear |
 | `[data-zap-clone]` | hero-zap.ts | Glitch aleatorio en el rótulo del hero |
 | `[data-wave]` | waves.ts | Morph de las olas + parallax |
 | `[data-magnetic]` | magnetic.ts | Botón magnético (lo aplica `Button` por defecto) |
 | `[data-process-step]` | animations.ts | Escala de las imágenes de Proceso |
 | `[data-solu-line]` | soluciones-lines.ts | Separadores que se dibujan (`scaleX`), agrupados por sección |
-| `[data-about-hero]` / `[data-about-portrait]` / `[data-about-arc]` / `[data-about-wash]` | about-parallax.ts | Hero de /sobre-mi: el disco baja, se achica y se atenúa; el arco gira 24°; el wash deriva |
+| `[data-about-hero]` / `[data-about-portrait]` / `[data-about-wash]` | about-parallax.ts | Hero de /sobre-mi: el retrato (hoy no hay) baja, se achica y se atenúa; el wash deriva |
 | `[data-about-reveal]` / `[data-about-stack]` / `[data-count-to]` | about-intro.ts | Aparición del retrato, velocidad del marquee y contadores |
 | `[data-lang-chip]` | CSS (`:has()`) | Banderita de la tarjeta "Idiomas" de /sobre-mi |
 
@@ -103,7 +103,7 @@ Chrome deja de desenfocar lo que pasa por detrás si:
 - **Nada de `bg-clip-text` + `text-transparent` sobre colores que son variables** (`accent-ink`/`deep`): Chrome no repinta al cambiar de tema y el texto queda invisible pero seleccionable.
 - **`accent-ink`/`deep` son variables:** no aceptan modificador de opacidad (`/80` no genera nada).
 - **Hero en mobile:** mide `min-h-svh` (no `dvh`) para no cambiar de alto cuando el navegador esconde la barra de direcciones. Su fade (`hero-scroll.ts`) es corto, con `scrub: true` y `ease: "power2.out"`, porque ese primer tramo del gesto no mueve `scrollY`: con un fade lineal y largo se sentía "el hero sube y después se desvanece".
-- **GSAP pisa el `translate` de Tailwind:** si un elemento se centra con `-translate-*`, las animaciones van en una capa interna (así está el disco de /sobre-mi).
+- **GSAP pisa el `translate` de Tailwind:** si un elemento se centra con `-translate-*`, las animaciones van en una capa interna.
 
 ### Build y fuentes
 
@@ -120,4 +120,4 @@ Chrome deja de desenfocar lo que pasa por detrás si:
 - Targets táctiles ≥ 44px. Los puntos de los carruseles son `w-11 h-11 p-4` + `bg-clip-content`.
 - Carruseles: `aria-current` en los puntos. Las tarjetas no activas de Testimonios llevan `inert` + `aria-hidden`, y se navega con ← →.
 - Contraste AA en ambos temas (tabla en `docs/marca.md`). `dark.muted` = `#A8A8A8`.
-- Lo decorativo va `aria-hidden`, con su texto real en `sr-only` (rol del arco y stack de /sobre-mi).
+- Lo decorativo va `aria-hidden`, con su texto real en `sr-only` (stack de /sobre-mi).
