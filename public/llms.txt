@@ -36,9 +36,12 @@
 
 ## Soluciones
 
-- **Presencia** — Landing page o sitio institucional, diseño responsivo e integración directa con WhatsApp.
-- **Catálogo** — Productos o servicios organizados por categorías, con filtros, galería y formularios de consulta.
-- **Venta** — Ecommerce completo con pagos, cuentas de usuario y suscripciones.
+Precios de referencia en USD (si se paga en otra moneda, se aplica el cambio del momento).
+
+- **Landing** (desde USD 200) — Una página pensada para convertir, responsive, con integración directa con WhatsApp.
+- **Sitio web** (desde USD 400) — Sitio institucional con varias secciones, galería, catálogo y formularios de consulta.
+- **Web a medida** (desde USD 800) — Proyecto con backend: cuentas de usuario, panel de administración, base de datos y pagos.
+- **Plataforma** (desde USD 1.300) — Desarrollo grande y personalizado: SaaS, marketplace, integraciones y flujos complejos.
 
 ## Proceso de trabajo
 

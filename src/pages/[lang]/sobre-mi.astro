@@ -5,10 +5,7 @@ import Footer from "@components/Footer.astro";
 import SectionHeader from "@components/SectionHeader.astro";
 import WhatsAppIcon from "@components/WhatsAppIcon.astro";
 import Button from "@components/Button.astro";
-import { Image, getImage } from "astro:assets";
 import { waLink, mailtoLink } from "@data/contact";
-
-import retrato from "@assets/images/sobreMi.webp";
 
 import es from "@i18n/es.json";
 import en from "@i18n/en.json";
@@ -46,33 +43,8 @@ const alternates = ["es", "en", "it"].map((l) => ({
 const pageTitle = `${about.title} ${about.highlight} | Julián Recarte, ${t.layout.jobTitle}`;
 const pageDescription = about.metaDescription;
 
-// Mismo transform que la <Image> del retrato: la URL preloadeada
-// es exactamente la que el navegador va a pedir (LCP del hero).
-const retratoPreload = await getImage({ src: retrato, width: 1024 });
-
-// Arco del rol: una sola vez, por fuera del disco, en su cuarto superior izquierdo.
-// Unidades del viewBox (disco = radio 50); ángulos en grados, sentido matemático (0° = derecha, 90° = arriba).
-// Va de un poco debajo de la mitad izquierda (206°) hasta pasar apenas el punto más alto (82°), en sentido horario.
-const arcR = 53;
-const arcFrom = 206;
-const arcTo = 82;
-const arcPoint = (deg: number) => {
-  const rad = (deg * Math.PI) / 180;
-  return `${(50 + arcR * Math.cos(rad)).toFixed(2)} ${(50 - arcR * Math.sin(rad)).toFixed(2)}`;
-};
-const arcPath = `M ${arcPoint(arcFrom)} A ${arcR} ${arcR} 0 0 1 ${arcPoint(arcTo)}`;
-const arcLength = (arcR * (arcFrom - arcTo) * Math.PI) / 180;
-
 // Bento de "En resumen": el 1º y el 4º ocupan dos columnas (2 + 1 / 1 + 2).
 const factSpan = ["md:col-span-2", "", "", "md:col-span-2"];
-// Tinte de cada tarjeta: variaciones muy leves entre beige y naranja,
-// alternadas para que dos vecinas nunca repitan tono.
-const factTint = [
-  "bg-white/40 dark:bg-dark-card",
-  "bg-accent-orange/[0.06] dark:bg-accent-orange/[0.07]",
-  "bg-accent-pastel/[0.14] dark:bg-accent-pastel/[0.05]",
-  "bg-accent-warm/[0.04] dark:bg-dark-card",
-];
 // Chips de la tarjeta "Idiomas": mismo orden en los 3 JSON (es · en · it).
 const langChips = ["es", "en", "it"];
 
@@ -112,12 +84,9 @@ const schema = [
   schema={schema}
   t={t.layout}
 >
-  <link slot="head" rel="preload" as="image" href={retratoPreload.src} fetchpriority="high" />
-
   <Nav slot="nav" lang={lang} t={t.nav} prefix={`/${lang}/`} />
 
-  <!-- Hero: bio + retrato. El texto queda estático en lg (el disco se posiciona contra la
-       sección): `isolate` + wash en -z-10 para que el wash no le pinte encima. -->
+  <!-- Hero: bio (sin retrato por ahora). `isolate` + wash en -z-10 para que el wash no le pinte encima. -->
   <section
     data-about-hero
     class="relative isolate px-6 pt-[calc(var(--navbar-h)+3rem)] pb-16 md:pt-[calc(var(--navbar-h)+5rem)] md:pb-24 lg:pt-[var(--navbar-h)] lg:min-h-[min(100svh,860px)] lg:flex lg:items-center overflow-x-clip"
@@ -125,51 +94,9 @@ const schema = [
     <div data-about-wash aria-hidden="true" class="about-wash pointer-events-none absolute inset-0 -z-10"></div>
 
     <div class="w-full max-w-7xl mx-auto">
-      <!-- Texto (mobile: todo centrado y el disco arriba del H1). El rol ("Desarrollador web
-           FullStack") no va como eyebrow: bordea el disco (arco de abajo); acá queda para lectores. -->
-      <div class="flex flex-col items-center text-center lg:items-start lg:text-left lg:max-w-[48%] lg:py-16">
+      <!-- Texto (mobile: todo centrado). El rol ("Desarrollador web FullStack") queda para lectores. -->
+      <div class="flex flex-col items-center text-center max-w-3xl mx-auto lg:py-16">
         <p class="sr-only">{about.label}</p>
-
-        <!-- Disco: la foto dentro del sol. Mobile: en flujo, arriba del H1. lg: absoluto contra la
-             sección, centrado en alto y alineado al borde derecho del contenedor (7xl + px-6).
-             El de afuera centra (translate) y hace el reveal (solo opacidad + blur); el de adentro
-             lleva todo lo de GSAP (scroll: y + scale + opacidad; mouse: tilt de card-tilt.ts),
-             así nada pisa el translate del centrado. -->
-        <div
-          data-about-reveal
-          class="relative mt-8 mb-12 w-[78%] max-w-[380px] aspect-square lg:absolute lg:m-0 lg:max-w-none lg:w-[min(38vw,520px)] lg:right-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))] lg:top-[calc(50%+var(--navbar-h)/2)] lg:-translate-y-1/2"
-        >
-          <div data-about-portrait data-tilt class="relative w-full h-full">
-            <!-- sobreMi.webp es un recorte con alfa cuyo único corte duro es la espalda contra el
-                 borde derecho del archivo: la figura va centrada y un poco más grande que el disco
-                 (w 110%) para que ese corte caiga fuera del círculo; arriba entra la cabeza entera
-                 y abajo el disco corta a la altura de las rodillas. -->
-            <div class="absolute inset-0 rounded-full overflow-hidden bg-gradient-to-br from-accent-orange to-accent-pastel">
-              <Image
-                src={retrato}
-                alt="Julián Recarte"
-                width={1024}
-                class="absolute left-[-9%] top-0 w-[110%] max-w-none h-auto"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-              />
-              <!-- Brillo que sigue al cursor (card-tilt.ts, igual que en las cards de proyectos). -->
-              <span data-card-shine aria-hidden="true" class="pointer-events-none absolute inset-0 rounded-full opacity-0 transition-opacity duration-300"></span>
-            </div>
-            <!-- Arco del rol: una vez, por fuera del disco, desde un poco debajo de la mitad izquierda
-                 hasta pasar apenas el tope. viewBox 100 = ancho del disco → escala con él;
-                 textLength estira la frase al largo exacto del arco. -->
-            <svg data-about-arc aria-hidden="true" viewBox="0 0 100 100" class="about-arc pointer-events-none absolute inset-0 overflow-visible">
-              <defs>
-                <path id="about-arc-path" d={arcPath} />
-              </defs>
-              <text class="fill-accent-ink">
-                <textPath href="#about-arc-path" textLength={arcLength.toFixed(2)} lengthAdjust="spacing">{about.label}</textPath>
-              </text>
-            </svg>
-          </div>
-        </div>
 
         <h1 data-reveal-heading class="t-h1 font-medium text-copy dark:text-dark-copy text-balance mb-6">
           {about.title} <span class="text-accent-deep whitespace-nowrap">{about.highlight}</span>
@@ -206,7 +133,7 @@ const schema = [
           {[...about.stack, ...about.stack].map((item) => (
             <li class="about-stack-item flex items-center gap-6 px-3 whitespace-nowrap t-eyebrow text-copy/70 dark:text-dark-muted">
               {item}
-              <span class="text-accent-orange text-[0.625rem]">✦</span>
+              <span class="w-1 h-1 rounded-full bg-accent-orange"></span>
             </li>
           ))}
         </ul>
@@ -223,15 +150,14 @@ const schema = [
   <!-- En resumen: bento -->
   <section class="relative px-6 py-16 md:py-24">
     <div class="max-w-7xl mx-auto">
-      <SectionHeader label={about.factsLabel} title={about.factsTitle} highlight={about.factsHighlight} centered={false} />
+      <SectionHeader label={about.factsLabel} title={about.factsTitle} highlight={about.factsHighlight} />
 
       <dl class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5" data-reveal-stagger>
         {about.facts.map((fact, i) => (
           <div
             class:list={[
-              "about-card group relative flex flex-col gap-6 rounded-2xl border line-hair p-5 md:p-6",
+              "about-card group relative flex flex-col gap-6 rounded-2xl border line-hair bg-white/50 dark:bg-dark-card/50 shadow-card md:hover:shadow-card-hover md:hover:border-accent-orange/25 transition-[box-shadow,border-color] duration-500 p-5 md:p-6",
               factSpan[i],
-              factTint[i],
             ]}
           >
             {fact.icon === "globe" && (
@@ -314,7 +240,7 @@ const schema = [
 
       <div data-reveal-stagger>
         {about.principles.map((item, i) => (
-          <div class="group relative grid grid-cols-1 md:grid-cols-[minmax(0,360px)_1fr] gap-3 md:gap-12 py-8 md:py-10">
+          <div class="group relative grid grid-cols-1 md:grid-cols-[300px_1fr] gap-3 md:gap-12 py-8 md:py-10">
             <div data-solu-line aria-hidden="true" class="absolute top-0 left-0 right-0 h-px bg-white/[0.1] origin-left"></div>
             {i === about.principles.length - 1 && (
               <div data-solu-line aria-hidden="true" class="absolute bottom-0 left-0 right-0 h-px bg-white/[0.1] origin-left"></div>
@@ -323,7 +249,7 @@ const schema = [
               <span aria-hidden="true" class="t-index text-dark-muted/40 shrink-0">
                 {String(i + 1).padStart(2, "0")}.
               </span>
-              <h3 class="t-h4 font-medium text-dark-copy transition-colors duration-300 group-hover:text-accent-orange">
+              <h3 class="t-h3 font-bold text-accent-deep">
                 {item.title}
               </h3>
             </div>
@@ -364,7 +290,7 @@ const schema = [
   <section class="relative px-6 py-20 md:py-28 overflow-hidden">
     <div
       aria-hidden="true"
-      class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] max-w-[150vw] rounded-full bg-accent-orange/[0.06] blur-3xl pointer-events-none dark:bg-accent-orange/[0.04]"
+      class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] max-w-[150vw] rounded-full bg-accent-orange/[0.03] blur-3xl pointer-events-none dark:opacity-0"
     ></div>
 
     <div class="relative max-w-3xl mx-auto flex flex-col items-center text-center">
@@ -404,7 +330,7 @@ const schema = [
 </Layout>
 
 <style>
-  /* Wash del hero: dos focos suaves de la paleta que dan profundidad al retrato. */
+  /* Wash del hero: dos focos suaves de la paleta que dan profundidad al hero. */
   .about-wash {
     background:
       radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--clr-accent-orange) 14%, transparent), transparent 58%),
@@ -416,17 +342,6 @@ const schema = [
       radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--clr-accent-orange) 10%, transparent), transparent 58%),
       radial-gradient(circle at 10% 72%, color-mix(in srgb, var(--clr-accent-pastel) 8%, transparent), transparent 52%);
   }
-
-  /* Arco del rol: el tamaño va en unidades del viewBox (100 = ancho del disco), no en px, así
-     escala con el círculo. word-spacing extra:
-     textLength reparte el espacio igual entre todas las letras y las palabras se pegaban. */
-  .about-arc text {
-    font-size: 6px;
-    word-spacing: 1.6px;
-    font-weight: 500;
-    text-transform: uppercase;
-  }
-
 
   /* Banda del stack: ticker continuo con bordes desvanecidos. */
   .about-stack {
@@ -465,22 +380,6 @@ const schema = [
 
   :global(.dark) .about-band {
     background-color: theme("colors.dark.card");
-  }
-
-  /* Bento: elevación suave al hover. */
-  .about-card {
-    transition:
-      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-      border-color var(--dur-base) ease;
-  }
-
-  @media (hover: hover) {
-    .about-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -20px rgba(var(--rgb-accent-orange), 0.25);
-      border-color: rgba(var(--rgb-accent-orange), 0.25);
-    }
   }
 
   /* Tarjeta "Idiomas": al pasar (o tocar: el chip es enfocable) por un

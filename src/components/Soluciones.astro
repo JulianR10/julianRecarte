@@ -5,6 +5,7 @@ import SectionHeader from "./SectionHeader.astro";
 interface SolucionItem {
   title: string;
   description: string;
+  price: string;
 }
 
 interface Props {
@@ -15,6 +16,8 @@ interface Props {
     cta: string;
     hint: string;
     hintHighlight: string;
+    from: string;
+    currencyNote: string;
     items: SolucionItem[];
   };
 }
@@ -46,12 +49,22 @@ const { t } = Astro.props;
               {item.title}
             </h3>
           </div>
-          <p class="t-body text-copy/70 dark:text-dark-muted text-balance">
-            {item.description}
-          </p>
+          <div class="flex flex-col gap-4 md:flex-row md:items-baseline md:justify-between md:gap-12">
+            <p class="t-body text-copy/70 dark:text-dark-muted text-balance">
+              {item.description}
+            </p>
+            <p class="shrink-0 md:text-right">
+              <span class="t-label text-copy/70 dark:text-dark-muted">{t.from}</span>{" "}
+              <span class="t-h3 font-bold text-accent-deep whitespace-nowrap">{item.price}</span>
+            </p>
+          </div>
         </div>
       ))}
     </div>
+
+    <p class="t-meta text-center md:text-right text-copy/70 dark:text-dark-muted mt-6" data-reveal>
+      {t.currencyNote}
+    </p>
 
     <p class="t-body text-center italic text-copy/70 dark:text-dark-muted max-w-2xl mx-auto mt-10 md:mt-12 text-balance" data-reveal>
       {t.hint}<span class="underline decoration-accent-orange decoration-2 underline-offset-4">{t.hintHighlight}</span>

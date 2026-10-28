@@ -31,18 +31,28 @@
     "cta": "Parliamo del tuo progetto",
     "hint": "Hai un'idea diversa o vuoi combinare soluzioni? Creiamo un progetto ",
     "hintHighlight": "adattato al 100% alle tue esigenze.",
+    "from": "Da",
+    "currencyNote": "Prezzi di riferimento in USD. Se paghi in un'altra valuta, si applica il cambio del giorno.",
     "items": [
       {
-        "title": "Presenza",
-        "description": "Landing o sito istituzionale, design responsive e integrazione diretta con WhatsApp per farti contattare senza attrito."
+        "title": "Landing",
+        "price": "USD 200",
+        "description": "Una pagina pensata per convertire: design responsive, testi chiari e integrazione diretta con WhatsApp per farti contattare senza attrito."
       },
       {
-        "title": "Catalogo",
-        "description": "Prodotti o servizi organizzati per categorie, con filtri, galleria e moduli per raccogliere richieste."
+        "title": "Sito web",
+        "price": "USD 400",
+        "description": "Sito istituzionale con più sezioni, galleria, catalogo di prodotti o servizi e moduli per raccogliere richieste."
       },
       {
-        "title": "Vendita",
-        "description": "Ecommerce completo con pagamenti, account utente e abbonamenti. Pronto per vendere e scalare."
+        "title": "Web su misura",
+        "price": "USD 800",
+        "description": "Progetto con backend: account utente, pannello di amministrazione, database e pagamenti. Pronto per vendere e scalare."
+      },
+      {
+        "title": "Piattaforma",
+        "price": "USD 1.300",
+        "description": "Sviluppo ampio e personalizzato: SaaS, marketplace, integrazioni e flussi complessi, su misura per il tuo business."
       }
     ]
   },
@@ -134,49 +144,49 @@
     "label": "Sviluppatore Web FullStack",
     "title": "Chi",
     "highlight": "sono",
-    "introLead": "Progetto e sviluppo siti web belli da vedere, veloci da caricare e che portano clienti.",
-    "intro": "Sono Julián Recarte, sviluppatore web FullStack. Aiuto aziende e brand con landing page, siti istituzionali, cataloghi ed ecommerce su misura, curando ciò che conta davvero: che carichi veloce, che trasformi le visite in clienti e che sia facile da trovare per persone, motori di ricerca e modelli di IA.",
+    "introLead": "Realizzo siti web belli da vedere, veloci da caricare e che aiutano i clienti a contattarti.",
+    "intro": "Sono Julián Recarte, sviluppatore web FullStack. Lavoro con aziende e brand che hanno bisogno di una landing, di un sito, di una web app su misura o di una piattaforma più grande. Mi assicuro che carichi veloce, che si capisca al primo sguardo e che sia facile da trovare, sia per le persone sia per i motori di ricerca e gli strumenti di IA.",
     "ctaPrimary": "Parliamo del tuo progetto",
     "ctaSecondary": "Vedi i progetti",
-    "metaDescription": "Julián Recarte, sviluppatore web FullStack. Landing page, siti, cataloghi ed ecommerce su misura. 100% da remoto, in spagnolo, inglese e italiano.",
+    "metaDescription": "Julián Recarte, sviluppatore web FullStack. Landing, siti web, web app su misura e piattaforme. 100% da remoto, in spagnolo, inglese e italiano.",
     "teaserLabel": "Chi sono",
     "teaserTitle": "Dietro",
     "teaserHighlight": "ogni progetto",
-    "teaserText": "Sono uno sviluppatore web FullStack e lavoro 100% da remoto con clienti di tutto il mondo, in spagnolo, inglese e italiano. Trasformo le idee in siti veloci, curati e pensati per portare risultati.",
+    "teaserText": "Sono uno sviluppatore web FullStack e lavoro 100% da remoto con clienti di tutto il mondo, in spagnolo, inglese e italiano. Mi piace che ogni sito sia veloce, curato e davvero utile a chi lo usa.",
     "cta": "Scopri di più su di me",
     "factsLabel": "Profilo",
     "factsTitle": "In",
     "factsHighlight": "sintesi",
     "facts": [
-      { "label": "Ruolo", "value": "Sviluppatore web FullStack (frontend + backend)", "icon": "code" },
+      { "label": "Ruolo", "value": "Sviluppatore web FullStack (frontend e backend)", "icon": "code" },
       { "label": "Lingue", "value": "Spagnolo · Inglese · Italiano", "stat": "3", "icon": "globe" },
-      { "label": "Modalità", "value": "Da remoto, clienti in tutto il mondo", "stat": "100", "suffix": "%", "icon": "remote" },
-      { "label": "Servizi", "value": "Landing page · Siti istituzionali · Cataloghi · Ecommerce · Gestione aziendale", "icon": "layers" }
+      { "label": "Modalità", "value": "Da remoto, con clienti in tutto il mondo", "stat": "100", "suffix": "%", "icon": "remote" },
+      { "label": "Servizi", "value": "Landing · Siti web · Web su misura · Piattaforme", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "Domande frequenti",
     "faqTitle": "Le domande",
     "faqHighlight": "più frequenti",
     "faq": [
-      { "q": "Quali servizi offri?", "a": "Progetto e sviluppo landing page, siti istituzionali, cataloghi digitali, ecommerce e pannelli di amministrazione su misura. Integro anche sistemi di abbonamento, newsletter e pagamenti." },
-      { "q": "Lavori da remoto?", "a": "Sì. Lavoro 100% da remoto con clienti di tutto il mondo, in spagnolo, inglese e italiano." },
-      { "q": "Quanto tempo richiede un progetto?", "a": "Una landing page è di solito pronta in 1-2 settimane; un sito con catalogo o ecommerce richiede 3-6 settimane, in base a portata e contenuti." },
-      { "q": "Quali tecnologie usi?", "a": "Principalmente Astro, Tailwind CSS, GSAP, Supabase, Node.js e TypeScript. Scelgo la tecnologia in base a ciò che serve al progetto." },
-      { "q": "Posso modificare il sito da solo?", "a": "Sì. Quando il progetto lo richiede, sviluppo un pannello di amministrazione su misura per gestire contenuti, prodotti o ordini senza dipendere da uno sviluppatore." },
-      { "q": "Come iniziamo?", "a": "Scrivimi su WhatsApp o via email con la tua idea. Facciamo un briefing, propongo un approccio e un preventivo, e partiamo." }
+      { "q": "Quali servizi offri?", "a": "Realizzo landing, siti web, web su misura con backend (account utente, pannelli, pagamenti) e piattaforme più grandi. I prezzi di partenza sono nella sezione Soluzioni della home." },
+      { "q": "Lavori da remoto?", "a": "Sì, 100% da remoto. Lavoro con clienti di vari paesi, in spagnolo, inglese e italiano." },
+      { "q": "Quanto tempo richiede un progetto?", "a": "Una landing è di solito pronta in 1-2 settimane. Un sito con catalogo o ecommerce richiede 3-6 settimane, in base a portata e contenuti." },
+      { "q": "Quali tecnologie usi?", "a": "Soprattutto Astro, Tailwind CSS, GSAP, Supabase, Node.js e TypeScript. Ma la tecnologia la scelgo in base a ciò che serve a ogni progetto." },
+      { "q": "Posso modificare il sito da solo?", "a": "Sì. Se il progetto lo richiede, creo un pannello di amministrazione per modificare contenuti, prodotti o ordini senza dipendere da nessuno." },
+      { "q": "Come iniziamo?", "a": "Scrivimi su WhatsApp o via email raccontandomi la tua idea. Facciamo due chiacchiere per capire di cosa hai bisogno, ti mando una proposta con preventivo e partiamo." }
     ],
     "principlesLabel": "Come lavoro",
     "principlesTitle": "Ciò che",
     "principlesHighlight": "conta per me",
     "principles": [
-      { "title": "Prestazioni prima di tutto", "text": "Ogni sito è costruito per caricare veloce su qualsiasi dispositivo e connessione. La velocità non è un extra: è ciò che trattiene i visitatori e migliora il posizionamento." },
-      { "title": "Cura in ogni pixel", "text": "Tipografia, spaziature, animazioni e accessibilità curate nei minimi dettagli. Un sito curato trasmette la stessa fiducia che vuoi trasmettere con il tuo brand." },
-      { "title": "Comunicazione diretta", "text": "Parli con me, senza intermediari. Ti aggiorno in ogni fase, in spagnolo, inglese o italiano, e rispondo in fretta." }
+      { "title": "Che carichi veloce", "text": "Ogni sito è pensato per funzionare bene su qualsiasi telefono e con qualsiasi connessione. La velocità non è un extra: è ciò che fa restare le persone e ti fa posizionare meglio su Google." },
+      { "title": "Cura dei dettagli", "text": "Tipografia, spaziature, animazioni e accessibilità: curo ogni aspetto. Un sito curato trasmette la stessa fiducia che vuoi trasmettere con il tuo brand." },
+      { "title": "Contatto diretto", "text": "Parli con me, senza intermediari. Ti aggiorno su ogni fase, in spagnolo, inglese o italiano, e rispondo in fretta." }
     ],
     "closingLabel": "Contatti",
     "closingTitle": "Hai un progetto",
     "closingHighlight": "in mente?",
-    "closingText": "Raccontami la tua idea e ti rispondo con un approccio e un preventivo. Senza impegno.",
+    "closingText": "Raccontami la tua idea e ti rispondo con una proposta e un preventivo. Senza impegno.",
     "closingWhatsapp": "Scrivimi su WhatsApp",
     "closingEmail": "Invia un'email",
     "backHome": "Torna alla home"

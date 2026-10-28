@@ -31,18 +31,28 @@
     "cta": "Hablemos de tu proyecto",
     "hint": "¿Tenés una idea diferente o querés combinar soluciones? Creamos un proyecto ",
     "hintHighlight": "adaptado 100% a tus necesidades.",
+    "from": "Desde",
+    "currencyNote": "Precios de referencia en USD. Si pagás en otra moneda, se aplica el cambio del momento.",
     "items": [
       {
-        "title": "Presencia",
-        "description": "Landing o sitio institucional, diseño responsive e integración directa con WhatsApp para que te contacten sin fricción."
+        "title": "Landing",
+        "price": "USD 200",
+        "description": "Una página pensada para convertir: diseño responsive, textos claros e integración directa con WhatsApp para que te contacten sin fricción."
       },
       {
-        "title": "Catálogo",
-        "description": "Productos o servicios organizados por categorías, con filtros, galería y formularios para captar consultas."
+        "title": "Sitio web",
+        "price": "USD 400",
+        "description": "Sitio institucional con varias secciones, galería, catálogo de productos o servicios y formularios para captar consultas."
       },
       {
-        "title": "Venta",
-          "description": "Ecommerce completo con sistema de pagos, cuentas de usuario y suscripciones. Todo listo para vender y escalar."
+        "title": "Web a medida",
+        "price": "USD 800",
+        "description": "Proyecto con backend: cuentas de usuario, panel de administración, base de datos y pagos. Todo listo para vender y escalar."
+      },
+      {
+        "title": "Plataforma",
+        "price": "USD 1.300",
+        "description": "Desarrollo grande y personalizado: SaaS, marketplace, integraciones y flujos complejos, pensado a la medida de tu negocio."
       }
     ]
   },
@@ -134,49 +144,49 @@
     "label": "Desarrollador web FullStack",
     "title": "Sobre",
     "highlight": "mí",
-    "introLead": "Diseño y desarrollo sitios web que se ven bonitos, cargan rápido y traen clientes.",
-    "intro": "Soy Julián Recarte, desarrollador web FullStack. Ayudo a negocios y marcas con landing pages, sitios institucionales, catálogos y ecommerce a medida, cuidando lo que más importa: que cargue rápido, que convierta visitas en clientes y que te encuentren fácil personas, buscadores y modelos de IA.",
+    "introLead": "Hago sitios web que se ven bien, cargan rápido y ayudan a que te contacten.",
+    "intro": "Soy Julián Recarte, desarrollador web FullStack. Trabajo con negocios y marcas que necesitan una landing, un sitio, una web con sistema propio o una plataforma a medida. Me ocupo de que cargue rápido, de que se entienda a primera vista y de que te encuentren, tanto las personas como los buscadores y las herramientas de IA.",
     "ctaPrimary": "Hablemos de tu proyecto",
     "ctaSecondary": "Ver proyectos",
-    "metaDescription": "Julián Recarte, desarrollador web FullStack. Landing pages, sitios, catálogos y ecommerce a medida. 100% remoto, en español, inglés e italiano.",
+    "metaDescription": "Julián Recarte, desarrollador web FullStack. Landings, sitios web, webs a medida y plataformas. 100% remoto, en español, inglés e italiano.",
     "teaserLabel": "Sobre mí",
     "teaserTitle": "Detrás de",
     "teaserHighlight": "cada proyecto",
-    "teaserText": "Soy desarrollador web FullStack y trabajo 100% remoto con clientes de todo el mundo, en español, inglés e italiano. Convierto ideas en sitios rápidos, cuidados y pensados para traer resultados.",
+    "teaserText": "Soy desarrollador web FullStack y trabajo 100% remoto con clientes de todo el mundo, en español, inglés e italiano. Me gusta que cada sitio sea rápido, prolijo y que le sirva de verdad a quien lo tiene.",
     "cta": "Conocer más sobre mí",
     "factsLabel": "Perfil",
     "factsTitle": "En",
     "factsHighlight": "resumen",
     "facts": [
-      { "label": "Rol", "value": "Desarrollador web FullStack (frontend + backend)", "icon": "code" },
+      { "label": "Rol", "value": "Desarrollador web FullStack (frontend y backend)", "icon": "code" },
       { "label": "Idiomas", "value": "Español · Inglés · Italiano", "stat": "3", "icon": "globe" },
-      { "label": "Modalidad", "value": "Remoto, clientes en todo el mundo", "stat": "100", "suffix": "%", "icon": "remote" },
-      { "label": "Servicios", "value": "Landing pages · Sitios institucionales · Catálogos · Ecommerce · Gestión de negocio", "icon": "layers" }
+      { "label": "Modalidad", "value": "Remoto, con clientes de todo el mundo", "stat": "100", "suffix": "%", "icon": "remote" },
+      { "label": "Servicios", "value": "Landings · Sitios web · Webs a medida · Plataformas", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "Preguntas frecuentes",
     "faqTitle": "Lo que",
     "faqHighlight": "preguntan",
     "faq": [
-      { "q": "¿Qué servicios ofrecés?", "a": "Diseño y desarrollo landing pages, sitios institucionales, catálogos digitales, ecommerce y paneles de administración a medida. También integro sistemas de suscripción, newsletter y pagos." },
-      { "q": "¿Trabajás de forma remota?", "a": "Sí. Trabajo 100% remoto con clientes de todo el mundo, en español, inglés e italiano." },
-      { "q": "¿Cuánto tarda un proyecto?", "a": "Una landing suele estar lista en 1 a 2 semanas; un sitio con catálogo o ecommerce, entre 3 y 6 semanas, según el alcance y los contenidos." },
-      { "q": "¿Con qué tecnologías trabajás?", "a": "Principalmente Astro, Tailwind CSS, GSAP, Supabase, Node.js y TypeScript. Elijo la tecnología según lo que cada proyecto necesita." },
-      { "q": "¿Puedo editar el sitio yo mismo?", "a": "Sí. Cuando el proyecto lo necesita, desarrollo un panel de administración a medida para que gestiones contenido, productos o pedidos sin depender de un desarrollador." },
-      { "q": "¿Cómo empezamos?", "a": "Escribime por WhatsApp o email con tu idea. Hacemos un briefing, te propongo un enfoque y un presupuesto, y arrancamos." }
+      { "q": "¿Qué servicios ofrecés?", "a": "Hago landings, sitios web, webs a medida con backend (cuentas de usuario, paneles, pagos) y plataformas más grandes. Los precios de arranque están en la sección Soluciones del inicio." },
+      { "q": "¿Trabajás de forma remota?", "a": "Sí, 100% remoto. Trabajo con clientes de distintos países, en español, inglés e italiano." },
+      { "q": "¿Cuánto tarda un proyecto?", "a": "Una landing suele estar lista en 1 o 2 semanas. Un sitio con catálogo o ecommerce, entre 3 y 6 semanas, según el alcance y los contenidos." },
+      { "q": "¿Con qué tecnologías trabajás?", "a": "Sobre todo con Astro, Tailwind CSS, GSAP, Supabase, Node.js y TypeScript. Pero la tecnología la elijo según lo que necesite cada proyecto." },
+      { "q": "¿Puedo editar el sitio yo mismo?", "a": "Sí. Si el proyecto lo pide, armo un panel de administración para que puedas cambiar contenido, productos o pedidos sin depender de nadie." },
+      { "q": "¿Cómo empezamos?", "a": "Escribime por WhatsApp o por mail contándome tu idea. Charlamos para entender qué necesitás, te paso una propuesta con presupuesto y arrancamos." }
     ],
     "principlesLabel": "Cómo trabajo",
     "principlesTitle": "Lo que",
     "principlesHighlight": "me importa",
     "principles": [
-      { "title": "Rendimiento primero", "text": "Cada sitio se construye para cargar rápido en cualquier dispositivo y conexión. La velocidad no es un extra: es lo que retiene a tus visitas y mejora tu posicionamiento." },
-      { "title": "Detalle en cada píxel", "text": "Tipografía, espaciado, animaciones y accesibilidad cuidados al milímetro. Un sitio prolijo transmite la misma confianza que querés que transmita tu marca." },
-      { "title": "Comunicación directa", "text": "Hablás conmigo, sin intermediarios. Te mantengo al tanto en cada etapa, en español, inglés o italiano, y respondo rápido." }
+      { "title": "Que cargue rápido", "text": "Cada sitio está pensado para andar bien en cualquier celular y con cualquier conexión. La velocidad no es un extra: es lo que hace que la gente se quede y que Google te posicione mejor." },
+      { "title": "Cuidar los detalles", "text": "Tipografía, espacios, animaciones y accesibilidad: me fijo en todo. Un sitio prolijo transmite la misma confianza que querés que transmita tu marca." },
+      { "title": "Trato directo", "text": "Hablás conmigo, sin intermediarios. Te voy contando cómo avanza cada etapa, en español, inglés o italiano, y respondo rápido." }
     ],
     "closingLabel": "Contacto",
     "closingTitle": "¿Tenés un proyecto",
     "closingHighlight": "en mente?",
-    "closingText": "Contame tu idea y te respondo con un enfoque y un presupuesto. Sin compromiso.",
+    "closingText": "Contame tu idea y te respondo con una propuesta y un presupuesto. Sin compromiso.",
     "closingWhatsapp": "Escribime por WhatsApp",
     "closingEmail": "Enviar un email",
     "backHome": "Volver al inicio"

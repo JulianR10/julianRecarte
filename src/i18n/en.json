@@ -31,18 +31,28 @@
     "cta": "Let's talk about your project",
     "hint": "Have a different idea or want to combine solutions? We'll create a project ",
     "hintHighlight": "100% tailored to your needs.",
+    "from": "From",
+    "currencyNote": "Reference prices in USD. If you pay in another currency, the exchange rate of the day applies.",
     "items": [
       {
-        "title": "Presence",
-        "description": "Landing or institutional site, responsive design and direct WhatsApp integration so clients can reach you frictionlessly."
+        "title": "Landing",
+        "price": "USD 200",
+        "description": "A single page built to convert: responsive design, clear copy and direct WhatsApp integration so clients can reach you frictionlessly."
       },
       {
-        "title": "Catalog",
-        "description": "Products or services organized by categories, with filters, gallery and forms to capture inquiries."
+        "title": "Website",
+        "price": "USD 400",
+        "description": "Institutional site with several sections, gallery, product or service catalog and forms to capture inquiries."
       },
       {
-        "title": "Sales",
-        "description": "Full ecommerce with payments, user accounts and subscriptions. Ready to sell and scale."
+        "title": "Custom web app",
+        "price": "USD 800",
+        "description": "Project with a backend: user accounts, admin panel, database and payments. Ready to sell and scale."
+      },
+      {
+        "title": "Platform",
+        "price": "USD 1,300",
+        "description": "Large, fully customized development: SaaS, marketplace, integrations and complex flows, tailored to your business."
       }
     ]
   },
@@ -134,49 +144,49 @@
     "label": "FullStack Web Developer",
     "title": "About",
     "highlight": "me",
-    "introLead": "I design and build websites that look beautiful, load fast and bring in clients.",
-    "intro": "I'm Julián Recarte, a FullStack web developer. I help businesses and brands with custom landing pages, corporate sites, catalogs and ecommerce, taking care of what matters most: fast loading, turning visitors into clients, and being easy to find for people, search engines and AI models.",
+    "introLead": "I build websites that look good, load fast and help people get in touch.",
+    "intro": "I'm Julián Recarte, a FullStack web developer. I work with businesses and brands that need a landing page, a website, a custom web app or a larger platform. I make sure it loads fast, makes sense at first glance and is easy to find, for people as well as search engines and AI tools.",
     "ctaPrimary": "Let's talk about your project",
     "ctaSecondary": "View projects",
-    "metaDescription": "Julián Recarte, FullStack web developer. Custom landing pages, sites, catalogs and ecommerce. 100% remote, in Spanish, English and Italian.",
+    "metaDescription": "Julián Recarte, FullStack web developer. Landing pages, websites, custom web apps and platforms. 100% remote, in Spanish, English and Italian.",
     "teaserLabel": "About",
     "teaserTitle": "Behind",
     "teaserHighlight": "every project",
-    "teaserText": "I'm a FullStack web developer working 100% remotely with clients worldwide, in Spanish, English and Italian. I turn ideas into fast, well-crafted websites built to deliver results.",
+    "teaserText": "I'm a FullStack web developer working 100% remotely with clients worldwide, in Spanish, English and Italian. I like every site to be fast, tidy and genuinely useful to whoever owns it.",
     "cta": "More about me",
     "factsLabel": "Profile",
     "factsTitle": "At a",
     "factsHighlight": "glance",
     "facts": [
-      { "label": "Role", "value": "FullStack web developer (frontend + backend)", "icon": "code" },
+      { "label": "Role", "value": "FullStack web developer (frontend and backend)", "icon": "code" },
       { "label": "Languages", "value": "Spanish · English · Italian", "stat": "3", "icon": "globe" },
-      { "label": "Work style", "value": "Remote, clients worldwide", "stat": "100", "suffix": "%", "icon": "remote" },
-      { "label": "Services", "value": "Landing pages · Corporate sites · Catalogs · Ecommerce · Business management", "icon": "layers" }
+      { "label": "Work style", "value": "Remote, with clients worldwide", "stat": "100", "suffix": "%", "icon": "remote" },
+      { "label": "Services", "value": "Landing pages · Websites · Custom web apps · Platforms", "icon": "layers" }
     ],
     "stack": ["Astro", "Tailwind CSS", "GSAP", "Supabase", "Node.js", "TypeScript"],
     "faqLabel": "FAQ",
     "faqTitle": "Frequently asked",
     "faqHighlight": "questions",
     "faq": [
-      { "q": "What services do you offer?", "a": "I design and develop landing pages, corporate sites, digital catalogs, ecommerce and custom admin panels. I also integrate subscription systems, newsletters and payments." },
-      { "q": "Do you work remotely?", "a": "Yes. I work 100% remotely with clients worldwide, in Spanish, English and Italian." },
-      { "q": "How long does a project take?", "a": "A landing page is usually ready in 1 to 2 weeks; a site with a catalog or ecommerce takes 3 to 6 weeks, depending on scope and content." },
-      { "q": "What technologies do you use?", "a": "Mainly Astro, Tailwind CSS, GSAP, Supabase, Node.js and TypeScript. I choose the technology based on what each project needs." },
-      { "q": "Can I edit the site myself?", "a": "Yes. When the project needs it, I build a custom admin panel so you can manage content, products or orders without depending on a developer." },
-      { "q": "How do we start?", "a": "Message me on WhatsApp or email with your idea. We do a briefing, I propose an approach and a budget, and we get started." }
+      { "q": "What services do you offer?", "a": "I make landing pages, websites, custom web apps with a backend (user accounts, dashboards, payments) and larger platforms. Starting prices are in the Solutions section on the home page." },
+      { "q": "Do you work remotely?", "a": "Yes, 100% remote. I work with clients from different countries, in Spanish, English and Italian." },
+      { "q": "How long does a project take?", "a": "A landing page is usually ready in 1 to 2 weeks. A site with a catalog or ecommerce takes 3 to 6 weeks, depending on scope and content." },
+      { "q": "What technologies do you use?", "a": "Mostly Astro, Tailwind CSS, GSAP, Supabase, Node.js and TypeScript. But I pick the technology based on what each project needs." },
+      { "q": "Can I edit the site myself?", "a": "Yes. If the project calls for it, I build an admin panel so you can change content, products or orders without depending on anyone." },
+      { "q": "How do we start?", "a": "Message me on WhatsApp or by email with your idea. We chat to understand what you need, I send you a proposal with a quote, and we get going." }
     ],
     "principlesLabel": "How I work",
     "principlesTitle": "What I",
     "principlesHighlight": "care about",
     "principles": [
-      { "title": "Performance first", "text": "Every site is built to load fast on any device and connection. Speed isn't an extra: it's what keeps your visitors around and improves your search ranking." },
-      { "title": "Detail in every pixel", "text": "Typography, spacing, animations and accessibility crafted with care. A polished site conveys the same trust you want your brand to convey." },
-      { "title": "Direct communication", "text": "You talk to me, no middlemen. I keep you updated at every stage, in Spanish, English or Italian, and I reply fast." }
+      { "title": "Fast loading", "text": "Every site is built to run well on any phone and any connection. Speed isn't an extra: it's what makes people stay and helps you rank better on Google." },
+      { "title": "Attention to detail", "text": "Typography, spacing, animations and accessibility: I care about all of it. A polished site conveys the same trust you want your brand to convey." },
+      { "title": "Direct contact", "text": "You talk to me, no middlemen. I keep you posted on every stage, in Spanish, English or Italian, and I reply fast." }
     ],
     "closingLabel": "Contact",
     "closingTitle": "Got a project",
     "closingHighlight": "in mind?",
-    "closingText": "Tell me your idea and I'll get back to you with an approach and a quote. No strings attached.",
+    "closingText": "Tell me your idea and I'll get back to you with a proposal and a quote. No strings attached.",
     "closingWhatsapp": "Message me on WhatsApp",
     "closingEmail": "Send an email",
     "backHome": "Back to home"
