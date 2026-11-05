@@ -1,6 +1,6 @@
 ---
 interface Props {
-  label: string;
+  label?: string;
   title: string;
   highlight: string;
   id?: string;
@@ -8,16 +8,18 @@ interface Props {
   class?: string;
 }
 
-const { label, title, highlight, id, centered = true, class: className = "" } = Astro.props;
+const { label, title, highlight, id, centered = false, class: className = "" } = Astro.props;
 ---
 
-<div class:list={[{ "text-center": centered }, "mb-16 md:mb-20", className]} data-reveal>
-  <span
-    class="t-eyebrow inline-block text-accent-ink label-outline mb-6"
-    data-reveal-heading
-  >
-    {label}
-  </span>
+<div class:list={[{ "text-center": centered }, "mb-16 md:mb-20", className]}>
+  {label && (
+    <span
+      class="t-eyebrow inline-block text-accent-ink label-outline mb-6"
+      data-reveal-heading
+    >
+      {label}
+    </span>
+  )}
   <h2
     id={id}
     data-reveal-heading

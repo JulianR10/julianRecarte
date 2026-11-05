@@ -62,7 +62,7 @@ const mobileMockup = project.mockupMobile ?? project.mockup;
       <div class="flex flex-col items-center text-center lg:text-left lg:items-start gap-6">
         <div class="flex flex-col items-center lg:items-start">
           {project.image && (
-            <div data-reveal class="mb-5 flex justify-center lg:justify-start">
+            <div class="mb-5 flex justify-center lg:justify-start">
               {project.liveUrl ? (
                 <a
                   href={project.liveUrl}
@@ -91,10 +91,10 @@ const mobileMockup = project.mockupMobile ?? project.mockup;
             </div>
           )}
 
-          <h1 data-reveal class="t-h3 font-medium mb-2">
+          <h1 class="t-h3 font-medium mb-2">
             {t.title}
           </h1>
-          <p data-reveal class="t-body-lg max-w-2xl mx-auto lg:mx-0 text-copy/70 dark:text-dark-muted">
+          <p class="t-body-lg max-w-2xl mx-auto lg:mx-0 text-copy/70 dark:text-dark-muted">
             {t.subtitle}
           </p>
         </div>

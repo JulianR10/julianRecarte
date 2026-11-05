@@ -64,10 +64,10 @@ La API entre el HTML y el JS.
 
 | Atributo | Módulo | Qué hace |
 |---|---|---|
-| `[data-reveal]` / `[data-reveal-stagger]` | reveal-observer.ts | Fade-in al entrar en viewport (stagger: cada hijo) |
+| `[data-reveal]` / `[data-reveal-stagger]` | reveal-observer.ts | Fade-in al entrar en viewport (stagger: cada hijo). Usarlo con criterio: si todo entra con fundido, nada se destaca |
 | `[data-reveal-heading]` | cine-text.ts | Reveal por letra, agrupado por palabra |
 | `[data-project-card]` / `[data-tilt]` + `[data-card-shine]` | card-tilt.ts | Tilt 3D y brillo con el mouse (cards de proyectos) |
-| `[data-hero-text]` / `[data-hero-image]` / `[data-hero-orb]` | hero-scroll.ts | Salida del hero de la home al scrollear |
+| `[data-hero-text]` / `[data-hero-image]` | hero-scroll.ts | Salida del hero de la home al scrollear |
 | `[data-zap-clone]` | hero-zap.ts | Glitch aleatorio en el rótulo del hero |
 | `[data-wave]` | waves.ts | Morph de las olas + parallax |
 | `[data-magnetic]` | magnetic.ts | Botón magnético (lo aplica `Button` por defecto) |
@@ -75,7 +75,7 @@ La API entre el HTML y el JS.
 | `[data-solu-line]` | soluciones-lines.ts | Separadores que se dibujan (`scaleX`), agrupados por sección |
 | `[data-about-hero]` / `[data-about-portrait]` / `[data-about-wash]` | about-parallax.ts | Hero de /sobre-mi: el retrato (hoy no hay) baja, se achica y se atenúa; el wash deriva |
 | `[data-about-reveal]` / `[data-about-stack]` / `[data-count-to]` | about-intro.ts | Aparición del retrato, velocidad del marquee y contadores |
-| `[data-lang-chip]` | CSS (`:has()`) | Banderita de la tarjeta "Idiomas" de /sobre-mi |
+| `[data-lang-chip]` | CSS (`:has()`) | Bandera de la tarjeta "Idiomas" de /sobre-mi: entra desde la derecha con el hover (el toque en táctil) |
 
 Todos los módulos GSAP tienen `destroy` (`ctx.kill()`). Los de ScrollTrigger: hero-scroll, waves, animations, cine-text, soluciones-lines, about-parallax y about-intro (contadores).
 
@@ -85,7 +85,7 @@ Todos los módulos GSAP tienen `destroy` (`ctx.kill()`). Los de ScrollTrigger: h
 
 - **La regla CSS no frena a GSAP.** `globals.css` acorta las animaciones y transiciones CSS, pero GSAP anima por rAF. El corte real está en `defineAnimation`, que no arranca con `prefers-reduced-motion`, así que los módulos no necesitan un guard propio. Solo `cine-text.ts` lo desactiva (`checkReducedMotion: false`), porque igual tiene que procesar el DOM.
 - **Contenido invisible:** `[data-reveal]` arranca en `opacity: 0`. Todo módulo que salga temprano tiene que añadir `.revealed`, como ya hacen `reveal-observer.ts` y `cine-text.ts`.
-- **Hero sticky:** con movimiento reducido `hero-scroll.ts` no corre, así que `globals.css` pasa `#hero` a `relative` y sus orbes de `fixed` a `absolute`. Si no, el hero queda clavado detrás de todas las secciones. Cualquier elemento `sticky`/`fixed` que dependa de GSAP para salir de pantalla necesita el mismo fallback.
+- **Hero sticky:** con movimiento reducido `hero-scroll.ts` no corre, así que `globals.css` pasa `#hero` a `relative`. Si no, el hero queda clavado detrás de todas las secciones. Cualquier elemento `sticky`/`fixed` que dependa de GSAP para salir de pantalla necesita el mismo fallback.
 - **Lenis:** con movimiento reducido no se crea. Un listener de scroll nativo alimenta `onScroll()` + `ScrollTrigger.update()`; sin él, "volver arriba" y el resaltado del nav se congelan.
 
 ### `backdrop-filter` del nav

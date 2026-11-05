@@ -7,7 +7,6 @@ export const heroScroll = defineAnimation((gsap: typeof gsap) => {
 
   const textContent = hero.querySelector<HTMLElement>("[data-hero-text]");
   const imageDiv = hero.querySelector<HTMLElement>("[data-hero-image]");
-  const orbs = document.querySelectorAll<HTMLElement>("[data-hero-orb]");
 
   function createAnimations(isMobile: boolean) {
     // Mobile: fade corto, sin retraso y con ease para que se note desde el
@@ -40,15 +39,6 @@ export const heroScroll = defineAnimation((gsap: typeof gsap) => {
         opacity: 0,
         scale: isMobile ? 0.85 : 0.8,
         ease,
-        scrollTrigger: baseConfig,
-      });
-    }
-
-    if (orbs.length) {
-      gsap.to(orbs, {
-        opacity: 0,
-        scale: 0.5,
-        ease: "none",
         scrollTrigger: baseConfig,
       });
     }

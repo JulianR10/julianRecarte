@@ -17,7 +17,7 @@ Fuente única: tokens en `tailwind.config.mjs` + `globals.css`. Auditado contra 
 | `accent.ink` (var) | `#B33A0E` → orange en oscuro | **Texto chico** en naranja |
 | `accent.deep` (var) | `#D2491A` → orange en oscuro | **Texto grande** (≥ 24px) en naranja |
 
-- **El violeta (`#5B1FFF`) se eliminó** (token incluido). Barra de progreso, orb del hero, olas, glow del zap y avatares pasaron a naranja/warm/pastel. No reintroducir acentos fríos.
+- **El violeta (`#5B1FFF`) se eliminó** (token incluido). Barra de progreso, olas, glow del zap y avatares pasaron a naranja/warm/pastel. No reintroducir acentos fríos.
 - **Sin hex en componentes.** Usar clases o `theme("colors.x")` dentro de `<style>`. Excepciones: `<meta name="theme-color">` y el `style` del redirect de `/` (no pueden leer variables), y los colores propios de cada proyecto (`--project-accent` del case study) y las banderitas de la tarjeta "Idiomas" de /sobre-mi (`--flag-art`).
 
 ### Tinta naranja (contraste AA)
@@ -55,7 +55,7 @@ Fuera de `Button` quedan solo controles que no son CTA de página: el pill "Ver 
 
 - **Líneas (2 roles)** en `@layer components`: `.line-hair` (`black/8%` · oscuro `dark-muted/20%`) para separadores, bordes de tarjeta, banda y footer; `.line-control` (`black/20%` · `dark-muted/30%`) para botones con borde. Se usan con `border` / `border-t` / `border-y` (`border line-hair`). Los separadores de 1px pintados con fondo (`h-px bg-black/[0.08]`) equivalen a `hair`.
 - **Sombras:** `shadow-card` → `hover:shadow-card-hover` en tarjetas (Projects, Process); `shadow-lg` en CTA y flotantes; `shadow-md` en controles chicos; `shadow-xl` en retrato y tarjeta de testimonio. Nada de `shadow-[…]` arbitrarias.
-- **Radios:** `rounded-full` para todo control (botones, pills, selector de idioma, skip link) y `rounded-2xl` para tarjetas. Las excepciones son intencionales: `rounded-[2rem]` en el retrato del hero y `rounded-[1.75rem]` en la tarjeta de testimonio.
+- **Radios:** `rounded-full` para todo control (botones, pills, selector de idioma, skip link) y `rounded-lg` para tarjetas y cajas (cuidado con los radios parciales de las imágenes internas: tienen que coincidir, si no asoma el fondo en las esquinas). La excepción intencional es `rounded-[2rem]` en el retrato del hero.
 - **Contenedor:** `max-w-7xl mx-auto` en toda sección de layout (= Nav y Footer, así el contenido arranca alineado con el logo en todas las páginas). Las columnas de **lectura** usan `max-w-3xl` / `2xl` / `xl` (FAQ, AboutTeaser, Testimonios, párrafos). No usar `5xl`/`6xl`.
 
 ## Sistema tipográfico: roles en `globals.css`
@@ -64,7 +64,7 @@ La escala vive en `src/styles/globals.css` como **tokens** (`--fs-*`, `--lh-*`, 
 
 | Rol | Uso | Móvil → `md:` |
 |---|---|---|
-| `.t-eyebrow` | Label sobre un título de sección | 14px, 500, `.3em`, uppercase |
+| `.t-eyebrow` | Label chico (hero, pasos de Proceso, subtítulos del case study). `SectionHeader` ya no lo lleva | 14px, 500, `.3em`, uppercase |
 | `.t-index` | Contador editorial (01, 02) | 12px, 500, `.22em`, tabular |
 | `.t-h1` | Título de página (Hero, `/sobre-mi`) | 2.5rem → 3rem → `lg:` 3.75rem |
 | `.t-h2` | Título de sección y de página interior | 2.25rem → 3rem |

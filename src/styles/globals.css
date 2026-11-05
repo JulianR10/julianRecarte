@@ -418,15 +418,6 @@ h6 {
    transition: transform 0.6s ease-out;
  }
 
-/* ============================================
-   Hero Orbs
-   ============================================ */
-.orb-accent {
-  background-color: color-mix(in srgb, var(--clr-accent-orange) 15%, transparent);
-}
-:root.dark .orb-accent {
-  background-color: color-mix(in srgb, var(--clr-accent-orange) 2%, transparent);
-}
 
 /* ============================================
      WhatsApp Button
@@ -498,9 +489,5 @@ h6 {
      quedar dentro del hero en vez de flotar sobre toda la página. */
   #hero {
     position: relative;
-  }
-
-  #hero [data-hero-orb] {
-    position: absolute;
   }
 }
