@@ -30,6 +30,8 @@ Fundido de 128px (`--section-fade-h`) entre el hero sticky y Soluciones: `Hero` 
 ## Case studies
 
 - `[lang]/proyectos/[slug].astro`. Triba, Multiservizi y Fernando Del Pino están live (el logo linkea a `liveUrl`); SP es `comingSoon`. En las cards, los live van primero.
+- **Grilla de cards** (`Projects.astro`): carrusel en mobile, 2 columnas desde `md` y 4 en una fila desde `xl` (con padding reducido en `ProjectCard`). Con otra cantidad de proyectos hay que revisar el corte: 5 o 7 dejan una card sola en la última fila.
+- **Fernando Del Pino** es el caso de estudio mínimo (solo desafío y solución, sin `adminPanel` ni `plus`). Hasta cargar `mockup` y `mockupMobile` en `projects.ts`, la columna derecha del hero queda vacía.
 - **Página con scroll normal.** Antes estaba bloqueada a `100dvh` y en viewports bajos, con zoom o en en/it el contenido se recortaba sin aviso. No volver a bloquearla.
 - El mockup va a tamaño natural (`w-full h-auto`). El botón "volver" es `absolute` para no quedar debajo del nav fijo.
 - El H1 queda en `.t-h3` por el ancho de la columna (ver [marca.md](marca.md)).
