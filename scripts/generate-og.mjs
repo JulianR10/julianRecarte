@@ -123,6 +123,14 @@ const jobs = [
       accent: "#800020",
     }),
   },
+  {
+    out: "og-fer-del-pino.jpg",
+    svg: caseSvg({
+      title: "Fernando Del Pino",
+      subtitle: "Sitio de una página para un profe de tenis",
+      accent: "#1A4FD0",
+    }),
+  },
 ];
 
 for (const job of jobs) {

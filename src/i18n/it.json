@@ -103,6 +103,13 @@
         "name": "Gianluca Petrungaro",
         "role": "Titolare",
         "company": "Multiservizi Petrungaro SRL"
+      },
+      {
+        "quote": "Julián ha capito esattamente ciò che mi serviva: qualcosa di semplice, chiaro e bello da vedere sul telefono. Ora gli allievi mi scrivono direttamente su WhatsApp per prenotare la lezione.",
+        "initials": "FD",
+        "name": "Fernando Del Pino",
+        "role": "Maestro di tennis",
+        "company": "Fernando Del Pino"
       }
     ]
   },
@@ -211,6 +218,15 @@
       "title": "SP Soluciones Textiles",
       "description": "Landing page per un'impresa tessile con catalogo servizi, galleria lavori e connessione diretta a WhatsApp. Design pulito con identità di marca.",
       "subtitle": "Landing page con catalogo servizi e connessione diretta a WhatsApp."
+    },
+    "fer-del-pino": {
+      "title": "Fernando Del Pino",
+      "description": "Landing page per Fernando, maestro di tennis. Giorni, luogo degli allenamenti e contatto diretto sul suo WhatsApp.",
+      "subtitle": "Sito di una pagina per un maestro di tennis, con contatto diretto su WhatsApp.",
+      "challengeTitle": "La sfida",
+      "challenge": "Fernando insegnava tennis senza presenza online: i nuovi allievi arrivavano solo col passaparola e non avevano dove vedere giorni, luogo e come prenotare.",
+      "solutionTitle": "La soluzione",
+      "solution": "Un sito di una sola pagina, veloce e leggibile da smartphone: quando si allena, dove e un pulsante che apre WhatsApp con il messaggio pronto per prenotare."
     },
     "multiservizi": {
       "title": "Multiservizi SRL",

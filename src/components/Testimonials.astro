@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import SectionHeader from "./SectionHeader.astro";
 import logoTriba from "@assets/images/logoTriba.svg";
+import logoFer from "@assets/images/logoFer.webp";
 import logoSP from "@assets/images/logoSP.png";
 import logoMultiservizi from "@assets/images/logoMultiservizi.png";
 
@@ -33,6 +34,7 @@ const { t } = Astro.props;
 const companyLogos: { match: RegExp; logo: ImageMetadata }[] = [
   { match: /triba/i, logo: logoTriba },
   { match: /multiservizi/i, logo: logoMultiservizi },
+  { match: /pino/i, logo: logoFer },
   { match: /sp|estampado/i, logo: logoSP },
 ];
 

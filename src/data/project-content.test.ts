@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { getProjectCopy } from "@data/project-content";
 
 const LANGS = ["es", "en", "it"];
-const SLUGS = ["triba", "sp-soluciones-textiles", "multiservizi"];
+const SLUGS = ["triba", "sp-soluciones-textiles", "multiservizi", "fer-del-pino"];
 
 describe("getProjectCopy", () => {
   it("returns the card copy (title/description/subtitle) for every slug in every language", () => {
@@ -25,6 +25,10 @@ describe("getProjectCopy", () => {
       const multi = getProjectCopy("multiservizi", lang);
       expect(multi.challenge, `${lang}/multi challenge`).not.toBe("");
       expect(multi.solution, `${lang}/multi solution`).not.toBe("");
+
+      const fer = getProjectCopy("fer-del-pino", lang);
+      expect(fer.challenge, `${lang}/fer challenge`).not.toBe("");
+      expect(fer.solution, `${lang}/fer solution`).not.toBe("");
 
       const sp = getProjectCopy("sp-soluciones-textiles", lang);
       expect(sp.challenge, `${lang}/sp challenge`).toBeFalsy();

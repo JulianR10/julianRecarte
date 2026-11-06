@@ -32,6 +32,7 @@
 ## Casos de estudio
 
 - [Triba](https://julianrecarte.dev/es/proyectos/triba/) — Revista digital con sistema de suscripciones, newsletter automática y programa de colaboradores. Panel de administración a medida (contenido y suscriptores, multiidioma español/inglés), archivo de ediciones y suscripción multimoneda. Stack: Astro, Tailwind, Supabase, Node.
+- [Fernando Del Pino](https://julianrecarte.dev/es/proyectos/fer-del-pino/) — Sitio de una página para un profe de tenis de Laguna Larga: días, lugar y contacto directo por WhatsApp. Stack: Next.js, Tailwind.
 - [Multiservizi SRL](https://julianrecarte.dev/es/proyectos/multiservizi/) — Plataforma mayorista para funeraria en Calabria (Italia): catálogo digital, panel cliente para pedidos y panel admin con estadísticas de ventas. Stack: Astro, Tailwind, Supabase, Node.
 
 ## Soluciones

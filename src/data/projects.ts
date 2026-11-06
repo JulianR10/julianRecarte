@@ -2,6 +2,7 @@ import type { ImageMetadata } from "astro";
 import logoSP from "@assets/images/logoSP.png";
 import tribaLogo from "@assets/images/logoTriba.svg";
 import logoMulti from "@assets/images/logoMultiservizi.png";
+import logoFer from "@assets/images/logoFer.webp";
 import celuFirme from "@assets/images/celuFirme.webp";
 import celuGirado from "@assets/images/celuGirado.webp";
 import tabletVerticalFirme from "@assets/images/tabletVerticalFirme.webp";
@@ -56,6 +57,18 @@ export const projects: Project[] = [
     mockup: mockupDesktopMulti,
     screenshots: [],
     style: "radial-gradient(circle at 25% 20%, rgba(128,0,32,0.35), transparent 50%), radial-gradient(circle at 75% 60%, rgba(180,65,85,0.25), transparent 50%), linear-gradient(135deg, rgba(200,140,150,0.15), rgba(245,225,225,0.1))",
+  },
+  {
+    title: "Fernando Del Pino",
+    slug: "fer-del-pino",
+    year: "2026",
+    publishedAt: "2026-11-06",
+    stack: ["Next.js", "Tailwind"],
+    accent: "#1A4FD0",
+    liveUrl: "https://fer-del-pino.vercel.app/",
+    image: logoFer,
+    screenshots: [],
+    style: "radial-gradient(circle at 25% 20%, rgba(26,79,208,0.28), transparent 50%), radial-gradient(circle at 75% 60%, rgba(116,172,223,0.25), transparent 50%), linear-gradient(135deg, rgba(201,214,245,0.18), rgba(240,245,255,0.1))",
   },
   {
     title: "SP Soluciones Textiles",

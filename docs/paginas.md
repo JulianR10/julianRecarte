@@ -29,7 +29,7 @@ Fundido de 128px (`--section-fade-h`) entre el hero sticky y Soluciones: `Hero` 
 
 ## Case studies
 
-- `[lang]/proyectos/[slug].astro`. Triba y Multiservizi están live (el logo linkea a `liveUrl`); SP es `comingSoon`. En las cards, los live van primero.
+- `[lang]/proyectos/[slug].astro`. Triba, Multiservizi y Fernando Del Pino están live (el logo linkea a `liveUrl`); SP es `comingSoon`. En las cards, los live van primero.
 - **Página con scroll normal.** Antes estaba bloqueada a `100dvh` y en viewports bajos, con zoom o en en/it el contenido se recortaba sin aviso. No volver a bloquearla.
 - El mockup va a tamaño natural (`w-full h-auto`). El botón "volver" es `absolute` para no quedar debajo del nav fijo.
 - El H1 queda en `.t-h3` por el ancho de la columna (ver [marca.md](marca.md)).
