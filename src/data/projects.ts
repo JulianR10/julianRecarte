@@ -10,6 +10,8 @@ import LaptopGirado from "@assets/images/LaptopGirado.webp";
 import mockupsDesktop from "@assets/images/mockupsDesktop.webp";
 import mockupMobile from "@assets/images/mockupMobile.webp";
 import mockupDesktopMulti from "@assets/images/mockupDesktopMulti.webp";
+import mockupDesktopFerDelPino from "@assets/images/mockupDesktopFerDelPino.webp";
+import mockupMobileFer from "@assets/images/mockupDesktopFer.webp";
 
 export interface Project {
   title: string;
@@ -67,6 +69,8 @@ export const projects: Project[] = [
     accent: "#1A4FD0",
     liveUrl: "https://fer-del-pino.vercel.app/",
     image: logoFer,
+    mockup: mockupDesktopFerDelPino,
+    mockupMobile: mockupMobileFer,
     screenshots: [],
     style: "radial-gradient(circle at 25% 20%, rgba(26,79,208,0.28), transparent 50%), radial-gradient(circle at 75% 60%, rgba(116,172,223,0.25), transparent 50%), linear-gradient(135deg, rgba(201,214,245,0.18), rgba(240,245,255,0.1))",
   },

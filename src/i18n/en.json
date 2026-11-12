@@ -226,7 +226,12 @@
       "challengeTitle": "The challenge",
       "challenge": "Fernando taught tennis with no online presence: new students relied on word of mouth and had nowhere to see the days, the venue or how to book.",
       "solutionTitle": "The solution",
-      "solution": "A fast, single-page site that reads well on a phone: when he trains, where, and a button that opens WhatsApp with the booking message ready."
+      "solution": "A fast, single-page site that reads well on a phone: when he trains, where, and a button that opens WhatsApp with the booking message ready.",
+      "plusTitle": "A look people remember",
+      "plus": "I designed it like a pixel-art tennis video game, with a tournament ticker counting down the days to the next Grand Slam: a simple site that looks like no other.",
+      "adminPanel": {
+        "badges": ["Single page", "Direct WhatsApp", "Class days", "Map location", "Custom design"]
+      }
     },
     "multiservizi": {
       "title": "Multiservizi SRL",

@@ -36,6 +36,7 @@ const t = safeT(raw);
 const { backLabel } = t.caseStudies;
 const cs = {
   backLabel,
+  viewSite: t.projects.viewSite,
   ...getProjectCopy(project.slug, lang),
 };
 

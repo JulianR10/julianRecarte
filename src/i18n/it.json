@@ -226,7 +226,12 @@
       "challengeTitle": "La sfida",
       "challenge": "Fernando insegnava tennis senza presenza online: i nuovi allievi arrivavano solo col passaparola e non avevano dove vedere giorni, luogo e come prenotare.",
       "solutionTitle": "La soluzione",
-      "solution": "Un sito di una sola pagina, veloce e leggibile da smartphone: quando si allena, dove e un pulsante che apre WhatsApp con il messaggio pronto per prenotare."
+      "solution": "Un sito di una sola pagina, veloce e leggibile da smartphone: quando si allena, dove e un pulsante che apre WhatsApp con il messaggio pronto per prenotare.",
+      "plusTitle": "Un'identità che si ricorda",
+      "plus": "L'ho disegnato come un videogioco di tennis in pixel art, con una barra dei tornei che conta i giorni al prossimo Grand Slam: un sito semplice che non somiglia a nessun altro.",
+      "adminPanel": {
+        "badges": ["Pagina unica", "WhatsApp diretto", "Giorni di lezione", "Posizione su mappa", "Design su misura"]
+      }
     },
     "multiservizi": {
       "title": "Multiservizi SRL",

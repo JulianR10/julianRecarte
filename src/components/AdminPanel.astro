@@ -9,9 +9,11 @@ const { t } = Astro.props;
 ---
 
 <div data-reveal class="w-full">
-  <ul class="flex flex-wrap justify-center lg:justify-start gap-2" aria-label="Admin panel features">
+  <!-- Grilla en lugar de pills con flex-wrap: las columnas quedan alineadas aunque la última fila esté incompleta. -->
+  <ul class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-2 text-left t-meta text-copy/70 dark:text-dark-muted" aria-label="Admin panel features">
     {t.badges.map((badge) => (
-      <li class="admin-badge rounded-full border px-3.5 py-1.5 t-badge">
+      <li class="flex items-baseline gap-2">
+        <span class="admin-dot shrink-0 w-1.5 h-1.5 rounded-full translate-y-[-0.1em]" aria-hidden="true"></span>
         {badge}
       </li>
     ))}
@@ -19,15 +21,11 @@ const { t } = Astro.props;
 </div>
 
 <style>
-  .admin-badge {
-    color: var(--project-accent);
-    border-color: color-mix(in srgb, var(--project-accent) 35%, transparent);
-    background-color: color-mix(in srgb, var(--project-accent) 8%, transparent);
+  .admin-dot {
+    background-color: var(--project-accent);
   }
 
-  :global(.dark) .admin-badge {
-    color: color-mix(in srgb, var(--project-accent) 60%, white);
-    border-color: color-mix(in srgb, var(--project-accent) 50%, white);
-    background-color: color-mix(in srgb, var(--project-accent) 20%, transparent);
+  :global(.dark) .admin-dot {
+    background-color: color-mix(in srgb, var(--project-accent) 60%, white);
   }
 </style>
