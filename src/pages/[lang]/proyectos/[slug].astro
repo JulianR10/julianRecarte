@@ -54,7 +54,7 @@ const projectOg: Record<string, string> = {
   multiservizi: "/og-multiservizi.jpg",
   "fer-del-pino": "/og-fer-del-pino.jpg",
 };
-const ogImage = projectOg[project.slug] ?? "/og-cover.jpg";
+const ogImage = projectOg[project.slug] ?? "/og-cover-v2.jpg";
 // Última modificación: fecha del build (sitio estático → coincide con el deploy).
 const buildDate = new Date().toISOString().slice(0, 10);
 const articleImage = project.screenshots[0]?.src ?? project.mockup?.src;

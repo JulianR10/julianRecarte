@@ -2,7 +2,13 @@
  * generate-og.mjs — genera las imágenes Open Graph (1200×630) del sitio.
  *
  * Uso: node scripts/generate-og.mjs   (requiere `sharp`, ya es dependencia)
- * Salida: public/og-cover.jpg, public/og-triba.jpg, public/og-multiservizi.jpg
+ * Salida: public/og-triba.jpg, public/og-multiservizi.jpg, public/og-fer-del-pino.jpg
+ *
+ * La portada (public/og-cover-v2.jpg) NO se genera acá: lleva la foto y las
+ * webfonts del sitio, que este rasterizador no maneja. Su fuente es
+ * scripts/og-cover.html; para regenerarla, abrirla en Chrome a 1200×630 y
+ * guardar como JPG (calidad 90). Si cambia, subir el sufijo (-v3) para
+ * invalidar el caché de X/WhatsApp y actualizar las referencias.
  *
  * Es una herramienta local (no corre en el build de Vercel). Si cambiás el
  * nombre/rol o los proyectos, corré de nuevo el script.
@@ -71,24 +77,6 @@ function wrapSvg(body) {
   </svg>`;
 }
 
-/** Portada principal (home). */
-function coverSvg() {
-  return wrapSvg(`
-    ${blobs(orange, purple)}
-    ${monogram(80, 72)}
-    <text x="180" y="112" font-family="${FONT}" font-size="26" font-weight="700" letter-spacing="6" fill="${orange}">PORTFOLIO</text>
-    <text x="180" y="146" font-family="${FONT}" font-size="22" letter-spacing="2" fill="${ink}" fill-opacity="0.55">Desarrollador Web FullStack</text>
-
-    <text x="80" y="330" font-family="${FONT}" font-size="104" font-weight="800" fill="${ink}">Julián Recarte</text>
-
-    <text x="82" y="410" font-family="${FONT}" font-size="42" font-weight="600" fill="${orange}">Sitios y apps web a medida</text>
-
-    <text x="82" y="490" font-family="${FONT}" font-size="27" fill="${ink}" fill-opacity="0.6">Astro · GSAP · Tailwind CSS · Supabase</text>
-
-    <text x="82" y="548" font-family="${FONT}" font-size="24" font-weight="700" letter-spacing="1" fill="${ink}" fill-opacity="0.75">julianrecarte.dev</text>
-  `);
-}
-
 /** Portada de case study, tintada con el acento del proyecto. */
 function caseSvg({ title, subtitle, accent, eyebrow = "CASO DE ESTUDIO" }) {
   return wrapSvg(`
@@ -106,7 +94,6 @@ function caseSvg({ title, subtitle, accent, eyebrow = "CASO DE ESTUDIO" }) {
 }
 
 const jobs = [
-  { out: "og-cover.jpg", svg: coverSvg() },
   {
     out: "og-triba.jpg",
     svg: caseSvg({

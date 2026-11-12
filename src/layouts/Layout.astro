@@ -69,9 +69,9 @@ const SITE = "https://julianrecarte.dev";
 const DEFAULT_LOCALE = "es";
 
 // URL absoluta de la imagen Open Graph (default: portada del sitio).
-const ogImageUrl = (ogImage || "/og-cover.jpg").startsWith("http")
+const ogImageUrl = (ogImage || "/og-cover-v2.jpg").startsWith("http")
   ? (ogImage as string)
-  : `${SITE}${ogImage || "/og-cover.jpg"}`;
+  : `${SITE}${ogImage || "/og-cover-v2.jpg"}`;
 
 // x-default apunta a la versión del idioma por defecto (antes: home fijo).
 const xDefault = alternates.find((a) => a.lang === DEFAULT_LOCALE)?.href ?? canonical;
@@ -149,7 +149,7 @@ const personDescription = personBio || description;
       "jobTitle": jobTitle,
       "description": personDescription,
       "url": `${SITE}/${lang}/`,
-      "image": `${SITE}/og-cover.jpg`,
+      "image": `${SITE}/og-cover-v2.jpg`,
       "email": "julianrecarteweb@gmail.com",
       "sameAs": [
         "https://github.com/JulianR10",
@@ -193,7 +193,7 @@ const personDescription = personBio || description;
           "url": `${SITE}/${lang}/`,
           "logo": {
             "@type": "ImageObject",
-            "url": `${SITE}/og-cover.jpg`,
+            "url": `${SITE}/og-cover-v2.jpg`,
             "width": 1200,
             "height": 630,
           },

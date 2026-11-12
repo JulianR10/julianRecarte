@@ -6,7 +6,7 @@
 
 - **`public/llms.txt`:** resumen citable para LLMs (quién, servicios, contacto, URLs). Enlazado desde `robots.txt`.
 - **`public/robots.txt`:** `Allow` explícito para los crawlers de IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.) + sitemap.
-- **Imágenes OG** (1200×630): `og-cover`, `og-triba`, `og-multiservizi`, `og-fer-del-pino`. Se generan con `npm run og` (local, no corre en el build).
+- **Imágenes OG** (1200×630): `og-cover-v2`, `og-triba`, `og-multiservizi`, `og-fer-del-pino`. Los casos de estudio se generan con `npm run og` (local, no corre en el build); la portada se diseña aparte en `scripts/og-cover.html` (foto + webfonts) y se versiona en el nombre (`-v2`) para invalidar el caché de X/WhatsApp.
 - **Sitemap:** excluye `/`, que es solo un redirect (308 en `vercel.json`, `noindex`), para evitar el conflicto de hreflang. `x-default` apunta al idioma por defecto.
 
 ## JSON-LD (`src/data/schema.ts`)

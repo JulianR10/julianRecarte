@@ -82,7 +82,7 @@ export function professionalServiceSchema({
     name: `Julián Recarte — ${jobTitle}`,
     description: bio,
     url: `${SITE}/${lang}/`,
-    image: `${SITE}/og-cover.jpg`,
+    image: `${SITE}/og-cover-v2.jpg`,
     provider: { "@id": `${SITE}/#person` },
     areaServed: "Worldwide",
     availableLanguage: LANGUAGES,
